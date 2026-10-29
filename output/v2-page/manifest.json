@@ -1,0 +1,2319 @@
+{
+  "slide": {
+    "width": 13.333,
+    "height": 7.5,
+    "size_mode": "wide",
+    "background": {
+      "angle": 90,
+      "stops": [
+        {
+          "position": 0,
+          "color": "#C7EEE6"
+        },
+        {
+          "position": 1,
+          "color": "#BCE1D8"
+        }
+      ]
+    }
+  },
+  "content_box": {
+    "left": 0,
+    "top": 0.029162790697674357,
+    "width": 13.333,
+    "height": 7.441674418604651,
+    "fit": "contain"
+  },
+  "source": {
+    "path": "source.png",
+    "width_px": 2752,
+    "height_px": 1536
+  },
+  "page_strategy": "Native editable Korean text and callouts over a native mint fill; independently separated complex stationery assets. No whole-slide source raster.",
+  "text_inventory": [
+    {
+      "id": "title",
+      "text": "2024년 산업안전보건교육 주요 개정 및 교육 체계 핵심 요약",
+      "decision": "native-text"
+    },
+    {
+      "id": "subtitle1",
+      "text": "2024년 시행 법령 및 교육규정에 따른 핵심 개정 사항과 근로자 대상별 필수 법정 교육시간을 정리한 자료.",
+      "decision": "native-text"
+    },
+    {
+      "id": "subtitle2",
+      "text": "정기교육 주기 완화 및 단기근로자 교육시간 감면 등 현장 부담을 줄이고 실효성을 높인 주요 변경점을 포함.",
+      "decision": "native-text"
+    },
+    {
+      "id": "book1",
+      "text": "2024년",
+      "decision": "native-text"
+    },
+    {
+      "id": "book2",
+      "text": "교육 규정",
+      "decision": "native-text"
+    },
+    {
+      "id": "book3",
+      "text": "주요 개정",
+      "decision": "native-text"
+    },
+    {
+      "id": "book4",
+      "text": "사항",
+      "decision": "native-text"
+    },
+    {
+      "id": "period-title",
+      "text": "정기교육 주기 완화 (매분기 → 매반기)",
+      "decision": "native-text"
+    },
+    {
+      "id": "period-body",
+      "text": "근로자 정기안전보건교육 주기가 매반기 단위로 확대",
+      "decision": "native-text"
+    },
+    {
+      "id": "short-title1",
+      "text": "단기 및 일용근로자",
+      "decision": "native-text"
+    },
+    {
+      "id": "short-title2",
+      "text": "교육시간 부담 완화",
+      "decision": "native-text"
+    },
+    {
+      "id": "short-body1",
+      "text": "계약기간 1주일 이하 1시간,",
+      "decision": "native-text"
+    },
+    {
+      "id": "short-body2",
+      "text": "1개월 이하 4시간 (채용 시 감면)",
+      "decision": "native-text"
+    },
+    {
+      "id": "refresher-title1",
+      "text": "직무 보수교육 이수기간 확대",
+      "decision": "native-text"
+    },
+    {
+      "id": "refresher-title2",
+      "text": "(총 6개월 → 총 1년)",
+      "decision": "native-text"
+    },
+    {
+      "id": "refresher-body1",
+      "text": "신규교육 이수일 기준 전후 6개월 이내로",
+      "decision": "native-text"
+    },
+    {
+      "id": "refresher-body2",
+      "text": "이수 기한 연장",
+      "decision": "native-text"
+    },
+    {
+      "id": "clip1",
+      "text": "근로자 유형별",
+      "decision": "native-text"
+    },
+    {
+      "id": "clip2",
+      "text": "법정 교육시간",
+      "decision": "native-text"
+    },
+    {
+      "id": "clip3",
+      "text": "기준",
+      "decision": "native-text"
+    },
+    {
+      "id": "folder0",
+      "text": "채용 시",
+      "decision": "native-text"
+    },
+    {
+      "id": "folder1",
+      "text": "및 작업내용",
+      "decision": "native-text"
+    },
+    {
+      "id": "folder2",
+      "text": "변경 시",
+      "decision": "native-text"
+    },
+    {
+      "id": "folder3",
+      "text": "교육",
+      "decision": "native-text"
+    },
+    {
+      "id": "hiring1",
+      "text": "일반근로자 채용 시:",
+      "decision": "native-text"
+    },
+    {
+      "id": "hiring2",
+      "text": "8시간 이상",
+      "decision": "native-text"
+    },
+    {
+      "id": "change1",
+      "text": "작업내용 변경 시:",
+      "decision": "native-text"
+    },
+    {
+      "id": "change2",
+      "text": "2시간 이상 교육",
+      "decision": "native-text"
+    },
+    {
+      "id": "regular1",
+      "text": "정기교육",
+      "decision": "native-text"
+    },
+    {
+      "id": "regular2",
+      "text": "(매반기 기준)",
+      "decision": "native-text"
+    },
+    {
+      "id": "manager1",
+      "text": "관리감독자 정기교육",
+      "decision": "native-text"
+    },
+    {
+      "id": "manager2",
+      "text": "(연간 기준)",
+      "decision": "native-text"
+    },
+    {
+      "id": "office0",
+      "text": "사무직·판매직:",
+      "decision": "native-text"
+    },
+    {
+      "id": "office1",
+      "text": "매반기 6시간 이상",
+      "decision": "native-text"
+    },
+    {
+      "id": "others0",
+      "text": "그 외 근로자:",
+      "decision": "native-text"
+    },
+    {
+      "id": "others1",
+      "text": "매반기 12시간 이상",
+      "decision": "native-text"
+    },
+    {
+      "id": "annual0",
+      "text": "연간 16시간 이상 이수",
+      "decision": "native-text"
+    },
+    {
+      "id": "remote0",
+      "text": "50% 이상 집체·현장·",
+      "decision": "native-text"
+    },
+    {
+      "id": "remote1",
+      "text": "실시간 비대면 교육",
+      "decision": "native-text"
+    }
+  ],
+  "visual_inventory": [
+    {
+      "id": "notebook",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects1/notebook.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "vertical-ruler",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects1/vertical-ruler.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "clipboard",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects1/clipboard.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "blue-folder",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects1/blue-folder.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "tablet-stylus",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects1/tablet-stylus.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "desk-cluster",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects1/desk-cluster.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "horizontal-ruler",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/horizontal-ruler.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "pencil",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/pencil.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "pink-eraser",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/pink-eraser.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "yellow-note",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/yellow-note.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "paperclips",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/paperclips.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "small-calendar",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/small-calendar.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "blue-eraser",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/blue-eraser.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "glasses",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/glasses.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "scissors",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/scissors.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "badge",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/badge.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "helmet",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/helmet-source.png",
+      "source_type": "source-masked",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "wrench",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/wrench.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "calculator",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/calculator.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "stapler",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/stapler.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "ring-calendar",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/ring-calendar.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "video-monitor",
+      "role": "foreground",
+      "object_type": "stationery illustration",
+      "path": "assets/objects2/video-monitor.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    },
+    {
+      "id": "brand-logo",
+      "role": "foreground",
+      "object_type": "logo",
+      "path": "assets/logo/brand-logo.png",
+      "source_type": "asset-sheet-separated",
+      "note": "Tiny ruler/calendar/calculator markings are incidental object identity, not main educational content."
+    }
+  ],
+  "background_strategy": {
+    "mode": "native-or-script",
+    "source_consistency_contract": "Mint background; composition and source-pixel object positions retained. Original photographic vignette simplified to a solid mint fill.",
+    "removed_foreground": "No source screenshot used: all stationery objects separated; all meaningful Korean content rebuilt as native text.",
+    "comparison_note": "Compared source and reconstructed preview: mint hue and object layout retained; photographic mint vignette simplified to solid mint. No original whole-slide raster is present."
+  },
+  "quality_checks": {
+    "font_size_calibrated": true,
+    "visual_inventory_matched": true,
+    "background_strategy_checked": true,
+    "shape_corner_geometry_checked": true
+  },
+  "text_boxes": [
+    {
+      "id": "title",
+      "text": "2024년 산업안전보건교육 주요 개정 및 교육 체계 핵심 요약",
+      "box_px": [
+        430.0,
+        52.41,
+        1894.69,
+        96.75
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 26.25,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "D46A85",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "title",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "subtitle1",
+      "text": "2024년 시행 법령 및 교육규정에 따른 핵심 개정 사항과 근로자 대상별 필수 법정 교육시간을 정리한 자료.",
+      "box_px": [
+        635.59,
+        157.22,
+        1484.84,
+        52.41
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 11.72,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "subtitle",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "subtitle2",
+      "text": "정기교육 주기 완화 및 단기근로자 교육시간 감면 등 현장 부담을 줄이고 실효성을 높인 주요 변경점을 포함.",
+      "box_px": [
+        635.59,
+        205.59,
+        1484.84,
+        52.41
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 11.72,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "subtitle",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "book1",
+      "text": "2024년",
+      "box_px": [
+        235.16,
+        487.78,
+        268.75,
+        77.94
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 19.69,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "D46A85",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "book",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "book2",
+      "text": "교육 규정",
+      "box_px": [
+        227.09,
+        550.94,
+        282.19,
+        77.94
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 19.69,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "D46A85",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "book",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "book3",
+      "text": "주요 개정",
+      "box_px": [
+        225.75,
+        611.41,
+        283.53,
+        77.94
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 19.69,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "050505",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "book",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "book4",
+      "text": "사항",
+      "box_px": [
+        274.12,
+        673.22,
+        174.69,
+        77.94
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 19.69,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "050505",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "book",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "period-title",
+      "text": "정기교육 주기 완화 (매분기 → 매반기)",
+      "box_px": [
+        767.28,
+        467.62,
+        505.25,
+        49.72
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 11.72,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "section",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "period-body",
+      "text": "근로자 정기안전보건교육 주기가 매반기 단위로 확대",
+      "box_px": [
+        769.97,
+        524.06,
+        524.06,
+        38.97
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 8.44,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "small",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "short-title1",
+      "text": "단기 및 일용근로자",
+      "box_px": [
+        923.16,
+        587.22,
+        266.06,
+        44.34
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 11.25,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "section",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "short-title2",
+      "text": "교육시간 부담 완화",
+      "box_px": [
+        923.16,
+        626.19,
+        266.06,
+        44.34
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 11.25,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "section",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "short-body1",
+      "text": "계약기간 1주일 이하 1시간,",
+      "box_px": [
+        923.16,
+        678.59,
+        374.91,
+        36.28
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 8.44,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "small",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "short-body2",
+      "text": "1개월 이하 4시간 (채용 시 감면)",
+      "box_px": [
+        923.16,
+        709.5,
+        391.03,
+        36.28
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 8.44,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "small",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "refresher-title1",
+      "text": "직무 보수교육 이수기간 확대",
+      "box_px": [
+        923.16,
+        763.25,
+        382.97,
+        44.34
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 11.25,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "section",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "refresher-title2",
+      "text": "(총 6개월 → 총 1년)",
+      "box_px": [
+        923.16,
+        802.22,
+        380.28,
+        44.34
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 11.25,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "section",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "refresher-body1",
+      "text": "신규교육 이수일 기준 전후 6개월 이내로",
+      "box_px": [
+        923.16,
+        855.97,
+        412.53,
+        37.62
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 8.44,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "small",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "refresher-body2",
+      "text": "이수 기한 연장",
+      "box_px": [
+        923.16,
+        886.88,
+        295.62,
+        37.62
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 8.44,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "small",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "clip1",
+      "text": "근로자 유형별",
+      "box_px": [
+        1893.34,
+        516.0,
+        327.88,
+        75.25
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 18.75,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "D46A85",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "clipboard",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "clip2",
+      "text": "법정 교육시간",
+      "box_px": [
+        1890.66,
+        577.81,
+        331.91,
+        77.94
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 18.75,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "050505",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "clipboard",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "clip3",
+      "text": "기준",
+      "box_px": [
+        1967.25,
+        642.31,
+        177.38,
+        76.59
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 18.75,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "050505",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "clipboard",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "folder0",
+      "text": "채용 시",
+      "box_px": [
+        213.66,
+        1095.16,
+        235.16,
+        72.56
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 17.34,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "050505",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "folder",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "folder1",
+      "text": "및 작업내용",
+      "box_px": [
+        173.34,
+        1155.62,
+        315.78,
+        72.56
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 17.34,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "050505",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "folder",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "folder2",
+      "text": "변경 시",
+      "box_px": [
+        210.97,
+        1216.09,
+        241.88,
+        72.56
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 17.34,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "050505",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "folder",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "folder3",
+      "text": "교육",
+      "box_px": [
+        249.94,
+        1277.91,
+        167.97,
+        72.56
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 17.34,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "050505",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "folder",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "hiring1",
+      "text": "일반근로자 채용 시:",
+      "box_px": [
+        959.44,
+        1073.66,
+        290.25,
+        49.72
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 12.19,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottom",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "hiring2",
+      "text": "8시간 이상",
+      "box_px": [
+        959.44,
+        1119.34,
+        284.88,
+        49.72
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 12.19,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottom",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "change1",
+      "text": "작업내용 변경 시:",
+      "box_px": [
+        959.44,
+        1229.53,
+        290.25,
+        49.72
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 12.19,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottom",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "change2",
+      "text": "2시간 이상 교육",
+      "box_px": [
+        959.44,
+        1275.22,
+        290.25,
+        49.72
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 12.19,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottom",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "regular1",
+      "text": "정기교육",
+      "box_px": [
+        1578.91,
+        950.03,
+        228.44,
+        59.12
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 13.59,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "111111",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottomheading",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "regular2",
+      "text": "(매반기 기준)",
+      "box_px": [
+        1556.06,
+        997.06,
+        271.44,
+        59.12
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 13.59,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "111111",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottomheading",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "manager1",
+      "text": "관리감독자 정기교육",
+      "box_px": [
+        2194.34,
+        950.03,
+        368.19,
+        59.12
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 13.59,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "111111",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottomheading",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "manager2",
+      "text": "(연간 기준)",
+      "box_px": [
+        2250.78,
+        997.06,
+        256.66,
+        59.12
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "font_size": 13.59,
+      "font_size_source": "measured",
+      "bold": true,
+      "color": "111111",
+      "align": "center",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottomheading",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "office0",
+      "text": "사무직·판매직:",
+      "box_px": [
+        1664.91,
+        1116.66,
+        268.75,
+        51.06
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 11.72,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottom",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "office1",
+      "text": "매반기 6시간 이상",
+      "box_px": [
+        1664.91,
+        1161.0,
+        268.75,
+        51.06
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 11.72,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottom",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "others0",
+      "text": "그 외 근로자:",
+      "box_px": [
+        1664.91,
+        1316.88,
+        280.84,
+        51.06
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 11.72,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottom",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "others1",
+      "text": "매반기 12시간 이상",
+      "box_px": [
+        1664.91,
+        1361.22,
+        280.84,
+        51.06
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 11.72,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottom",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "annual0",
+      "text": "연간 16시간 이상 이수",
+      "box_px": [
+        2292.44,
+        1138.16,
+        321.16,
+        51.06
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 11.72,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottom",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "remote0",
+      "text": "50% 이상 집체·현장·",
+      "box_px": [
+        2292.44,
+        1318.22,
+        321.16,
+        51.06
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 11.72,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottom",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    },
+    {
+      "id": "remote1",
+      "text": "실시간 비대면 교육",
+      "box_px": [
+        2292.44,
+        1362.56,
+        321.16,
+        51.06
+      ],
+      "font": "Noto Sans CJK KR",
+      "preview_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "font_size": 11.72,
+      "font_size_source": "measured",
+      "bold": false,
+      "color": "111111",
+      "align": "left",
+      "valign": "middle",
+      "fit_text": true,
+      "line_height": 1.12,
+      "z_index": 50,
+      "size_group": "bottom",
+      "lang": "ko-KR",
+      "char_spacing": 0
+    }
+  ],
+  "shapes": [
+    {
+      "id": "period-box",
+      "type": "roundRect",
+      "box_px": [
+        756.53,
+        464.94,
+        525.41,
+        55.09
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "source_corner_radius_px": 16.125,
+      "corner_category": "small-radius",
+      "z_index": 15
+    },
+    {
+      "id": "period-box-pointer",
+      "type": "path",
+      "box_px": [
+        739.06,
+        484.22,
+        21.5,
+        16.53
+      ],
+      "path_px": [
+        {
+          "op": "moveTo",
+          "points": [
+            [
+              756.53125,
+              484.22031250000003
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              739.0625,
+              492.484375
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              756.53125,
+              500.74843749999997
+            ]
+          ]
+        },
+        {
+          "op": "close",
+          "points": []
+        }
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "z_index": 15
+    },
+    {
+      "id": "short-box",
+      "type": "roundRect",
+      "box_px": [
+        909.72,
+        585.88,
+        278.16,
+        90.03
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "source_corner_radius_px": 16.125,
+      "corner_category": "small-radius",
+      "z_index": 15
+    },
+    {
+      "id": "short-box-pointer",
+      "type": "path",
+      "box_px": [
+        892.25,
+        617.39,
+        21.5,
+        27.01
+      ],
+      "path_px": [
+        {
+          "op": "moveTo",
+          "points": [
+            [
+              909.71875,
+              617.3859375
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              892.25,
+              630.890625
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              909.71875,
+              644.3953125
+            ]
+          ]
+        },
+        {
+          "op": "close",
+          "points": []
+        }
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "z_index": 15
+    },
+    {
+      "id": "refresher-box",
+      "type": "roundRect",
+      "box_px": [
+        909.72,
+        761.91,
+        397.75,
+        92.72
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "source_corner_radius_px": 16.125,
+      "corner_category": "small-radius",
+      "z_index": 15
+    },
+    {
+      "id": "refresher-box-pointer",
+      "type": "path",
+      "box_px": [
+        892.25,
+        794.36,
+        21.5,
+        27.82
+      ],
+      "path_px": [
+        {
+          "op": "moveTo",
+          "points": [
+            [
+              909.71875,
+              794.3578125
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              892.25,
+              808.265625
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              909.71875,
+              822.1734375
+            ]
+          ]
+        },
+        {
+          "op": "close",
+          "points": []
+        }
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "z_index": 15
+    },
+    {
+      "id": "hiring-box",
+      "type": "roundRect",
+      "box_px": [
+        943.31,
+        1066.94,
+        311.75,
+        111.53
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "source_corner_radius_px": 17.46875,
+      "corner_category": "small-radius",
+      "z_index": 15
+    },
+    {
+      "id": "hiring-box-pointer",
+      "type": "path",
+      "box_px": [
+        925.84,
+        1105.97,
+        21.5,
+        33.46
+      ],
+      "path_px": [
+        {
+          "op": "moveTo",
+          "points": [
+            [
+              943.3125,
+              1105.9734375
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              925.84375,
+              1122.703125
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              943.3125,
+              1139.4328125
+            ]
+          ]
+        },
+        {
+          "op": "close",
+          "points": []
+        }
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "z_index": 15
+    },
+    {
+      "id": "change-box",
+      "type": "roundRect",
+      "box_px": [
+        943.31,
+        1221.47,
+        311.75,
+        111.53
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "source_corner_radius_px": 17.46875,
+      "corner_category": "small-radius",
+      "z_index": 15
+    },
+    {
+      "id": "change-box-pointer",
+      "type": "path",
+      "box_px": [
+        925.84,
+        1260.5,
+        21.5,
+        33.46
+      ],
+      "path_px": [
+        {
+          "op": "moveTo",
+          "points": [
+            [
+              943.3125,
+              1260.5046875
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              925.84375,
+              1277.234375
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              943.3125,
+              1293.9640625
+            ]
+          ]
+        },
+        {
+          "op": "close",
+          "points": []
+        }
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "z_index": 15
+    },
+    {
+      "id": "office-box",
+      "type": "roundRect",
+      "box_px": [
+        1648.78,
+        1108.59,
+        294.28,
+        111.53
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "source_corner_radius_px": 17.46875,
+      "corner_category": "small-radius",
+      "z_index": 15
+    },
+    {
+      "id": "office-box-pointer",
+      "type": "path",
+      "box_px": [
+        1631.31,
+        1147.63,
+        21.5,
+        33.46
+      ],
+      "path_px": [
+        {
+          "op": "moveTo",
+          "points": [
+            [
+              1648.78125,
+              1147.6296875
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              1631.3125,
+              1164.359375
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              1648.78125,
+              1181.0890625
+            ]
+          ]
+        },
+        {
+          "op": "close",
+          "points": []
+        }
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "z_index": 15
+    },
+    {
+      "id": "others-box",
+      "type": "roundRect",
+      "box_px": [
+        1648.78,
+        1308.81,
+        306.38,
+        111.53
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "source_corner_radius_px": 17.46875,
+      "corner_category": "small-radius",
+      "z_index": 15
+    },
+    {
+      "id": "others-box-pointer",
+      "type": "path",
+      "box_px": [
+        1631.31,
+        1347.85,
+        21.5,
+        33.46
+      ],
+      "path_px": [
+        {
+          "op": "moveTo",
+          "points": [
+            [
+              1648.78125,
+              1347.8484375
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              1631.3125,
+              1364.578125
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              1648.78125,
+              1381.3078125
+            ]
+          ]
+        },
+        {
+          "op": "close",
+          "points": []
+        }
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "z_index": 15
+    },
+    {
+      "id": "annual-box",
+      "type": "roundRect",
+      "box_px": [
+        2276.31,
+        1108.59,
+        346.69,
+        111.53
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "source_corner_radius_px": 17.46875,
+      "corner_category": "small-radius",
+      "z_index": 15
+    },
+    {
+      "id": "annual-box-pointer",
+      "type": "path",
+      "box_px": [
+        2258.84,
+        1147.63,
+        21.5,
+        33.46
+      ],
+      "path_px": [
+        {
+          "op": "moveTo",
+          "points": [
+            [
+              2276.3125,
+              1147.6296875
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              2258.84375,
+              1164.359375
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              2276.3125,
+              1181.0890625
+            ]
+          ]
+        },
+        {
+          "op": "close",
+          "points": []
+        }
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "z_index": 15
+    },
+    {
+      "id": "remote-box",
+      "type": "roundRect",
+      "box_px": [
+        2276.31,
+        1310.16,
+        346.69,
+        111.53
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "source_corner_radius_px": 17.46875,
+      "corner_category": "small-radius",
+      "z_index": 15
+    },
+    {
+      "id": "remote-box-pointer",
+      "type": "path",
+      "box_px": [
+        2258.84,
+        1349.19,
+        21.5,
+        33.46
+      ],
+      "path_px": [
+        {
+          "op": "moveTo",
+          "points": [
+            [
+              2276.3125,
+              1349.1921875
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              2258.84375,
+              1365.921875
+            ]
+          ]
+        },
+        {
+          "op": "lnTo",
+          "points": [
+            [
+              2276.3125,
+              1382.6515625
+            ]
+          ]
+        },
+        {
+          "op": "close",
+          "points": []
+        }
+      ],
+      "fill": "FAF8F5",
+      "stroke": "none",
+      "z_index": 15
+    }
+  ],
+  "images": [
+    {
+      "id": "notebook",
+      "path": "assets/objects1/notebook.png",
+      "box_px": [
+        96.71,
+        313.46,
+        479.8,
+        642.92
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "vertical-ruler",
+      "path": "assets/objects1/vertical-ruler.png",
+      "box_px": [
+        537.82,
+        315.24,
+        135.07,
+        640.7
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "clipboard",
+      "path": "assets/objects1/clipboard.png",
+      "box_px": [
+        1817.44,
+        315.24,
+        479.68,
+        644.75
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "blue-folder",
+      "path": "assets/objects1/blue-folder.png",
+      "box_px": [
+        116.45,
+        980.45,
+        420.15,
+        503.54
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "tablet-stylus",
+      "path": "assets/objects1/tablet-stylus.png",
+      "box_px": [
+        2267.61,
+        461.51,
+        393.65,
+        487.92
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "desk-cluster",
+      "path": "assets/objects1/desk-cluster.png",
+      "box_px": [
+        1433.7,
+        309.72,
+        410.01,
+        644.37
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "horizontal-ruler",
+      "path": "assets/objects2/horizontal-ruler.png",
+      "box_px": [
+        634.39,
+        322.77,
+        583.21,
+        113.68
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "pencil",
+      "path": "assets/objects2/pencil.png",
+      "box_px": [
+        649.81,
+        399.09,
+        438.46,
+        76.59
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "pink-eraser",
+      "path": "assets/objects2/pink-eraser.png",
+      "box_px": [
+        647.4,
+        458.27,
+        101.35,
+        71.11
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "yellow-note",
+      "path": "assets/objects2/yellow-note.png",
+      "box_px": [
+        646.47,
+        564.84,
+        189.22,
+        195.25
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "paperclips",
+      "path": "assets/objects2/paperclips.png",
+      "box_px": [
+        814.96,
+        576.58,
+        84.71,
+        175.8
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "small-calendar",
+      "path": "assets/objects2/small-calendar.png",
+      "box_px": [
+        646.78,
+        743.65,
+        185.9,
+        192.39
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "blue-eraser",
+      "path": "assets/objects2/blue-eraser.png",
+      "box_px": [
+        812.55,
+        767.8,
+        85.49,
+        141.39
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "glasses",
+      "path": "assets/objects2/glasses.png",
+      "box_px": [
+        2304.4,
+        338.03,
+        313.36,
+        143.63
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "scissors",
+      "path": "assets/objects2/scissors.png",
+      "box_px": [
+        486.34,
+        1015.01,
+        228.63,
+        459.89
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "badge",
+      "path": "assets/objects2/badge.png",
+      "box_px": [
+        718.02,
+        1002.55,
+        228.87,
+        214.78
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "helmet",
+      "path": "assets/helmet-source.png",
+      "box_px": [
+        725,
+        1205,
+        210,
+        265
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "wrench",
+      "path": "assets/objects2/wrench.png",
+      "box_px": [
+        914.85,
+        1326.08,
+        380.78,
+        145.52
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "calculator",
+      "path": "assets/objects2/calculator.png",
+      "box_px": [
+        1435.11,
+        1053.2,
+        215.03,
+        278.01
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "stapler",
+      "path": "assets/objects2/stapler.png",
+      "box_px": [
+        1441.67,
+        1310.8,
+        207.29,
+        135.78
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "ring-calendar",
+      "path": "assets/objects2/ring-calendar.png",
+      "box_px": [
+        2103.12,
+        1077.5,
+        173.41,
+        181.78
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "video-monitor",
+      "path": "assets/objects2/video-monitor.png",
+      "box_px": [
+        2114.7,
+        1284.65,
+        170.48,
+        169.27
+      ],
+      "z_index": 30
+    },
+    {
+      "id": "brand-logo",
+      "path": "assets/logo/brand-logo.png",
+      "box_px": [
+        2544.88,
+        1496.48,
+        200.57,
+        35.85
+      ],
+      "z_index": 30
+    }
+  ],
+  "asset_provenance": [
+    {
+      "path": "assets/objects1/notebook.png",
+      "source": "assets/sheet1.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects1/vertical-ruler.png",
+      "source": "assets/sheet1.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects1/clipboard.png",
+      "source": "assets/sheet1.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects1/blue-folder.png",
+      "source": "assets/sheet1.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects1/tablet-stylus.png",
+      "source": "assets/sheet1.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects1/desk-cluster.png",
+      "source": "assets/sheet1.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/horizontal-ruler.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/pencil.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/pink-eraser.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/yellow-note.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/paperclips.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/small-calendar.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/blue-eraser.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/glasses.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/scissors.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/badge.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/helmet-source.png",
+      "source": "source.png",
+      "source_type": "source-masked",
+      "provenance_note": "Source-color seed segmentation, source alpha and exact opaque pixels; compositing evidence verified.",
+      "evidence": "assets/helmet-source.evidence.json"
+    },
+    {
+      "path": "assets/objects2/wrench.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/calculator.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/stapler.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/ring-calendar.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/objects2/video-monitor.png",
+      "source": "assets/sheet2.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Source-faithful image editing followed by editppt chroma removal and complete-object region splitting; no source crops."
+    },
+    {
+      "path": "assets/logo/brand-logo.png",
+      "source": "assets/logo-sheet.png",
+      "source_type": "asset-sheet-separated",
+      "provenance_note": "Brand identity wordmark separated through image editing and recorded chroma removal/splitting; intentionally remains a logo image."
+    }
+  ],
+  "warnings": [
+    "Original background vignette and soft shadows are simplified.",
+    "Minor source-faithful image-edit differences in stationery proportions and 1-pixel chroma edges remain.",
+    "Local PaddleOCR model download was blocked; Korean text was manually transcribed and visually compared to the source.",
+    "Tiny calendar, ruler and calculator markings remain part of separated image objects."
+  ]
+}

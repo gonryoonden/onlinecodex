@@ -1,0 +1,58 @@
+{
+  "regions": [
+    {
+      "name": "notebook",
+      "box": [
+        0,
+        0,
+        550,
+        535
+      ]
+    },
+    {
+      "name": "vertical-ruler",
+      "box": [
+        550,
+        0,
+        450,
+        535
+      ]
+    },
+    {
+      "name": "clipboard",
+      "box": [
+        1000,
+        0,
+        536,
+        535
+      ]
+    },
+    {
+      "name": "blue-folder",
+      "box": [
+        0,
+        535,
+        550,
+        489
+      ]
+    },
+    {
+      "name": "tablet-stylus",
+      "box": [
+        550,
+        535,
+        450,
+        489
+      ]
+    },
+    {
+      "name": "desk-cluster",
+      "box": [
+        1000,
+        535,
+        536,
+        489
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "ssim": 0.6798071027852216,
+  "rgb_mae": 19.148762948575655,
+  "ssim_convention": "11x11 uniform-window grayscale, data_range=255",
+  "alignment": "contain source in render canvas",
+  "regions": [
+    {
+      "id": "title",
+      "ssim": 0.5033152416435391,
+      "rgb_mae": 26.889747023809523
+    },
+    {
+      "id": "left-detail",
+      "ssim": 0.5421741432720263,
+      "rgb_mae": 23.42584968530174
+    },
+    {
+      "id": "right-detail",
+      "ssim": 0.62731774652735,
+      "rgb_mae": 22.845508887265645
+    },
+    {
+      "id": "bottom",
+      "ssim": 0.6816763783860962,
+      "rgb_mae": 19.38994481236203
+    }
+  ]
+}

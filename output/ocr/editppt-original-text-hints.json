@@ -1,0 +1,401 @@
+{
+  "schema_version": 1,
+  "backend": "builtin-ink",
+  "source": {
+    "width_px": 2752,
+    "height_px": 1536
+  },
+  "lines": [
+    {
+      "box_px": [
+        415,
+        46,
+        305,
+        111
+      ],
+      "glyph_height_px": 69.0,
+      "line_count": 1,
+      "id": "L01",
+      "size_group": "g1",
+      "group_glyph_px": 70.0,
+      "font_pt_if_cjk": 25.5,
+      "font_pt_if_latin": 34.0
+    },
+    {
+      "box_px": [
+        2156,
+        46,
+        182,
+        112
+      ],
+      "glyph_height_px": 70.0,
+      "line_count": 1,
+      "id": "L02",
+      "size_group": "g1",
+      "group_glyph_px": 70.0,
+      "font_pt_if_cjk": 25.5,
+      "font_pt_if_latin": 34.0
+    },
+    {
+      "box_px": [
+        638,
+        158,
+        1467,
+        55
+      ],
+      "glyph_height_px": 35.0,
+      "line_count": 1,
+      "id": "L03",
+      "size_group": "g3",
+      "group_glyph_px": 35.0,
+      "font_pt_if_cjk": 13.0,
+      "font_pt_if_latin": 17.0
+    },
+    {
+      "box_px": [
+        635,
+        207,
+        1473,
+        54
+      ],
+      "glyph_height_px": 34.0,
+      "line_count": 1,
+      "id": "L04",
+      "size_group": "g3",
+      "group_glyph_px": 35.0,
+      "font_pt_if_cjk": 13.0,
+      "font_pt_if_latin": 17.0
+    },
+    {
+      "box_px": [
+        773,
+        341,
+        90,
+        32
+      ],
+      "glyph_height_px": 20.0,
+      "line_count": 1,
+      "id": "L05",
+      "size_group": "g6",
+      "group_glyph_px": 20.0,
+      "font_pt_if_cjk": 7.5,
+      "font_pt_if_latin": 9.5
+    },
+    {
+      "box_px": [
+        918,
+        341,
+        155,
+        32
+      ],
+      "glyph_height_px": 20.0,
+      "line_count": 1,
+      "id": "L06",
+      "size_group": "g6",
+      "group_glyph_px": 20.0,
+      "font_pt_if_cjk": 7.5,
+      "font_pt_if_latin": 9.5
+    },
+    {
+      "box_px": [
+        137,
+        364,
+        38,
+        53
+      ],
+      "glyph_height_px": 15.5,
+      "line_count": 2,
+      "id": "L07",
+      "size_group": "g7",
+      "group_glyph_px": 15.5,
+      "font_pt_if_cjk": 5.5,
+      "font_pt_if_latin": 7.5
+    },
+    {
+      "box_px": [
+        1655,
+        370,
+        16,
+        42
+      ],
+      "glyph_height_px": 10.0,
+      "line_count": 2,
+      "id": "L08",
+      "size_group": "g9",
+      "group_glyph_px": 10.0,
+      "font_pt_if_cjk": 3.5,
+      "font_pt_if_latin": 5.0
+    },
+    {
+      "box_px": [
+        912,
+        466,
+        164,
+        53
+      ],
+      "glyph_height_px": 33.0,
+      "line_count": 1,
+      "id": "L09",
+      "size_group": "g3",
+      "group_glyph_px": 35.0,
+      "font_pt_if_cjk": 13.0,
+      "font_pt_if_latin": 17.0
+    },
+    {
+      "box_px": [
+        770,
+        469,
+        94,
+        48
+      ],
+      "glyph_height_px": 30.0,
+      "line_count": 1,
+      "id": "L10",
+      "size_group": "g4",
+      "group_glyph_px": 30.0,
+      "font_pt_if_cjk": 11.0,
+      "font_pt_if_latin": 14.5
+    },
+    {
+      "box_px": [
+        137,
+        475,
+        38,
+        23
+      ],
+      "glyph_height_px": 15.0,
+      "line_count": 1,
+      "id": "L11",
+      "size_group": "g7",
+      "group_glyph_px": 15.5,
+      "font_pt_if_cjk": 5.5,
+      "font_pt_if_latin": 7.5
+    },
+    {
+      "box_px": [
+        136,
+        501,
+        40,
+        53
+      ],
+      "glyph_height_px": 16.0,
+      "line_count": 2,
+      "id": "L12",
+      "size_group": "g7",
+      "group_glyph_px": 15.5,
+      "font_pt_if_cjk": 5.5,
+      "font_pt_if_latin": 7.5
+    },
+    {
+      "box_px": [
+        2021,
+        517,
+        93,
+        75
+      ],
+      "glyph_height_px": 47.0,
+      "line_count": 1,
+      "id": "L13",
+      "size_group": "g2",
+      "group_glyph_px": 47.0,
+      "font_pt_if_cjk": 17.5,
+      "font_pt_if_latin": 23.0
+    },
+    {
+      "box_px": [
+        772,
+        524,
+        92,
+        36
+      ],
+      "glyph_height_px": 22.0,
+      "line_count": 1,
+      "id": "L14",
+      "size_group": "g5",
+      "group_glyph_px": 22.0,
+      "font_pt_if_cjk": 8.0,
+      "font_pt_if_latin": 10.5
+    },
+    {
+      "box_px": [
+        916,
+        524,
+        158,
+        36
+      ],
+      "glyph_height_px": 22.0,
+      "line_count": 1,
+      "id": "L15",
+      "size_group": "g5",
+      "group_glyph_px": 22.0,
+      "font_pt_if_cjk": 8.0,
+      "font_pt_if_latin": 10.5
+    },
+    {
+      "box_px": [
+        137,
+        557,
+        38,
+        49
+      ],
+      "glyph_height_px": 14.0,
+      "line_count": 2,
+      "id": "L16",
+      "size_group": "g8",
+      "group_glyph_px": 14.0,
+      "font_pt_if_cjk": 5.0,
+      "font_pt_if_latin": 7.0
+    },
+    {
+      "box_px": [
+        914,
+        587,
+        162,
+        87
+      ],
+      "glyph_height_px": 30.0,
+      "line_count": 2,
+      "id": "L17",
+      "size_group": "g4",
+      "group_glyph_px": 30.0,
+      "font_pt_if_cjk": 11.0,
+      "font_pt_if_latin": 14.5
+    },
+    {
+      "box_px": [
+        137,
+        639,
+        38,
+        22
+      ],
+      "glyph_height_px": 14.0,
+      "line_count": 1,
+      "id": "L18",
+      "size_group": "g8",
+      "group_glyph_px": 14.0,
+      "font_pt_if_cjk": 5.0,
+      "font_pt_if_latin": 7.0
+    },
+    {
+      "box_px": [
+        137,
+        666,
+        38,
+        22
+      ],
+      "glyph_height_px": 14.0,
+      "line_count": 1,
+      "id": "L19",
+      "size_group": "g8",
+      "group_glyph_px": 14.0,
+      "font_pt_if_cjk": 5.0,
+      "font_pt_if_latin": 7.0
+    },
+    {
+      "box_px": [
+        916,
+        679,
+        156,
+        65
+      ],
+      "glyph_height_px": 22.0,
+      "line_count": 2,
+      "id": "L20",
+      "size_group": "g5",
+      "group_glyph_px": 22.0,
+      "font_pt_if_cjk": 8.0,
+      "font_pt_if_latin": 10.5
+    },
+    {
+      "box_px": [
+        137,
+        748,
+        38,
+        22
+      ],
+      "glyph_height_px": 14.0,
+      "line_count": 1,
+      "id": "L21",
+      "size_group": "g8",
+      "group_glyph_px": 14.0,
+      "font_pt_if_cjk": 5.0,
+      "font_pt_if_latin": 7.0
+    },
+    {
+      "box_px": [
+        915,
+        765,
+        161,
+        85
+      ],
+      "glyph_height_px": 29.5,
+      "line_count": 2,
+      "id": "L22",
+      "size_group": "g4",
+      "group_glyph_px": 30.0,
+      "font_pt_if_cjk": 11.0,
+      "font_pt_if_latin": 14.5
+    },
+    {
+      "box_px": [
+        916,
+        856,
+        156,
+        65
+      ],
+      "glyph_height_px": 23.0,
+      "line_count": 2,
+      "id": "L23",
+      "size_group": "g5",
+      "group_glyph_px": 22.0,
+      "font_pt_if_cjk": 8.0,
+      "font_pt_if_latin": 10.5
+    },
+    {
+      "box_px": [
+        1573,
+        952,
+        75,
+        104
+      ],
+      "glyph_height_px": 36.0,
+      "line_count": 2,
+      "id": "L24",
+      "size_group": "g3",
+      "group_glyph_px": 35.0,
+      "font_pt_if_cjk": 13.0,
+      "font_pt_if_latin": 17.0
+    },
+    {
+      "box_px": [
+        2284,
+        1320,
+        48,
+        47
+      ],
+      "glyph_height_px": 29.0,
+      "line_count": 1,
+      "id": "L25",
+      "size_group": "g4",
+      "group_glyph_px": 30.0,
+      "font_pt_if_cjk": 11.0,
+      "font_pt_if_latin": 14.5
+    },
+    {
+      "box_px": [
+        2545,
+        1505,
+        202,
+        22
+      ],
+      "glyph_height_px": 14.0,
+      "line_count": 1,
+      "id": "L26",
+      "size_group": "g8",
+      "group_glyph_px": 14.0,
+      "font_pt_if_cjk": 5.0,
+      "font_pt_if_latin": 7.0
+    }
+  ],
+  "note": "ADVISORY ONLY: these measurements are a reference, and some text lines may be missed or merged with graphics. Lines sharing a size_group are the same text level and must use exactly one font size. When assembling the final PPT: keep same-level text at identical font sizes (apply the group's size to similar lines, including ones you add yourself), and fill in every text the detector missed from your own reading of the source image. box_px values are source pixels usable directly in text_boxes. Pick font_pt_if_cjk for CJK text and font_pt_if_latin for Latin text, and add \"font_size_source\": \"measured\" to boxes you size from these hints."
+}

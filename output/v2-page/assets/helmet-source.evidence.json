@@ -1,0 +1,18 @@
+{
+  "source": "../../../2024\ub144_\uc0b0\uc5c5\uc548\uc804\ubcf4\uac74\uad50\uc721_\uc8fc\uc694_\uac1c\uc815_\uc694\uc57d.png",
+  "source_sha256": "0d0e21aa7914feaa3adfe06c72260070cfe126a2db32a947c54300b77e05f000",
+  "source_box": [
+    725,
+    1205,
+    210,
+    265
+  ],
+  "background": "../../helmet-local-background.png",
+  "background_sha256": "730e340dad3783f72cc2acf52a1201d941bbf47e79a6e4cf4321c7b7046f51b7",
+  "mask": "helmet-source.mask.png",
+  "mask_sha256": "d024e1315a2b3d7d16e128a5c20f29c37995d44f967071cb69a7f10a41ba062b",
+  "asset_sha256": "f3e0b69a9cb1c4497d6b17f87a3495fc77ef64c893109a7f6f72b1483a562400",
+  "method": "source compositing equation; opaque pixels unchanged",
+  "checks": [],
+  "soft_pixel_fraction": 0.018095238095238095
+}

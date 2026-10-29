@@ -1,0 +1,13 @@
+# Fidelity v2 engine and limits
+
+CLI: `editppt fidelity qa SOURCE RENDER OUT [--regions regions.json]` and `editppt fidelity extract SOURCE CLEAN_BACKGROUND ASSET --box X Y W H [--mask MASK]`.
+
+Python API in runtime/fidelity.py: fit_background, seeded_mask, extract, validate_masked, compare_text, regression_plan. Seeded masks are color-based for isolated contrasting objects; they are not general semantic segmentation. Supplied masks must match the ROI exactly. Clean background must match the whole source size; only the declared ROI is sampled, never used as a full-slide screenshot.
+
+Extraction solves source = foreground * alpha + clean_background * (1-alpha), preserving opaque source pixels exactly. Mask checks are hard gates. ROI borders are checked, not zeroed to fabricate transparency. Very faint shadows below detector noise may be lost: inspect masks visually. Background estimation fits robust local planes from border samples and rejects high residuals; complex shadows/overlap need an explicit mask and repaired clean base from the existing image-edit backend. There is no generic semantic model, automatic text inpainting or general complex-background completion in this version.
+
+For background choose solid, native linear gradient or explicit clean-base repair after inspecting source. Never use a full original slide under editable labels. Linear gradient endpoints must be supported by empty source regions. Field fitting is diagnostic and must not itself become an image layer containing foreground.
+
+QA compares actual PowerPoint-compatible renders at matched resolution. SSIM uses 11x11 uniform grayscale windows, RGB MAE is also reported. Region boxes use render pixels. Compare equivalent render pipelines and retain reference source hashes. Baseline threshold: global SSIM must not fall more than .01; per-region drop >.05 produces a selective repair plan. These are regression tolerances after the supplied baseline measurement, not universal quality guarantees. Text comparison uses stable IDs, exact strings, bbox IoU and center displacement. Raw OCR remains independent evidence. Font weight/line-break correctness still requires rendered inspection; no OCR model is bundled. Tables and editable object counts are independently checked by editppt validator.
+
+Repair plans are diagnostic JSON; the agent performs actual selective repair and repeats QA. Full automatic retries, learned segmentation, OCR inference orchestration and objective shadow/color-spill classifiers are not implemented. Mask boundary and compositing residual detect specific clipping/contamination cases, not every visual defect.

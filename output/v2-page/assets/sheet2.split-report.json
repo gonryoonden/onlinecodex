@@ -1,0 +1,453 @@
+{
+  "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+  "assets": [
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/horizontal-ruler.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        39,
+        132,
+        451,
+        192
+      ],
+      "padded_box": [
+        15,
+        108,
+        470,
+        216
+      ],
+      "area": 24139,
+      "merged_count": 1,
+      "size": [
+        455,
+        108
+      ],
+      "region_box": [
+        0,
+        0,
+        470,
+        290
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/pencil.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        485,
+        148,
+        840,
+        176
+      ],
+      "padded_box": [
+        470,
+        124,
+        864,
+        200
+      ],
+      "area": 8840,
+      "merged_count": 1,
+      "size": [
+        394,
+        76
+      ],
+      "region_box": [
+        470,
+        0,
+        880,
+        290
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/pink-eraser.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        916,
+        133,
+        1005,
+        183
+      ],
+      "padded_box": [
+        892,
+        109,
+        1029,
+        207
+      ],
+      "area": 4237,
+      "merged_count": 1,
+      "size": [
+        137,
+        98
+      ],
+      "region_box": [
+        880,
+        0,
+        1040,
+        290
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/yellow-note.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        1107,
+        63,
+        1302,
+        253
+      ],
+      "padded_box": [
+        1083,
+        39,
+        1326,
+        277
+      ],
+      "area": 36518,
+      "merged_count": 1,
+      "size": [
+        243,
+        238
+      ],
+      "region_box": [
+        1040,
+        0,
+        1335,
+        290
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/paperclips.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        1418,
+        103,
+        1602,
+        221
+      ],
+      "padded_box": [
+        1394,
+        79,
+        1626,
+        245
+      ],
+      "area": 7042,
+      "merged_count": 1,
+      "size": [
+        232,
+        166
+      ],
+      "region_box": [
+        1335,
+        0,
+        1678,
+        290
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/small-calendar.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        79,
+        351,
+        293,
+        576
+      ],
+      "padded_box": [
+        55,
+        327,
+        317,
+        600
+      ],
+      "area": 45115,
+      "merged_count": 1,
+      "size": [
+        262,
+        273
+      ],
+      "region_box": [
+        0,
+        290,
+        340,
+        640
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/blue-eraser.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        451,
+        374,
+        538,
+        564
+      ],
+      "padded_box": [
+        427,
+        350,
+        562,
+        588
+      ],
+      "area": 16006,
+      "merged_count": 1,
+      "size": [
+        135,
+        238
+      ],
+      "region_box": [
+        340,
+        290,
+        600,
+        640
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/glasses.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        665,
+        426,
+        1014,
+        534
+      ],
+      "padded_box": [
+        641,
+        402,
+        1038,
+        558
+      ],
+      "area": 12636,
+      "merged_count": 1,
+      "size": [
+        397,
+        156
+      ],
+      "region_box": [
+        600,
+        290,
+        1050,
+        640
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/scissors.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        1117,
+        306,
+        1254,
+        622
+      ],
+      "padded_box": [
+        1093,
+        290,
+        1278,
+        640
+      ],
+      "area": 14217,
+      "merged_count": 1,
+      "size": [
+        185,
+        350
+      ],
+      "region_box": [
+        1050,
+        290,
+        1335,
+        640
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/badge.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        1405,
+        364,
+        1618,
+        557
+      ],
+      "padded_box": [
+        1381,
+        340,
+        1642,
+        581
+      ],
+      "area": 32542,
+      "merged_count": 1,
+      "size": [
+        261,
+        241
+      ],
+      "region_box": [
+        1335,
+        290,
+        1678,
+        640
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/helmet.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        73,
+        653,
+        278,
+        890
+      ],
+      "padded_box": [
+        49,
+        640,
+        302,
+        914
+      ],
+      "area": 38894,
+      "merged_count": 1,
+      "size": [
+        253,
+        274
+      ],
+      "region_box": [
+        0,
+        640,
+        320,
+        937
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/wrench.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        362,
+        737,
+        688,
+        818
+      ],
+      "padded_box": [
+        338,
+        713,
+        712,
+        842
+      ],
+      "area": 12684,
+      "merged_count": 1,
+      "size": [
+        374,
+        129
+      ],
+      "region_box": [
+        320,
+        640,
+        740,
+        937
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/calculator.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        781,
+        657,
+        935,
+        882
+      ],
+      "padded_box": [
+        757,
+        640,
+        959,
+        906
+      ],
+      "area": 34138,
+      "merged_count": 1,
+      "size": [
+        202,
+        266
+      ],
+      "region_box": [
+        740,
+        640,
+        1000,
+        937
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/stapler.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        1041,
+        713,
+        1255,
+        832
+      ],
+      "padded_box": [
+        1017,
+        689,
+        1279,
+        856
+      ],
+      "area": 17837,
+      "merged_count": 1,
+      "size": [
+        262,
+        167
+      ],
+      "region_box": [
+        1000,
+        640,
+        1315,
+        937
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/ring-calendar.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        1345,
+        710,
+        1467,
+        841
+      ],
+      "padded_box": [
+        1321,
+        686,
+        1485,
+        865
+      ],
+      "area": 13872,
+      "merged_count": 1,
+      "size": [
+        164,
+        179
+      ],
+      "region_box": [
+        1315,
+        640,
+        1485,
+        937
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects2/video-monitor.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet2.asset-sheet-alpha.png",
+      "box": [
+        1499,
+        717,
+        1634,
+        847
+      ],
+      "padded_box": [
+        1485,
+        693,
+        1658,
+        871
+      ],
+      "area": 15019,
+      "merged_count": 1,
+      "size": [
+        173,
+        178
+      ],
+      "region_box": [
+        1485,
+        640,
+        1678,
+        937
+      ]
+    }
+  ]
+}

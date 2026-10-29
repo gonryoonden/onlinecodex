@@ -1,0 +1,552 @@
+{
+  "ocr_status": "blocked-model-download",
+  "method": "authorized offline measurement plus source-image visual comparison",
+  "text_boxes": [
+    {
+      "id": "title",
+      "text": "2024년 산업안전보건교육 주요 개정 및 교육 체계 핵심 요약",
+      "box_px": [
+        430.0,
+        52.41,
+        1894.69,
+        96.75
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0.148
+    },
+    {
+      "id": "subtitle1",
+      "text": "2024년 시행 법령 및 교육규정에 따른 핵심 개정 사항과 근로자 대상별 필수 법정 교육시간을 정리한 자료.",
+      "box_px": [
+        635.59,
+        157.22,
+        1484.84,
+        52.41
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L03",
+      "hint_iou": 0.915
+    },
+    {
+      "id": "subtitle2",
+      "text": "정기교육 주기 완화 및 단기근로자 교육시간 감면 등 현장 부담을 줄이고 실효성을 높인 주요 변경점을 포함.",
+      "box_px": [
+        635.59,
+        205.59,
+        1484.84,
+        52.41
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L04",
+      "hint_iou": 0.913
+    },
+    {
+      "id": "book1",
+      "text": "2024년",
+      "box_px": [
+        235.16,
+        487.78,
+        268.75,
+        77.94
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "book2",
+      "text": "교육 규정",
+      "box_px": [
+        227.09,
+        550.94,
+        282.19,
+        77.94
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "book3",
+      "text": "주요 개정",
+      "box_px": [
+        225.75,
+        611.41,
+        283.53,
+        77.94
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "book4",
+      "text": "사항",
+      "box_px": [
+        274.12,
+        673.22,
+        174.69,
+        77.94
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "period-title",
+      "text": "정기교육 주기 완화 (매분기 → 매반기)",
+      "box_px": [
+        767.28,
+        467.62,
+        505.25,
+        49.72
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L09",
+      "hint_iou": 0.318
+    },
+    {
+      "id": "period-body",
+      "text": "근로자 정기안전보건교육 주기가 매반기 단위로 확대",
+      "box_px": [
+        769.97,
+        524.06,
+        524.06,
+        38.97
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L15",
+      "hint_iou": 0.278
+    },
+    {
+      "id": "short-title1",
+      "text": "단기 및 일용근로자",
+      "box_px": [
+        923.16,
+        587.22,
+        266.06,
+        44.34
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L17",
+      "hint_iou": 0.355
+    },
+    {
+      "id": "short-title2",
+      "text": "교육시간 부담 완화",
+      "box_px": [
+        923.16,
+        626.19,
+        266.06,
+        44.34
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L17",
+      "hint_iou": 0.355
+    },
+    {
+      "id": "short-body1",
+      "text": "계약기간 1주일 이하 1시간,",
+      "box_px": [
+        923.16,
+        678.59,
+        374.91,
+        36.28
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L20",
+      "hint_iou": 0.29
+    },
+    {
+      "id": "short-body2",
+      "text": "1개월 이하 4시간 (채용 시 감면)",
+      "box_px": [
+        923.16,
+        709.5,
+        391.03,
+        36.28
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L20",
+      "hint_iou": 0.268
+    },
+    {
+      "id": "refresher-title1",
+      "text": "직무 보수교육 이수기간 확대",
+      "box_px": [
+        923.16,
+        763.25,
+        382.97,
+        44.34
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L22",
+      "hint_iou": 0.269
+    },
+    {
+      "id": "refresher-title2",
+      "text": "(총 6개월 → 총 1년)",
+      "box_px": [
+        923.16,
+        802.22,
+        380.28,
+        44.34
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L22",
+      "hint_iou": 0.285
+    },
+    {
+      "id": "refresher-body1",
+      "text": "신규교육 이수일 기준 전후 6개월 이내로",
+      "box_px": [
+        923.16,
+        855.97,
+        412.53,
+        37.62
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L23",
+      "hint_iou": 0.279
+    },
+    {
+      "id": "refresher-body2",
+      "text": "이수 기한 연장",
+      "box_px": [
+        923.16,
+        886.88,
+        295.62,
+        37.62
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L23",
+      "hint_iou": 0.314
+    },
+    {
+      "id": "clip1",
+      "text": "근로자 유형별",
+      "box_px": [
+        1893.34,
+        516.0,
+        327.88,
+        75.25
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L13",
+      "hint_iou": 0.279
+    },
+    {
+      "id": "clip2",
+      "text": "법정 교육시간",
+      "box_px": [
+        1890.66,
+        577.81,
+        331.91,
+        77.94
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L13",
+      "hint_iou": 0.042
+    },
+    {
+      "id": "clip3",
+      "text": "기준",
+      "box_px": [
+        1967.25,
+        642.31,
+        177.38,
+        76.59
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "folder0",
+      "text": "채용 시",
+      "box_px": [
+        213.66,
+        1095.16,
+        235.16,
+        72.56
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "folder1",
+      "text": "및 작업내용",
+      "box_px": [
+        173.34,
+        1155.62,
+        315.78,
+        72.56
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "folder2",
+      "text": "변경 시",
+      "box_px": [
+        210.97,
+        1216.09,
+        241.88,
+        72.56
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "folder3",
+      "text": "교육",
+      "box_px": [
+        249.94,
+        1277.91,
+        167.97,
+        72.56
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "hiring1",
+      "text": "일반근로자 채용 시:",
+      "box_px": [
+        959.44,
+        1073.66,
+        290.25,
+        49.72
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "hiring2",
+      "text": "8시간 이상",
+      "box_px": [
+        959.44,
+        1119.34,
+        284.88,
+        49.72
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "change1",
+      "text": "작업내용 변경 시:",
+      "box_px": [
+        959.44,
+        1229.53,
+        290.25,
+        49.72
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "change2",
+      "text": "2시간 이상 교육",
+      "box_px": [
+        959.44,
+        1275.22,
+        290.25,
+        49.72
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "regular1",
+      "text": "정기교육",
+      "box_px": [
+        1578.91,
+        950.03,
+        228.44,
+        59.12
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L24",
+      "hint_iou": 0.227
+    },
+    {
+      "id": "regular2",
+      "text": "(매반기 기준)",
+      "box_px": [
+        1556.06,
+        997.06,
+        271.44,
+        59.12
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L24",
+      "hint_iou": 0.228
+    },
+    {
+      "id": "manager1",
+      "text": "관리감독자 정기교육",
+      "box_px": [
+        2194.34,
+        950.03,
+        368.19,
+        59.12
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "manager2",
+      "text": "(연간 기준)",
+      "box_px": [
+        2250.78,
+        997.06,
+        256.66,
+        59.12
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "office0",
+      "text": "사무직·판매직:",
+      "box_px": [
+        1664.91,
+        1116.66,
+        268.75,
+        51.06
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "office1",
+      "text": "매반기 6시간 이상",
+      "box_px": [
+        1664.91,
+        1161.0,
+        268.75,
+        51.06
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "others0",
+      "text": "그 외 근로자:",
+      "box_px": [
+        1664.91,
+        1316.88,
+        280.84,
+        51.06
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "others1",
+      "text": "매반기 12시간 이상",
+      "box_px": [
+        1664.91,
+        1361.22,
+        280.84,
+        51.06
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "annual0",
+      "text": "연간 16시간 이상 이수",
+      "box_px": [
+        2292.44,
+        1138.16,
+        321.16,
+        51.06
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L01",
+      "hint_iou": 0
+    },
+    {
+      "id": "remote0",
+      "text": "50% 이상 집체·현장·",
+      "box_px": [
+        2292.44,
+        1318.22,
+        321.16,
+        51.06
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L25",
+      "hint_iou": 0.111
+    },
+    {
+      "id": "remote1",
+      "text": "실시간 비대면 교육",
+      "box_px": [
+        2292.44,
+        1362.56,
+        321.16,
+        51.06
+      ],
+      "confidence": null,
+      "method": "visual transcription compared against source, not PaddleOCR output",
+      "nearest_hint_id": "L25",
+      "hint_iou": 0.01
+    }
+  ]
+}

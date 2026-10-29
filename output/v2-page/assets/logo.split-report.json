@@ -1,0 +1,27 @@
+{
+  "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/logo.asset-sheet-alpha.png",
+  "assets": [
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/logo/brand-logo.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/logo.asset-sheet-alpha.png",
+      "box": [
+        763,
+        335,
+        1413,
+        388
+      ],
+      "padded_box": [
+        739,
+        311,
+        1437,
+        412
+      ],
+      "area": 16329,
+      "merged_count": 3,
+      "size": [
+        698,
+        101
+      ]
+    }
+  ]
+}

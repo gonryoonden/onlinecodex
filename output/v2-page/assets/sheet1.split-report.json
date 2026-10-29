@@ -1,0 +1,173 @@
+{
+  "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet1.asset-sheet-alpha.png",
+  "assets": [
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects1/notebook.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet1.asset-sheet-alpha.png",
+      "box": [
+        157,
+        57,
+        498,
+        493
+      ],
+      "padded_box": [
+        133,
+        33,
+        522,
+        517
+      ],
+      "area": 142277,
+      "merged_count": 1,
+      "size": [
+        389,
+        484
+      ],
+      "region_box": [
+        0,
+        0,
+        550,
+        535
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects1/vertical-ruler.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet1.asset-sheet-alpha.png",
+      "box": [
+        740,
+        55,
+        798,
+        496
+      ],
+      "padded_box": [
+        716,
+        31,
+        822,
+        520
+      ],
+      "area": 24915,
+      "merged_count": 1,
+      "size": [
+        106,
+        489
+      ],
+      "region_box": [
+        550,
+        0,
+        1000,
+        535
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects1/clipboard.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet1.asset-sheet-alpha.png",
+      "box": [
+        1048,
+        58,
+        1381,
+        502
+      ],
+      "padded_box": [
+        1024,
+        34,
+        1405,
+        526
+      ],
+      "area": 146447,
+      "merged_count": 1,
+      "size": [
+        381,
+        492
+      ],
+      "region_box": [
+        1000,
+        0,
+        1536,
+        535
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects1/blue-folder.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet1.asset-sheet-alpha.png",
+      "box": [
+        156,
+        580,
+        477,
+        953
+      ],
+      "padded_box": [
+        132,
+        556,
+        501,
+        977
+      ],
+      "area": 115985,
+      "merged_count": 1,
+      "size": [
+        369,
+        421
+      ],
+      "region_box": [
+        0,
+        535,
+        550,
+        1024
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects1/tablet-stylus.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet1.asset-sheet-alpha.png",
+      "box": [
+        613,
+        575,
+        926,
+        951
+      ],
+      "padded_box": [
+        589,
+        551,
+        950,
+        975
+      ],
+      "area": 106788,
+      "merged_count": 1,
+      "size": [
+        361,
+        424
+      ],
+      "region_box": [
+        550,
+        535,
+        1000,
+        1024
+      ]
+    },
+    {
+      "path": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/objects1/desk-cluster.png",
+      "source": "/workspace/onlinecodex/output/conversion/pages/page_001/assets/sheet1.asset-sheet-alpha.png",
+      "box": [
+        1072,
+        547,
+        1389,
+        971
+      ],
+      "padded_box": [
+        1048,
+        535,
+        1413,
+        995
+      ],
+      "area": 92367,
+      "merged_count": 1,
+      "size": [
+        365,
+        460
+      ],
+      "region_box": [
+        1000,
+        535,
+        1536,
+        1024
+      ]
+    }
+  ]
+}

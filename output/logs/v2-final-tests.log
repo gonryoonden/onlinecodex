@@ -1,0 +1,17 @@
+....................Warning: OPENAI_API_KEY is not set; dry-run only. API target: official OpenAI API (OPENAI_BASE_URL unset).
+Warning: OPENAI_API_KEY is not set; dry-run only. API target: official OpenAI API (OPENAI_BASE_URL unset).
+.......................................................[0;93m2026-10-29 07:11:10.712647228 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+/workspace/.venvs/editppt/lib/python3.12/site-packages/fitz/__init__.py:17: FutureWarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+  warnings.warn(
+.....................................................
+----------------------------------------------------------------------
+Ran 128 tests in 8.719s
+
+OK
+...../workspace/onlinecodex/tests/test_fidelity.py:30: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  self.assertEqual(list(im.getdata()),[(251,232,233,255),(252,208,109,255)])
+..
+----------------------------------------------------------------------
+Ran 7 tests in 0.017s
+
+OK

@@ -1,0 +1,9 @@
+{
+  "global_passed": true,
+  "threshold_policy": {
+    "global_ssim_floor": 0.6698071027852216,
+    "regional_ssim_max_drop": 0.05
+  },
+  "reprocess_regions": [],
+  "automation": "diagnostic plan only; agent must repair selected regions and rerun QA"
+}
