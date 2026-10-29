@@ -13,6 +13,9 @@ def mask_checks(a):
     if np.max(np.r_[a[0],a[-1],a[:,0],a[:,-1]])>0: errors.append('foreground touches ROI boundary: expand ROI')
     coverage=float(np.mean(a>0))
     if coverage<.005 or coverage>.94: errors.append('empty or rectangular/background-attached mask')
+    ys,xs=np.nonzero(a>0)
+    if len(xs) and np.mean(a[ys.min():ys.max()+1,xs.min():xs.max()+1]>0)>.98:
+        errors.append('rectangular foreground silhouette: source crop is not segmentation')
     if np.mean(a>=254)<.005: errors.append('no reliable opaque core')
     return errors
 

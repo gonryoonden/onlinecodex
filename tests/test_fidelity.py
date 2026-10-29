@@ -6,7 +6,9 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'.agents/skills/image-
 from fidelity import mask_checks,extract,validate_masked,ssim
 from build_pptx_from_manifest import slide_background_xml,text_box_xml
 class FidelityTests(unittest.TestCase):
- def test_rectangular_crop_rejected(self):self.assertTrue(mask_checks(np.full((20,20),255,dtype='uint8')))
+ def test_rectangular_crop_rejected(self):
+  self.assertTrue(mask_checks(np.full((20,20),255,dtype='uint8')))
+  a=np.zeros((40,40),dtype='uint8');a[5:35,5:35]=255;self.assertTrue(mask_checks(a))
  def test_ssim(self):
   a=np.zeros((32,32,3));self.assertAlmostEqual(ssim(a,a),1);self.assertLess(ssim(a,a+100),.01)
  def test_gradient_and_lang(self):
@@ -14,7 +16,7 @@ class FidelityTests(unittest.TestCase):
   self.assertIn('ko-KR',text_box_xml(2,{'text':'한글','char_spacing':.3}))
  def test_pixel_provenance(self):
   with tempfile.TemporaryDirectory() as d:
-   p=Path(d);bg=np.full((40,40,3),200,dtype='uint8');src=bg.copy();src[10:30,10:30]=50
+   p=Path(d);bg=np.full((40,40,3),200,dtype='uint8');src=bg.copy();yy,xx=np.mgrid[:40,:40];src[(xx-20)**2+(yy-20)**2<100]=50
    Image.fromarray(bg).save(p/'bg.png');Image.fromarray(src).save(p/'src.png')
    extract(p/'src.png',[0,0,40,40],p/'bg.png',p/'asset.png')
    self.assertEqual(validate_masked(p/'asset.png',p/'asset.evidence.json'),[])
