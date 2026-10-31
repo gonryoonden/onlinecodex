@@ -75,3 +75,23 @@ STUDIO_PYTHON="$PWD/.venvs/studio/bin/python" ./scripts/test-studio-python
 최초 typecheck 실패와 TS 5개 실패는 [typecheck-initial](../evidence/studio/phase2/typecheck-initial.log), [typescript-tests-initial](../evidence/studio/phase2/typescript-tests-initial.log)에 보존했습니다. Next의 spawn env 타입 요구를 수정했고, 기존 테스트를 삭제하지 않은 채 2.5/internal-wire/최대3회 호출 전제를 새 무료 정책/Google-wire/1회 시도 계약으로 갱신했습니다. 최종 통과로 초기 실패를 숨기지 않았습니다.
 
 기존 13개 수락 기준은 유지합니다. 항목 1–6, 8–13의 기존 기능을 위 회귀 범위에서 재확인했고, 항목 7의 **실제 API 검증은 계속 BLOCKED**입니다. 2차 추가 목표인 실제 OCR/객체 마스크/잔상 없는 분해 전체 E2E는 미완료입니다. PNG mask 브라우저 decode, local repair UI/reconstruct 연결, 실제 계정 모델 호출·무료 조건 확인, 실이미지 비교/SSIM을 다음 환경에서 수행해야 합니다. GPU 모델·유료 이미지 생성은 추가하지 않았습니다.
+
+
+## 3차 최종 검증 (2026-10-31 KST)
+
+제품은 **부분 완료**입니다. 기존 13개 수락 항목을 유지하며 아래 확장 증거를 추가합니다. Gemini 실연결은 더 이상 키 부재 BLOCKED가 아니며, 원본의 실제 생성 응답을 확인했습니다. 정확한 의미적 마스크 분리와 복잡 배경 고충실도는 미완료입니다.
+
+| 항목 | 결과 | 증거 |
+|---|---|---|
+| TypeScript / typecheck / lint / build | 59 PASS / PASS / PASS / PASS | evidence/studio/phase3/*tests.log, typecheck.log, lint.log, build.log |
+| Python upstream/fidelity/Studio | 151 PASS (128+7+16) | phase3/python-tests.log |
+| Chromium | 10 PASS | phase3/e2e.log: 기존7 + 합성repair + 실제원본수동 + 실Gemini응답재생 |
+| 실제 Gemini | PASS(제한 범위) | 3.5 Flash-Lite, HTTP200, 10.92초, text19/image27/mask0; gemini-live-improved.json |
+| 한국어 CER | 0.5%, 400자 중 2자 | gemini-live-improved-ocr.json. 좌표/줄바꿈/의미적 완전성 별도 |
+| 실제 복원/편집/저장 | PASS(근사) | live-result-repair-diagnostics.json: mask45.47%, 비마스크 픽셀 보존. 한글수정, 객체이동/크기변경/삭제, 재접속복원 |
+| PNG/PDF/PPTX/ZIP | PASS | artifact-verification.json, repair-artifacts.json, live-artifacts.json. 실제 PPTX2슬라이드, native text19/picture27 |
+| 합성 복잡배경 품질 | FAIL(고정 MAE≤8) | quality/report.json: Telea20.45 / NS19.13. 다른 4종 PASS. 기준 완화 없음 |
+| 실제 투명 분리 | 미완료 | 실응답 mask0, 이미지27개는 사각근사. 합성PNG/polygon와 실제 segmentation을 구분 |
+| 원격 CI / 배포 | 별도 상태 확인 필요 / 미게시 | GitHub API Forbidden, 사용자 게시 금지 준수 |
+
+실제 AI 응답으로 native shape는 반환되지 않았습니다. 기존 도형 편집/출력은 합성·일반 편집 테스트에서 보존했지만 이 원본의 자동 native shape 성공으로 표시하지 않습니다. PowerPoint GUI는 미검증이며 실제 파일 ZIP/XML/python-pptx 검증입니다.

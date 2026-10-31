@@ -12,7 +12,7 @@ vi.mock("@google/genai", () => ({
     interactions = { create: mocks.interact };
   },
 }));
-import { GeminiAnalyzer } from "@/lib/ai-analyzer";
+import { analyzer, GeminiAnalyzer, withFreeQuotaFallback, AnalysisError, modelJsonSchema } from "@/lib/ai-analyzer";
 const sourceFixture = JSON.parse(
   readFileSync("../../tests/studio/fixtures/synthetic.analysis.json", "utf8"),
 );
@@ -103,7 +103,7 @@ it("Interactions disables SDK retries and storage, and uses supported low thinki
   vi.stubEnv("GEMINI_API_MODE", "interactions");
   mocks.interact.mockResolvedValue({
     status: "completed",
-    outputs: [{ type: "text", text: valid }],
+    output_text: valid,
   });
   const analyzer = new GeminiAnalyzer();
   expect(
@@ -174,4 +174,54 @@ it("separate mask response updates only matching image regions", async () => {
     segmentation: "separate",
     generationCalls: 2,
   });
+});
+
+it("falls back only on quota to the next explicitly free candidate", async () => {
+  const run = vi.fn().mockRejectedValueOnce(new AnalysisError("QUOTA", "limit", 429)).mockResolvedValue("ok");
+  expect(await withFreeQuotaFallback(["gemini-3.8-flash", "gemini-3.6-flash"], run)).toBe("ok");
+  expect(run.mock.calls.map(c => c[0])).toEqual(["gemini-3.8-flash", "gemini-3.6-flash"]);
+});
+it("quota exhaustion never repeats candidates or calls paid models", async () => {
+  const run = vi.fn().mockRejectedValue(new AnalysisError("QUOTA", "limit", 429));
+  await expect(withFreeQuotaFallback(["gemini-4-argon", "gemini-3.8-flash", "gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite"], run)).rejects.toHaveProperty("code", "QUOTA");
+  expect(run.mock.calls.map(c => c[0])).toEqual(["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite"]);
+});
+it.each(["AUTH", "INVALID_ANALYSIS", "TIMEOUT", "DAILY_LIMIT", "OVERLOADED"])("never quota-falls-back on %s", async code => {
+  const run = vi.fn().mockRejectedValue(new AnalysisError(code, "test"));
+  await expect(withFreeQuotaFallback(["gemini-3.8-flash", "gemini-3.6-flash"], run)).rejects.toHaveProperty("code", code);
+  expect(run).toHaveBeenCalledTimes(1);
+});
+
+it("SDK2 Interactions omits removed response_mime_type", async () => {
+ vi.stubEnv("GEMINI_API_MODE", "interactions");
+ mocks.interact.mockResolvedValue({ status: "completed", output_text: valid });
+ await new GeminiAnalyzer().analyze("image", "image/png");
+ expect(mocks.interact.mock.calls[0][0]).not.toHaveProperty("response_mime_type");
+ expect(mocks.interact.mock.calls[0][0].response_format.type).toBe("text");
+});
+
+it("keeps serving schema small while validating all bounds after generation", async () => {
+ const { googleAnalysisSchema } = await import("../src/lib/magic-layers/google-analysis");
+ const schema = JSON.stringify(modelJsonSchema(googleAnalysisSchema));
+ expect(schema).not.toContain('"maxItems"');
+ expect(schema).not.toContain('"pattern"');
+ expect(schema).toContain('"box_2d"');
+ expect(schema).toContain('"required"');
+ const bad = structuredClone(wire); bad.regions[0].box_2d = [0, 0, 1001, 1001];
+ expect(googleAnalysisSchema.safeParse(bad).success).toBe(false);
+});
+
+it("factory quota fallback changes model and counts every generation attempt", async () => {
+ mocks.generate.mockRejectedValueOnce({ status: 429 }).mockResolvedValueOnce({ text: valid });
+ const count = vi.fn();
+ const engine = analyzer({ beforeGenerate: count });
+ await engine.analyze("image", "image/png");
+ expect(mocks.generate.mock.calls.map(c=>c[0].model)).toEqual(["gemini-3.8-flash", "gemini-3.6-flash"]);
+ expect(engine.lastRun?.generationCalls).toBe(2);
+ expect(count).toHaveBeenCalledTimes(2);
+});
+it("factory respects the local daily budget before any generation", async () => {
+ const engine = analyzer({ beforeGenerate: () => { throw new AnalysisError("DAILY_LIMIT", "limit", 429); } });
+ await expect(engine.analyze("image", "image/png")).rejects.toHaveProperty("code", "DAILY_LIMIT");
+ expect(mocks.generate).not.toHaveBeenCalled();
 });

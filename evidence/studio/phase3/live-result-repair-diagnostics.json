@@ -1,0 +1,12 @@
+{
+  "status": 200,
+  "diagnostics": {
+    "method": "opencv-ns",
+    "textMaskMode": "boxes",
+    "maskPixels": 1922068,
+    "textMaskPixels": 761625,
+    "maskedFraction": 0.454704343810562,
+    "unmaskedPixelsUnchanged": true,
+    "exactBackgroundRecovery": false
+  }
+}

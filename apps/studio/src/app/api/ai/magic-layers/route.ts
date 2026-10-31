@@ -6,10 +6,11 @@ import {
   diagnostic,
   aiConfig,
 } from "@/lib/ai-analyzer";
+import { MODEL_CANDIDATES } from "@/lib/ai-policy";
 import { imageData } from "@/lib/project";
 import { guard, boundedJson } from "@/lib/server-guard";
 export const runtime = "nodejs";
-export const maxDuration = 150;
+export const maxDuration = 180;
 let busy = false,
   day = "",
   calls = 0,
@@ -50,6 +51,7 @@ export async function POST(req: Request) {
       .object({
         image: imageData,
         consent: z.literal(true),
+        model: z.string().refine(m => MODEL_CANDIDATES.includes(m)).optional(),
         mode: z.enum(["combined", "separate"]).default("combined"),
       })
       .parse(await boundedJson(req, 9 * 1024 * 1024));
@@ -78,9 +80,10 @@ export async function POST(req: Request) {
       );
     const engine = analyzer({
       mode: body.mode,
+      model: body.model,
       beforeGenerate: () => {
         if (calls >= limit)
-          throw new AnalysisError("QUOTA", "일일 호출 한도 초과", 429);
+          throw new AnalysisError("DAILY_LIMIT", "일일 호출 한도 초과", 429);
         calls++;
         last = Date.now();
       },

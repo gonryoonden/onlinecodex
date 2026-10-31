@@ -41,7 +41,9 @@ def region_mask(region,width,height):
   if not data.startswith('data:image/png;base64,') or len(data)>2*1024*1024:raise ValueError('invalid alpha mask')
   with Image.open(io.BytesIO(base64.b64decode(data.split(',')[1],validate=True))) as image:
    if image.format!='PNG' or image.width*image.height>4_194_304:raise ValueError('invalid mask PNG')
-   alpha=image.convert('L').resize((max(1,round(w)),max(1,round(h))),Image.Resampling.BILINEAR)
+   gray=np.asarray(image.convert('L'),dtype=np.float32)
+   transparency=np.asarray(image.convert('RGBA').getchannel('A'),dtype=np.float32)
+   alpha=Image.fromarray(np.uint8(np.rint(gray*transparency/255))).resize((max(1,round(w)),max(1,round(h))),Image.Resampling.BILINEAR)
    mask.paste(alpha,(round(x),round(y)))
  elif region.get('shape')=='ellipse':draw.ellipse((x,y,x+w,y+h),fill=255)
  elif region.get('shape')=='rounded-rect':draw.rounded_rectangle((x,y,x+w,y+h),radius=min(w,h)*.15,fill=255)

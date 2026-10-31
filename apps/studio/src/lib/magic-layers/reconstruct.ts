@@ -20,7 +20,7 @@ export async function maskedCrop(source: HTMLImageElement, region: Region) {
     source.naturalHeight,
   );
   // Integer, one-to-one source pixels. Padding leaves transparent room around masks.
-  const pad = region.polygon ? 2 : 0;
+  const pad = region.polygon || region.maskPng ? 2 : 0;
   const left = Math.max(0, Math.floor(sx) - pad);
   const top = Math.max(0, Math.floor(sy) - pad);
   const right = Math.min(source.naturalWidth, Math.ceil(sx + sw) + pad);
@@ -55,6 +55,26 @@ export async function maskedCrop(source: HTMLImageElement, region: Region) {
     ctx.fillStyle = "#000";
     ctx.fill();
   }
+  if (region.maskPng) {
+    const mask = await loadImage(region.maskPng);
+    if (mask.naturalWidth * mask.naturalHeight > 4194304)
+      throw new Error("PNG 마스크가 너무 큽니다.");
+    const alpha = document.createElement("canvas");
+    alpha.width = canvas.width;
+    alpha.height = canvas.height;
+    const ac = alpha.getContext("2d");
+    if (!ac) throw new Error("Canvas 사용 불가");
+    ac.drawImage(mask, sx - left, sy - top, sw, sh);
+    const pixels = ac.getImageData(0, 0, alpha.width, alpha.height);
+    // Google masks encode foreground probability in grayscale, not PNG alpha.
+    for (let i = 0; i < pixels.data.length; i += 4) {
+      pixels.data[i + 3] = Math.round(pixels.data[i] * pixels.data[i + 3] / 255);
+      pixels.data[i] = pixels.data[i + 1] = pixels.data[i + 2] = 255;
+    }
+    ac.putImageData(pixels, 0, 0);
+    ctx.globalCompositeOperation = "destination-in";
+    ctx.drawImage(alpha, 0, 0);
+  }
   return {
     dataUrl: canvas.toDataURL("image/png"),
     width: canvas.width,
@@ -67,6 +87,13 @@ export async function maskedCrop(source: HTMLImageElement, region: Region) {
     ],
   };
 }
+export interface RepairedSource {
+  background: string;
+  objectSource: string;
+  width: number;
+  height: number;
+  warning: string;
+}
 export async function reconstructDesign(
   input: Analysis,
   source: Asset,
@@ -75,9 +102,13 @@ export async function reconstructDesign(
   skip: string[],
   confirmedBackground: boolean,
   provider = "manual",
+  repair?: RepairedSource,
 ) {
   const analysis = analysisSchema.parse(input);
-  const img = await loadImage(source.dataUrl);
+  const img = await loadImage(repair?.objectSource ?? source.dataUrl);
+  if (repair && (repair.width !== source.width || repair.height !== source.height ||
+      img.naturalWidth !== source.width || img.naturalHeight !== source.height))
+    throw new Error("복원 이미지 크기가 원본과 다릅니다. 다시 보정하세요.");
   const fit = fitSource(source.width, source.height, width, height);
   const elements: AnyElement[] = [];
   const assets: Asset[] = [];
@@ -87,7 +118,21 @@ export async function reconstructDesign(
     color: analysis.background.from,
   };
   const unsafe = analysis.background.kind === "complex" || !confirmedBackground;
-  if (unsafe) {
+  if (repair) {
+    const restored = await loadImage(repair.background);
+    if (restored.naturalWidth !== source.width || restored.naturalHeight !== source.height)
+      throw new Error("복원 배경 크기가 원본과 다릅니다.");
+    const asset: Asset = { id: uid("asset"), name: "로컬 복원 배경 · 검토 필요",
+      mime: "image/png", dataUrl: repair.background, width: source.width,
+      height: source.height, original: false };
+    assets.push(asset);
+    elements.push(createImageElement(asset.dataUrl, asset.width, asset.height, {
+      x: fit.x, y: fit.y, width: fit.width, height: fit.height, radius: 0,
+      assetId: asset.id, locked: true, name: asset.name,
+      provenance: { source: source.id, method: "local-inpaint-approximation", review: true, backgroundWarning: true },
+    }));
+    warnings.push(repair.warning);
+  } else if (unsafe) {
     elements.push(
       createImageElement(source.dataUrl, source.width, source.height, {
         x: fit.x,
@@ -129,7 +174,7 @@ export async function reconstructDesign(
     const provenance = {
       source: source.id,
       regionId: r.id,
-      method: `${provider}:${r.type === "image" ? (r.polygon ? "polygon-mask" : "approximate-crop") : "native-" + r.type}`,
+      method: `${provider}:${r.type === "image" ? (repair ? "local-repaired-crop" : r.maskPng ? "png-mask" : r.polygon ? "polygon-mask" : "approximate-crop") : "native-" + r.type}`,
       sourcePixels: pixels,
       review: r.review || provider !== "manual",
       backgroundWarning: unsafe,
@@ -171,7 +216,7 @@ export async function reconstructDesign(
       const crop = await maskedCrop(img, r);
       const a: Asset = {
         id: uid("asset"),
-        name: `${r.id} · ${r.polygon ? "다각형 마스크" : "근사 크롭"}`,
+        name: `${r.id} · ${r.maskPng ? "PNG 마스크" : r.polygon ? "다각형 마스크" : "근사 크롭"}`,
         mime: "image/png",
         width: crop.width,
         height: crop.height,
@@ -193,7 +238,7 @@ export async function reconstructDesign(
       r.type === "text"
         ? `확인 필요 · ${r.text?.slice(0, 20)}`
         : r.type === "image"
-          ? r.polygon
+          ? r.polygon || r.maskPng
             ? "마스크 이미지 · 경계 확인 필요"
             : "근사 크롭"
           : r.shape;

@@ -9,7 +9,7 @@ import {
   type Analysis,
   type Region,
 } from "@/lib/magic-layers/schema";
-import { reconstructDesign } from "@/lib/magic-layers/reconstruct";
+import { reconstructDesign, type RepairedSource } from "@/lib/magic-layers/reconstruct";
 import { renderPage } from "@/lib/render";
 import { uid } from "@/lib/types";
 interface Props {
@@ -30,19 +30,29 @@ export default function MagicDialog({
     enabled: boolean;
     model: string;
     reason: string;
+    candidates?: string[];
   } | null>(null);
   const [analysis, setAnalysis] = useState<Analysis>({
     background: { kind: "solid", from: "#FFFFFF", to: "#FFFFFF", angle: 90 },
     regions: [],
     notes: "수동 영역 지정 · AI 분석을 실행하지 않았습니다.",
   });
+  const [skip, setSkip] = useState<string[]>([]);
+  const [repair, setRepair] = useState<(RepairedSource & { key: string }) | null>(null);
+  const [repairMethod, setRepairMethod] = useState("ns");
+  const [textMode, setTextMode] = useState("boxes");
+  const repairKey = JSON.stringify([source.id, analysis, skip, repairMethod, textMode]);
+  const activeRepair = repair?.key === repairKey ? repair : undefined;
+  const [resultWarnings, setResultWarnings] = useState<string[]>([]);
+  const [selectedModel, setSelectedModel] = useState("");
   const [consent, setConsent] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [skip, setSkip] = useState<string[]>([]);
   const [selected, setSelected] = useState("");
   const [preview, setPreview] = useState("");
+  const [previewKey, setPreviewKey] = useState("");
+  const currentPreviewKey = JSON.stringify([repairKey, confirmed, activeRepair?.key]);
   const [provider, setProvider] = useState("manual");
   const [poly, setPoly] = useState(false);
   const [points, setPoints] = useState<[number, number][]>([]);
@@ -71,7 +81,7 @@ export default function MagicDialog({
       const response = await fetch("/api/ai/magic-layers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: source.dataUrl, consent }),
+        body: JSON.stringify({ image: source.dataUrl, consent, ...(selectedModel ? { model: selectedModel } : {}) }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error ?? "분석 실패");
@@ -120,16 +130,39 @@ export default function MagicDialog({
         skip,
         confirmed,
         provider,
+        activeRepair,
       );
+      setResultWarnings(result.warnings);
       if (apply) {
         onApply(result.page, result.assets, source);
         onClose();
-      } else setPreview(await renderPage(result.page, width, height));
+      } else {
+        setPreview(await renderPage(result.page, width, height));
+        setPreviewKey(currentPreviewKey);
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : "레이어 생성 실패");
     } finally {
       setBusy(false);
     }
+  }
+  async function repairBackground() {
+    setBusy(true);
+    setError("");
+    setPreview("");
+    try {
+      const response = await fetch("/api/magic-layers/background", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: source.dataUrl, analysis, skip,
+          method: repairMethod, textMode, padding: 3 }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error ?? "로컬 보정 실패");
+      setRepair({ ...data, key: repairKey });
+    } catch (e) {
+      setRepair(null);
+      setError(e instanceof Error ? e.message : "로컬 보정 실패");
+    } finally { setBusy(false); }
   }
   function finishPolygon() {
     try {
@@ -142,7 +175,7 @@ export default function MagicDialog({
         Math.max(...xs) - Math.min(...xs),
         Math.max(...ys) - Math.min(...ys),
       ];
-      const r = regionSchema.parse({ ...region, polygon: points, bbox });
+      const r = regionSchema.parse({ ...region, polygon: points, maskPng: undefined, bbox });
       patch(r);
       setPoly(false);
       setPoints([]);
@@ -183,10 +216,15 @@ export default function MagicDialog({
                   : (config?.reason ?? "AI 연결 상태 확인 중")}
               </strong>
               <p>
-                분석 요청 1회 · 오류 시 자동 재시도 없음. 계정별 비용·무료 쿼터가
+                모델별 1회 요청 · 429 할당량 초과 시 다음 무료 후보로 전환합니다. 최대 3회이며 그 밖의 오류는 재시도하지 않습니다. 계정별 비용·무료 쿼터가
                 적용되며 확정 금액을 예측하지 않습니다. 원본은 이 버튼을 누를
                 때만 외부로 전송합니다.
               </p>
+              {config?.candidates && <label>무료 분석 모델
+                <select aria-label="무료 분석 모델" value={selectedModel || config.model} disabled={busy} onChange={e => setSelectedModel(e.target.value)}>
+                  {config.candidates.map(m => <option key={m} value={m}>{m}</option>)}
+                </select>
+              </label>}
               <label>
                 <input
                   type="checkbox"
@@ -291,7 +329,7 @@ export default function MagicDialog({
               <div className="section-label">
                 변환 미리보기 · 원본과 확대 비교
               </div>
-              {preview ? (
+              {preview && previewKey === currentPreviewKey ? (
                 <div className="compare-scroll">
                   <img
                     style={{ width: `${zoom * 100}%`, maxWidth: "none" }}
@@ -356,7 +394,7 @@ export default function MagicDialog({
                       {r.type === "text" ? r.text : (r.shape ?? "이미지")}
                       <small>
                         {r.type === "image"
-                          ? r.polygon
+                          ? r.polygon || r.maskPng
                             ? "마스크 경계 확인 필요"
                             : "근사 크롭"
                           : "확인 필요"}
@@ -381,7 +419,7 @@ export default function MagicDialog({
                           onChange={(e) => {
                             const b = [...region.bbox] as Region["bbox"];
                             b[i] = Number(e.target.value);
-                            patch({ bbox: b, polygon: undefined });
+                            patch({ bbox: b, polygon: undefined, maskPng: undefined });
                           }}
                         />
                       </label>
@@ -467,7 +505,7 @@ export default function MagicDialog({
                       >
                         다각형 다시 지정
                       </button>
-                      <button onClick={() => patch({ polygon: undefined })}>
+                      <button onClick={() => patch({ polygon: undefined, maskPng: undefined })}>
                         마스크 제거
                       </button>
                       {poly && (
@@ -481,6 +519,23 @@ export default function MagicDialog({
               )}
               <fieldset>
                 <legend>배경 복원</legend>
+                <label>로컬 복원 알고리즘
+                  <select aria-label="로컬 복원 알고리즘" value={repairMethod} onChange={e => setRepairMethod(e.target.value)}>
+                    <option value="telea">Telea</option><option value="ns">Navier–Stokes</option>
+                  </select>
+                </label>
+                <label>텍스트 제거 영역
+                  <select aria-label="텍스트 제거 영역" value={textMode} onChange={e => setTextMode(e.target.value)}>
+                    <option value="boxes">전체 텍스트 영역</option><option value="ink">글자 획 추정</option>
+                  </select>
+                </label>
+                <div className="button-row">
+                  <button disabled={busy || analysis.regions.length === skip.length} onClick={() => void repairBackground()}>로컬 배경 보정</button>
+                  {activeRepair && <button onClick={() => { setRepair(null); setPreview(""); }}>복원 취소</button>}
+                </div>
+                {activeRepair && <p role="status">로컬 복원 적용 · {activeRepair.warning}</p>}
+                {repair && !activeRepair && <p className="warning">영역·설정이 변경되었습니다. 로컬 배경 보정을 다시 실행하세요.</p>}
+                <p>외부 전송 없이 CPU로 처리합니다. 원본은 보존하며 가려진 배경은 근사 추정합니다.</p>
                 <label>
                   방식
                   <select
@@ -569,6 +624,7 @@ export default function MagicDialog({
                     : "원본 배경을 새로 그립니다. 가려진 디테일·제외한 영역은 복원하지 않습니다."}
                 </p>
               </fieldset>
+              {resultWarnings.map(w => <p className="warning" key={w}>{w}</p>)}
               <p className="muted">{analysis.notes}</p>
             </div>
           </div>

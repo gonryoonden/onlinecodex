@@ -1,0 +1,16 @@
+
+> personal-magic-studio@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/onlinecodex/apps/studio
+
+
+ Test Files  3 passed (3)
+      Tests  59 passed (59)
+   Start at  12:50:49
+   Duration  608ms (transform 344ms, setup 0ms, import 753ms, tests 136ms, environment 0ms)
+

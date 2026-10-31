@@ -1,0 +1,9 @@
+{
+  "status": 422,
+  "elapsedSeconds": 41.73,
+  "result": {
+    "code": "SCHEMA_UNSUPPORTED",
+    "error": "선택 모델/API가 구조화 스키마를 거부했습니다. 자동으로 다른 API를 재호출하지 않았습니다.",
+    "autoRetried": false
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "status": 422,
+  "elapsedSeconds": 5.24,
+  "result": {
+    "code": "MODEL_UNSUPPORTED",
+    "error": "허용된 최신 모델 후보에 접근할 수 없습니다. 연결 검사 결과와 계정 모델 권한을 확인하세요.",
+    "autoRetried": false
+  }
+}

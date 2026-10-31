@@ -1,3 +1,7 @@
+# 최신 상태 — 3차
+
+실제 Gemini 3.5 Flash-Lite로 원본에서 text19/image27을 생성·편집·출력했습니다. 키 부재는 해소됐습니다. 실제 mask0/native shape0, 일부 한글·좌표·style 오류, 사각 crop의 배경 혼입과 근사 inpainting 한계가 남습니다. NS/Telea 로컬 repair와 PNG grayscale mask 디코딩은 이제 UI에 연결됐습니다. 아래 과거 목록의 ‘키 없음/UI 미연결/PNG 미구현’은 2차 당시 상태이며 현재 한계는 [개발 루프](development-loop.md)와 [실검증](gemini-verification.md)을 우선합니다. 상위 모델503, 원격CI조회Forbidden, 개인인증HTTPS배포미수행은 남은 외부 항목입니다.
+
 # 품질과 범위의 한계
 
 - 제품 상태는 부분 완료. 일반 편집과 로컬 파일 기능을 실제 테스트하지만 라이브 Gemini 키가 없으므로 자동 인식 품질을 완성으로 표시하지 않습니다. 모델 런타임 점검/구조화 JSON/오류 처리는 구현됨, 실계정 연동은 BLOCKED.

@@ -51,6 +51,8 @@ export function diagnostic(error: unknown): AnalysisError {
       : {};
   const status = Number(data.status) || 0,
     name = String(data.name ?? "").toLowerCase();
+  if (status === 503)
+    return new AnalysisError("OVERLOADED", "Gemini 서비스가 일시적으로 혼잡합니다. 자동 재호출하지 않았습니다. 잠시 후 다시 시도하세요.", 503);
   if (status === 429) {
     const seconds = Number(data.headers?.get?.("retry-after"));
     return new AnalysisError(
@@ -144,12 +146,21 @@ export async function probeModels(
   }
   return results;
 }
-const LAYOUT_PROMPT = `Analyze only visible Korean/other text, simple shapes and image objects. Return EXACT visible text, including punctuation and line breaks. Never invent unreadable characters; omit unreadable content and describe omissions in notes. Text must be native text, simple rect/ellipse/line native shapes, detailed illustrations images. All box_2d coordinates MUST be [ymin,xmin,ymax,xmax] normalized 0..1000 relative to the whole image. For image contours, mask is polygon [x,y] points normalized within the object's bounding box (mask_space=bbox), or explicitly mark mask_space=image for whole-image points. Do not replace a segmentation contour with a rectangle. Omit uncertain masks. Do not generate a mask_png or synthetic pixels; copy source pixels later. Mark every inferred region review=true; no confidence values. Separate text printed inside an illustration from its underlying image object. style.fontSize is normalized 0..1000 relative to source image height; colors #RRGGBB; align left/center/right. zIndex bottom-to-top; no duplicate regions. Background complex for uncertain/photographic/textured backgrounds; solid/gradient only when evident. Report missing/occluded pixels in notes. Limit to 80 regions and 96 polygon vertices.`;
+const LAYOUT_PROMPT = `Analyze only visible Korean/other text, simple shapes and image objects. Return EXACT visible text, including punctuation and line breaks. Never invent unreadable characters; omit unreadable content and describe omissions in notes. Text must be native text, simple rect/ellipse/line native shapes, detailed illustrations images. All box_2d coordinates MUST be [ymin,xmin,ymax,xmax] normalized 0..1000 relative to the whole image. For image contours, mask is polygon [x,y] points normalized within the object's bounding box (mask_space=bbox), or explicitly mark mask_space=image for whole-image points. Do not replace a segmentation contour with a rectangle. Omit uncertain masks. Do not generate a mask_png or synthetic pixels; copy source pixels later. Mark every inferred region review=true; no confidence values. Separate text printed inside an illustration from its underlying image object. style.fontSize is normalized 0..1000 relative to source image height; colors #RRGGBB; align left/center/right. zIndex bottom-to-top; no duplicate regions. Background complex for uncertain/photographic/textured backgrounds; solid/gradient only when evident. Report missing/occluded pixels in notes. Do not stop after OCR: inventory visible stationery, tools, illustrations, photos, and icons as independent image regions, even when no reliable contour is available. Never omit all images from an illustrated infographic. Coordinates must cover the actual visible element, not a nearby caption. Text styles must include measured color and estimated fontSize whenever visible. In JSON text use actual newline escapes, never a literal backslash followed by n. Limit to 80 regions and 96 polygon vertices.`;
 const MASK_PROMPT = `Return segmentation ONLY for the image region IDs listed below. Preserve IDs. box_2d=[ymin,xmin,ymax,xmax] in whole-image 0..1000. mask is a real object contour polygon [x,y] normalized within its box, with mask_space=bbox. If using whole-image points explicitly return mask_space=image. Do not substitute rectangular crops for contours. Omit masks you cannot infer. Do not invent hidden pixels, text, new objects, IDs or mask_png. Maximum 96 vertices per contour. Requested regions: `;
-function jsonSchema(schema: z.ZodType) {
+export function modelJsonSchema(schema: z.ZodType) {
+  // Constrained decoding cannot compile the combinatorial bounds in nested
+  // 80-region / 256-vertex arrays. Runtime Zod validation retains ALL bounds.
   const value = z.toJSONSchema(schema, { unrepresentable: "any" });
-  delete value.$schema;
-  return value;
+  const unsupported = new Set(["$schema", "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum", "minLength", "maxLength", "pattern", "minItems", "maxItems"]);
+  function visit(node: unknown): unknown {
+    if (Array.isArray(node)) return node.map(visit);
+    if (node && typeof node === "object") return Object.fromEntries(
+      Object.entries(node).filter(([key]) => !unsupported.has(key)).map(([key, child]) => [key, visit(child)]),
+    );
+    return node;
+  }
+  return visit(value) as Record<string, unknown>;
 }
 function parseJSON(text: string) {
   try {
@@ -167,6 +178,7 @@ export class GeminiAnalyzer implements AiAnalyzer {
     private options: {
       mode?: "combined" | "separate";
       beforeGenerate?: () => void;
+      model?: string;
     } = {},
   ) {}
   async analyze(image: string, mime: string): Promise<Analysis> {
@@ -176,12 +188,14 @@ export class GeminiAnalyzer implements AiAnalyzer {
       apiKey: process.env.GEMINI_API_KEY,
       httpOptions: { timeout: 45000, retryOptions: { attempts: 1 } },
     });
-    const candidates = process.env.GEMINI_VISION_MODEL?.trim()
+    const candidates = this.options.model ? [this.options.model] : process.env.GEMINI_VISION_MODEL?.trim()
       ? [cfg.model]
       : MODEL_CANDIDATES;
     let selected: string | undefined;
     for (const model of candidates) {
       const [probe] = await probeModels(client, [model]);
+      if (!probe.accessible && ["NETWORK", "AUTH", "QUOTA", "TIMEOUT"].includes(probe.code ?? ""))
+        throw new AnalysisError(probe.code!, "Gemini 모델 조회 실패: 프록시·키·쿼터 상태를 확인하세요.", probe.code === "QUOTA" ? 429 : 503);
       if (
         probe.accessible &&
         (!probe.supportedActions ||
@@ -223,7 +237,7 @@ export class GeminiAnalyzer implements AiAnalyzer {
             ],
             config: {
               responseMimeType: "application/json",
-              responseJsonSchema: jsonSchema(schema),
+              responseJsonSchema: modelJsonSchema(schema),
               maxOutputTokens: 16384,
               thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
               abortSignal: AbortSignal.timeout(45000),
@@ -253,9 +267,8 @@ export class GeminiAnalyzer implements AiAnalyzer {
             response_format: {
               type: "text",
               mime_type: "application/json",
-              schema: jsonSchema(schema),
+              schema: modelJsonSchema(schema),
             },
-            response_mime_type: "application/json",
             generation_config: {
               thinking_level: "low",
               thinking_summaries: "none",
@@ -269,14 +282,7 @@ export class GeminiAnalyzer implements AiAnalyzer {
             "INCOMPLETE",
             "Gemini 응답이 완료되지 않았습니다. 자동 재요청하지 않았습니다.",
           );
-        // SDK 1.52 exposes outputs; newer API documentation also shows output_text.
-        const outputText =
-          "output_text" in response && typeof response.output_text === "string"
-            ? response.output_text
-            : (response.outputs ?? [])
-                .filter((o) => o.type === "text")
-                .map((o) => (o.type === "text" ? o.text : ""))
-                .join("");
+        const outputText = response.output_text ?? "";
         return parseJSON(outputText);
       });
     let analysis: Analysis;
@@ -328,11 +334,49 @@ export class GeminiAnalyzer implements AiAnalyzer {
     return analysis;
   }
 }
+export async function withFreeQuotaFallback<T>(
+  candidates: string[], run: (model: string) => Promise<T>,
+): Promise<T> {
+  const allowed = [...new Set(candidates)].filter(m => MODEL_CANDIDATES.includes(m));
+  let last: unknown;
+  for (const model of allowed) {
+    try { return await run(model); }
+    catch (error) {
+      const diagnosed = diagnostic(error);
+      if (diagnosed.code !== "QUOTA") throw diagnosed;
+      last = diagnosed;
+    }
+  }
+  throw last ?? new AnalysisError("MODEL_UNSUPPORTED", "허용된 무료 모델 후보가 없습니다.");
+}
+class FreeFallbackAnalyzer implements AiAnalyzer {
+  lastRun?: AnalysisProvenance;
+  constructor(private options: { mode?: "combined" | "separate"; beforeGenerate?: () => void; model?: string } = {}) {}
+  async analyze(image: string, mime: string) {
+    const config = aiConfig();
+    if (!config.enabled) throw new AnalysisError("AI_DISABLED", config.reason, 503);
+    const preferred = this.options.model ?? config.model;
+    const start = MODEL_CANDIDATES.indexOf(preferred);
+    if (start < 0) throw new AnalysisError("MODEL_UNSUPPORTED", "허용된 무료 모델만 선택하세요.");
+    const candidates = process.env.GEMINI_QUOTA_FALLBACK === "false"
+      ? [preferred] : MODEL_CANDIDATES.slice(start);
+    let total = 0;
+    return withFreeQuotaFallback(candidates, async model => {
+      const engine = new GeminiAnalyzer({ ...this.options, model, beforeGenerate: () => {
+        this.options.beforeGenerate?.();
+        total++;
+      } });
+      try { return await engine.analyze(image, mime); }
+      finally { if (engine.lastRun) this.lastRun = { ...engine.lastRun, generationCalls: total }; }
+    });
+  }
+}
 export function analyzer(options?: {
+  model?: string;
   mode?: "combined" | "separate";
   beforeGenerate?: () => void;
 }): AiAnalyzer {
   return aiConfig().enabled
-    ? new GeminiAnalyzer(options)
+    ? new FreeFallbackAnalyzer(options)
     : new DisabledAnalyzer(aiConfig().reason);
 }

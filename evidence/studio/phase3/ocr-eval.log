@@ -1,0 +1,18 @@
+{
+  "source": "evidence/studio/phase3/live-35-simplified.json",
+  "mode": "saved live API response, no new calls",
+  "matching": "greedy text matching; whitespace removed and literal newline markers normalized for CER; geometric accuracy NOT included",
+  "referenceCharacters": 400,
+  "characterErrors": 5,
+  "cer": 0.0125,
+  "referenceBlocks": 19,
+  "missingBlocks": 0,
+  "extraTextRegions": [],
+  "objects": {
+    "text": 19,
+    "shape": 0,
+    "image": 0
+  },
+  "styleRegions": 0,
+  "warning": "CER does not certify correct geometry, colors, segmentation or completeness of image objects."
+}

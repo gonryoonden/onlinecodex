@@ -45,3 +45,12 @@ class LocalRepairTests(unittest.TestCase):
  def test_rejects_mime_mismatch(self):
   data=payload();data['image']=data['image'].replace('image/png','image/jpeg')
   with self.assertRaisesRegex(ValueError,'signature'):module.repair(data)
+
+ def test_png_mask_respects_grayscale_and_transparency(self):
+  region={'bbox':[0,0,1000,1000]}
+  mask=Image.new('RGBA',(2,2),(255,255,255,0))
+  mask.putpixel((1,1),(128,128,128,255))
+  region['maskPng']=module.png_url(mask)
+  result=module.region_mask(region,2,2)
+  self.assertEqual(int(result[0,0]),0)
+  self.assertEqual(int(result[1,1]),128)

@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://ai.google.dev/gemini-api/docs/models",
+    "status": 200
+  },
+  {
+    "url": "https://ai.google.dev/gemini-api/docs/pricing",
+    "status": 200
+  },
+  {
+    "url": "https://generativelanguage.googleapis.com/v1beta/models",
+    "status": 403
+  }
+]
