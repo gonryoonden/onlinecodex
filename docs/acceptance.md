@@ -95,3 +95,6 @@ STUDIO_PYTHON="$PWD/.venvs/studio/bin/python" ./scripts/test-studio-python
 | 원격 CI / 배포 | 별도 상태 확인 필요 / 미게시 | GitHub API Forbidden, 사용자 게시 금지 준수 |
 
 실제 AI 응답으로 native shape는 반환되지 않았습니다. 기존 도형 편집/출력은 합성·일반 편집 테스트에서 보존했지만 이 원본의 자동 native shape 성공으로 표시하지 않습니다. PowerPoint GUI는 미검증이며 실제 파일 ZIP/XML/python-pptx 검증입니다.
+
+
+원격 최종 확인: 구현 `f01b797` push 성공 및 원격 head 일치. 원격 CI 조회/재실행은 API Forbidden으로 BLOCKED. PR #1의 현재 Draft/open 상태도 API 재확인 불가. 배포하지 않았습니다. 구현·검증은 위 범위에서 보존되며 핵심 자동흐름은 동작하지만 정확한 투명분리/복잡배경 품질과 원격CI가 남아 전체 판정은 **부분 완료**입니다.

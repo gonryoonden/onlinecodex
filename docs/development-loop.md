@@ -47,3 +47,14 @@ STUDIO_EVIDENCE_DIR="$PWD/evidence/studio/phase3" .venvs/studio/bin/python scrip
 - TypeScript59 PASS, Python151 PASS, type/lint/build PASS. 기존13개 수락기준 유지, 복잡합성배경은 고정기준 FAIL을 그대로 기록.
 - 미완료: 실제 정확한 투명객체 마스크·경계/그림자 복원·오인식2자 및style/좌표 검토, 상위무료모델서비스503, GitHubCI조회Forbidden, HTTPS개인배포(미게시).
 - 배포가 아닌 기존 Draft브랜치 반영을 진행. 마지막 검증 커밋/원격head/CI상태는 아래 보존기록에서 확인.
+
+
+## Git 보존·외부 상태
+
+- 마지막 전체 검증 구현 커밋: `f01b797e4dec803cdc19b4fbe4ef8b22cb003cc5`.
+- 원격 `feature/personal-magic-studio`에 정상 push 성공. git ls-remote로 일치 확인.
+- 기존 PR 주소: https://github.com/gonryoonden/onlinecodex/pull/1. API Forbidden으로 현재 Draft/open 상태를 독립 재확인하지 못함. merge/publish하지 않음.
+- GitHub Actions 조회 및 workflow_dispatch 요청은 api.github.com Forbidden으로 BLOCKED. 원격 CI PASS라고 주장하지 않음. GitHub 웹의 기존 PR Checks에서 확인하고 필요 시 `Personal Magic Studio` 워크플로를 해당 브랜치로 실행해야 함.
+- 이 후속 커밋은 검증 문서/원격 상태 기록만 포함. 코드 변경 없음. 구현 커밋 검증 결과는 유지.
+- 다음 명령: `gh run list --repo gonryoonden/onlinecodex --branch feature/personal-magic-studio --limit 3` (API 접근 복구 후).
+- 남은 품질 작업: 실이미지 mask 추출/그림자, style·좌표·OCR2자 교정, 상위 무료모델503 회복 후 제한된 재평가. 모델 생성 호출은 여기서 중지했으며 기존 실제 응답으로 오프라인 회귀 가능.
