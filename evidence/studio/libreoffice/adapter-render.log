@@ -1,0 +1,1 @@
+convert /workspace/onlinecodex/evidence/studio/adapter/two-pages.pptx as a Impress document -> /workspace/onlinecodex/evidence/studio/libreoffice/two-pages.pdf using filter : impress_pdf_Export

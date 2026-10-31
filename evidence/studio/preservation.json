@@ -1,0 +1,19 @@
+{
+  ".agents": {
+    "unchanged": true
+  },
+  "cloud-setup": {
+    "unchanged": true
+  },
+  "tests/upstream": {
+    "unchanged": true
+  },
+  "tests/test_fidelity.py": {
+    "unchanged": true
+  },
+  "output": {
+    "unchanged": true
+  },
+  "base": "0baf282ef35aff119296852f149964c059165e29",
+  "branch": "feature/personal-magic-studio"
+}

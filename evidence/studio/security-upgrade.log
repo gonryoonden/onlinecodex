@@ -1,0 +1,6 @@
+
+> personal-magic-studio@0.1.0 postinstall
+> node scripts-copy-worker.mjs
+
+
+added 4 packages, removed 4 packages, and changed 6 packages in 6s

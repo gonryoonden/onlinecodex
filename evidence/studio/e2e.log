@@ -1,0 +1,18 @@
+
+> personal-magic-studio@0.1.0 test:e2e
+> playwright test
+
+
+Running 7 tests using 1 worker
+
+(node:8597) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/studio.spec.ts:57:5 › Korean editor: layers, persistence, two pages, ZIP in a fresh session, PNG PDF native PPTX (10.8s)
+  ✓  2 tests/studio.spec.ts:175:5 › Magic offline: manual ground truth, real transparent polygon, rebuilt background and explicit residue warning (5.9s)
+  ✓  3 tests/studio.spec.ts:309:5 › PDF pages import, malformed image rejected, real Korean original retained with AI disabled (7.5s)
+  ✓  4 tests/studio.spec.ts:382:5 › test-only injected AI failures never change the saved project (2.2s)
+  ✓  5 tests/studio.spec.ts:423:5 › test-only storage quota failure exposes a usable manual ZIP backup (1.6s)
+  ✓  6 tests/studio.spec.ts:450:5 › a real Chromium process restart retains IndexedDB editing data (3.5s)
+  ✓  7 tests/studio.spec.ts:491:5 › JPEG EXIF and WebP retain original bytes and aspect ratio through native image export (1.8s)
+
+  7 passed (35.0s)

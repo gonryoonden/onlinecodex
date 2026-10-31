@@ -1,0 +1,36 @@
+[
+  {
+    "case": "capabilities",
+    "status": 200,
+    "response": {
+      "enabled": false,
+      "model": "gemini-2.5-flash",
+      "configured": false,
+      "reason": "AI 연결 필요: GEMINI_API_KEY 미설정",
+      "paidImageGeneration": false,
+      "dailyLimit": 20
+    }
+  },
+  {
+    "case": "AI disabled",
+    "status": 503,
+    "response": {
+      "code": "AI_DISABLED",
+      "error": "AI 연결 필요: GEMINI_API_KEY 미설정"
+    }
+  },
+  {
+    "case": "CSRF",
+    "status": 403,
+    "response": {
+      "error": "다른 사이트의 요청은 허용하지 않습니다."
+    }
+  },
+  {
+    "case": "remote host",
+    "status": 403,
+    "response": {
+      "error": "원격 접근은 인증된 개인용 프록시와 STUDIO_ACCESS_TOKEN 설정이 필요합니다."
+    }
+  }
+]

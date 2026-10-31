@@ -1,0 +1,10 @@
+*.pdf binary
+*.pptx binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+# Preserve raw command output, including progress CRs and generated indentation.
+evidence/studio/*.log -whitespace
+evidence/studio/**/*.log -whitespace

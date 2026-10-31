@@ -1,0 +1,14 @@
+F......
+======================================================================
+FAIL: test_all_xml_rgb_colors_are_six_digit_hex (test_pptx.StudioPptxTests.test_all_xml_rgb_colors_are_six_digit_hex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/onlinecodex/tests/studio/test_pptx.py", line 23, in test_all_xml_rgb_colors_are_six_digit_hex
+    for color in etree.fromstring(z.read(name)).xpath('//a:srgbClr/@val',namespaces=NS):self.assertRegex(color,r'^[0-9A-F]{6}$')
+                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Regex didn't match: '^[0-9A-F]{6}$' not found in 'TRANSPARENT'
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.290s
+
+FAILED (failures=1)

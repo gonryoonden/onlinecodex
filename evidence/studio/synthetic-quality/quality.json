@@ -1,0 +1,7 @@
+{
+  "ssim": 0.9447495195326625,
+  "rgb_mae": 3.010422634548611,
+  "ssim_convention": "11x11 uniform-window grayscale, data_range=255",
+  "alignment": "contain source in render canvas",
+  "regions": []
+}

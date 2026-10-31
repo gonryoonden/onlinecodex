@@ -1,0 +1,120 @@
+
+> personal-magic-studio@0.1.0 test:e2e
+> playwright test
+
+
+Running 3 tests using 1 worker
+
+(node:2200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/studio.spec.ts:11:5 › Korean editor: layers, persistence, two pages, ZIP in a fresh session, PNG PDF native PPTX (18.8s)
+(node:2365) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/studio.spec.ts:20:5 › Magic offline: manual ground truth, real transparent polygon, rebuilt background and explicit residue warning (2.0m)
+(node:3130) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/studio.spec.ts:26:5 › PDF pages import, malformed image rejected, real Korean original retained with AI disabled (4.2s)
+
+
+  1) tests/studio.spec.ts:11:5 › Korean editor: layers, persistence, two pages, ZIP in a fresh session, PNG PDF native PPTX 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('요소 X', { exact: true })
+    Expected: "90"
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" getByLabel('요소 X', { exact: true }) with timeout 15000ms
+      - waiting for getByLabel('요소 X', { exact: true })
+
+
+      13 |  await page.getByRole('button',{name:'사각형',exact:true}).click();await page.getByLabel('레이어 이름').fill('첫 페이지 도형');await page.getByRole('button',{name:'원',exact:true}).click();await page.getByRole('button',{name:'레이어 아래로',exact:true}).click();await page.getByTestId('file-upload').setInputFiles(path.join(fixtures,'diamond.png'));await expect(page.getByTestId('layer-image')).toHaveCount(1);let p=await snapshot(page);expect(p.pages[0].elements).toHaveLength(4);expect(Object.values(p.assets)[0]).toMatchObject({width:220,height:170});
+      14 |  const id=p.pages[0].elements.find(e=>e.type==='image')!.id;await page.getByLabel(`${id} 숨김`,{exact:true}).click();await page.getByLabel(`${id} 잠금`,{exact:true}).click();await page.getByTestId('layer-image').locator('.layer-name').click();await page.keyboard.press('Delete');p=await snapshot(page);expect(p.pages[0].elements.find(e=>e.id===id)).toMatchObject({locked:true,visible:false});await page.getByLabel(`${id} 잠금 해제`,{exact:true}).click();await page.getByLabel(`${id} 표시`,{exact:true}).click();
+    > 15 |  await page.getByTestId('layer-text').locator('.layer-name').click();await page.getByLabel('요소 X',{exact:true}).fill('140');await page.getByLabel('요소 X',{exact:true}).blur();await page.keyboard.press('Control+z');await expect(page.getByLabel('요소 X',{exact:true})).toHaveValue('90');await page.keyboard.press('Control+Shift+z');await expect(page.getByLabel('요소 X',{exact:true})).toHaveValue('140');await page.getByTestId('layer-rect').locator('.layer-name').click({modifiers:['Shift']});await page.getByRole('button',{name:'요소 정렬 left',exact:true}).click();p=await snapshot(page);const aligned=p.pages[0].elements.filter(e=>e.type==='text'||e.type==='rect');expect(aligned[0].x).toBe(aligned[1].x);
+         |                                                                                                                                                                                                                                                                         ^
+      16 |  await page.getByRole('button',{name:'페이지 추가',exact:true}).click();await page.getByRole('button',{name:'텍스트 추가',exact:true}).click();await page.getByLabel('텍스트 내용',{exact:true}).fill('두 번째 페이지 독립 객체');await page.getByRole('button',{name:'페이지 앞으로',exact:true}).click();p=await snapshot(page);expect(p.pages).toHaveLength(2);expect(p.pages[0].elements).toHaveLength(1);expect(p.pages[0].elements[0].text).toBe('두 번째 페이지 독립 객체');expect(p.pages[1].elements).toHaveLength(4);await page.getByRole('button',{name:'페이지 복제',exact:true}).click();await page.getByRole('button',{name:'페이지 삭제',exact:true}).click();const saved=await snapshot(page);await page.reload();await page.getByTestId('layer-text').waitFor();p=await snapshot(page);expect(p.pages).toEqual(saved.pages);expect(p.assets).toEqual(saved.assets);await page.getByRole('button',{name:'페이지 2',exact:true}).click();await page.getByTestId('layer-image').locator('.layer-name').click();await page.screenshot({path:path.join(evidence,'editor-1366x768.png')});
+      17 |  const zip=await output(page,'프로젝트 ZIP · 재편집 백업','browser-project.studio.zip');await output(page,'PNG · 현재 페이지','browser-current.png');await output(page,'PDF · 모든 페이지','browser-two-pages.pdf');await output(page,'PPTX · 편집 가능한 객체','browser-two-pages.pptx');
+      18 |  const context=await browser.newContext({viewport:{width:1366,height:768}});const fresh=await context.newPage();await boot(fresh);await fresh.getByTestId('archive-upload').setInputFiles(zip);await expect(fresh.getByText('레이어와 원본 에셋을 복원했습니다.',{exact:true})).toBeVisible();const restored=await snapshot(fresh);expect(restored.pages).toEqual(p.pages);expect(restored.assets).toEqual(p.assets);await fresh.screenshot({path:path.join(evidence,'restored-session.png')});await context.close();fs.writeFileSync(path.join(evidence,'browser-project.json'),JSON.stringify(p,null,2));fs.writeFileSync(path.join(evidence,'console-errors.json'),JSON.stringify(errors,null,2));expect(errors).toEqual([]);
+        at /workspace/onlinecodex/apps/studio/tests/studio.spec.ts:15:265
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/studio-Korean-editor-layer-f8c16-session-PNG-PDF-native-PPTX/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/studio-Korean-editor-layer-f8c16-session-PNG-PDF-native-PPTX/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/studio-Korean-editor-layer-f8c16-session-PNG-PDF-native-PPTX/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/studio-Korean-editor-layer-f8c16-session-PNG-PDF-native-PPTX/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/studio.spec.ts:20:5 › Magic offline: manual ground truth, real transparent polygon, rebuilt background and explicit residue warning 
+
+    Test timeout of 120000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 120000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: 'Magic Layers 검토' }).getByLabel('도형', { exact: true })
+        - waiting for "http://127.0.0.1:3000/" navigation to finish...
+        - navigated to "http://127.0.0.1:3000/"
+
+
+      20 |         req.onsuccess = () => {
+      21 |           const get = req.result
+    > 22 |             .transaction("projects")
+         |                                     ^
+      23 |             .objectStore("projects")
+      24 |             .getAll();
+      25 |           get.onsuccess = () =>
+        at /workspace/onlinecodex/apps/studio/tests/studio.spec.ts:22:583
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/studio-Magic-offline-manua-7bdd5-nd-explicit-residue-warning/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/studio-Magic-offline-manua-7bdd5-nd-explicit-residue-warning/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/studio-Magic-offline-manua-7bdd5-nd-explicit-residue-warning/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/studio-Magic-offline-manua-7bdd5-nd-explicit-residue-warning/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/studio.spec.ts:26:5 › PDF pages import, malformed image rejected, real Korean original retained with AI disabled 
+
+    Error: ENOENT: no such file or directory, open '/workspace/onlinecodex/evidence/studio/browser-two-pages.pdf'
+
+      25 |           get.onsuccess = () =>
+      26 |             resolve(
+    > 27 |               get.result.sort(
+         |                               ^
+      28 |                 (a: { updatedAt: string }, b: { updatedAt: string }) =>
+      29 |                   b.updatedAt.localeCompare(a.updatedAt),
+      30 |               )[0],
+        at /workspace/onlinecodex/apps/studio/tests/studio.spec.ts:27:137
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/studio-PDF-pages-import-ma-9bd38-l-retained-with-AI-disabled/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/studio-PDF-pages-import-ma-9bd38-l-retained-with-AI-disabled/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/studio-PDF-pages-import-ma-9bd38-l-retained-with-AI-disabled/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/studio-PDF-pages-import-ma-9bd38-l-retained-with-AI-disabled/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/studio.spec.ts:11:5 › Korean editor: layers, persistence, two pages, ZIP in a fresh session, PNG PDF native PPTX 
+    tests/studio.spec.ts:20:5 › Magic offline: manual ground truth, real transparent polygon, rebuilt background and explicit residue warning 
+    tests/studio.spec.ts:26:5 › PDF pages import, malformed image rejected, real Korean original retained with AI disabled 

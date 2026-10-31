@@ -1,0 +1,17 @@
+.E.......
+======================================================================
+ERROR: test_exif_jpeg_orientation_matches_browser_coordinates (test_pptx.StudioPptxTests.test_exif_jpeg_orientation_matches_browser_coordinates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/onlinecodex/tests/studio/test_pptx.py", line 30, in test_exif_jpeg_orientation_matches_browser_coordinates
+    with tempfile.TemporaryDirectory() as d:self.assertEqual(Image.open(adapter.decode_asset(a,Path(d))).size,(640,960))
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/onlinecodex/scripts/studio-pptx.py", line 22, in decode_asset
+    if im.size!=(a['width'],a['height']) or im.width*im.height>40_000_000:raise ValueError('Asset dimensions mismatch')
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Asset dimensions mismatch
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.428s
+
+FAILED (errors=1)
