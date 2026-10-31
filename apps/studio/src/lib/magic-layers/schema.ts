@@ -43,6 +43,11 @@ export const regionSchema = z
     text: z.string().max(10000).optional(),
     bbox: bboxSchema,
     polygon: polygonSchema.optional(),
+    maskPng: z
+      .string()
+      .max(2 * 1024 * 1024)
+      .regex(/^data:image\/png;base64,[A-Za-z0-9+/]+=*$/)
+      .optional(),
     shape: z.enum(["rect", "rounded-rect", "ellipse", "line"]).optional(),
     style: z
       .object({
@@ -59,6 +64,16 @@ export const regionSchema = z
       .optional(),
   })
   .superRefine((r, ctx) => {
+    if (r.polygon && r.maskPng)
+      ctx.addIssue({
+        code: "custom",
+        message: "polygon과 PNG mask는 동시에 사용할 수 없습니다.",
+      });
+    if (r.maskPng && !r.maskPng.startsWith("data:image/png;base64,iVBORw0KGgo"))
+      ctx.addIssue({
+        code: "custom",
+        message: "PNG mask의 파일 서명이 유효하지 않습니다.",
+      });
     if (r.type === "text" && !r.text?.trim())
       ctx.addIssue({
         code: "custom",

@@ -1,0 +1,24 @@
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+src/lib/local-repair-server.ts(6,161): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Property 'NODE_ENV' is missing in type '{ PATH: string; LANG: string; PYTHONDONTWRITEBYTECODE: string; }' but required in type 'ProcessEnv'.
+src/lib/local-repair-server.ts(7,38): error TS2339: Property 'kill' does not exist on type 'never'.
+  The intersection 'ChildProcessWithoutNullStreams & ChildProcessByStdio<Writable, Readable, Readable> & ... 7 more ... & ChildProcess' was reduced to 'never' because property 'stdin' has conflicting types in some constituents.
+src/lib/local-repair-server.ts(8,8): error TS2339: Property 'stdout' does not exist on type 'never'.
+  The intersection 'ChildProcessWithoutNullStreams & ChildProcessByStdio<Writable, Readable, Readable> & ... 7 more ... & ChildProcess' was reduced to 'never' because property 'stdin' has conflicting types in some constituents.
+src/lib/local-repair-server.ts(8,91): error TS2339: Property 'kill' does not exist on type 'never'.
+  The intersection 'ChildProcessWithoutNullStreams & ChildProcessByStdio<Writable, Readable, Readable> & ... 7 more ... & ChildProcess' was reduced to 'never' because property 'stdin' has conflicting types in some constituents.
+src/lib/local-repair-server.ts(9,8): error TS2339: Property 'stderr' does not exist on type 'never'.
+  The intersection 'ChildProcessWithoutNullStreams & ChildProcessByStdio<Writable, Readable, Readable> & ... 7 more ... & ChildProcess' was reduced to 'never' because property 'stdin' has conflicting types in some constituents.
+src/lib/local-repair-server.ts(10,8): error TS2339: Property 'on' does not exist on type 'never'.
+  The intersection 'ChildProcessWithoutNullStreams & ChildProcessByStdio<Writable, Readable, Readable> & ... 7 more ... & ChildProcess' was reduced to 'never' because property 'stdin' has conflicting types in some constituents.
+src/lib/local-repair-server.ts(11,8): error TS2339: Property 'on' does not exist on type 'never'.
+  The intersection 'ChildProcessWithoutNullStreams & ChildProcessByStdio<Writable, Readable, Readable> & ... 7 more ... & ChildProcess' was reduced to 'never' because property 'stdin' has conflicting types in some constituents.
+src/lib/local-repair-server.ts(11,19): error TS7006: Parameter 'code' implicitly has an 'any' type.
+src/lib/local-repair-server.ts(12,8): error TS2339: Property 'stdin' does not exist on type 'never'.
+  The intersection 'ChildProcessWithoutNullStreams & ChildProcessByStdio<Writable, Readable, Readable> & ... 7 more ... & ChildProcess' was reduced to 'never' because property 'stdin' has conflicting types in some constituents.
+src/lib/local-repair-server.ts(12,39): error TS2339: Property 'stdin' does not exist on type 'never'.
+  The intersection 'ChildProcessWithoutNullStreams & ChildProcessByStdio<Writable, Readable, Readable> & ... 7 more ... & ChildProcess' was reduced to 'never' because property 'stdin' has conflicting types in some constituents.

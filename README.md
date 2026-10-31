@@ -21,7 +21,9 @@ npm --prefix apps/studio run build
 STUDIO_PYTHON="$PWD/.venvs/studio/bin/python" npm --prefix apps/studio start
 ```
 
-선택 AI 설정: `.env.example`을 `apps/studio/.env.local`로 복사하고 서버 환경에 `GEMINI_API_KEY`를 등록합니다. 채팅/코드에 키를 붙여 넣지 마세요. 모델 기본 후보는 `gemini-2.5-flash`이며 계정 접근은 분석 때 점검합니다. `ENABLE_PAID_AI=false`가 기본이고 이미지 생성 모델을 호출하지 않습니다. 이 플래그가 Google 계정의 과금을 차단하는 것은 아닙니다. 계정 예산·쿼터를 별도로 설정하세요.
+선택 AI 설정: `.env.example`을 `apps/studio/.env.local`로 복사하고 서버 환경에 `GEMINI_API_KEY`를 등록합니다. 채팅/코드에 키를 붙여 넣지 마세요. 모델 후보는 `gemini-3.8-flash` → `gemini-3.6-flash` → `gemini-3.5-flash-lite` 순서입니다. 실제 계정 성공 모델은 아직 없습니다. AI Studio에서 이 키의 프로젝트가 Free Tier인지 확인한 뒤 `GEMINI_BILLING_TIER=free`를 설정해야 분석이 활성화됩니다. 이 값은 운영자 확인이며 독립적인 과금 검증은 아닙니다. `ENABLE_PAID_AI=false`가 기본이고 이미지 생성 모델을 호출하지 않습니다. 이 플래그가 Google 계정의 과금을 차단하는 것은 아닙니다. 계정 예산·쿼터를 별도로 설정하세요.
+
+이번 2차 개발의 보존 상태와 다음 작업은 [인계 문서](docs/phase2-handoff.md)를 참고하세요. 로컬 배경 복원 API는 추가했지만 편집기에는 아직 연결하지 않았습니다.
 
 ## 사용
 

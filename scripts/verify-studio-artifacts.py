@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Inspect actual browser downloads, not generator assumptions."""
 from pathlib import Path
-import base64,hashlib,io,json,re,zipfile
+import base64,hashlib,io,json,re,zipfile,os
 from PIL import Image,ImageChops,ImageDraw
 from lxml import etree
 import fitz
 from pptx import Presentation
-ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'evidence/studio';NS={'a':'http://schemas.openxmlformats.org/drawingml/2006/main','p':'http://schemas.openxmlformats.org/presentationml/2006/main'}
+ROOT=Path(__file__).resolve().parents[1];OUT=Path(os.environ.get('STUDIO_EVIDENCE_DIR',str(ROOT/'evidence/studio')));NS={'a':'http://schemas.openxmlformats.org/drawingml/2006/main','p':'http://schemas.openxmlformats.org/presentationml/2006/main'}
 report={}
 for name in ['browser-current.png','synthetic-reconstructed.png']:
  im=Image.open(OUT/name);im.verify();report[name]={'readable':True,'bytes':(OUT/name).stat().st_size}

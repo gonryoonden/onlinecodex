@@ -6,6 +6,8 @@
 
 환경: Linux, Node 24.19.0, Python 3.12.14, Chromium 154.0.8037.57. 의존성 실제 설치 `scripts/setup-studio`와 `npm ci` 기록: [clean-setup.log](../evidence/studio/clean-setup.log). 최종 런타임 전용 새 venv에는 Pillow/lxml/numpy만 설치해 PPTX 서버를 실행했습니다: [runtime-python-setup.log](../evidence/studio/runtime-python-setup.log). DB·AI 키·로그인 없음. `npm start`의 localhost 프로덕션 서버로 E2E를 수행했습니다. 서버와 URL은 실제 확인했으며 인터넷 공개 배포는 하지 않았습니다.
 
+아래 13항목 표는 1차 검증 이력입니다. 최신 보존 체크포인트 결과는 문서 끝에 별도로 기록하며, 라이브 AI의 BLOCKED 판정은 유지합니다.
+
 ## 필수 13항목
 
 | # | 수락 기준 | 판정 | 실제 증거와 범위 |
@@ -52,3 +54,24 @@ STUDIO_PYTHON="$PWD/.venvs/studio/bin/python" ./scripts/test-studio-python
 ```
 
 `*-initial.log`, `*-before.log`, `adapter/initial/`은 수정 전 실패 증거입니다. 최신 판정은 위에서 연결한 로그·JSON을 사용합니다. CI workflow도 추가했지만 GitHub 원격 실행 결과는 로컬 결과와 별도로 확인해야 합니다.
+
+
+## 2차 보존 체크포인트
+
+2026-10-31 KST, 새 Cloud 환경으로 이동하기 전 사용자 요청에 따라 현재 변경을 보존했습니다. 전체 기능 완료가 아닙니다. [인계 문서](phase2-handoff.md)에 새 환경 설정·미완료 작업을 기록했습니다.
+
+| 검증 | 결과 | 증거/제한 |
+|---|---|---|
+| Typecheck / lint / production build | PASS | [typecheck](../evidence/studio/phase2/typecheck.log), [lint](../evidence/studio/phase2/lint.log), [build](../evidence/studio/phase2/build.log) |
+| TypeScript | 48/48 PASS | [log](../evidence/studio/phase2/typescript-tests.log). 기존 37개 유지, 계약 갱신 + 신규 11개. Google YX/XYWH·bbox-local mask, 무료 상태 미확인 차단, Interactions 무재시도, 별도 마스크 실패 시 첫 분석 보존. **SDK mock/합성 wire fixture이며 실제 AI 증거 아님.** |
+| Python | 150/150 PASS | [log](../evidence/studio/phase2/python-tests.log): 기존 upstream 128 + fidelity 7 + Studio 15(기존 어댑터 9 + 로컬 repair 6). 비마스크 픽셀 보존/합성 단색 객체 제거/텍스트 제거 소스/과도한 마스크 거부 등. |
+| Chromium E2E | 7/7 PASS | [log](../evidence/studio/phase2/e2e.log), [새 스크린샷](../evidence/studio/phase2/browser/editor-1366x768.png), [수동 분리](../evidence/studio/phase2/browser/magic-reconstructed-editor.png). 프로덕션 서버, 기존 편집/복원/ZIP/출력 회귀. 새 로컬 repair UI 통합 시험은 아님. |
+| 출력 실제 파일 검사 | PASS | [log](../evidence/studio/phase2/artifact-checks.log), [report](../evidence/studio/phase2/browser/artifact-verification.json). PNG/PDF/PPTX/ZIP/native 객체 및 18,304개 mask core 원본 픽셀 일치. 일반 편집 문서의 원본 충실도 인증을 뜻하지 않음. |
+| 로컬 repair API | 제한 범위 PASS | [API report](../evidence/studio/phase2/api-checks.json): 합성 정답 영역, HTTP 200, 마스크 밖 픽셀 동일. [배경](../evidence/studio/phase2/local-repair-background.png), [마스크](../evidence/studio/phase2/local-repair-mask.png). UI/reconstruct 미연결이며 실제 이미지 품질 미검증. |
+| Gemini 실연결·무료 과금 확인·실제 한글 자동 분해 | BLOCKED | 현재 key 없음 / Cloud secrets 0개 / 인증 호출 0회 / 과금 상태 미확인. [Gemini 기록](gemini-verification.md). 후보 모델은 최신 문서 기준이며 실제 성공 모델은 아직 없음. |
+| 기존 엔진·원본·1차 증거 보존 | PASS | [preservation](../evidence/studio/phase2/preservation.json). a1b4396 대비 fidelity/기존 테스트/output/reconstruct.ts 변경 없음, 저장소 한글 원본 동일, 1차 evidence 변경 없음. |
+| staged 비밀 패턴 검사 | PASS | [scan](../evidence/studio/phase2/secrets-scan.json). 키/키 일부를 출력·저장하지 않음. 신규 이미지와 JSON은 합성 fixture/공개 저장소 원본의 회귀 증거. |
+
+최초 typecheck 실패와 TS 5개 실패는 [typecheck-initial](../evidence/studio/phase2/typecheck-initial.log), [typescript-tests-initial](../evidence/studio/phase2/typescript-tests-initial.log)에 보존했습니다. Next의 spawn env 타입 요구를 수정했고, 기존 테스트를 삭제하지 않은 채 2.5/internal-wire/최대3회 호출 전제를 새 무료 정책/Google-wire/1회 시도 계약으로 갱신했습니다. 최종 통과로 초기 실패를 숨기지 않았습니다.
+
+기존 13개 수락 기준은 유지합니다. 항목 1–6, 8–13의 기존 기능을 위 회귀 범위에서 재확인했고, 항목 7의 **실제 API 검증은 계속 BLOCKED**입니다. 2차 추가 목표인 실제 OCR/객체 마스크/잔상 없는 분해 전체 E2E는 미완료입니다. PNG mask 브라우저 decode, local repair UI/reconstruct 연결, 실제 계정 모델 호출·무료 조건 확인, 실이미지 비교/SSIM을 다음 환경에서 수행해야 합니다. GPU 모델·유료 이미지 생성은 추가하지 않았습니다.

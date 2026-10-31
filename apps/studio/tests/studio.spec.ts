@@ -2,7 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import type { Project } from "@/lib/project";
-const evidence = path.resolve("../../evidence/studio");
+const evidence = path.resolve(process.env.STUDIO_EVIDENCE_DIR || "../../evidence/studio");
 const fixtures = path.resolve("../../tests/studio/fixtures");
 const analysis = JSON.parse(
   fs.readFileSync(path.join(fixtures, "synthetic.analysis.json"), "utf8"),

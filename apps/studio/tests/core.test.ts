@@ -160,7 +160,7 @@ describe("AI disabled and diagnosable failure", () => {
       "secret",
     );
   });
-  it("retries at most twice and preserves error", async () => {
+  it("does not retry quota failures and preserves error", async () => {
     const run = vi
       .fn()
       .mockRejectedValue(new AnalysisError("QUOTA", "quota", 429));
@@ -168,7 +168,7 @@ describe("AI disabled and diagnosable failure", () => {
       "status",
       429,
     );
-    expect(run).toHaveBeenCalledTimes(3);
+    expect(run).toHaveBeenCalledTimes(1);
   });
   it("never retries unauthorized or unsupported models", async () => {
     const run = vi
@@ -277,14 +277,12 @@ describe("editing limits keep automatic saves and ZIP backups valid", () => {
     store.getState().loadDesign(p);
     const t = createTextElement();
     store.getState().addElement(t);
-    store
-      .getState()
-      .updateElements([t.id], {
-        fontSize: -40,
-        height: 100000,
-        opacity: 2,
-        rotation: Infinity,
-      });
+    store.getState().updateElements([t.id], {
+      fontSize: -40,
+      height: 100000,
+      opacity: 2,
+      rotation: Infinity,
+    });
     expect(() =>
       validateProject({ ...p, pages: store.getState().pages }),
     ).not.toThrow();

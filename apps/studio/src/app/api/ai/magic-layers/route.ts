@@ -9,7 +9,7 @@ import {
 import { imageData } from "@/lib/project";
 import { guard, boundedJson } from "@/lib/server-guard";
 export const runtime = "nodejs";
-export const maxDuration = 90;
+export const maxDuration = 150;
 let busy = false,
   day = "",
   calls = 0,
@@ -47,7 +47,11 @@ export async function POST(req: Request) {
   busy = true;
   try {
     const body = z
-      .object({ image: imageData, consent: z.literal(true) })
+      .object({
+        image: imageData,
+        consent: z.literal(true),
+        mode: z.enum(["combined", "separate"]).default("combined"),
+      })
       .parse(await boundedJson(req, 9 * 1024 * 1024));
     const bytes = Buffer.from(body.image.split(",")[1], "base64");
     const meta = await sharp(bytes, {
@@ -65,14 +69,32 @@ export async function POST(req: Request) {
         "16MP 이하 PNG/JPEG/WebP 이미지를 사용하세요.",
         400,
       );
-    calls++;
-    last = Date.now();
-    const result = await analyzer().analyze(body.image, `image/${meta.format}`);
+    const planned = body.mode === "separate" ? 2 : 1;
+    if (calls + planned > limit)
+      throw new AnalysisError(
+        "QUOTA",
+        "선택한 분석 방식에 필요한 일일 호출량이 남아 있지 않습니다.",
+        429,
+      );
+    const engine = analyzer({
+      mode: body.mode,
+      beforeGenerate: () => {
+        if (calls >= limit)
+          throw new AnalysisError("QUOTA", "일일 호출 한도 초과", 429);
+        calls++;
+        last = Date.now();
+      },
+    });
+    const result = await engine.analyze(body.image, `image/${meta.format}`);
     return Response.json({
       analysis: result,
       provenance: {
         provider: "gemini",
-        model: aiConfig().model,
+        model: engine.lastRun?.model ?? aiConfig().model,
+        apiMode: engine.lastRun?.apiMode,
+        generationCalls: engine.lastRun?.generationCalls ?? 0,
+        segmentation: engine.lastRun?.segmentation,
+        segmentationError: engine.lastRun?.segmentationError,
         analyzedAt: new Date().toISOString(),
         sourceWidth: meta.width,
         sourceHeight: meta.height,
@@ -91,7 +113,12 @@ export async function POST(req: Request) {
           )
         : diagnostic(error);
     return Response.json(
-      { code: e.code, error: e.message },
+      {
+        code: e.code,
+        error: e.message,
+        retryAfterSeconds: e.retryAfterSeconds,
+        autoRetried: false,
+      },
       { status: e.status },
     );
   } finally {
