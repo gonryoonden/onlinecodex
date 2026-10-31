@@ -1,0 +1,26 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+{
+  "local-repair": {
+    "pngReadable": true,
+    "pdfPages": 2,
+    "pptxSlides": 2,
+    "nativeText": [
+      "",
+      "",
+      "",
+      "복원 후 한글 수정",
+      "한글 텍스트와 독립적인 편집 레이어",
+      ""
+    ],
+    "pictures": 2
+  },
+  "real-manual": {
+    "pngReadable": true,
+    "pdfPages": 2,
+    "pptxSlides": 2,
+    "nativeText": [
+      "2024년 교육 안내 · 직접 수정됨"
+    ],
+    "pictures": 1
+  }
+}

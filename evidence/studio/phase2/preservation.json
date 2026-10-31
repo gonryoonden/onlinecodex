@@ -1,0 +1,20 @@
+{
+  "branch": "feature/personal-magic-studio",
+  "previousCommit": "a1b4396b5fcb046a66dec5065b828b8602fdd51c",
+  "protectedPathsComparedTo": "a1b4396",
+  "protectedPaths": [
+    ".agents",
+    "cloud-setup",
+    "tests/upstream",
+    "tests/test_fidelity.py",
+    "output",
+    "apps/studio/src/lib/magic-layers/reconstruct.ts"
+  ],
+  "modifiedProtectedFiles": [],
+  "originalImageUnchanged": true,
+  "geminiKeyPresent": false,
+  "authenticatedGeminiCallsPerformed": 0,
+  "billingTier": "unknown",
+  "phase1EvidenceModified": [],
+  "status": "preservation checkpoint; live AI and UI repair integration incomplete"
+}

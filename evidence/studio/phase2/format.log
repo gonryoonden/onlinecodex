@@ -1,0 +1,12 @@
+apps/studio/src/lib/ai-analyzer.ts 123ms
+apps/studio/src/lib/ai-policy.ts 6ms
+apps/studio/src/lib/gemini-models.json 20ms
+apps/studio/src/lib/local-repair-server.ts 11ms
+apps/studio/src/lib/magic-layers/google-analysis.ts 28ms
+apps/studio/src/lib/magic-layers/schema.ts 28ms
+apps/studio/src/app/api/ai/connection/route.ts 4ms
+apps/studio/src/app/api/ai/magic-layers/route.ts 13ms
+apps/studio/src/app/api/magic-layers/background/route.ts 11ms
+apps/studio/tests/gemini.test.ts 22ms
+apps/studio/tests/google-analysis.test.ts 16ms
+apps/studio/tests/core.test.ts 35ms

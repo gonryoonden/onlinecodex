@@ -1,0 +1,32 @@
+
+> personal-magic-studio@0.1.0 build
+> next build
+
+▲ Next.js 16.4.3 (Turbopack)
+✓ Running next.config.ts took 65ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 8.0s
+  Running TypeScript ...
+  Finished TypeScript in 4.3s ...
+  Collecting page data using 2 workers ...
+  Generating static pages using 2 workers (0/6) ...
+  Generating static pages using 2 workers (1/6) 
+  Generating static pages using 2 workers (2/6) 
+  Generating static pages using 2 workers (4/6) 
+✓ Generating static pages using 2 workers (6/6) in 145ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/ai/connection
+├ ƒ /api/ai/magic-layers
+├ ƒ /api/capabilities
+├ ƒ /api/export/pptx
+└ ƒ /api/magic-layers/background
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

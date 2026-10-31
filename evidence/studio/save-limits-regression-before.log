@@ -1,0 +1,343 @@
+
+> personal-magic-studio@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/onlinecodex/apps/studio
+
+ ❯ tests/core.test.ts (33 tests | 2 failed) 70ms
+     × bounds numeric input before storing document state 6ms
+     × does not exceed the documented layer capacity 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/core.test.ts > editing limits keep automatic saves and ZIP backups valid > bounds numeric input before storing document state
+AssertionError: expected [Function] to not throw an error but '[\n  {\n    "code": "invalid_union",\…' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"[
+  {
+    \"code\": \"invalid_union\",
+    \"errors\": [
+      [
+        {
+          \"origin\": \"number\",
+          \"code\": \"too_big\",
+          \"maximum\": 10000,
+          \"inclusive\": true,
+          \"path\": [
+            \"height\"
+          ],
+          \"message\": \"Too big: expected number to be <=10000\"
+        },
+        {
+          \"expected\": \"number\",
+          \"code\": \"invalid_type\",
+          \"received\": \"Infinity\",
+          \"path\": [
+            \"rotation\"
+          ],
+          \"message\": \"Invalid input: expected number, received Infinity\"
+        },
+        {
+          \"origin\": \"number\",
+          \"code\": \"too_big\",
+          \"maximum\": 1,
+          \"inclusive\": true,
+          \"path\": [
+            \"opacity\"
+          ],
+          \"message\": \"Too big: expected number to be <=1\"
+        },
+        {
+          \"origin\": \"number\",
+          \"code\": \"too_small\",
+          \"minimum\": 1,
+          \"inclusive\": true,
+          \"path\": [
+            \"fontSize\"
+          ],
+          \"message\": \"Too small: expected number to be >=1\"
+        }
+      ],
+      [
+        {
+          \"origin\": \"number\",
+          \"code\": \"too_big\",
+          \"maximum\": 10000,
+          \"inclusive\": true,
+          \"path\": [
+            \"height\"
+          ],
+          \"message\": \"Too big: expected number to be <=10000\"
+        },
+        {
+          \"expected\": \"number\",
+          \"code\": \"invalid_type\",
+          \"received\": \"Infinity\",
+          \"path\": [
+            \"rotation\"
+          ],
+          \"message\": \"Invalid input: expected number, received Infinity\"
+        },
+        {
+          \"origin\": \"number\",
+          \"code\": \"too_big\",
+          \"maximum\": 1,
+          \"inclusive\": true,
+          \"path\": [
+            \"opacity\"
+          ],
+          \"message\": \"Too big: expected number to be <=1\"
+        },
+        {
+          \"code\": \"invalid_value\",
+          \"values\": [
+            \"rect\",
+            \"ellipse\"
+          ],
+          \"path\": [
+            \"type\"
+          ],
+          \"message\": \"Invalid option: expected one of \\\"rect\\\"|\\\"ellipse\\\"\"
+        },
+        {
+          \"code\": \"invalid_union\",
+          \"errors\": [
+            [
+              {
+                \"expected\": \"string\",
+                \"code\": \"invalid_type\",
+                \"path\": [],
+                \"message\": \"Invalid input: expected string, received undefined\"
+              }
+            ],
+            [
+              {
+                \"code\": \"invalid_value\",
+                \"values\": [
+                  \"transparent\"
+                ],
+                \"path\": [],
+                \"message\": \"Invalid input: expected \\\"transparent\\\"\"
+              }
+            ]
+          ],
+          \"path\": [
+            \"stroke\"
+          ],
+          \"message\": \"Invalid input\"
+        },
+        {
+          \"expected\": \"number\",
+          \"code\": \"invalid_type\",
+          \"path\": [
+            \"strokeWidth\"
+          ],
+          \"message\": \"Invalid input: expected number, received undefined\"
+        },
+        {
+          \"expected\": \"number\",
+          \"code\": \"invalid_type\",
+          \"path\": [
+            \"cornerRadius\"
+          ],
+          \"message\": \"Invalid input: expected number, received undefined\"
+        }
+      ],
+      [
+        {
+          \"origin\": \"number\",
+          \"code\": \"too_big\",
+          \"maximum\": 10000,
+          \"inclusive\": true,
+          \"path\": [
+            \"height\"
+          ],
+          \"message\": \"Too big: expected number to be <=10000\"
+        },
+        {
+          \"expected\": \"number\",
+          \"code\": \"invalid_type\",
+          \"received\": \"Infinity\",
+          \"path\": [
+            \"rotation\"
+          ],
+          \"message\": \"Invalid input: expected number, received Infinity\"
+        },
+        {
+          \"origin\": \"number\",
+          \"code\": \"too_big\",
+          \"maximum\": 1,
+          \"inclusive\": true,
+          \"path\": [
+            \"opacity\"
+          ],
+          \"message\": \"Too big: expected number to be <=1\"
+        },
+        {
+          \"code\": \"invalid_value\",
+          \"values\": [
+            \"line\"
+          ],
+          \"path\": [
+            \"type\"
+          ],
+          \"message\": \"Invalid input: expected \\\"line\\\"\"
+        },
+        {
+          \"expected\": \"string\",
+          \"code\": \"invalid_type\",
+          \"path\": [
+            \"stroke\"
+          ],
+          \"message\": \"Invalid input: expected string, received undefined\"
+        },
+        {
+          \"expected\": \"number\",
+          \"code\": \"invalid_type\",
+          \"path\": [
+            \"strokeWidth\"
+          ],
+          \"message\": \"Invalid input: expected number, received undefined\"
+        },
+        {
+          \"expected\": \"boolean\",
+          \"code\": \"invalid_type\",
+          \"path\": [
+            \"dashed\"
+          ],
+          \"message\": \"Invalid input: expected boolean, received undefined\"
+        },
+        {
+          \"expected\": \"boolean\",
+          \"code\": \"invalid_type\",
+          \"path\": [
+            \"arrowStart\"
+          ],
+          \"message\": \"Invalid input: expected boolean, received undefined\"
+        },
+        {
+          \"expected\": \"boolean\",
+          \"code\": \"invalid_type\",
+          \"path\": [
+            \"arrowEnd\"
+          ],
+          \"message\": \"Invalid input: expected boolean, received undefined\"
+        }
+      ],
+      [
+        {
+          \"origin\": \"number\",
+          \"code\": \"too_big\",
+          \"maximum\": 10000,
+          \"inclusive\": true,
+          \"path\": [
+            \"height\"
+          ],
+          \"message\": \"Too big: expected number to be <=10000\"
+        },
+        {
+          \"expected\": \"number\",
+          \"code\": \"invalid_type\",
+          \"received\": \"Infinity\",
+          \"path\": [
+            \"rotation\"
+          ],
+          \"message\": \"Invalid input: expected number, received Infinity\"
+        },
+        {
+          \"origin\": \"number\",
+          \"code\": \"too_big\",
+          \"maximum\": 1,
+          \"inclusive\": true,
+          \"path\": [
+            \"opacity\"
+          ],
+          \"message\": \"Too big: expected number to be <=1\"
+        },
+        {
+          \"code\": \"invalid_value\",
+          \"values\": [
+            \"image\"
+          ],
+          \"path\": [
+            \"type\"
+          ],
+          \"message\": \"Invalid input: expected \\\"image\\\"\"
+        },
+        {
+          \"expected\": \"string\",
+          \"code\": \"invalid_type\",
+          \"path\": [
+            \"src\"
+          ],
+          \"message\": \"Invalid input: expected string, received undefined\"
+        },
+        {
+          \"expected\": \"number\",
+          \"code\": \"invalid_type\",
+          \"path\": [
+            \"radius\"
+          ],
+          \"message\": \"Invalid input: expected number, received undefined\"
+        },
+        {
+          \"expected\": \"number\",
+          \"code\": \"invalid_type\",
+          \"path\": [
+            \"naturalWidth\"
+          ],
+          \"message\": \"Invalid input: expected number, received undefined\"
+        },
+        {
+          \"expected\": \"number\",
+          \"code\": \"invalid_type\",
+          \"path\": [
+            \"naturalHeight\"
+          ],
+          \"message\": \"Invalid input: expected number, received undefined\"
+        }
+      ]
+    ],
+    \"path\": [
+      \"pages\",
+      0,
+      \"elements\",
+      0
+    ],
+    \"message\": \"Invalid input\"
+  }
+]"
+
+ ❯ tests/core.test.ts:275:340
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/core.test.ts > editing limits keep automatic saves and ZIP backups valid > does not exceed the documented layer capacity
+AssertionError: expected [ { …(16) }, { …(16) }, …(499) ] to have a length of 500 but got 501
+
+- Expected
++ Received
+
+- 500
++ 501
+
+ ❯ tests/core.test.ts:276:278
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  2 failed | 35 passed (37)
+   Start at  01:41:18
+   Duration  2.98s (transform 177ms, setup 0ms, import 401ms, tests 2.35s, environment 0ms)
+

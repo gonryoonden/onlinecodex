@@ -1,0 +1,178 @@
+{
+  "criteria": {
+    "synthetic_masked_rgb_mae_max": 8,
+    "unmasked_pixels_identical": true,
+    "real_hidden_background": "no ground truth; visual review required",
+    "ocr_cer": "N/A until live AI response",
+    "mask_iou": "N/A; manually supplied masks are not predictions"
+  },
+  "synthetic": [
+    {
+      "fixture": "korean-text",
+      "mode": "synthetic manual ground truth",
+      "results": [
+        {
+          "method": "telea",
+          "masked_rgb_mae_before": 14.028960696198016,
+          "masked_rgb_mae_after": 2.4550966545402666,
+          "global_ssim": 0.9920197334018644,
+          "unmasked_pixels_identical": true,
+          "passes_fixed_mae": true
+        },
+        {
+          "method": "ns",
+          "masked_rgb_mae_before": 14.028960696198016,
+          "masked_rgb_mae_after": 0.0,
+          "global_ssim": 1.0,
+          "unmasked_pixels_identical": true,
+          "passes_fixed_mae": true
+        }
+      ]
+    },
+    {
+      "fixture": "flat-shapes",
+      "mode": "synthetic manual ground truth",
+      "results": [
+        {
+          "method": "telea",
+          "masked_rgb_mae_before": 121.53624052973811,
+          "masked_rgb_mae_after": 3.694048400246575,
+          "global_ssim": 0.9678972760947802,
+          "unmasked_pixels_identical": true,
+          "passes_fixed_mae": true
+        },
+        {
+          "method": "ns",
+          "masked_rgb_mae_before": 121.53624052973811,
+          "masked_rgb_mae_after": 0.0,
+          "global_ssim": 1.0,
+          "unmasked_pixels_identical": true,
+          "passes_fixed_mae": true
+        }
+      ]
+    },
+    {
+      "fixture": "complex-background",
+      "mode": "synthetic manual ground truth",
+      "results": [
+        {
+          "method": "telea",
+          "masked_rgb_mae_before": 90.30752251983535,
+          "masked_rgb_mae_after": 20.447254866869496,
+          "global_ssim": 0.9581368924339068,
+          "unmasked_pixels_identical": true,
+          "passes_fixed_mae": false
+        },
+        {
+          "method": "ns",
+          "masked_rgb_mae_before": 90.30752251983535,
+          "masked_rgb_mae_after": 19.12531567539621,
+          "global_ssim": 0.9641237886487274,
+          "unmasked_pixels_identical": true,
+          "passes_fixed_mae": false
+        }
+      ]
+    },
+    {
+      "fixture": "overlapping-objects",
+      "mode": "synthetic manual ground truth",
+      "results": [
+        {
+          "method": "telea",
+          "masked_rgb_mae_before": 56.18373799439241,
+          "masked_rgb_mae_after": 3.694048400246575,
+          "global_ssim": 0.9678972760947802,
+          "unmasked_pixels_identical": true,
+          "passes_fixed_mae": true
+        },
+        {
+          "method": "ns",
+          "masked_rgb_mae_before": 56.18373799439241,
+          "masked_rgb_mae_after": 0.0,
+          "global_ssim": 1.0,
+          "unmasked_pixels_identical": true,
+          "passes_fixed_mae": true
+        }
+      ]
+    },
+    {
+      "fixture": "table-layout",
+      "mode": "synthetic manual ground truth",
+      "results": [
+        {
+          "method": "telea",
+          "masked_rgb_mae_before": 21.991290341824257,
+          "masked_rgb_mae_after": 3.694048400246575,
+          "global_ssim": 0.9678972760947802,
+          "unmasked_pixels_identical": true,
+          "passes_fixed_mae": true
+        },
+        {
+          "method": "ns",
+          "masked_rgb_mae_before": 21.991290341824257,
+          "masked_rgb_mae_after": 0.0,
+          "global_ssim": 1.0,
+          "unmasked_pixels_identical": true,
+          "passes_fixed_mae": true
+        }
+      ]
+    }
+  ],
+  "real": [
+    {
+      "method": "telea",
+      "mode": "real image, manually supplied title and helmet boxes; not AI",
+      "diagnostics": {
+        "method": "opencv-telea",
+        "textMaskMode": "boxes",
+        "maskPixels": 247212,
+        "textMaskPixels": 204988,
+        "maskedFraction": 0.058483035065406974,
+        "unmaskedPixelsUnchanged": true,
+        "exactBackgroundRecovery": false
+      },
+      "quality": "visual review required; no hidden-background reference",
+      "cer": null,
+      "iou": null
+    },
+    {
+      "method": "ns",
+      "mode": "real image, manually supplied title and helmet boxes; not AI",
+      "diagnostics": {
+        "method": "opencv-ns",
+        "textMaskMode": "boxes",
+        "maskPixels": 247212,
+        "textMaskPixels": 204988,
+        "maskedFraction": 0.058483035065406974,
+        "unmaskedPixelsUnchanged": true,
+        "exactBackgroundRecovery": false
+      },
+      "quality": "visual review required; no hidden-background reference",
+      "cer": null,
+      "iou": null
+    }
+  ],
+  "manual_regions": [
+    {
+      "id": "title",
+      "type": "text",
+      "bbox": [
+        150,
+        30,
+        700,
+        65
+      ]
+    },
+    {
+      "id": "helmet",
+      "type": "image",
+      "bbox": [
+        267,
+        797,
+        67,
+        139
+      ]
+    }
+  ],
+  "live_gemini_calls": 0
+}

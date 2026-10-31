@@ -1,0 +1,5 @@
+src/store/editor-store.ts 248ms
+src/components/Studio.tsx 146ms
+src/lib/archive.ts 15ms
+tests/core.test.ts 25ms
+tests/studio.spec.ts 76ms

@@ -1,0 +1,21 @@
+
+> personal-magic-studio@0.1.0 test:e2e
+> playwright test
+
+
+Running 10 tests using 1 worker
+
+(node:6311) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/studio.spec.ts:57:5 › Korean editor: layers, persistence, two pages, ZIP in a fresh session, PNG PDF native PPTX (5.7s)
+  ✓   2 tests/studio.spec.ts:175:5 › Magic offline: manual ground truth, real transparent polygon, rebuilt background and explicit residue warning (4.8s)
+  ✓   3 tests/studio.spec.ts:309:5 › PDF pages import, malformed image rejected, real Korean original retained with AI disabled (7.3s)
+  ✓   4 tests/studio.spec.ts:382:5 › test-only injected AI failures never change the saved project (1.7s)
+  ✓   5 tests/studio.spec.ts:423:5 › test-only storage quota failure exposes a usable manual ZIP backup (1.1s)
+  ✓   6 tests/studio.spec.ts:450:5 › a real Chromium process restart retains IndexedDB editing data (2.7s)
+  ✓   7 tests/studio.spec.ts:491:5 › JPEG EXIF and WebP retain original bytes and aspect ratio through native image export (1.8s)
+  ✓   8 tests/studio.spec.ts:496:5 › Local repair and grayscale PNG mask: synthetic fixture, invalidation, persistence and native exports (5.9s)
+  ✓   9 tests/studio.spec.ts:549:5 › Real Korean source: manual title repair, native text, preserved original and exports (NOT live AI) (17.1s)
+  ✓  10 tests/studio.spec.ts:585:5 › Recorded LIVE Gemini Korean result: real regions, CPU repair, independent edits and exports (no new AI calls) (20.7s)
+
+  10 passed (1.2m)

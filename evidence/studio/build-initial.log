@@ -1,0 +1,41 @@
+
+> personal-magic-studio@0.1.0 build
+> next build
+
+▲ Next.js 16.4.3 (Turbopack)
+✓ Running next.config.ts took 75ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 8.2s
+  Running TypeScript ...
+
+  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+  	- include was updated to add '.next/dev/types/**/*.ts'
+
+Could not parse output from TypeScript's --showConfig.
+Turbopack build encountered 1 warning:
+./src/app/api/export/pptx/route.ts:8:428
+Warning: Dynamic filesystem access causes tracing of the whole project
+  [90m6 |[0m ...
+  [90m7 |[0m ...
+[33m[1m>[0m [90m8 |[0m ...[33mIO_PYTHON[0m||[32m'python3'[0m,[script],{stdio:[[32m'pipe'[0m,[32m'pipe'[0m,[32m'pipe'[0m],env:{...process.env,[33mPYTHONDO...[0m
+  [90m  |[0m    [33m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m9 |[0m ...
+
+Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+This can slow down deployments or lead to failures when size limits are exceeded.
+To resolve this, you can
+- make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+- only use them in development, or
+- opt out by adding an ignore comment to the highlighted call: child_process.spawn(/*turbopackIgnore: true*/ ...), or
+- remove them.
+
+Import trace:
+  App Route:
+    ./src/app/api/export/pptx/route.ts
+    ./src/app/api/export/pptx/route.ts
+
+

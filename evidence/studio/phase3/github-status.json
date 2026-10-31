@@ -1,0 +1,16 @@
+{
+  "verifiedImplementationCommit": "f01b797e4dec803cdc19b4fbe4ef8b22cb003cc5",
+  "remoteBranch": "feature/personal-magic-studio",
+  "remoteHeadVerified": true,
+  "push": "success",
+  "prUrl": "https://github.com/gonryoonden/onlinecodex/pull/1",
+  "prStateVerified": false,
+  "githubApi": "Forbidden",
+  "remoteCI": "BLOCKED: cannot dispatch or inspect via current API access",
+  "localTests": {
+    "typescript": 59,
+    "python": 151,
+    "browser": 10
+  },
+  "sitePublished": false
+}

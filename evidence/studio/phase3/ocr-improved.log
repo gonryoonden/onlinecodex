@@ -1,0 +1,18 @@
+{
+  "source": "evidence/studio/phase3/gemini-live-improved.json",
+  "mode": "saved live API response, no new calls",
+  "matching": "greedy text matching; whitespace removed and literal newline markers normalized for CER; geometric accuracy NOT included",
+  "referenceCharacters": 400,
+  "characterErrors": 2,
+  "cer": 0.005,
+  "referenceBlocks": 19,
+  "missingBlocks": 0,
+  "extraTextRegions": [],
+  "objects": {
+    "text": 19,
+    "shape": 0,
+    "image": 27
+  },
+  "styleRegions": 19,
+  "warning": "CER does not certify correct geometry, colors, segmentation or completeness of image objects."
+}

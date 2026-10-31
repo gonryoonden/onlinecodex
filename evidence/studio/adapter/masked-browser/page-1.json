@@ -1,0 +1,64 @@
+{
+  "slide": {
+    "width": 10.0,
+    "height": 6.666666666666667,
+    "background": "#FFFFFF"
+  },
+  "content_box": {
+    "left": 0,
+    "top": 0,
+    "width": 10.0,
+    "height": 6.666666666666667
+  },
+  "source": {
+    "width_px": 960,
+    "height_px": 640
+  },
+  "text_inventory": [],
+  "visual_inventory": [
+    {
+      "id": "image_mvvqmgwu56x10j",
+      "role": "foreground",
+      "path": "/workspace/onlinecodex/evidence/studio/adapter/masked-browser/asset_mvvqmgwt4qnstt.png",
+      "source_type": "user-provided"
+    }
+  ],
+  "background_strategy": {
+    "mode": "native-or-script",
+    "source_consistency_contract": "Studio user-edited page",
+    "removed_foreground": [],
+    "comparison_note": "Native background selected by user"
+  },
+  "quality_checks": {
+    "font_size_calibrated": false,
+    "visual_inventory_matched": false,
+    "background_strategy_checked": false,
+    "shape_corner_geometry_checked": false
+  },
+  "text_boxes": [],
+  "shapes": [],
+  "images": [
+    {
+      "id": "image_mvvqmgwu56x10j",
+      "box_px": [
+        0,
+        0,
+        960,
+        640
+      ],
+      "z_index": 0,
+      "rotation": 0,
+      "path": "/workspace/onlinecodex/evidence/studio/adapter/masked-browser/asset_mvvqmgwt4qnstt.png",
+      "alt": "synthetic.png"
+    }
+  ],
+  "asset_provenance": [
+    {
+      "path": "/workspace/onlinecodex/evidence/studio/adapter/masked-browser/asset_mvvqmgwt4qnstt.png",
+      "source": "/workspace/onlinecodex/evidence/studio/adapter/masked-browser/asset_mvvqmgwt4qnstt.png",
+      "source_type": "user-provided",
+      "provenance_note": "Studio asset: user-provided. Not source-masked certified: not a polygon-masked source asset"
+    }
+  ],
+  "page_strategy": "studio-native-edited-document"
+}

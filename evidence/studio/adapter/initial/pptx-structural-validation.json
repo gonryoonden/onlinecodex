@@ -1,0 +1,46 @@
+{
+  "pptx": "/workspace/onlinecodex/evidence/studio/adapter/two-pages.pptx",
+  "zip_ok": true,
+  "slides": 2,
+  "images": 1,
+  "editable_text_shapes": 2,
+  "native_tables": 0,
+  "editable_table_cells": 0,
+  "shape_count": 5,
+  "all_text": "첫 페이지 한글 편집 가능\n두 번째 페이지 · 순서 확인",
+  "required_text": [],
+  "missing_required_text": [],
+  "missing_parts": [],
+  "missing_relationship_targets": [],
+  "missing_asset_provenance": [],
+  "missing_manifest_images": [],
+  "missing_provenance_sources": [],
+  "invalid_asset_provenance": [],
+  "media_hash_mismatches": [],
+  "asset_provenance_checked": 0,
+  "manifest_image_count": 0,
+  "media_manifest_mismatch": true,
+  "relationship_targets_checked": 12,
+  "warnings": [],
+  "page_contract_violations": [
+    {
+      "field": "source.width_px/source.height_px",
+      "reason": "page manifest must record the source image pixel size"
+    },
+    {
+      "field": "visual_inventory",
+      "reason": "page manifest must record the non-text visual inventory, even when it is empty"
+    },
+    {
+      "field": "background_strategy",
+      "reason": "page manifest must record how the background was rebuilt or preserved"
+    },
+    {
+      "field": "quality_checks",
+      "reason": "quality_checks must be an object"
+    }
+  ],
+  "line_geometry_violations": [],
+  "table_structure_violations": [],
+  "passed": false
+}
