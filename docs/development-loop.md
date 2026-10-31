@@ -58,3 +58,9 @@ STUDIO_EVIDENCE_DIR="$PWD/evidence/studio/phase3" .venvs/studio/bin/python scrip
 - 이 후속 커밋은 검증 문서/원격 상태 기록만 포함. 코드 변경 없음. 구현 커밋 검증 결과는 유지.
 - 다음 명령: `gh run list --repo gonryoonden/onlinecodex --branch feature/personal-magic-studio --limit 3` (API 접근 복구 후).
 - 남은 품질 작업: 실이미지 mask 추출/그림자, style·좌표·OCR2자 교정, 상위 무료모델503 회복 후 제한된 재평가. 모델 생성 호출은 여기서 중지했으며 기존 실제 응답으로 오프라인 회귀 가능.
+
+## 임시 개인 접속 작업 (2026-10-31 KST)
+
+사용자가 비밀번호 있는 계정 없는 임시 HTTPS접속 승인. scripts/studio-private-proxy.mjs 및 tests/studio/private-proxy.test.mjs 추가. Node2테스트 PASS, 실제 앱 무인증401/인증200, Chromium 한글편집/저장/PythonPPTX 출력 PASS. 원본앱코드/엔진 변경 없음. 인증정보는/tmp mode600에만 보관하고 Git/로그에 넣지 않음.
+
+Cloudflare quick tunnel은 외부DNS connection refused로 URL발급 실패. HTTPS프록시도 해당도메인403, TCPgrants 없음. 환경설정 초안에 기존Gemini를 보존하고 필요한Cloudflare HTTPS도메인과start_skill 저장했으나 적용/게시되지 않음. TCP7844는 현 도구로 허용추가 불가. **현재 외부접속 BLOCKED이며 전달할 실URL 없음.** docs/private-preview.md 참고. 네트워크정책 우회나 미인증 공개 노출은 하지 않음.
