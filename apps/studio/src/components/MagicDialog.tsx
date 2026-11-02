@@ -12,6 +12,7 @@ import {
 import { reconstructDesign, type RepairedSource } from "@/lib/magic-layers/reconstruct";
 import { renderPage } from "@/lib/render";
 import { uid } from "@/lib/types";
+import { prepareAiImage, readApiJson } from "@/lib/ai-transport";
 interface Props {
   source: Asset;
   width: number;
@@ -82,12 +83,13 @@ export default function MagicDialog({
     setBusy(true);
     setError("");
     try {
+      const image = await prepareAiImage(source.dataUrl);
       const response = await fetch("/api/ai/magic-layers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: source.dataUrl, consent, ...(selectedModel ? { model: selectedModel } : {}) }),
+        body: JSON.stringify({ image, consent, ...(selectedModel ? { model: selectedModel } : {}) }),
       });
-      const data = await response.json();
+      const data = await readApiJson(response);
       if (!response.ok) throw new Error(data.error ?? "분석 실패");
       const parsed = analysisSchema.parse(data.analysis);
       setAnalysis(parsed);
@@ -160,7 +162,7 @@ export default function MagicDialog({
         body: JSON.stringify({ image: source.dataUrl, analysis, skip,
           method: repairMethod, textMode, padding: 3 }),
       });
-      const data = await response.json();
+      const data = await readApiJson(response);
       if (!response.ok) throw new Error(data.error ?? "로컬 보정 실패");
       setRepair({ ...data, key: repairKey });
     } catch (e) {
