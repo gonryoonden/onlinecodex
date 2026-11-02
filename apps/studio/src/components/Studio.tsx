@@ -343,6 +343,7 @@ export default function Studio() {
     setBusy(true);
     setError("");
     setExportOpen(false);
+    let browserPptx = false;
     try {
       const p = capture();
       if (format === "zip")
@@ -363,18 +364,41 @@ export default function Studio() {
         );
       else if (format === "pdf") download(await exportPDF(p), `${p.name}.pdf`);
       else {
-        const response = await fetch("/api/export/pptx", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(p),
-        });
-        if (!response.ok) {
-          const data = await response.json();
-          throw new Error(data.error ?? "PPTX 출력 실패");
+        const { exportNativePPTX } = await import("@/lib/native-pptx");
+        const browserDownload = async () => {
+          download(await exportNativePPTX(p), `${p.name}.pptx`);
+          browserPptx = true;
+        };
+        // Hosted Next.js cannot spawn our Python fidelity worker. Large JSON
+        // payloads also fail before the API receives them (HTTP 413).
+        const local = ["127.0.0.1", "localhost"].includes(window.location.hostname);
+        if (!local) {
+          await browserDownload();
+        } else {
+          const payload = JSON.stringify(p);
+          if (new Blob([payload]).size > 3_500_000) await browserDownload();
+          else {
+            const response = await fetch("/api/export/pptx", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: payload,
+            });
+            if (!response.ok) {
+              const raw = await response.text();
+              if (response.status === 413 || /request entity too large/i.test(raw)) {
+                await browserDownload();
+              } else {
+                let detail = raw.slice(0, 160);
+                try { detail = JSON.parse(raw).error ?? detail; } catch {}
+                throw new Error(`PPTX 출력 실패 (HTTP ${response.status}): ${detail}`);
+              }
+            } else download(await response.blob(), `${p.name}.pptx`);
+          }
         }
-        download(await response.blob(), `${p.name}.pptx`);
       }
-      setNotice(`${format.toUpperCase()} 파일을 생성했습니다.`);
+      setNotice(browserPptx
+        ? "PPTX를 브라우저에서 생성했습니다. 글자·도형·이미지는 독립 객체이며, 원본과 완전히 같은 재현을 보장하지 않습니다."
+        : `${format.toUpperCase()} 파일을 생성했습니다.`);
     } catch (e) {
       setError(message(e));
     } finally {
