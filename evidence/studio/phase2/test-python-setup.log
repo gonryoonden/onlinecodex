@@ -1,0 +1,11 @@
+Requirement already satisfied: Pillow==13.0.0 in ./.venvs/studio/lib/python3.12/site-packages (from -r scripts/studio-requirements.txt (line 1)) (13.0.0)
+Requirement already satisfied: lxml==6.1.3 in ./.venvs/studio/lib/python3.12/site-packages (from -r scripts/studio-requirements.txt (line 2)) (6.1.3)
+Requirement already satisfied: numpy==2.5.4 in ./.venvs/studio/lib/python3.12/site-packages (from -r scripts/studio-requirements.txt (line 3)) (2.5.4)
+Collecting opencv-python-headless==4.14.0.94 (from -r scripts/studio-requirements.txt (line 4))
+  Using cached opencv_python_headless-4.14.0.94-cp37-abi3-manylinux_2_28_x86_64.whl.metadata (19 kB)
+Using cached opencv_python_headless-4.14.0.94-cp37-abi3-manylinux_2_28_x86_64.whl (62.0 MB)
+Installing collected packages: opencv-python-headless
+Successfully installed opencv-python-headless-4.14.0.94
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.2
+[notice] To update, run: python -m pip install --upgrade pip

@@ -1,0 +1,99 @@
+
+> personal-magic-studio@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/onlinecodex/apps/studio
+
+ ❯ tests/gemini.test.ts (4 tests | 4 failed) 49ms
+   × probes model and validates structured response (test SDK only) 34ms
+   × does not generate against unavailable model 10ms
+   × rejects malformed model JSON and stops after two retries 2ms
+   × quota and timeout get actionable bounded failures 3ms
+ ❯ tests/core.test.ts (33 tests | 1 failed) 140ms
+     × retries at most twice and preserves error 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/core.test.ts > AI disabled and diagnosable failure > retries at most twice and preserves error
+AssertionError: expected "vi.fn()" to be called 3 times, but got 1 times
+ ❯ tests/core.test.ts:171:17
+    169|       429,
+    170|     );
+    171|     expect(run).toHaveBeenCalledTimes(3);
+       |                 ^
+    172|   });
+    173|   it("never retries unauthorized or unsupported models", async () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/gemini.test.ts > probes model and validates structured response (test SDK only)
+Error: 공식 무료 티어를 확인한 모델 후보만 허용합니다.
+ ❯ GeminiAnalyzer.analyze src/lib/ai-analyzer.ts:43:46
+     41|  constructor(private options:{mode?:'combined'|'separate';beforeGenera…
+     42|  async analyze(image:string,mime:string):Promise<Analysis>{
+     43|   const cfg=aiConfig();if(!cfg.enabled)throw new AnalysisError('AI_DIS…
+       |                                              ^
+     44|   const client=new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY,http…
+     45|   const candidates=process.env.GEMINI_VISION_MODEL?.trim()?[cfg.model]…
+ ❯ tests/gemini.test.ts:25:40
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/gemini.test.ts > does not generate against unavailable model
+AssertionError: expected Error: 공식 무료 티어를 확인한 모델 후보만 허용합니다. { …(3) } to have property "code" with value 'MODEL_UNSUPPORTED'
+
+Expected: "MODEL_UNSUPPORTED"
+Received: "AI_DISABLED"
+
+ ❯ tests/gemini.test.ts:42:4
+     40|   await expect(
+     41|     new GeminiAnalyzer().analyze("image", "image/png"),
+     42|   ).rejects.toHaveProperty("code", "MODEL_UNSUPPORTED");
+       |    ^
+     43|   expect(mocks.generate).not.toHaveBeenCalled();
+     44| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/gemini.test.ts > rejects malformed model JSON and stops after two retries
+AssertionError: expected Error: 공식 무료 티어를 확인한 모델 후보만 허용합니다. { …(3) } to have property "code" with value 'INVALID_ANALYSIS'
+
+Expected: "INVALID_ANALYSIS"
+Received: "AI_DISABLED"
+
+ ❯ tests/gemini.test.ts:49:4
+     47|   await expect(
+     48|     new GeminiAnalyzer().analyze("image", "image/png"),
+     49|   ).rejects.toHaveProperty("code", "INVALID_ANALYSIS");
+       |    ^
+     50|   expect(mocks.generate).toHaveBeenCalledTimes(3);
+     51| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/gemini.test.ts > quota and timeout get actionable bounded failures
+AssertionError: expected Error: 공식 무료 티어를 확인한 모델 후보만 허용합니다. { …(3) } to have property "code" with value 'QUOTA'
+
+Expected: "QUOTA"
+Received: "AI_DISABLED"
+
+ ❯ tests/gemini.test.ts:56:4
+     54|   await expect(
+     55|     new GeminiAnalyzer().analyze("image", "image/png"),
+     56|   ).rejects.toHaveProperty("code", "QUOTA");
+       |    ^
+     57|   expect(mocks.generate).toHaveBeenCalledTimes(3);
+     58|   mocks.generate
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  5 failed | 32 passed (37)
+   Start at  12:09:37
+   Duration  2.06s (transform 426ms, setup 0ms, import 1.21s, tests 189ms, environment 0ms)
+

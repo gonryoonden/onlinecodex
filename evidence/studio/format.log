@@ -1,0 +1,47 @@
+src/app/api/ai/magic-layers/route.ts 79ms (unchanged)
+src/app/api/capabilities/route.ts 4ms (unchanged)
+src/app/api/export/pptx/route.ts 29ms (unchanged)
+src/app/error.tsx 12ms
+src/app/globals.css 109ms (unchanged)
+src/app/layout.tsx 5ms (unchanged)
+src/app/page.tsx 4ms (unchanged)
+src/components/canvas/element-node.tsx 131ms (unchanged)
+src/components/canvas/StudioCanvas.tsx 29ms (unchanged)
+src/components/canvas/use-loaded-image.ts 9ms (unchanged)
+src/components/canvas/v06-nodes.tsx 44ms (unchanged)
+src/components/MagicDialog.tsx 67ms (unchanged)
+src/components/Studio.tsx 139ms
+src/lib/ai-analyzer.ts 20ms (unchanged)
+src/lib/animations.ts 33ms (unchanged)
+src/lib/archive.ts 14ms (unchanged)
+src/lib/collab/hlc.ts 16ms (unchanged)
+src/lib/collab/identity.ts 9ms (unchanged)
+src/lib/collab/merge.ts 18ms (unchanged)
+src/lib/collab/protocol.ts 8ms (unchanged)
+src/lib/editor-utils.ts 37ms (unchanged)
+src/lib/image-layout.ts 2ms
+src/lib/imports.ts 21ms (unchanged)
+src/lib/magic-layers/reconstruct.ts 15ms
+src/lib/magic-layers/schema.ts 13ms (unchanged)
+src/lib/magic.ts 10ms (unchanged)
+src/lib/project.ts 22ms (unchanged)
+src/lib/render.ts 8ms (unchanged)
+src/lib/server-guard.ts 7ms
+src/lib/storage.ts 6ms (unchanged)
+src/lib/templates.ts 1ms (unchanged)
+src/lib/types.ts 36ms (unchanged)
+src/lib/v06-geometry.ts 10ms (unchanged)
+src/store/editor-store.ts 141ms (unchanged)
+tests/core.test.ts 20ms
+tests/gemini.test.ts 5ms
+tests/server-only.ts 1ms (unchanged)
+tests/studio.spec.ts 54ms
+eslint.config.mjs 13ms (unchanged)
+next-env.d.ts 2ms (unchanged)
+next.config.ts 2ms (unchanged)
+package-lock.json 52ms (unchanged)
+package.json 1ms (unchanged)
+playwright.config.ts 2ms (unchanged)
+scripts-copy-worker.mjs 1ms (unchanged)
+tsconfig.json 1ms (unchanged)
+vitest.config.ts 1ms (unchanged)

@@ -1,0 +1,68 @@
+{
+  "pptx": "/workspace/onlinecodex/evidence/studio/adapter/one-page/one-page.pptx",
+  "zip_ok": true,
+  "slides": 1,
+  "images": 1,
+  "editable_text_shapes": 1,
+  "native_tables": 0,
+  "editable_table_cells": 0,
+  "shape_count": 3,
+  "all_text": "첫 페이지 한글 편집 가능",
+  "required_text": [
+    "첫 페이지 한글 편집 가능"
+  ],
+  "missing_required_text": [],
+  "missing_parts": [],
+  "missing_relationship_targets": [],
+  "missing_asset_provenance": [],
+  "missing_manifest_images": [],
+  "missing_provenance_sources": [],
+  "invalid_asset_provenance": [
+    {
+      "path": "/workspace/onlinecodex/evidence/studio/adapter/one-page/diamond.png",
+      "field": "approval_note",
+      "value": null
+    }
+  ],
+  "media_hash_mismatches": [],
+  "asset_provenance_checked": 1,
+  "manifest_image_count": 1,
+  "media_manifest_mismatch": false,
+  "relationship_targets_checked": 10,
+  "warnings": [],
+  "page_contract_violations": [
+    {
+      "field": "quality_checks.background_strategy_checked",
+      "reason": "required page QA check must be explicitly true"
+    },
+    {
+      "field": "quality_checks.font_size_calibrated",
+      "reason": "required page QA check must be explicitly true"
+    },
+    {
+      "field": "quality_checks.shape_corner_geometry_checked",
+      "reason": "required page QA check must be explicitly true"
+    },
+    {
+      "field": "quality_checks.visual_inventory_matched",
+      "reason": "required page QA check must be explicitly true"
+    },
+    {
+      "field": "visual_inventory[0]",
+      "reason": "foreground visual decisions must not use direct crops, native approximations, emoji/text symbols, or warning-only fallbacks"
+    },
+    {
+      "field": "visual_inventory[0]",
+      "path": "/workspace/onlinecodex/evidence/studio/adapter/one-page/diamond.png",
+      "reason": "foreground visual objects require matching asset-sheet-separated or imagegen provenance"
+    },
+    {
+      "field": "asset_provenance[0]",
+      "path": "/workspace/onlinecodex/evidence/studio/adapter/one-page/diamond.png",
+      "reason": "foreground asset provenance must use asset-sheet-separated or imagegen"
+    }
+  ],
+  "line_geometry_violations": [],
+  "table_structure_violations": [],
+  "passed": false
+}

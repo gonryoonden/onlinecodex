@@ -1,0 +1,17 @@
+{
+  "source": "asset_mvvqba174xlmvs.png",
+  "source_sha256": "0cd6716b24d9b43d003c76eba305bdc1cede0441481a2f4792725f09a2537595",
+  "source_box": [
+    597,
+    367,
+    224,
+    174
+  ],
+  "background": "proof-42d8ba0f9d413bc048533bf8.background.png",
+  "background_sha256": "2f379e2116db636c9847085bee0a155dd68a71868d46ce91e7058b8799b6a49f",
+  "mask": "proof-42d8ba0f9d413bc048533bf8.mask.png",
+  "mask_sha256": "6329e241bc8d44f4a27b0b7323ca42733f1ca2ced66c66740cf8330d2b9ad094",
+  "asset_sha256": "dfa4b113481555da334dea50fd944eaedd65b85af4aa6b898b60459351c152c8",
+  "method": "Studio user polygon; original integer source pixels; verified by unchanged fidelity.validate_masked",
+  "checks": []
+}

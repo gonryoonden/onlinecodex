@@ -1,0 +1,7 @@
+-r studio-requirements.txt
+numpy>=2.0,<3
+PyMuPDF>=1.26.0,<2
+requests>=2.32.4,<3
+PyYAML>=6.0.2,<7
+openai>=2.0,<4
+python-pptx>=1.0.2,<2

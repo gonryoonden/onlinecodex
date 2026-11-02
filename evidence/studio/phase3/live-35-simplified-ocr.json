@@ -1,0 +1,153 @@
+{
+  "source": "evidence/studio/phase3/live-35-simplified.json",
+  "mode": "saved live API response, no new calls",
+  "matching": "greedy text matching; whitespace removed and literal newline markers normalized for CER; geometric accuracy NOT included",
+  "referenceCharacters": 400,
+  "characterErrors": 5,
+  "cer": 0.0125,
+  "referenceBlocks": 19,
+  "missingBlocks": 0,
+  "extraTextRegions": [],
+  "objects": {
+    "text": 19,
+    "shape": 0,
+    "image": 0
+  },
+  "styleRegions": 0,
+  "blocks": [
+    {
+      "reference": "2024년 산업안전보건교육 주요 개정 및 교육 체계 핵심 요약",
+      "regionId": "text_1",
+      "prediction": "2024년 산업안전보건교육 주요 개정 및 교육 체계 핵심 요약",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "2024년 시행 법령 및 교육규정에 따른 핵심 개정 사항과 근로자 대상별 필수 법정 교육시간을 정리한 자료.\n정기교육 주기 완화 및 단기근로자 교육시간 감면 등 현장 부담을 줄이고 실효성을 높인 주요 변경점을 포함.",
+      "regionId": "text_2",
+      "prediction": "2024년 시행 법령 및 교육규정에 따른 핵심 개정 사항과 근로자 대상별 필수 법정 교육시간을 정리한 자료.\n정기교육 주기 완화 및 단기근로자 교육시간 감면 등 현장 부담을 줄이고 실효성을 높인 주요 변경점을 포함.",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "2024년\n교육 규정\n주요 개정\n사항",
+      "regionId": "text_3",
+      "prediction": "2024년\n교육 규정\n주요 개정\n사항",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "정기교육 주기 완화 (매분기 → 매반기)",
+      "regionId": "text_4",
+      "prediction": "정기교육 주기 완화 (매분기 -> 매반기)",
+      "characterErrors": 2,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "근로자 정기안전보건교육 주기가 매반기 단위로 확대",
+      "regionId": "text_5",
+      "prediction": "근로자 정기안전보건교육 주기가 매반기 단위로 확대",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "단기 및 일용근로자\n교육시간 부담 완화",
+      "regionId": "text_6",
+      "prediction": "단기 및 일용근로자\n교육시간 부담 완화",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "계약기간 1주일 이하 1시간,\n1개월 이하 4시간 (채용 시 감면)",
+      "regionId": "text_7",
+      "prediction": "계약기간 1주일 이하 1시간,\n1개월 이하 4시간 (채용 시 감면)",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "직무 보수교육 이수기간 확대\n(총 6개월 → 총 1년)",
+      "regionId": "text_8",
+      "prediction": "직무 보수교육 이수기간 확대\n(총 6개월 -> 총 1년)",
+      "characterErrors": 2,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "신규교육 이수일 기준 전후 6개월 이내로\n이수 기한 연장",
+      "regionId": "text_9",
+      "prediction": "신규교육 이수일 기준 전후 6개월 이내로\n이수 기한 연장",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "근로자 유형별\n법정 교육시간\n기준",
+      "regionId": "text_10",
+      "prediction": "근로자 유형별\n법정 교육시간\n기준",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "채용 시\n및 작업내용\n변경 시\n교육",
+      "regionId": "text_11",
+      "prediction": "채용 시\n및 작업내용\n변경 시\n교육",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "일반근로자 채용 시:\n8시간 이상",
+      "regionId": "text_12",
+      "prediction": "일반근로자 채용 시:\n8시간 이상",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "작업내용 변경 시:\n2시간 이상 교육",
+      "regionId": "text_13",
+      "prediction": "작업내용 변경 시:\n2시간 이상 교육",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "정기교육\n(매반기 기준)",
+      "regionId": "text_14",
+      "prediction": "정기교육\n(매반기 기준)",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "관리감독자 정기교육\n(연간 기준)",
+      "regionId": "text_17",
+      "prediction": "관리감독자 정기교육\n(연간 기준)",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "사무직·판매직:\n매반기 6시간 이상",
+      "regionId": "text_15",
+      "prediction": "사무직·판매직:\n매반기 6시간 이상",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "그 외 근로자:\n매반기 12시간 이상",
+      "regionId": "text_16",
+      "prediction": "그 외 근로자:\n매반기 12시간 이상",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "연간 16시간 이상 이수",
+      "regionId": "text_18",
+      "prediction": "연간 16시간 이상 이수",
+      "characterErrors": 0,
+      "literalNewlineMarkers": 0
+    },
+    {
+      "reference": "50% 이상 집체·현장·\n실시간 비대면 교육",
+      "regionId": "text_19",
+      "prediction": "50% 이상 집채·현장·\n실시간 비대면 교육",
+      "characterErrors": 1,
+      "literalNewlineMarkers": 0
+    }
+  ],
+  "warning": "CER does not certify correct geometry, colors, segmentation or completeness of image objects."
+}

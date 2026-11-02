@@ -1,0 +1,6 @@
+{
+  "mode": "real AI unedited reconstruction versus original; contain alignment; whole page",
+  "rgb_mae": 8.307703450520833,
+  "mask_iou": null,
+  "warning": "Image objects are approximate rectangular crops. Pixel similarity cannot certify Korean text or correct segmentation."
+}

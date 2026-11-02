@@ -1,0 +1,121 @@
+{
+  "slide": {
+    "width": 10.0,
+    "height": 6.666666666666667,
+    "background": "#F4F8F5"
+  },
+  "content_box": {
+    "left": 0,
+    "top": 0,
+    "width": 10.0,
+    "height": 6.666666666666667
+  },
+  "source": {
+    "width_px": 960,
+    "height_px": 640
+  },
+  "text_inventory": [
+    "첫 페이지 한글 편집 가능"
+  ],
+  "visual_inventory": [
+    {
+      "id": "image_600_370",
+      "role": "foreground",
+      "path": "/workspace/onlinecodex/evidence/studio/adapter/one-page/diamond.png",
+      "source_type": "user-approved-rasterization"
+    }
+  ],
+  "background_strategy": {
+    "mode": "native-or-script",
+    "source_consistency_contract": "Studio user-edited page",
+    "removed_foreground": [],
+    "comparison_note": "Native background selected by user"
+  },
+  "quality_checks": {
+    "font_size_calibrated": false,
+    "visual_inventory_matched": false,
+    "background_strategy_checked": false,
+    "shape_corner_geometry_checked": false
+  },
+  "text_boxes": [
+    {
+      "id": "text_70_65",
+      "box_px": [
+        70,
+        65,
+        800,
+        80
+      ],
+      "z_index": 3,
+      "rotation": 0,
+      "text": "첫 페이지 한글 편집 가능",
+      "font": "Noto Sans KR",
+      "font_size": 30.0,
+      "color": "#18333B",
+      "bold": true,
+      "italic": false,
+      "align": "left",
+      "lang": "ko-KR",
+      "char_spacing": 0.0,
+      "fit_text": false,
+      "wrap": "square",
+      "line_height": 1.25
+    }
+  ],
+  "shapes": [
+    {
+      "id": "rect_80_250",
+      "box_px": [
+        80,
+        250,
+        270,
+        160
+      ],
+      "z_index": 0,
+      "rotation": 0,
+      "type": "rect",
+      "fill": "#32857A",
+      "stroke": "none",
+      "stroke_width": 0.0
+    },
+    {
+      "id": "ellipse_280_340",
+      "box_px": [
+        280,
+        340,
+        150,
+        150
+      ],
+      "z_index": 1,
+      "rotation": 0,
+      "type": "ellipse",
+      "fill": "#D9AE49",
+      "stroke": "none",
+      "stroke_width": 0.0
+    }
+  ],
+  "images": [
+    {
+      "id": "image_600_370",
+      "box_px": [
+        600,
+        370,
+        220,
+        170
+      ],
+      "z_index": 2,
+      "rotation": 0,
+      "path": "/workspace/onlinecodex/evidence/studio/adapter/one-page/diamond.png",
+      "alt": "image_600_370"
+    }
+  ],
+  "asset_provenance": [
+    {
+      "path": "/workspace/onlinecodex/evidence/studio/adapter/one-page/diamond.png",
+      "source": "/workspace/onlinecodex/evidence/studio/adapter/one-page/original.png",
+      "source_type": "user-approved-rasterization",
+      "provenance_note": "Studio asset: test-ground-truth:polygon-mask. Not source-masked certified: integer source ROI required"
+    }
+  ],
+  "page_strategy": "studio-native-edited-document"
+}

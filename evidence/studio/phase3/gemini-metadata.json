@@ -1,0 +1,59 @@
+{
+  "generationCalls": 0,
+  "billingTierConfirmed": false,
+  "paidDisabled": true,
+  "status": 200,
+  "models": [
+    {
+      "name": "models/gemini-3.5-flash-lite",
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "createCachedContent",
+        "batchGenerateContent"
+      ]
+    },
+    {
+      "name": "models/gemini-3.6-flash",
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "createCachedContent",
+        "batchGenerateContent"
+      ]
+    },
+    {
+      "name": "models/gemini-3.8-flash",
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "createCachedContent",
+        "batchGenerateContent"
+      ]
+    },
+    {
+      "name": "models/gemini-4-argon",
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "batchGenerateContent"
+      ]
+    },
+    {
+      "name": "models/gemini-3.8-flash-tts",
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "batchGenerateContent"
+      ]
+    },
+    {
+      "name": "models/gemini-3.8-flash-lite-tts",
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "batchGenerateContent"
+      ]
+    }
+  ]
+}

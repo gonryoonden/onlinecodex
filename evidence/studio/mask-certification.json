@@ -1,0 +1,13 @@
+{
+  "source_type": "source-masked",
+  "checks": [],
+  "mask_count": 1,
+  "proofs": [
+    {
+      "page": "page-2.json",
+      "evidence": "evidence/studio/adapter/masked-browser/proof-ff9977956582acaa145b7574.evidence.json",
+      "checks": []
+    }
+  ],
+  "full_page_source_fidelity_certified": false
+}

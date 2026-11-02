@@ -1,0 +1,211 @@
+
+> personal-magic-studio@0.1.0 dev
+> next dev --hostname 127.0.0.1
+
+▲ Next.js 16.4.3 (Turbopack)
+- Local:         http://127.0.0.1:3000
+- Network:       http://127.0.0.1:3000
+✓ Ready in 439ms
+✓ Running next.config.ts took 75ms
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+
+✓ Generated AGENTS.md for AI agents. Set `agentRules: false` in next.config to disable.
+ GET /api/capabilities 200 in 433ms (next.js: 346ms, application-code: 86ms)
+○ Compiling / ...
+ GET / 200 in 305ms (next.js: 160ms, application-code: 146ms)
+ GET / 200 in 35ms (next.js: 1.3ms, application-code: 33ms)
+ GET /api/capabilities 200 in 8ms (next.js: 1.9ms, application-code: 6ms)
+ GET / 200 in 31ms (next.js: 2ms, application-code: 29ms)
+✓ Compiled in 36ms
+ GET / 200 in 25ms (next.js: 1.3ms, application-code: 24ms)
+ GET / 200 in 24ms (next.js: 0.7ms, application-code: 23ms)
+ GET / 200 in 24ms (next.js: 0.8ms, application-code: 23ms)
+ GET / 200 in 21ms (next.js: 1.0ms, application-code: 20ms)
+ GET / 200 in 42ms (next.js: 3ms, application-code: 39ms)
+ GET / 200 in 55ms (next.js: 1.6ms, application-code: 53ms)
+ GET /api/capabilities 200 in 38ms (next.js: 6ms, application-code: 32ms)
+ GET /api/capabilities 200 in 34ms (next.js: 0.9ms, application-code: 33ms)
+✓ Compiled in 20ms
+ GET / 200 in 99ms (next.js: 6ms, application-code: 93ms)
+ GET /api/capabilities 200 in 18ms (next.js: 1.7ms, application-code: 16ms)
+✓ Compiled in 114ms
+✓ Compiled in 191ms
+✓ Compiled in 260ms
+ GET /api/capabilities 200 in 8ms (next.js: 1.1ms, application-code: 7ms)
+✓ Compiled in 334ms
+ GET /api/capabilities 200 in 16ms (next.js: 4ms, application-code: 12ms)
+✓ Compiled in 61ms
+✓ Compiled in 24ms
+✓ Compiled in 23ms
+✓ Compiled in 63ms
+✓ Compiled in 52ms
+✓ Compiled in 577ms
+✓ Compiled in 201ms
+ GET / 200 in 79ms (next.js: 6ms, application-code: 74ms)
+✓ Compiled in 150ms
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.4.3 (Turbopack)
+- Local:         http://127.0.0.1:3000
+- Network:       http://127.0.0.1:3000
+✓ Ready in 301ms
+✓ Running next.config.ts took 43ms
+
+ GET / 200 in 381ms (next.js: 219ms, application-code: 162ms)
+⨯ ./src/lib/imports.ts:98:25
+Error: Module not found: Can't resolve 'pdfjs-dist'
+  [90m 96 |[0m     );
+  [90m 97 |[0m     [36mif[0m (header !== [32m"%PDF-"[0m) [36mthrow[0m [36mnew[0m [33mError[0m([32m"올바른 PDF가 아닙니다."[0m);
+[31m[1m>[0m [90m 98 |[0m     [36mconst[0m pdfjs = [36mawait[0m [36mimport[0m([32m"pdfjs-dist"[0m);
+  [90m    |[0m                         [31m[1m^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 99 |[0m     pdfjs.[33mGlobalWorkerOptions[0m.workerSrc = [32m"/pdf.worker.min.mjs"[0m;
+  [90m100 |[0m     [36mconst[0m task = pdfjs.getDocument({
+  [90m101 |[0m       data: [36mnew[0m [33mUint8Array[0m([36mawait[0m file.arrayBuffer()),
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/lib/imports.ts [Client Component Browser]
+    ./src/components/Studio.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/lib/imports.ts:98:25
+Error: Module not found: Can't resolve 'pdfjs-dist'
+  [90m 96 |[0m     );
+  [90m 97 |[0m     [36mif[0m (header !== [32m"%PDF-"[0m) [36mthrow[0m [36mnew[0m [33mError[0m([32m"올바른 PDF가 아닙니다."[0m);
+[31m[1m>[0m [90m 98 |[0m     [36mconst[0m pdfjs = [36mawait[0m [36mimport[0m([32m"pdfjs-dist"[0m);
+  [90m    |[0m                         [31m[1m^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 99 |[0m     pdfjs.[33mGlobalWorkerOptions[0m.workerSrc = [32m"/pdf.worker.min.mjs"[0m;
+  [90m100 |[0m     [36mconst[0m task = pdfjs.getDocument({
+  [90m101 |[0m       data: [36mnew[0m [33mUint8Array[0m([36mawait[0m file.arrayBuffer()),
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/lib/imports.ts [Client Component Browser]
+    ./src/components/Studio.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/lib/imports.ts:98:25
+Error: Module not found: Can't resolve 'pdfjs-dist'
+  [90m 96 |[0m     );
+  [90m 97 |[0m     [36mif[0m (header !== [32m"%PDF-"[0m) [36mthrow[0m [36mnew[0m [33mError[0m([32m"올바른 PDF가 아닙니다."[0m);
+[31m[1m>[0m [90m 98 |[0m     [36mconst[0m pdfjs = [36mawait[0m [36mimport[0m([32m"pdfjs-dist"[0m);
+  [90m    |[0m                         [31m[1m^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 99 |[0m     pdfjs.[33mGlobalWorkerOptions[0m.workerSrc = [32m"/pdf.worker.min.mjs"[0m;
+  [90m100 |[0m     [36mconst[0m task = pdfjs.getDocument({
+  [90m101 |[0m       data: [36mnew[0m [33mUint8Array[0m([36mawait[0m file.arrayBuffer()),
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/lib/imports.ts [Client Component Browser]
+    ./src/components/Studio.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/lib/imports.ts:98:25
+Error: Module not found: Can't resolve 'pdfjs-dist'
+  [90m 96 |[0m     );
+  [90m 97 |[0m     [36mif[0m (header !== [32m"%PDF-"[0m) [36mthrow[0m [36mnew[0m [33mError[0m([32m"올바른 PDF가 아닙니다."[0m);
+[31m[1m>[0m [90m 98 |[0m     [36mconst[0m pdfjs = [36mawait[0m [36mimport[0m([32m"pdfjs-dist"[0m);
+  [90m    |[0m                         [31m[1m^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 99 |[0m     pdfjs.[33mGlobalWorkerOptions[0m.workerSrc = [32m"/pdf.worker.min.mjs"[0m;
+  [90m100 |[0m     [36mconst[0m task = pdfjs.getDocument({
+  [90m101 |[0m       data: [36mnew[0m [33mUint8Array[0m([36mawait[0m file.arrayBuffer()),
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/lib/imports.ts [Client Component Browser]
+    ./src/components/Studio.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+✓ Compiled in 703ms
+[browser] ./src/lib/imports.ts:98:25
+Error: Module not found: Can't resolve 'pdfjs-dist'
+   96 |     );
+   97 |     if (header !== "%PDF-") throw new Error("올바른 PDF가 아닙니다.");
+>  98 |     const pdfjs = await import("pdfjs-dist");
+      |                         ^^^^^^^^^^^^^^^^^^^^
+   99 |     pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+  100 |     const task = pdfjs.getDocument({
+  101 |       data: new Uint8Array(await file.arrayBuffer()),
+
+Import trace:
+  Client Component Browser:
+    ./src/lib/imports.ts [Client Component Browser]
+    ./src/components/Studio.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/lib/imports.ts:98:25
+Error: Module not found: Can't resolve 'pdfjs-dist'
+   96 |     );
+   97 |     if (header !== "%PDF-") throw new Error("올바른 PDF가 아닙니다.");
+>  98 |     const pdfjs = await import("pdfjs-dist");
+      |                         ^^^^^^^^^^^^^^^^^^^^
+   99 |     pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+  100 |     const task = pdfjs.getDocument({
+  101 |       data: new Uint8Array(await file.arrayBuffer()),
+
+Import trace:
+  Client Component Browser:
+    ./src/lib/imports.ts [Client Component Browser]
+    ./src/components/Studio.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/lib/imports.ts:98:25
+Error: Module not found: Can't resolve 'pdfjs-dist'
+   96 |     );
+   97 |     if (header !== "%PDF-") throw new Error("올바른 PDF가 아닙니다.");
+>  98 |     const pdfjs = await import("pdfjs-dist");
+      |                         ^^^^^^^^^^^^^^^^^^^^
+   99 |     pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+  100 |     const task = pdfjs.getDocument({
+  101 |       data: new Uint8Array(await file.arrayBuffer()),
+
+Import trace:
+  Client Component Browser:
+    ./src/lib/imports.ts [Client Component Browser]
+    ./src/components/Studio.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (0.5s elapsed so far; last modified: "/workspace/onlinecodex/apps/studio/node_modules/pdfjs-dist/types").
+✓ Compiled in 609ms
+ GET / 200 in 101ms (next.js: 7ms, application-code: 94ms)
+✓ Compiled in 1485ms
+ GET / 200 in 74ms (next.js: 5ms, application-code: 69ms)
+[?25h
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

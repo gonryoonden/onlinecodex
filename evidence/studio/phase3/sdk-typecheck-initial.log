@@ -1,0 +1,7 @@
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+src/lib/ai-analyzer.ts(279,25): error TS2339: Property 'outputs' does not exist on type 'GoogleGenAIInteraction'.
+src/lib/ai-analyzer.ts(280,26): error TS7006: Parameter 'o' implicitly has an 'any' type.
+src/lib/ai-analyzer.ts(281,23): error TS7006: Parameter 'o' implicitly has an 'any' type.

@@ -1,0 +1,714 @@
+{
+  "status": 200,
+  "elapsedSeconds": 10.92,
+  "result": {
+    "analysis": {
+      "background": {
+        "kind": "solid",
+        "from": "#cbe5dc",
+        "to": "#cbe5dc",
+        "angle": 0
+      },
+      "regions": [
+        {
+          "id": "r0",
+          "type": "text",
+          "text": "2024년 산업안전보건교육 주요 개정 및 교육 체계 핵심 요약",
+          "bbox": [
+            159,
+            43,
+            681,
+            47
+          ],
+          "style": {
+            "color": "#c13b56",
+            "fontSize": 41,
+            "bold": true,
+            "align": "center"
+          },
+          "zIndex": 1,
+          "review": true
+        },
+        {
+          "id": "r1",
+          "type": "text",
+          "text": "2024년 시행 법령 및 교육규정에 따른 핵심 개정 사항과 근로자 대상별 필수 법정 교육시간을 정리한 자료.\n정기교육 주기 완화 및 단기근로자 교육시간 감면 등 현장 부담을 줄이고 실효성을 높인 주요 변경점을 포함.",
+          "bbox": [
+            232,
+            108,
+            535,
+            58
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 20,
+            "align": "center"
+          },
+          "zIndex": 2,
+          "review": true
+        },
+        {
+          "id": "r2",
+          "type": "image",
+          "bbox": [
+            44,
+            223,
+            148,
+            364
+          ],
+          "zIndex": 3,
+          "review": true
+        },
+        {
+          "id": "r3",
+          "type": "text",
+          "text": "2024년\n교육 규정\n주요 개정\n사항",
+          "bbox": [
+            86,
+            326,
+            73,
+            147
+          ],
+          "style": {
+            "color": "#c9354d",
+            "fontSize": 33,
+            "bold": true,
+            "align": "center"
+          },
+          "zIndex": 4,
+          "review": true
+        },
+        {
+          "id": "r4",
+          "type": "image",
+          "bbox": [
+            239,
+            223,
+            192,
+            41
+          ],
+          "zIndex": 5,
+          "review": true
+        },
+        {
+          "id": "r5",
+          "type": "image",
+          "bbox": [
+            239,
+            272,
+            142,
+            20
+          ],
+          "zIndex": 6,
+          "review": true
+        },
+        {
+          "id": "r6",
+          "type": "image",
+          "bbox": [
+            241,
+            308,
+            25,
+            22
+          ],
+          "zIndex": 7,
+          "review": true
+        },
+        {
+          "id": "r7",
+          "type": "text",
+          "text": "정기교육 주기 완화 (분기기 → 매반기)",
+          "bbox": [
+            279,
+            309,
+            183,
+            22
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 20,
+            "bold": true,
+            "align": "left"
+          },
+          "zIndex": 8,
+          "review": true
+        },
+        {
+          "id": "r9",
+          "type": "text",
+          "text": "근로자 정기안전보건교육 주기가 매반기 단위로 확대",
+          "bbox": [
+            278,
+            343,
+            181,
+            18
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 15,
+            "align": "left"
+          },
+          "zIndex": 9,
+          "review": true
+        },
+        {
+          "id": "r10",
+          "type": "image",
+          "bbox": [
+            239,
+            379,
+            53,
+            92
+          ],
+          "zIndex": 10,
+          "review": true
+        },
+        {
+          "id": "r11",
+          "type": "image",
+          "bbox": [
+            299,
+            386,
+            24,
+            21
+          ],
+          "zIndex": 11,
+          "review": true
+        },
+        {
+          "id": "r12",
+          "type": "image",
+          "bbox": [
+            300,
+            418,
+            23,
+            49
+          ],
+          "zIndex": 12,
+          "review": true
+        },
+        {
+          "id": "r13",
+          "type": "text",
+          "text": "단기 및 일용근로자\n교육시간 부담 완화",
+          "bbox": [
+            334,
+            388,
+            90,
+            44
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 20,
+            "bold": true,
+            "align": "left"
+          },
+          "zIndex": 13,
+          "review": true
+        },
+        {
+          "id": "r14",
+          "type": "text",
+          "text": "계약기간 1주일 이하 1시간,\n1개월 이하 4시간 (채용 시 감면)",
+          "bbox": [
+            334,
+            445,
+            112,
+            35
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 15,
+            "align": "left"
+          },
+          "zIndex": 14,
+          "review": true
+        },
+        {
+          "id": "r15",
+          "type": "image",
+          "bbox": [
+            241,
+            493,
+            50,
+            94
+          ],
+          "zIndex": 15,
+          "review": true
+        },
+        {
+          "id": "r16",
+          "type": "image",
+          "bbox": [
+            299,
+            508,
+            18,
+            69
+          ],
+          "zIndex": 16,
+          "review": true
+        },
+        {
+          "id": "r17",
+          "type": "text",
+          "text": "직무 보수교육 이수기간 확대\n(총 6개월 → 총 1년)",
+          "bbox": [
+            334,
+            503,
+            135,
+            44
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 20,
+            "bold": true,
+            "align": "left"
+          },
+          "zIndex": 17,
+          "review": true
+        },
+        {
+          "id": "r18",
+          "type": "text",
+          "text": "신규교육 이수일 기준 전후 6개월 이내로\n이수 기한 연장",
+          "bbox": [
+            334,
+            558,
+            140,
+            39
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 15,
+            "align": "left"
+          },
+          "zIndex": 18,
+          "review": true
+        },
+        {
+          "id": "r19",
+          "type": "image",
+          "bbox": [
+            530,
+            232,
+            52,
+            95
+          ],
+          "zIndex": 19,
+          "review": true
+        },
+        {
+          "id": "r20",
+          "type": "image",
+          "bbox": [
+            595,
+            212,
+            61,
+            115
+          ],
+          "zIndex": 20,
+          "review": true
+        },
+        {
+          "id": "r21",
+          "type": "image",
+          "bbox": [
+            530,
+            351,
+            108,
+            132
+          ],
+          "zIndex": 21,
+          "review": true
+        },
+        {
+          "id": "r22",
+          "type": "image",
+          "bbox": [
+            646,
+            398,
+            8,
+            193
+          ],
+          "zIndex": 22,
+          "review": true
+        },
+        {
+          "id": "r23",
+          "type": "image",
+          "bbox": [
+            530,
+            496,
+            99,
+            93
+          ],
+          "zIndex": 23,
+          "review": true
+        },
+        {
+          "id": "r24",
+          "type": "image",
+          "bbox": [
+            672,
+            226,
+            147,
+            363
+          ],
+          "zIndex": 24,
+          "review": true
+        },
+        {
+          "id": "r25",
+          "type": "text",
+          "text": "근로자 유형별\n법정 교육시간\n기준",
+          "bbox": [
+            691,
+            344,
+            109,
+            111
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 30,
+            "bold": true,
+            "align": "center"
+          },
+          "zIndex": 25,
+          "review": true
+        },
+        {
+          "id": "r26",
+          "type": "image",
+          "bbox": [
+            843,
+            234,
+            94,
+            56
+          ],
+          "zIndex": 26,
+          "review": true
+        },
+        {
+          "id": "r27",
+          "type": "image",
+          "bbox": [
+            833,
+            318,
+            106,
+            273
+          ],
+          "zIndex": 27,
+          "review": true
+        },
+        {
+          "id": "r28",
+          "type": "image",
+          "bbox": [
+            946,
+            353,
+            9,
+            216
+          ],
+          "zIndex": 28,
+          "review": true
+        },
+        {
+          "id": "r65",
+          "type": "text",
+          "text": "정기교육\n(매반기 기준)",
+          "bbox": [
+            576,
+            626,
+            77,
+            54
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 24,
+            "bold": true,
+            "align": "center"
+          },
+          "zIndex": 29,
+          "review": true
+        },
+        {
+          "id": "r66",
+          "type": "text",
+          "text": "관리감독자 정기교육\n(연간 기준)",
+          "bbox": [
+            806,
+            626,
+            118,
+            54
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 24,
+            "bold": true,
+            "align": "center"
+          },
+          "zIndex": 30,
+          "review": true
+        },
+        {
+          "id": "r29",
+          "type": "image",
+          "bbox": [
+            53,
+            655,
+            130,
+            279
+          ],
+          "zIndex": 31,
+          "review": true
+        },
+        {
+          "id": "r30",
+          "type": "text",
+          "text": "채용 시\n및 작업내용\n변경 시\n교육",
+          "bbox": [
+            68,
+            720,
+            89,
+            148
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 30,
+            "bold": true,
+            "align": "center"
+          },
+          "zIndex": 32,
+          "review": true
+        },
+        {
+          "id": "r31",
+          "type": "image",
+          "bbox": [
+            188,
+            672,
+            58,
+            262
+          ],
+          "zIndex": 33,
+          "review": true
+        },
+        {
+          "id": "r32",
+          "type": "image",
+          "bbox": [
+            271,
+            668,
+            60,
+            101
+          ],
+          "zIndex": 34,
+          "review": true
+        },
+        {
+          "id": "r33",
+          "type": "image",
+          "bbox": [
+            271,
+            799,
+            59,
+            129
+          ],
+          "zIndex": 35,
+          "review": true
+        },
+        {
+          "id": "r34",
+          "type": "image",
+          "bbox": [
+            339,
+            875,
+            122,
+            55
+          ],
+          "zIndex": 36,
+          "review": true
+        },
+        {
+          "id": "r35",
+          "type": "text",
+          "text": "일반근로자 채용 시:\n8시간 이상",
+          "bbox": [
+            349,
+            703,
+            100,
+            52
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 20,
+            "bold": true,
+            "align": "left"
+          },
+          "zIndex": 37,
+          "review": true
+        },
+        {
+          "id": "r36",
+          "type": "text",
+          "text": "작업내용 변경 시:\n2시간 이상 교육",
+          "bbox": [
+            349,
+            807,
+            89,
+            49
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 20,
+            "bold": true,
+            "align": "left"
+          },
+          "zIndex": 38,
+          "review": true
+        },
+        {
+          "id": "r37",
+          "type": "image",
+          "bbox": [
+            530,
+            698,
+            56,
+            145
+          ],
+          "zIndex": 39,
+          "review": true
+        },
+        {
+          "id": "r38",
+          "type": "image",
+          "bbox": [
+            530,
+            862,
+            62,
+            62
+          ],
+          "zIndex": 40,
+          "review": true
+        },
+        {
+          "id": "r39",
+          "type": "text",
+          "text": "사무직·판매직:\n매반기 6시간 이상",
+          "bbox": [
+            606,
+            731,
+            94,
+            50
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 20,
+            "bold": true,
+            "align": "left"
+          },
+          "zIndex": 41,
+          "review": true
+        },
+        {
+          "id": "r40",
+          "type": "text",
+          "text": "그 외 근로자:\n매반기 12시간 이상",
+          "bbox": [
+            605,
+            862,
+            100,
+            50
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 20,
+            "bold": true,
+            "align": "left"
+          },
+          "zIndex": 42,
+          "review": true
+        },
+        {
+          "id": "r41",
+          "type": "image",
+          "bbox": [
+            773,
+            713,
+            44,
+            83
+          ],
+          "zIndex": 43,
+          "review": true
+        },
+        {
+          "id": "r42",
+          "type": "text",
+          "text": "연간 16시간 이상 이수",
+          "bbox": [
+            833,
+            749,
+            114,
+            20
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 20,
+            "bold": true,
+            "align": "left"
+          },
+          "zIndex": 44,
+          "review": true
+        },
+        {
+          "id": "r43",
+          "type": "image",
+          "bbox": [
+            773,
+            848,
+            45,
+            77
+          ],
+          "zIndex": 45,
+          "review": true
+        },
+        {
+          "id": "r44",
+          "type": "text",
+          "text": "50% 이상 집체·현장·\n실시간 비대면 교육",
+          "bbox": [
+            833,
+            862,
+            109,
+            50
+          ],
+          "style": {
+            "color": "#111111",
+            "fontSize": 20,
+            "bold": true,
+            "align": "left"
+          },
+          "zIndex": 46,
+          "review": true
+        }
+      ],
+      "notes": "Extracted all clearly legible texts, stationery elements, tools, and UI graphics as standard bounding boxes and regions."
+    },
+    "provenance": {
+      "provider": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "apiMode": "interactions",
+      "generationCalls": 1,
+      "segmentation": "combined",
+      "analyzedAt": "2026-10-31T12:46:45.339Z",
+      "sourceWidth": 2752,
+      "sourceHeight": 1536,
+      "coordinates": "xywh-0..1000",
+      "confidence": "not calibrated; omitted"
+    },
+    "usage": {
+      "requests": 1,
+      "dailyLimit": 20
+    }
+  }
+}

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+python_bin="${STUDIO_PYTHON:-python3}"
+fixture_dir=$(mktemp -d /tmp/studio-regression.XXXXXX)
+trap 'rm -rf "$fixture_dir"' EXIT
+mkdir -p "$fixture_dir/skills"
+cp -r .agents/skills/image-to-editable-ppt "$fixture_dir/skills/"
+cp -r tests/upstream "$fixture_dir/tests"
+printf '# Test fixture\n' > "$fixture_dir/README.md"
+printf '# Test fixture\n' > "$fixture_dir/README_en.md"
+"$python_bin" -m unittest discover -s "$fixture_dir/tests"
+"$python_bin" -m unittest discover -s tests -p test_fidelity.py
+"$python_bin" -m unittest discover -s tests/studio -p 'test_*.py'

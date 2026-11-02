@@ -1,0 +1,27 @@
+{
+  "connection": {
+    "status": 503,
+    "keyPresent": false,
+    "models": [],
+    "generationCalls": 0,
+    "billing": "unknown",
+    "reason": "AI 연결 필요: GEMINI_API_KEY 미설정"
+  },
+  "generationCallsPerformed": 0,
+  "localRepair": {
+    "status": 200,
+    "testScope": "synthetic ground-truth regions, NOT Gemini recognition; API only, UI not connected",
+    "width": 960,
+    "height": 640,
+    "diagnostics": {
+      "method": "opencv-telea",
+      "textMaskMode": "boxes",
+      "maskPixels": 206845,
+      "textMaskPixels": 93604,
+      "maskedFraction": 0.3366617838541667,
+      "unmaskedPixelsUnchanged": true,
+      "exactBackgroundRecovery": false
+    },
+    "warning": "로컬 인페인팅은 가려진 픽셀의 근사 추정입니다. 질감·그림자·글자 잔상을 비교하고 확인하세요."
+  }
+}

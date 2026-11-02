@@ -1,0 +1,19 @@
+....................Warning: OPENAI_API_KEY is not set; dry-run only. API target: official OpenAI API (OPENAI_BASE_URL unset).
+Warning: OPENAI_API_KEY is not set; dry-run only. API target: official OpenAI API (OPENAI_BASE_URL unset).
+............................................................................................................
+----------------------------------------------------------------------
+Ran 128 tests in 15.246s
+
+OK
+...../workspace/onlinecodex/tests/test_fidelity.py:32: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  self.assertEqual(list(im.getdata()),[(251,232,233,255),(252,208,109,255)])
+..
+----------------------------------------------------------------------
+Ran 7 tests in 0.025s
+
+OK
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.232s
+
+OK

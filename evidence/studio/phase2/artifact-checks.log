@@ -1,0 +1,62 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+{
+  "browser-current.png": {
+    "readable": true,
+    "bytes": 25218
+  },
+  "synthetic-reconstructed.png": {
+    "readable": true,
+    "bytes": 36769
+  },
+  "pdf": {
+    "pages": 2,
+    "rendered": true
+  },
+  "pptx": {
+    "zipIntegrity": true,
+    "pythonPptxOpen": true,
+    "slides": [
+      {
+        "slide": "ppt/slides/slide1.xml",
+        "texts": [
+          "두 번째 페이지 독립 객체"
+        ],
+        "nativeShapes": 1,
+        "images": 0
+      },
+      {
+        "slide": "ppt/slides/slide2.xml",
+        "texts": [
+          "한글 텍스트 수정",
+          "첫 페이지"
+        ],
+        "nativeShapes": 3,
+        "images": 1
+      }
+    ]
+  },
+  "zip": {
+    "schemaVersion": 1,
+    "pages": 2,
+    "assets": 1,
+    "sha256Verified": true
+  },
+  "maskedSourcePixels": {
+    "opaqueCompared": 18304,
+    "unchanged": true,
+    "roi": [
+      597,
+      367,
+      224,
+      174
+    ]
+  },
+  "synthetic": {
+    "alphaOutside": 0,
+    "alphaInside": 255,
+    "nativeText": 2,
+    "nativeShapes": 4,
+    "backgroundGhostTest": "known original title position blank",
+    "classification": "manual ground truth; approximate typography and polygon border, not AI recognition"
+  }
+}
