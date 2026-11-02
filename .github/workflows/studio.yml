@@ -24,6 +24,7 @@ jobs:
       - run: npm --prefix apps/studio ci
       - run: python -m pip install -r scripts/studio-test-requirements.txt
       - run: npm --prefix apps/studio run typecheck && npm --prefix apps/studio run lint && npm --prefix apps/studio test && npm --prefix apps/studio run build
+      - run: python scripts/verify-browser-pptx.py evidence/studio/native-pptx-smoke.pptx
       - run: ./scripts/test-studio-python
       - name: Install test browser
         working-directory: apps/studio

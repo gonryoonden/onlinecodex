@@ -9,7 +9,7 @@ const P="http://schemas.openxmlformats.org/presentationml/2006/main";
 const R="http://schemas.openxmlformats.org/officeDocument/2006/relationships";
 const REL="http://schemas.openxmlformats.org/package/2006/relationships";
 const emu=(n:number)=>String(Math.round(n*9525));
-const esc=(s:string)=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;");
+const esc=(s:string)=>s.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\uFFFE\uFFFF]/g,"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;");
 const hex=(s:string)=>s.slice(1).toUpperCase();
 const alpha=(v:number)=>Math.round(Math.max(0,Math.min(1,v))*100000);
 const fill=(c:string,o=1)=>`<a:solidFill><a:srgbClr val="${hex(c)}"><a:alpha val="${alpha(o)}"/></a:srgbClr></a:solidFill>`;
@@ -33,7 +33,7 @@ function picXml(id:number,e:ImageElement,rid:number){
  return `<p:pic><p:nvPicPr><p:cNvPr id="${id}" name="${esc(e.name||`Image ${id}`)}"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="rId${rid}"><a:alphaModFix amt="${alpha(e.opacity)}"/></a:blip><a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr>${xf(e)}<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>`;
 }
 function bgXml(bg:Project["pages"][number]["background"]){
- const f=bg.type==="solid"?fill(bg.color):`<a:gradFill rotWithShape="1"><a:gsLst><a:gs pos="0">${fill(bg.from)}</a:gs><a:gs pos="100000">${fill(bg.to)}</a:gs></a:gsLst><a:lin ang="${Math.round(bg.angle*60000)}" scaled="1"/></a:gradFill>`;
+ const f=bg.type==="solid"?fill(bg.color):`<a:gradFill rotWithShape="1"><a:gsLst><a:gs pos="0"><a:srgbClr val="${hex(bg.from)}"/></a:gs><a:gs pos="100000"><a:srgbClr val="${hex(bg.to)}"/></a:gs></a:gsLst><a:lin ang="${Math.round(bg.angle*60000)}" scaled="1"/></a:gradFill>`;
  return `<p:bg><p:bgPr>${f}<a:effectLst/></p:bgPr></p:bg>`;
 }
 const decode=(url:string)=>{const b=url.split(",")[1];if(!b)throw new Error("PPTX 이미지 데이터가 없습니다.");return Uint8Array.from(atob(b),c=>c.charCodeAt(0));};
