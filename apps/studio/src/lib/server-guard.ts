@@ -35,6 +35,18 @@ export function guard(req: Request) {
     const expected = Buffer.from(`Bearer ${token}`);
     if (value.length !== expected.length || !timingSafeEqual(value, expected))
       return Response.json({ error: "개인용 접근 인증 필요" }, { status: 401 });
+  } else if (
+    process.env.STUDIO_AUTH_MODE === "vercel-protection" &&
+    process.env.VERCEL === "1" &&
+    process.env.VERCEL_PROJECT_ID === process.env.STUDIO_PROTECTED_PROJECT_ID &&
+    Boolean(process.env.STUDIO_PROTECTED_PROJECT_ID) &&
+    actual.origin === process.env.STUDIO_ALLOWED_ORIGIN
+  ) {
+    // Operator must keep Vercel Authentication enabled for ALL deployments.
+    // Vercel's edge authenticates before this function. Never enable for public
+    // deployments; this opt-in is restricted to one project and exact origin.
+    // Origin / Sec-Fetch-Site checks above still apply. Explicit tokens win.
+    return null;
   } else if (!["localhost", "127.0.0.1", "[::1]"].includes(actual.hostname))
     return Response.json(
       {

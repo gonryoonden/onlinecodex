@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       { status: 503 },
     );
   const client = new GoogleGenAI({
-    apiKey: process.env.GEMINI_API_KEY,
+    apiKey: process.env.GEMINI_API_KEY?.trim() || process.env.GEMINI_API?.trim(),
     httpOptions: { timeout: 8000, retryOptions: { attempts: 1 } },
   });
   const models = await probeModels(client);

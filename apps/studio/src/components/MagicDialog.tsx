@@ -60,11 +60,15 @@ export default function MagicDialog({
   useEffect(() => {
     fetch("/api/capabilities")
       .then(async (r) => {
-        if (!r.ok) throw new Error("AI 상태 확인 실패");
-        return r.json();
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error ?? `AI 상태 확인 실패 (${r.status})`);
+        return data;
       })
       .then(setConfig)
-      .catch((e) => setError(e.message));
+      .catch((e) => {
+        setError(e.message);
+        setConfig({ enabled: false, model: "", reason: "AI 연결을 확인하지 못했습니다." });
+      });
   }, []);
   const region = analysis.regions.find((r) => r.id === selected);
   function patch(p: Partial<Region>) {

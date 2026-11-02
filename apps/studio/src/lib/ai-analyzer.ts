@@ -185,7 +185,7 @@ export class GeminiAnalyzer implements AiAnalyzer {
     const cfg = aiConfig();
     if (!cfg.enabled) throw new AnalysisError("AI_DISABLED", cfg.reason, 503);
     const client = new GoogleGenAI({
-      apiKey: process.env.GEMINI_API_KEY,
+      apiKey: process.env.GEMINI_API_KEY?.trim() || process.env.GEMINI_API?.trim(),
       httpOptions: { timeout: 45000, retryOptions: { attempts: 1 } },
     });
     const candidates = this.options.model ? [this.options.model] : process.env.GEMINI_VISION_MODEL?.trim()

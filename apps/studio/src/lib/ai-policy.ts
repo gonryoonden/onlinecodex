@@ -4,7 +4,7 @@ export function aiPolicy(
   env: Record<string, string | undefined> = process.env,
 ) {
   const model = env.GEMINI_VISION_MODEL?.trim() || MODEL_CANDIDATES[0];
-  const configured = Boolean(env.GEMINI_API_KEY?.trim());
+  const configured = Boolean(env.GEMINI_API_KEY?.trim() || env.GEMINI_API?.trim());
   const allowed = MODEL_CANDIDATES.includes(model);
   // An API key/model metadata cannot prove billing. This is explicit operator
   // confirmation of AI Studio's project tier, never an assertion inferred from a key.
