@@ -323,8 +323,11 @@ export default function Studio() {
         addAsset(a);
         if (meta.current)
           meta.current.sources[s.pages[s.currentPage].id] = a.id;
-        s.addElement(placeAsset(a, s.width, s.height));
-        setNotice(`${a.name} · 원본 ${a.width} × ${a.height}px 보존`);
+        const placed=placeAsset(a, s.width, s.height);
+        if(s.pages[s.currentPage].elements.length===0){const k=Math.min(s.width/a.width,s.height/a.height);placed.width=a.width*k;placed.height=a.height*k;placed.x=(s.width-placed.width)/2;placed.y=(s.height-placed.height)/2;}
+        s.addElement(placed);
+        s.setZoom(1);setMobilePanel(null);
+        setNotice("");
         setUploaded(a);recordBetaEvent({feature:'upload',stage:'input',outcome:'ok',code:'none'});
       }
     } catch (e) {
@@ -610,10 +613,10 @@ export default function Studio() {
           catch {setError("손상 기록을 JSON으로 보존하지 못했습니다. 기존 브라우저 데이터를 유지해 주세요.");}
         }}>손상 기록 보존 다운로드</button>
       </div>}
-      {uploaded&&<div className="notice" role="status">업로드한 원본이 저장 대상에 추가됐습니다. 필요한 부분부터 편집하세요.
-        <button onClick={()=>setMagic(uploaded)}>분석·영역 교정 열기</button><button onClick={()=>setUploaded(null)}>수동 편집 계속</button>
+      {uploaded&&<div className="notice studio-banner" role="status"><span>이미지 준비 완료</span>
+        <button onClick={()=>setMagic(uploaded)}>분석·영역 교정 열기</button><button onClick={()=>setUploaded(null)} aria-label="업로드 안내 닫기">닫기</button>
       </div>}
-      {page.elements.length===0&&<div className="notice"><button onClick={()=>file.current?.click()}>이미지로 시작</button><span> PNG/JPG를 올린 뒤 자동 처리 또는 직접 영역 지정을 선택하세요. 편집 원본은 프로젝트 ZIP으로 보관합니다.</span></div>}
+      {page.elements.length===0&&<div className="notice studio-banner"><button onClick={()=>file.current?.click()}>이미지로 시작</button><span>PNG/JPG 업로드 → 분석 → 편집</span></div>}
       <div className="mobile-controls" aria-label="모바일 편집 패널">
         <button aria-expanded={mobilePanel==="tools"} aria-controls="studio-tools" onClick={()=>setMobilePanel(mobilePanel==="tools"?null:"tools")}>도구 패널</button>
         <button aria-expanded={mobilePanel==="layers"} aria-controls="studio-inspector" onClick={()=>setMobilePanel(mobilePanel==="layers"?null:"layers")}>레이어 패널</button>
@@ -1131,8 +1134,8 @@ export default function Studio() {
               <button aria-label="축소" onClick={s.zoomOut}>
                 −
               </button>
-              <button onClick={() => s.setZoom(1)} title="작업영역에 맞춤">
-                {Math.round(s.zoom * 100)}%
+              <button onClick={() => s.setZoom(1)} aria-label="작업영역에 맞춤" title="작업영역에 맞춤">
+                맞춤 {Math.round(s.zoom * 100)}%
               </button>
               <button aria-label="확대" onClick={s.zoomIn}>
                 +

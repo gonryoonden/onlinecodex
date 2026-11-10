@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { stripTypeScriptTypes } from 'node:module';
 const source = await readFile(new URL('../../apps/studio/src/lib/server-guard.ts', import.meta.url), 'utf8');
 const { guard } = await import('data:text/javascript;base64,' + Buffer.from(stripTypeScriptTypes(source.replace('import "server-only";', ''))).toString('base64'));
-const keys = ['STUDIO_ACCESS_TOKEN', 'STUDIO_AUTH_MODE', 'VERCEL', 'VERCEL_PROJECT_ID', 'STUDIO_PROTECTED_PROJECT_ID', 'STUDIO_ALLOWED_ORIGIN', 'VERCEL_ENV', 'VERCEL_URL'];
+const keys = ['STUDIO_ACCESS_TOKEN', 'STUDIO_AUTH_MODE', 'VERCEL', 'VERCEL_PROJECT_ID', 'STUDIO_PROTECTED_PROJECT_ID', 'STUDIO_ALLOWED_ORIGIN', 'VERCEL_ENV', 'VERCEL_URL', 'VERCEL_BRANCH_URL'];
 const base = { STUDIO_AUTH_MODE: 'vercel-protection', VERCEL: '1', VERCEL_PROJECT_ID: 'project-a', STUDIO_PROTECTED_PROJECT_ID: 'project-a', STUDIO_ALLOWED_ORIGIN: 'https://studio.example' };
 function check(env, url = 'https://studio.example/api/capabilities', headers = {}) {
   const original = Object.fromEntries(keys.map(k => [k, process.env[k]]));
@@ -36,3 +36,6 @@ test('platform Preview URL cannot authorize production',()=>assert.equal(check({
 test('Preview URL still requires platform protection opt-in and exact project',()=>{for(const env of [{...preview,STUDIO_AUTH_MODE:''},{...preview,VERCEL_PROJECT_ID:'different'},{...preview,VERCEL:'0'}])assert.equal(check(env,'https://studio-preview-hash-team.vercel.app/api/capabilities').status,403);});
 test('Preview still denies cross-site requests and respects explicit tokens',()=>{assert.equal(check(preview,'https://studio-preview-hash-team.vercel.app/api/capabilities',{origin:'https://evil.example'}).status,403);assert.equal(check({...preview,STUDIO_ACCESS_TOKEN:'test-only'},'https://studio-preview-hash-team.vercel.app/api/capabilities').status,401);});
 test('custom or malformed platform URL does not grant access',()=>{for(const host of ['evil.example','studio.vercel.app.evil.example','studio.vercel.app/path'])assert.equal(check({...preview,VERCEL_URL:host},'https://evil.example/api/capabilities').status,403);});
+
+test('protected branch alias is accepted exactly in Preview',()=>assert.equal(check({...preview,VERCEL_BRANCH_URL:'studio-git-branch-team.vercel.app'},'https://studio-git-branch-team.vercel.app/api/capabilities'),null));
+test('branch alias still denies other projects, production, unrelated domains and cross origin',()=>{const p={...preview,VERCEL_BRANCH_URL:'studio-git-branch-team.vercel.app'},u='https://studio-git-branch-team.vercel.app/api/capabilities';for(const env of [{...p,VERCEL_PROJECT_ID:'wrong'},{...p,VERCEL_ENV:'production'},{...p,STUDIO_AUTH_MODE:''}])assert.equal(check(env,u).status,403);assert.equal(check(p,'https://other.vercel.app/api/capabilities').status,403);assert.equal(check(p,u,{origin:'https://evil.example'}).status,403);});

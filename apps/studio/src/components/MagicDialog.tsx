@@ -76,11 +76,11 @@ export default function MagicDialog({
   useEffect(() => {
     fetch("/api/capabilities")
       .then(async (r) => {
-        const data = await r.json();
-        if (!r.ok) throw new Error(data.error ?? `AI 상태 확인 실패 (${r.status})`);
+        const data = await readApiJson(r);
+        if (!r.ok) throw new Error(r.status===503 ? `AI 설정 누락: ${data.error ?? "Preview 환경변수를 확인하세요."}` : data.error ?? `AI 상태 확인 실패 (${r.status})`);
         return data;
       })
-      .then(setConfig)
+      .then(data=>{setConfig(data);if(!data.enabled)setError(`AI 설정 누락: ${data.reason ?? 'Preview 서버 설정을 확인하세요.'}`);})
       .catch((e) => {
         setError(e.message);
         setConfig({ enabled: false, model: "", reason: "AI 연결을 확인하지 못했습니다." });
@@ -99,7 +99,7 @@ export default function MagicDialog({
     if(!consent||!config?.enabled)throw new Error('외부 분석 사용 동의와 연결 상태를 확인하세요.');
     const {image,transport}=await prepareAiImageWithMetadata(source.dataUrl);signal?.throwIfAborted();
     const response=await fetch('/api/ai/magic-layers',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image,consent,...(selectedModel?{model:selectedModel}:{})}),signal});
-    const data=await readApiJson(response);if(!response.ok)throw new Error(data.error??'분석 실패');
+    const data=await readApiJson(response);if(!response.ok)throw new Error(response.status===503?`AI 설정 누락: ${data.error??'Preview 환경변수를 확인하세요.'}`:data.error??'분석 실패');
     return {analysis:analysisSchema.parse(data.analysis),provider:`gemini/${data.provenance.model}`,trace:{runId:uid('run'),transport,build:typeof data.trace?.build==='string'?data.trace.build:'unknown',stages:data.trace?.stages?stageSchema.array().parse(data.trace.stages):undefined}};
   }
   async function analyze() {
@@ -262,7 +262,7 @@ export default function MagicDialog({
         <div className="magic-body">
           <div className="notice">
             <strong>원본을 보존하며 필요한 부분부터 편집하세요.</strong>
-            <p>단색 배경은 로컬 분리를 우선합니다. 외부 전송 동의가 있으면 복잡한 이미지에 AI 분석을 사용할 수 있습니다. 실패 시 다른 로컬 방법을 한 번 시도하며, 모든 후보는 적용 전 검토합니다.</p>
+            <details><summary>자동 처리 방식</summary><p>단색 배경은 로컬 우선, 복잡한 이미지는 동의 후 AI 분석을 사용합니다. 실패 시 로컬 방법으로 전환합니다. 결과를 검토한 뒤 적용하세요.</p></details>
             <button className="primary" disabled={busy} onClick={()=>void smartProcess()}>자동 처리 시작</button>
             {busy&&cancellable&&<button onClick={()=>detection.current?.abort()}>자동 처리 취소</button>}
             {beforeAutomatic&&<button disabled={busy} onClick={()=>{setAnalysis(beforeAutomatic.analysis);setSkip(beforeAutomatic.skip);setProvider(beforeAutomatic.provider);setInitialTrace({});setRepair(null);setPreview('');setPipeline(null);setConfirmed(false);setBeforeAutomatic(null);}}>자동 처리 전 영역으로 되돌리기</button>}
@@ -275,7 +275,7 @@ export default function MagicDialog({
                   ? "Gemini 분석 준비"
                   : (config?.reason ?? "AI 연결 상태 확인 중")}
               </strong>
-              <p>
+              <details><summary>모델·무료 한도·전송 정책</summary><p>
                 모델별 1회 요청 · 429 할당량 초과 시 다음 무료 후보로 전환합니다. 최대 3회이며 그 밖의 오류는 재시도하지 않습니다. 계정별 비용·무료 쿼터가
                 적용되며 확정 금액을 예측하지 않습니다. 원본은 이 버튼을 누를
                 때 또는 동의 후 자동 처리가 AI 경로를 선택할 때 외부로 전송합니다.
@@ -285,7 +285,7 @@ export default function MagicDialog({
                   {config.candidates.map(m => <option key={m} value={m}>{m}</option>)}
                 </select>
               </label>}
-              <label>
+              </details><label>
                 <input
                   type="checkbox"
                   checked={consent}

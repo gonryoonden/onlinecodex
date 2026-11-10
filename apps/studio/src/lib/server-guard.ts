@@ -42,8 +42,9 @@ export function guard(req: Request) {
     Boolean(process.env.STUDIO_PROTECTED_PROJECT_ID) &&
     (actual.origin === process.env.STUDIO_ALLOWED_ORIGIN ||
       (process.env.VERCEL_ENV === "preview" &&
-        /^[a-z0-9-]+\.vercel\.app$/i.test(process.env.VERCEL_URL ?? "") &&
-        actual.origin === `https://${process.env.VERCEL_URL}`))
+        [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL].some(host =>
+          /^[a-z0-9-]+\.vercel\.app$/i.test(host ?? "") &&
+          actual.origin === `https://${host}`)))
   ) {
     // Operator must keep Vercel Authentication enabled for ALL deployments.
     // Vercel's edge authenticates before this function. Never enable for public

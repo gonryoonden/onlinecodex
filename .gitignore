@@ -22,3 +22,7 @@ evidence/studio/p3/
 evidence/studio/web/
 evidence/studio/layer-corpus/
 evidence/studio/mask/
+
+# Browser layout regression output
+evidence/studio/preview-ux/
+evidence/studio/beta/

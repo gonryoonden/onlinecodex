@@ -38,7 +38,6 @@ export default function StudioCanvas() {
   const fit = Math.min(
     (viewport.width - 64) / s.width,
     (viewport.height - 64) / s.height,
-    1,
   );
   const scale = Math.max(0.05, fit) * s.zoom;
   return (

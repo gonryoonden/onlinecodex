@@ -33,6 +33,10 @@ export async function prepareAiImageWithMetadata(dataUrl: string) {
   throw new Error("분석용 이미지 용량을 줄이지 못했습니다. 이미지를 나누어 분석하세요.");
 }
 export async function readApiJson(response: Response) {
+  if (response.status === 401 || response.status === 403)
+    throw new Error("인증 오류: Vercel 로그인과 Preview 접근 설정을 확인하세요.");
+  if (response.status === 429)
+    throw new Error("호출 한도 초과: 분석 중인 작업 또는 무료 할당량을 확인하고 잠시 후 다시 시도하세요.");
   if (response.status === 413)
     throw new Error("요청 용량이 서버 한도를 초과했습니다. 원본은 보존되었습니다.");
   if (!response.headers.get("content-type")?.includes("application/json"))
