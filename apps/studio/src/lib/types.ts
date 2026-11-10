@@ -14,6 +14,7 @@ export type ElementType =
   | "image"
   | "sticker"
   | "group"
+  | "chart"
   | "table"
   | "frame"
   | "embed"
@@ -129,8 +130,15 @@ export interface BaseElement {
     regionId?: string;
     method: string;
     sourcePixels?: [number, number, number, number];
+    mask?: {
+      bbox: [number,number,number,number];
+      polygon?: [number,number][];
+      assetId?: string;
+      edgeRefinement?: boolean;
+    };
     review: boolean;
     backgroundWarning?: boolean;
+    alphaEdit?: { baseAssetId: string };
   };
   /** v0.5: entry animation (undefined = none) */
   animation?: ElementAnimation;
@@ -265,6 +273,21 @@ export interface TableElement extends BaseElement {
   fontFamily: string;
 }
 
+/** One verified numeric series. No guessed/OCR-only values are accepted. */
+export interface BarChartElement extends BaseElement {
+  type: "chart";
+  data: {label:string;value:number}[];
+  seriesName:string;
+  confirmed:true;
+  fill:string;
+  textColor:string;
+  fontFamily:string;
+  fontSize:number;
+}
+export function createBarChartElement(init: BaseInit & Partial<BarChartElement> & Pick<BarChartElement,"data"|"seriesName">):BarChartElement {
+  return {...baseElement("chart",{width:600,height:360,...init}),fill:"#32857A",textColor:"#18333B",fontFamily:"Noto Sans KR",fontSize:16,...init,type:"chart",confirmed:true,rotation:0};
+}
+
 export const FRAME_SHAPES = [
   "rect",
   "ellipse",
@@ -395,6 +418,7 @@ export type AnyElement =
   | ImageElement
   | StickerElement
   | GroupElement
+  | BarChartElement
   | TableElement
   | FrameElement
   | EmbedElement

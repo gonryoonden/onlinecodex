@@ -89,9 +89,10 @@ export default function StudioCanvas() {
                   element={el}
                   interactive
                   registerNode={register}
-                  onDoubleClick={(id) => {
+                  onDoubleClick={(id, cell) => {
                     s.setSelection([id]);
-                    document.getElementById("text-editor")?.focus();
+                    const el=page.elements.find(e=>e.id===id);
+                    requestAnimationFrame(()=>document.getElementById(cell&&el?.type==="table"?`table-cell-${cell.row*el.cols+cell.col}`:"text-editor")?.focus());
                   }}
                 />
               ))}

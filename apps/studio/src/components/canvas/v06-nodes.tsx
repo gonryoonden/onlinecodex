@@ -151,7 +151,7 @@ export function TableNode({
           fill={isHeader ? (el.headerTextColor ?? "#FFFFFF") : el.textColor}
           verticalAlign="middle"
           align="left"
-          wrap="none"
+          wrap="word"
           ellipsis
           visible={!hidingThis}
           onDblClick={startDbl}

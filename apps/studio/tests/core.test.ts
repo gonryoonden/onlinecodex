@@ -119,6 +119,14 @@ describe("Canvix store reused without DB", () => {
   });
 });
 describe("versioned project integrity", () => {
+  it("retains original vector masks and rejects a missing raster mask asset", () => {
+    const p=newProject(); const t=createTextElement();
+    t.provenance={source:"local",method:"test",review:true,mask:{bbox:[0,0,1000,1000],polygon:[[0,0],[1000,0],[0,1000]]}};
+    p.pages[0].elements=[t];
+    expect(validateProject(p).pages[0].elements[0].provenance?.mask).toEqual(t.provenance.mask);
+    t.provenance.mask={bbox:[0,0,1000,1000],assetId:"missing"};
+    expect(()=>validateProject(p)).toThrow("누락된 원본 마스크");
+  });
   it("validates real two-page native fixture", () =>
     expect(
       validateProject(

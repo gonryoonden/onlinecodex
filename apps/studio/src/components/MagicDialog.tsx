@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { X, ScanLine, Plus, Check, Image as ImageIcon } from "lucide-react";
 import type { Asset } from "@/lib/project";
 import type { PageData } from "@/lib/types";
@@ -12,13 +12,18 @@ import {
 import { reconstructDesign, type RepairedSource } from "@/lib/magic-layers/reconstruct";
 import { renderPage } from "@/lib/render";
 import { uid } from "@/lib/types";
-import { prepareAiImage, readApiJson } from "@/lib/ai-transport";
+import { prepareAiImageWithMetadata, readApiJson } from "@/lib/ai-transport";
+import { stageSchema, statusLabels, warningLabels, assessInventory, type Diagnostic } from "@/lib/magic-layers/diagnostics";
+import { download } from "@/lib/archive";
+import { adaptivePipeline, profileSource, localProposal, inspectMasks, mergeRegions, type PipelineResult } from "@/lib/magic-layers/adaptive";
+import { recordBetaEvent,errorCode } from "@/lib/beta-diagnostics";
+import { detectLocalImages } from "@/lib/magic-layers/local-detect";
 interface Props {
   source: Asset;
   width: number;
   height: number;
   onClose: () => void;
-  onApply: (page: PageData, assets: Asset[], source: Asset) => void;
+  onApply: (page: PageData, assets: Asset[], source: Asset, diagnostic: Diagnostic) => void;
 }
 export default function MagicDialog({
   source,
@@ -38,7 +43,13 @@ export default function MagicDialog({
     regions: [],
     notes: "수동 영역 지정 · AI 분석을 실행하지 않았습니다.",
   });
+  const detection = useRef<AbortController | null>(null);
+  const [progress,setProgress] = useState<number | null>(null);
   const [skip, setSkip] = useState<string[]>([]);
+  const [mode, setMode] = useState<"preserve" | "redraw">("preserve");
+  const [inputKind, setInputKind] = useState<Diagnostic["inputKind"]>("unknown");
+  const [initialTrace, setInitialTrace] = useState<Partial<Diagnostic>>({});
+  const [resultTrace, setResultTrace] = useState<Diagnostic | null>(null);
   const [repair, setRepair] = useState<(RepairedSource & { key: string }) | null>(null);
   const [repairMethod, setRepairMethod] = useState("ns");
   const [textMode, setTextMode] = useState("boxes");
@@ -49,15 +60,19 @@ export default function MagicDialog({
   const [consent, setConsent] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [cancellable,setCancellable]=useState(false);
   const [error, setError] = useState("");
   const [selected, setSelected] = useState("");
   const [preview, setPreview] = useState("");
   const [previewKey, setPreviewKey] = useState("");
-  const currentPreviewKey = JSON.stringify([repairKey, confirmed, activeRepair?.key]);
+  const currentPreviewKey = JSON.stringify([repairKey, confirmed, activeRepair?.key, mode, inputKind]);
   const [provider, setProvider] = useState("manual");
   const [poly, setPoly] = useState(false);
   const [points, setPoints] = useState<[number, number][]>([]);
   const [zoom, setZoom] = useState(1);
+  const [pipeline,setPipeline]=useState<PipelineResult|null>(null);
+  const [beforeAutomatic,setBeforeAutomatic]=useState<{analysis:Analysis;skip:string[];provider:string}|null>(null);
+  useEffect(()=>()=>detection.current?.abort(),[]);
   useEffect(() => {
     fetch("/api/capabilities")
       .then(async (r) => {
@@ -73,36 +88,61 @@ export default function MagicDialog({
   }, []);
   const region = analysis.regions.find((r) => r.id === selected);
   function patch(p: Partial<Region>) {
+    recordBetaEvent({feature:'correction',stage:'review',outcome:'ok',code:'none',method:'manual',correction:p.text!==undefined?'text':p.polygon?'polygon':p.bbox?'bbox':'other'});
     setAnalysis((a) => ({
       ...a,
       regions: a.regions.map((r) => (r.id === selected ? { ...r, ...p } : r)),
     }));
     setPreview("");
   }
+  async function requestAnalysis(signal?:AbortSignal) {
+    if(!consent||!config?.enabled)throw new Error('외부 분석 사용 동의와 연결 상태를 확인하세요.');
+    const {image,transport}=await prepareAiImageWithMetadata(source.dataUrl);signal?.throwIfAborted();
+    const response=await fetch('/api/ai/magic-layers',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image,consent,...(selectedModel?{model:selectedModel}:{})}),signal});
+    const data=await readApiJson(response);if(!response.ok)throw new Error(data.error??'분석 실패');
+    return {analysis:analysisSchema.parse(data.analysis),provider:`gemini/${data.provenance.model}`,trace:{runId:uid('run'),transport,build:typeof data.trace?.build==='string'?data.trace.build:'unknown',stages:data.trace?.stages?stageSchema.array().parse(data.trace.stages):undefined}};
+  }
   async function analyze() {
-    setBusy(true);
-    setError("");
+    setBusy(true);setError('');const controller=new AbortController();detection.current=controller;setCancellable(true);
+    const deadline=setTimeout(()=>controller.abort(),120000);
+    try{
+      const result=await requestAnalysis(controller.signal);controller.signal.throwIfAborted();
+      const merged=mergeRegions(analysis.regions,result.analysis.regions);
+      setBeforeAutomatic({analysis,skip,provider});
+      setAnalysis(analysis.regions.length?{...analysis,regions:merged.regions}:{...result.analysis,regions:merged.regions});
+      setInitialTrace(analysis.regions.length?{}:result.trace);setProvider(result.provider);setSelected(merged.regions[0]?.id??'');
+      setConfirmed(false);setPreview('');setPipeline(null);
+      setResultWarnings(merged.protectedCount?['기존 교정 영역과 겹치는 AI 후보는 적용하지 않았습니다.']:[]);
+      recordBetaEvent({feature:'analysis',stage:'ai',outcome:'ok',code:'none',method:'gemini',count:merged.regions.length});
+    }catch(e){setError(controller.signal.aborted?'분석을 취소하거나 시간 한도에 도달했습니다. 기존 영역은 유지됩니다.':e instanceof Error?e.message:'분석 실패');recordBetaEvent({feature:'analysis',stage:'ai',outcome:controller.signal.aborted?'cancelled':'error',code:errorCode(e),method:'gemini'});}
+    finally{clearTimeout(deadline);setBusy(false);detection.current=null;setCancellable(false);}
+  }
+  async function smartProcess(){
+    setBusy(true);setError('');setProgress(0);const controller=new AbortController();detection.current=controller;setCancellable(true);
+    const deadline=setTimeout(()=>controller.abort(),120000);
+    try{
+      const flat=await profileSource(source,controller.signal);
+      const result=await adaptivePipeline({existing:analysis,flat,allowAI:consent&&Boolean(config?.enabled),signal:controller.signal,
+        local:(method,existing)=>localProposal(source,method,existing,controller.signal,setProgress),
+        ai:async()=>(await requestAnalysis(controller.signal)).analysis,
+        inspect:regions=>inspectMasks(regions,controller.signal),
+        onStage:method=>recordBetaEvent({feature:'analysis',stage:method==='gemini'?'ai':method==='legacy'?'legacy':'local',outcome:'review',code:'none',method})});
+      controller.signal.throwIfAborted();setBeforeAutomatic({analysis,skip,provider});setAnalysis(result.analysis);setPipeline(result);setProvider('adaptive-pipeline');setInitialTrace({});
+      setConfirmed(false);setPreview('');setResultWarnings(result.warnings);setSelected(result.analysis.regions[0]?.id??'');
+      for(const attempt of result.attempts)recordBetaEvent({feature:'analysis',stage:attempt.method==='gemini'?'ai':attempt.method==='legacy'?'legacy':'local',outcome:attempt.result==='error'?'error':attempt.result==='empty'?'fallback':'ok',code:attempt.result==='error'?'unknown':attempt.result==='empty'?'empty':'none',method:attempt.method,count:attempt.added});
+    }catch(e){setError(controller.signal.aborted?'처리를 취소하거나 시간 한도에 도달했습니다. 기존 교정과 원본은 유지됩니다.':e instanceof Error?e.message:'자동 처리 실패. 영역을 직접 지정하세요.');recordBetaEvent({feature:'analysis',stage:'profile',outcome:controller.signal.aborted?'cancelled':'error',code:errorCode(e)});}
+    finally{clearTimeout(deadline);setBusy(false);setProgress(null);detection.current=null;setCancellable(false);}
+  }
+  async function localDetect() {
+    setBusy(true);setError("");setProgress(0);
+    const controller=new AbortController();detection.current=controller;setCancellable(true);
     try {
-      const image = await prepareAiImage(source.dataUrl);
-      const response = await fetch("/api/ai/magic-layers", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image, consent, ...(selectedModel ? { model: selectedModel } : {}) }),
-      });
-      const data = await readApiJson(response);
-      if (!response.ok) throw new Error(data.error ?? "분석 실패");
-      const parsed = analysisSchema.parse(data.analysis);
-      setAnalysis(parsed);
-      setProvider(`gemini/${data.provenance.model}`);
-      setSelected(parsed.regions[0]?.id ?? "");
-      setSkip([]);
-      setConfirmed(false);
-      setPreview("");
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "분석 실패");
-    } finally {
-      setBusy(false);
-    }
+      const regions=await detectLocalImages(source,analysis.regions,controller.signal,setProgress);
+      setAnalysis(a=>({...a,regions:[...a.regions,...regions],notes:(a.notes+"\n로컬 픽셀 후보: 내부 밝은 색·그림자·겹침 경계가 누락될 수 있습니다. 자동 의미 인식 또는 정확한 분리가 아닙니다.").slice(0,2000)}));setPreview("");
+      if (provider === "manual") setProvider("local-pixel-candidates");
+      setResultWarnings([`로컬 전경 후보 ${regions.length}개. 의미 인식 결과가 아니며 내부 흰색·그림자·겹침이 빠질 수 있습니다. 마스크와 배경을 검토하세요.`]);
+    } catch(e) {setError(controller.signal.aborted?"후보 탐지를 취소했습니다. 기존 영역은 유지됩니다.":e instanceof Error?e.message:"후보 탐지 실패");}
+    finally {setBusy(false);setProgress(null);detection.current=null;setCancellable(false);}
   }
   function add(type: Region["type"]) {
     const r: Region = {
@@ -137,10 +177,13 @@ export default function MagicDialog({
         confirmed,
         provider,
         activeRepair,
+        { mode, inputKind, initial: initialTrace },
       );
       setResultWarnings(result.warnings);
+      setResultTrace(result.diagnostic);
+      recordBetaEvent({feature:'preview',stage:apply?'apply':'review',outcome:'review',code:result.diagnostic.status==='original-preserved'?'source-preserved':'none',count:result.page.elements.length});
       if (apply) {
-        onApply(result.page, result.assets, source);
+        onApply(result.page, result.assets, source, result.diagnostic);
         onClose();
       } else {
         setPreview(await renderPage(result.page, width, height));
@@ -148,6 +191,7 @@ export default function MagicDialog({
       }
     } catch (e) {
       setError(e instanceof Error ? e.message : "레이어 생성 실패");
+      recordBetaEvent({feature:'preview',stage:'review',outcome:'error',code:errorCode(e)});
     } finally {
       setBusy(false);
     }
@@ -165,7 +209,9 @@ export default function MagicDialog({
       const data = await readApiJson(response);
       if (!response.ok) throw new Error(data.error ?? "로컬 보정 실패");
       setRepair({ ...data, key: repairKey });
+      recordBetaEvent({feature:'background',stage:'apply',outcome:'review',code:'mask-risk'});
     } catch (e) {
+      recordBetaEvent({feature:'background',stage:'apply',outcome:'error',code:errorCode(e)});
       setRepair(null);
       setError(e instanceof Error ? e.message : "로컬 보정 실패");
     } finally { setBusy(false); }
@@ -214,6 +260,14 @@ export default function MagicDialog({
           </button>
         </header>
         <div className="magic-body">
+          <div className="notice">
+            <strong>원본을 보존하며 필요한 부분부터 편집하세요.</strong>
+            <p>단색 배경은 로컬 분리를 우선합니다. 외부 전송 동의가 있으면 복잡한 이미지에 AI 분석을 사용할 수 있습니다. 실패 시 다른 로컬 방법을 한 번 시도하며, 모든 후보는 적용 전 검토합니다.</p>
+            <button className="primary" disabled={busy} onClick={()=>void smartProcess()}>자동 처리 시작</button>
+            {busy&&cancellable&&<button onClick={()=>detection.current?.abort()}>자동 처리 취소</button>}
+            {beforeAutomatic&&<button disabled={busy} onClick={()=>{setAnalysis(beforeAutomatic.analysis);setSkip(beforeAutomatic.skip);setProvider(beforeAutomatic.provider);setInitialTrace({});setRepair(null);setPreview('');setPipeline(null);setConfirmed(false);setBeforeAutomatic(null);}}>자동 처리 전 영역으로 되돌리기</button>}
+            {pipeline&&<div aria-label="자동 처리 결과"><p>{pipeline.route==='flat'?'단색 둘레':'복잡한 둘레'} · {pipeline.attempts.length}개 경로 시도 · 검토할 영역 {pipeline.analysis.regions.length}개</p><ul>{pipeline.attempts.map(a=><li key={a.method}>{a.method==='gemini'?'AI':a.method==='legacy'?'기존 로컬':'배경 기준 로컬'}: {a.result==='error'?'실패 → 대체 경로':a.result==='empty'?'새 후보 없음':`새 후보 ${a.added}개`}</li>)}</ul></div>}
+          </div>
           <div className="magic-top">
             <div className="notice">
               <strong>
@@ -224,7 +278,7 @@ export default function MagicDialog({
               <p>
                 모델별 1회 요청 · 429 할당량 초과 시 다음 무료 후보로 전환합니다. 최대 3회이며 그 밖의 오류는 재시도하지 않습니다. 계정별 비용·무료 쿼터가
                 적용되며 확정 금액을 예측하지 않습니다. 원본은 이 버튼을 누를
-                때만 외부로 전송합니다.
+                때 또는 동의 후 자동 처리가 AI 경로를 선택할 때 외부로 전송합니다.
               </p>
               {config?.candidates && <label>무료 분석 모델
                 <select aria-label="무료 분석 모델" value={selectedModel || config.model} disabled={busy} onChange={e => setSelectedModel(e.target.value)}>
@@ -235,6 +289,7 @@ export default function MagicDialog({
                 <input
                   type="checkbox"
                   checked={consent}
+                  disabled={busy}
                   onChange={(e) => setConsent(e.target.checked)}
                 />{" "}
                 외부 Gemini API로 이미지 전송에 동의합니다.
@@ -254,7 +309,7 @@ export default function MagicDialog({
               {error}
             </p>
           )}
-          <div className="magic-grid">
+          <fieldset disabled={busy} style={{border:0,padding:0,minWidth:0}}><div className="magic-grid">
             <div className="comparison">
               <div className="section-label">
                 원본 · 클릭으로 다각형 꼭짓점 지정{" "}
@@ -276,7 +331,7 @@ export default function MagicDialog({
                       poly ? "region-overlay drawing" : "region-overlay"
                     }
                     onClick={(e) => {
-                      if (!poly) return;
+                      if (busy || !poly) return;
                       const rect = e.currentTarget.getBoundingClientRect();
                       setPoints((p) => [
                         ...p,
@@ -295,7 +350,7 @@ export default function MagicDialog({
                       <g
                         key={r.id}
                         onClick={(e) => {
-                          if (!poly) {
+                          if (!busy && !poly) {
                             e.stopPropagation();
                             setSelected(r.id);
                           }
@@ -350,13 +405,21 @@ export default function MagicDialog({
               )}
             </div>
             <div className="region-controls">
+              <label>입력 이미지 종류
+                <select aria-label="입력 이미지 종류" value={inputKind} onChange={e=>setInputKind(e.target.value as Diagnostic["inputKind"])}>
+                  <option value="unknown">미확인</option><option value="text-only">텍스트만 있음</option><option value="illustrated">삽화·아이콘이 있음</option>
+                </select>
+              </label>
+              {assessInventory(analysis.regions,inputKind).map(code=><p className="warning" key={code}>{warningLabels[code]}</p>)}
               <div className="section-label">
                 영역 검토 ·{" "}
                 {provider.startsWith("gemini")
                   ? "Gemini · 모든 결과 확인 필요"
-                  : "수동 지정 · AI 결과 아님"}
+                  : provider === "adaptive-pipeline" ? "자동 경로 · 후보 검토 필요" : provider === "local-pixel-candidates" ? "로컬 픽셀 후보 · 의미 인식 아님" : "수동 지정 · AI 결과 아님"}
               </div>
               <div className="button-row">
+                <button disabled={busy} onClick={()=>void localDetect()}>로컬 전경 후보 찾기</button>
+                {progress!==null && <><span role="status">후보 검사 {progress}%</span><button onClick={()=>detection.current?.abort()}>탐지 취소</button></>}
                 <button onClick={() => add("text")}>
                   <Plus size={14} />
                   텍스트 영역
@@ -457,6 +520,17 @@ export default function MagicDialog({
                           }
                         />
                       </label>
+                      <div className="field-grid">
+                        <label>행간<input aria-label="영역 텍스트 행간" type="number" min="0.5" max="5" step="0.05"
+                          value={region.style?.lineHeight ?? 1.25} onChange={e=>patch({style:{...region.style,color:region.style?.color??"#172C35",lineHeight:Number(e.target.value)}})}/></label>
+                        <label>자간 (높이 /1000)<input aria-label="영역 텍스트 자간" type="number" min="-100" max="100" step="0.1"
+                          value={region.style?.letterSpacing ?? 0} onChange={e=>patch({style:{...region.style,color:region.style?.color??"#172C35",letterSpacing:Number(e.target.value)}})}/></label>
+                      </div>
+                      <label><input type="checkbox" aria-label="영역 텍스트 굵게" checked={region.style?.bold??false}
+                        onChange={e=>patch({style:{...region.style,color:region.style?.color??"#172C35",bold:e.target.checked}})}/>굵게</label>
+                      <label>정렬<select aria-label="영역 텍스트 정렬" value={region.style?.align??"left"} onChange={e=>patch({style:{...region.style,color:region.style?.color??"#172C35",align:e.target.value as "left"|"center"|"right"}})}>
+                        <option value="left">왼쪽</option><option value="center">가운데</option><option value="right">오른쪽</option>
+                      </select></label>
                     </>
                   )}
                   {region.type === "shape" && (
@@ -502,6 +576,12 @@ export default function MagicDialog({
                     />
                   </label>
                   {region.type === "image" && (
+                    <label><input type="checkbox" aria-label="단색 경계 배경색 보정" disabled={!region.maskPng}
+                      checked={Boolean(region.edgeRefinement)} onChange={e=>patch({edgeRefinement:e.target.checked})}/>
+                      단색 경계 배경색 보정 · 한 픽셀 경계의 근사 alpha, 내부 색상 보존
+                    </label>
+                  )}
+                  {region.type === "image" && (
                     <div className="button-row">
                       <button
                         onClick={() => {
@@ -525,6 +605,13 @@ export default function MagicDialog({
               )}
               <fieldset>
                 <legend>배경 복원</legend>
+                <label>원본 보존 방식
+                  <select aria-label="원본 보존 방식" value={mode} onChange={e=>{setMode(e.target.value as "preserve" | "redraw");setConfirmed(false);setPreview("");}}>
+                    <option value="preserve">원본 보존 · 확인한 단색 영역만 부분 편집</option>
+                    <option value="redraw">전체 배경 재작성 · 미탐지 장식 손실 위험</option>
+                  </select>
+                </label>
+                <p>기본 모드는 겹치거나 배경이 불확실한 영역을 원본에 남깁니다. 원본 글자를 제거하지 못하면 새 글자를 겹치지 않습니다. 선택 영역 안의 미탐지 장식은 지워질 수 있으므로 미리보기에서 반드시 확인하세요.</p>
                 <label>로컬 복원 알고리즘
                   <select aria-label="로컬 복원 알고리즘" value={repairMethod} onChange={e => setRepairMethod(e.target.value)}>
                     <option value="telea">Telea</option><option value="ns">Navier–Stokes</option>
@@ -616,24 +703,31 @@ export default function MagicDialog({
                   <input
                     type="checkbox"
                     checked={confirmed}
-                    disabled={analysis.background.kind === "complex"}
+                    disabled={mode === "redraw" && analysis.background.kind === "complex"}
                     onChange={(e) => {
                       setConfirmed(e.target.checked);
                       setPreview("");
                     }}
                   />{" "}
-                  원본 배경을 단색/그라데이션으로 근사 재구성함을 확인했습니다.
+                  {mode === "preserve" ? "선택 영역이 단색 배경이며, 국소 제거 결과를 미리보기로 검토하겠습니다." : "원본 배경을 단색/그라데이션으로 근사 재구성함을 확인했습니다."}
                 </label>
                 <p className="warning">
-                  {!confirmed || analysis.background.kind === "complex"
+                  {mode === "preserve" ? "전체 디자인은 보존합니다. 국소 배경은 추정이며, 제외·중첩 영역은 원본 유지 상태입니다."
+                  : !confirmed || analysis.background.kind === "complex"
                     ? "배경 보정 필요 · 원본에 글자·객체 잔상이 남을 수 있습니다. 정확한 분리가 아닙니다."
                     : "원본 배경을 새로 그립니다. 가려진 디테일·제외한 영역은 복원하지 않습니다."}
                 </p>
               </fieldset>
               {resultWarnings.map(w => <p className="warning" key={w}>{w}</p>)}
+              {resultTrace && previewKey === currentPreviewKey && <div role="status">
+                <strong>{statusLabels[resultTrace.status]}</strong>
+                {resultTrace.warnings.map(w=><p className="warning" key={w}>{warningLabels[w]??w}</p>)}
+                <button onClick={()=>download(new Blob([JSON.stringify(resultTrace,null,2)],{type:"application/json"}),"magic-diagnostic.json")}>변환 진단 JSON</button>
+              </div>}
               <p className="muted">{analysis.notes}</p>
             </div>
           </div>
+          </fieldset>
         </div>
         <footer className="dialog-footer">
           <span>결과는 새 페이지에 추가되어 원본 페이지를 보존합니다.</span>
@@ -645,7 +739,7 @@ export default function MagicDialog({
           </button>
           <button
             className="primary"
-            disabled={busy || analysis.regions.length === skip.length}
+            disabled={busy || analysis.regions.length === skip.length || previewKey !== currentPreviewKey || !preview}
             onClick={() => void reconstruct(true)}
           >
             <Check size={16} />

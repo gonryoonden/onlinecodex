@@ -91,6 +91,10 @@ export async function POST(req: Request) {
     const result = await engine.analyze(body.image, `image/${meta.format}`);
     return Response.json({
       analysis: result,
+      trace: {
+        stages: engine.lastRun?.stages ?? [],
+        build: (process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.STUDIO_BUILD_SHA ?? "development").slice(0,100),
+      },
       provenance: {
         provider: "gemini",
         model: engine.lastRun?.model ?? aiConfig().model,

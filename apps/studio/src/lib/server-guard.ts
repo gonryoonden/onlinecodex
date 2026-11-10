@@ -40,11 +40,16 @@ export function guard(req: Request) {
     process.env.VERCEL === "1" &&
     process.env.VERCEL_PROJECT_ID === process.env.STUDIO_PROTECTED_PROJECT_ID &&
     Boolean(process.env.STUDIO_PROTECTED_PROJECT_ID) &&
-    actual.origin === process.env.STUDIO_ALLOWED_ORIGIN
+    (actual.origin === process.env.STUDIO_ALLOWED_ORIGIN ||
+      (process.env.VERCEL_ENV === "preview" &&
+        /^[a-z0-9-]+\.vercel\.app$/i.test(process.env.VERCEL_URL ?? "") &&
+        actual.origin === `https://${process.env.VERCEL_URL}`))
   ) {
     // Operator must keep Vercel Authentication enabled for ALL deployments.
     // Vercel's edge authenticates before this function. Never enable for public
     // deployments; this opt-in is restricted to one project and exact origin.
+    // Only Preview may additionally use its own platform-generated deployment
+    // URL. Never trust a wildcard domain, request header or production URL here.
     // Origin / Sec-Fetch-Site checks above still apply. Explicit tokens win.
     return null;
   } else if (!["localhost", "127.0.0.1", "[::1]"].includes(actual.hostname))

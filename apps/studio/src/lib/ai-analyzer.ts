@@ -9,12 +9,14 @@ import {
   mergeGoogleMasks,
 } from "./magic-layers/google-analysis";
 import { aiPolicy, MODEL_CANDIDATES } from "./ai-policy";
+import { snapshotStage, type Stage } from "./magic-layers/diagnostics";
 export interface AnalysisProvenance {
   model: string;
   apiMode: string;
   generationCalls: number;
   segmentation: "combined" | "separate" | "failed";
   segmentationError?: string;
+  stages?: Stage[];
 }
 export interface AiAnalyzer {
   analyze(image: string, mime: string): Promise<Analysis>;
@@ -287,9 +289,10 @@ export class GeminiAnalyzer implements AiAnalyzer {
       });
     let analysis: Analysis;
     try {
-      analysis = normalizeGoogleAnalysis(
-        await request(LAYOUT_PROMPT, googleAnalysisSchema),
-      );
+      const raw = googleAnalysisSchema.parse(await request(LAYOUT_PROMPT, googleAnalysisSchema));
+      this.lastRun.stages = [snapshotStage("ai-raw", raw.regions)];
+      analysis = normalizeGoogleAnalysis(raw);
+      this.lastRun.stages.push(snapshotStage("normalized", analysis.regions));
     } catch (e) {
       throw diagnostic(e);
     }

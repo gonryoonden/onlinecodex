@@ -43,6 +43,7 @@ export const regionSchema = z
     text: z.string().max(10000).optional(),
     bbox: bboxSchema,
     polygon: polygonSchema.optional(),
+    edgeRefinement: z.boolean().optional(),
     maskPng: z
       .string()
       .max(2 * 1024 * 1024)
@@ -55,6 +56,8 @@ export const regionSchema = z
         fontSize: z.number().finite().positive().max(1000).optional(),
         bold: z.boolean().optional(),
         align: z.enum(["left", "center", "right"]).optional(),
+        lineHeight: z.number().finite().min(.5).max(5).optional(),
+        letterSpacing: z.number().finite().min(-100).max(100).optional(),
       })
       .optional(),
     zIndex: z.number().int().min(-100).max(1000),

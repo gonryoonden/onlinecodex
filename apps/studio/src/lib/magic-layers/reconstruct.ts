@@ -13,6 +13,10 @@ import { loadImage } from "../imports";
 import { fitSource } from "../image-layout";
 import { type Analysis, analysisSchema, toPixels, type Region } from "./schema";
 import type { Asset } from "../project";
+import { planLocalReplacement, applyLocalPatches } from "./preservation";
+import { refineFlatEdges } from "./flat-edge";
+import { flatBackgroundMask } from "./local-detect";
+import { snapshotStage, elementItems, assessInventory, unexplainedLosses, textContrast, type Diagnostic, type TraceItem } from "./diagnostics";
 export async function maskedCrop(source: HTMLImageElement, region: Region) {
   const [sx, sy, sw, sh] = toPixels(
     region.bbox,
@@ -72,8 +76,17 @@ export async function maskedCrop(source: HTMLImageElement, region: Region) {
       pixels.data[i] = pixels.data[i + 1] = pixels.data[i + 2] = 255;
     }
     ac.putImageData(pixels, 0, 0);
-    ctx.globalCompositeOperation = "destination-in";
-    ctx.drawImage(alpha, 0, 0);
+    const original = region.edgeRefinement ? ctx.getImageData(0,0,canvas.width,canvas.height) : undefined;
+    // Never apply flat-color estimation to textured or transparent perimeters.
+    if(original && flatBackgroundMask(original.data,canvas.width,canvas.height)) {
+      const maskValues=new Uint8Array(canvas.width*canvas.height);
+      for(let i=0;i<maskValues.length;i++)maskValues[i]=pixels.data[i*4+3];
+      original.data.set(refineFlatEdges(original.data,canvas.width,canvas.height,maskValues).data);
+      ctx.putImageData(original,0,0);
+    } else {
+      ctx.globalCompositeOperation = "destination-in";
+      ctx.drawImage(alpha, 0, 0);
+    }
   }
   return {
     dataUrl: canvas.toDataURL("image/png"),
@@ -103,8 +116,39 @@ export async function reconstructDesign(
   confirmedBackground: boolean,
   provider = "manual",
   repair?: RepairedSource,
+  options: { mode?: "preserve" | "redraw"; inputKind?: Diagnostic["inputKind"]; initial?: Partial<Diagnostic> } = {},
 ) {
-  const analysis = analysisSchema.parse(input);
+  const originalAnalysis = analysisSchema.parse(input);
+  let analysis = originalAnalysis;
+  const mode = options.mode ?? "preserve";
+  const hadRepair = Boolean(repair);
+  let retained: TraceItem[] = [];
+  let localPatchCount = 0;
+  let lowContrast = false;
+  if (mode === "preserve" && !repair) {
+    const original = await loadImage(source.dataUrl);
+    const canvas = document.createElement("canvas");
+    canvas.width = source.width; canvas.height = source.height;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    if (!ctx) throw new Error("Canvas 사용 불가");
+    ctx.drawImage(original, 0, 0);
+    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const plan = planLocalReplacement(pixels.data, source.width, source.height, analysis.regions, skip, confirmedBackground);
+    pixels.data.set(applyLocalPatches(pixels.data, source.width, plan.patches));
+    ctx.putImageData(pixels, 0, 0);
+    retained = plan.retained; localPatchCount = plan.patches.length;
+    lowContrast = plan.accepted.some(r => {
+      if (r.type !== "text") return false;
+      const patch = plan.patches.find(p => p.id === r.id)!;
+      return textContrast(r.style?.color ?? "#172C35", "#"+patch.color.map(c=>c.toString(16).padStart(2,"0")).join("")) < 3;
+    });
+    // Erasure and editable replacement are committed together. Rejected text is NEVER overlaid.
+    analysis = { ...analysis, regions: plan.accepted };
+    repair = { background: canvas.toDataURL("image/png"), objectSource: source.dataUrl,
+      width: source.width, height: source.height,
+      warning: localPatchCount ? "부분 편집: 확인한 단색 영역만 지웠습니다. 경계·숨은 배경은 추정이며 이동·삭제 후 검토하세요."
+        : "원본 유지: 배경 제거가 확인되지 않은 영역은 중복 글자 없이 원본에 남겼습니다." };
+  }
   const img = await loadImage(repair?.objectSource ?? source.dataUrl);
   if (repair && (repair.width !== source.width || repair.height !== source.height ||
       img.naturalWidth !== source.width || img.naturalHeight !== source.height))
@@ -122,14 +166,14 @@ export async function reconstructDesign(
     const restored = await loadImage(repair.background);
     if (restored.naturalWidth !== source.width || restored.naturalHeight !== source.height)
       throw new Error("복원 배경 크기가 원본과 다릅니다.");
-    const asset: Asset = { id: uid("asset"), name: "로컬 복원 배경 · 검토 필요",
+    const asset: Asset = { id: uid("asset"), name: mode === "preserve" && !hadRepair ? "원본 보존 배경 · 부분 편집" : "로컬 복원 배경 · 검토 필요",
       mime: "image/png", dataUrl: repair.background, width: source.width,
       height: source.height, original: false };
     assets.push(asset);
     elements.push(createImageElement(asset.dataUrl, asset.width, asset.height, {
       x: fit.x, y: fit.y, width: fit.width, height: fit.height, radius: 0,
       assetId: asset.id, locked: true, name: asset.name,
-      provenance: { source: source.id, method: "local-inpaint-approximation", review: true, backgroundWarning: true },
+      provenance: { source: source.id, method: hadRepair ? "local-inpaint-approximation" : "source-preserved-local-patches", review: true, backgroundWarning: hadRepair },
     }));
     warnings.push(repair.warning);
   } else if (unsafe) {
@@ -167,17 +211,18 @@ export async function reconstructDesign(
     );
   for (const r of [...analysis.regions].sort((a, b) => a.zIndex - b.zIndex)) {
     if (skip.includes(r.id)) continue;
+    if (unsafe && !repair) { retained.push({id:r.id,type:r.type,reason:"original-preserved"}); continue; }
     const [rx, ry, w, h] = toPixels(r.bbox, fit.width, fit.height);
     const x = fit.x + rx,
       y = fit.y + ry;
     const pixels = toPixels(r.bbox, source.width, source.height);
-    const provenance = {
+    const provenance: NonNullable<AnyElement["provenance"]> = {
       source: source.id,
       regionId: r.id,
-      method: `${provider}:${r.type === "image" ? (repair ? "local-repaired-crop" : r.maskPng ? "png-mask" : r.polygon ? "polygon-mask" : "approximate-crop") : "native-" + r.type}`,
+      method: `${provider}:${r.type === "image" ? (hadRepair ? "local-repaired-crop" : r.maskPng ? "png-mask" : r.polygon ? "polygon-mask" : "approximate-crop") : "native-" + r.type}`,
       sourcePixels: pixels,
       review: r.review || provider !== "manual",
-      backgroundWarning: unsafe,
+      backgroundWarning: mode === "preserve" && !hadRepair ? false : unsafe,
     };
     let el: AnyElement;
     if (r.type === "text")
@@ -192,6 +237,8 @@ export async function reconstructDesign(
         bold: r.style?.bold ?? false,
         fill: r.style?.color ?? "#172C35",
         align: r.style?.align ?? "left",
+        lineHeight: r.style?.lineHeight ?? 1.25,
+        letterSpacing: (r.style?.letterSpacing ?? 0) * fit.height / 1000,
       });
     else if (r.type === "shape") {
       el =
@@ -214,6 +261,13 @@ export async function reconstructDesign(
             });
     } else {
       const crop = await maskedCrop(img, r);
+      if(r.polygon) provenance.mask={bbox:r.bbox,polygon:r.polygon};
+      else if(r.maskPng) {
+        const maskImage=await loadImage(r.maskPng),maskId=uid("asset");
+        assets.push({id:maskId,name:`${r.id} · 원본 경계 데이터`,mime:"image/png",
+          width:maskImage.naturalWidth,height:maskImage.naturalHeight,dataUrl:r.maskPng,original:false});
+        provenance.mask={bbox:r.bbox,assetId:maskId,edgeRefinement:r.edgeRefinement};
+      }
       const a: Asset = {
         id: uid("asset"),
         name: `${r.id} · ${r.maskPng ? "PNG 마스크" : r.polygon ? "다각형 마스크" : "근사 크롭"}`,
@@ -245,5 +299,20 @@ export async function reconstructDesign(
     el.provenance = provenance;
     elements.push(el);
   }
-  return { page: { ...createPage(background), elements }, assets, warnings };
+  const warningCodes = assessInventory(originalAnalysis.regions, options.inputKind ?? "unknown");
+  if (mode === "redraw" && !hadRepair && !unsafe) warningCodes.push("GLOBAL_BACKGROUND_LOSS");
+  if (lowContrast || (mode === "redraw" && !unsafe && originalAnalysis.regions.some(r=>r.type==="text"&&textContrast(r.style?.color??"#172C35",analysis.background.from)<3))) warningCodes.push("LOW_TEXT_CONTRAST");
+  const stages = [...(options.initial?.stages ?? []), snapshotStage("reviewed", originalAnalysis.regions.filter(r=>!skip.includes(r.id)), originalAnalysis.regions.filter(r=>skip.includes(r.id)).map(r=>({id:r.id,type:r.type,reason:"user-excluded" as const}))),
+    snapshotStage("reconstructed",elementItems(elements),retained.filter(r=>r.reason!=="user-excluded"))];
+  for(let i=1;i<stages.length;i++)for(const id of unexplainedLosses(stages[i-1],stages[i]))warningCodes.push(`UNEXPLAINED_LOSS:${id}`);
+  const nativeCount = elements.filter(e=>e.provenance?.regionId).length;
+  const diagnostic: Diagnostic = {
+    version:1,runId:options.initial?.runId ?? uid("run"),sourceId:source.id,createdAt:new Date().toISOString(),
+    provider,build:options.initial?.build,transport:options.initial?.transport,
+    inputKind: options.inputKind ?? "unknown",mode:hadRepair?"local-repair":mode,
+    status: mode==="preserve"&&!hadRepair ? nativeCount?"partial-editable":"original-preserved" : "review-required",
+    background:hadRepair?"inpaint-approximation":mode==="preserve"?localPatchCount?"local-patches":"original":unsafe?"original":"redrawn",
+    stages,warnings:warningCodes,
+  };
+  return { page: { ...createPage(background), elements }, assets, warnings, diagnostic };
 }

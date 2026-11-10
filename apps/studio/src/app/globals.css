@@ -992,3 +992,41 @@ h3 {
     transition: none !important;
   }
 }
+.table-cell-editor { max-height: 380px; overflow: auto; }
+.table-cell-editor textarea { min-height: 50px; }
+.table-dialog-body { padding: 20px; overflow: auto; }
+.table-dialog-body textarea { width: 100%; min-height: 110px; }
+.table-source { position: relative; width: min(100%, 600px); margin: 12px auto; }
+.table-source img { display: block; width: 100%; height: auto; }
+.mobile-controls { display: none; }
+@media (max-width: 700px) {
+  .studio { min-height: 500px; }
+  .topbar { height: auto; min-height: 100px; padding: 8px; flex-wrap: wrap; gap: 6px; }
+  .brand { display: none; }
+  .project-heading { flex-basis: 100%; }
+  .project-heading input { width: 100%; font-size: 16px; }
+  .top-actions { width: 100%; justify-content: space-between; gap: 3px; }
+  .top-actions button { min-height: 38px; padding: 6px; font-size: 11px; }
+  .mobile-controls { display: flex; flex-shrink: 0; gap: 6px; padding: 6px 8px; background: white; }
+  .mobile-controls button { min-height: 40px; flex: 1; }
+  .workspace { position: relative; grid-template-columns: 48px minmax(0,1fr); }
+  .tool-rail { padding: 4px 0; overflow: auto; }
+  .tool-rail button { min-height: 55px; padding: 3px; }
+  .tools-panel, .inspector { display: none; position: absolute; top: 0; bottom: 0; z-index: 4; width: min(310px,calc(100% - 48px)); box-shadow: 0 4px 16px #18333b33; overflow-y: auto; background: #fff; }
+  .tools-panel.mobile-open, .inspector.mobile-open { display: block; }
+  .tools-panel { left: 48px; }
+  .inspector { right: 0; }
+  .canvas-toolbar { padding: 4px; gap: 3px; flex-wrap: wrap; }
+  .canvas-toolbar .separator { margin: 0 3px; }
+  .page-bar { padding: 5px; gap: 4px; flex-wrap: wrap; min-height: 60px; }
+  .page-tabs { max-width: 100%; }
+  .page-actions { margin-left: auto; }
+  .canvas-footer { padding: 5px; }
+  .canvas-footer > span { display: none; }
+  .modal-backdrop { padding: 8px; }
+  .magic-grid { grid-template-columns: 1fr; }
+  .library-grid { grid-template-columns: 1fr; }
+  .dialog-footer { flex-wrap: wrap; }
+  .dialog-footer button { white-space: normal; }
+  .table-dialog-body input, .table-dialog-body textarea, .properties input, .properties textarea { font-size: 16px; }
+}

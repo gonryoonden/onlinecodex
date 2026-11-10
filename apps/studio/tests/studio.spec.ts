@@ -16,7 +16,7 @@ async function snapshot(page: Page) {
   return page.evaluate(
     async () =>
       new Promise<RecordData>((resolve) => {
-        const req = indexedDB.open("personal-magic-studio", 1);
+        const req = indexedDB.open("personal-magic-studio");
         req.onsuccess = () => {
           const get = req.result
             .transaction("projects")
@@ -142,12 +142,12 @@ test("Korean editor: layers, persistence, two pages, ZIP in a fresh session, PNG
   await page.screenshot({ path: path.join(evidence, "editor-1366x768.png") });
   const zip = await output(
     page,
-    "프로젝트 ZIP · 재편집 백업",
+    "프로젝트 ZIP · 편집 원본",
     "browser-project.studio.zip",
   );
   await output(page, "PNG · 현재 페이지", "browser-current.png");
   await output(page, "PDF · 모든 페이지", "browser-two-pages.pdf");
-  await output(page, "PPTX · 편집 가능한 객체", "browser-two-pages.pptx");
+  await output(page, "PPTX · 편집 가능한 객체 (실험)", "browser-two-pages.pptx");
   const context = await browser.newContext({
     viewport: { width: 1366, height: 768 },
   });
@@ -242,6 +242,7 @@ test("Magic offline: manual ground truth, real transparent polygon, rebuilt back
       await dialog.getByRole("button", { name: /꼭짓점 확정/ }).click();
     }
   }
+  await dialog.getByLabel("원본 보존 방식").selectOption("redraw");
   await dialog.getByLabel("배경 시작 색").fill(analysis.background.from);
   await dialog.getByLabel(/원본 배경을 단색/).check();
   await dialog
@@ -258,6 +259,8 @@ test("Magic offline: manual ground truth, real transparent polygon, rebuilt back
   await dialog.screenshot({
     path: path.join(evidence, "magic-manual-review.png"),
   });
+  await dialog.getByRole("button", { name: "결과 미리보기", exact: true }).click();
+  await expect(dialog.getByAltText("레이어 변환 결과")).toBeVisible();
   await dialog
     .getByRole("button", { name: "검토한 레이어 생성", exact: true })
     .click();
@@ -298,11 +301,13 @@ test("Magic offline: manual ground truth, real transparent polygon, rebuilt back
   await dialog
     .getByRole("button", { name: "텍스트 영역", exact: true })
     .click();
+  await dialog.getByRole("button", { name: "결과 미리보기", exact: true }).click();
+  await expect(dialog.getByAltText("레이어 변환 결과")).toBeVisible();
   await dialog
     .getByRole("button", { name: "검토한 레이어 생성", exact: true })
     .click();
   await expect(
-    page.getByText(/배경 보정 필요 · 원본에 글자\/객체 잔상/),
+    page.getByText(/원본 유지 · 편집 객체 미생성/).first(),
   ).toBeVisible();
   expect(errors).toEqual([]);
 });
@@ -352,18 +357,20 @@ test("PDF pages import, malformed image rejected, real Korean original retained 
   await dialog.getByLabel("영역 Y", { exact: true }).fill("30");
   await dialog.getByLabel("영역 너비", { exact: true }).fill("720");
   await dialog.getByLabel("영역 높이", { exact: true }).fill("70");
+  await dialog.getByRole("button", { name: "결과 미리보기", exact: true }).click();
+  await expect(dialog.getByAltText("레이어 변환 결과")).toBeVisible();
   await dialog
     .getByRole("button", { name: "검토한 레이어 생성", exact: true })
     .click();
   await expect(
-    page.getByText(/배경 보정 필요 · 원본에 글자\/객체 잔상/),
+    page.getByText(/원본 유지 · 편집 객체 미생성/).first(),
   ).toBeVisible();
   await page.screenshot({
     path: path.join(evidence, "real-korean-manual-partial-warning.png"),
   });
   const partial = await snapshot(page);
   const bg = partial.pages[partial.pages.length - 1].elements.find(
-    (e) => e.provenance?.backgroundWarning,
+    (e) => e.provenance?.method === "source-preserved-local-patches",
   )!;
   const realAsset = Object.values(partial.assets).find((a) =>
     a.name.startsWith("2024년_"),
@@ -439,7 +446,7 @@ test("test-only storage quota failure exposes a usable manual ZIP backup", async
   ).toBeVisible();
   const file = await output(
     page,
-    "프로젝트 ZIP · 재편집 백업",
+    "프로젝트 ZIP · 편집 원본",
     "save-failure-backup.studio.zip",
   );
   const { default: JSZip } = await import("jszip");
@@ -490,7 +497,7 @@ test("a real Chromium process restart retains IndexedDB editing data", async () 
 });
 test('JPEG EXIF and WebP retain original bytes and aspect ratio through native image export',async({page})=>{
  await boot(page);await page.getByTestId('file-upload').setInputFiles(path.join(fixtures,'synthetic-exif.jpg'));await expect(page.getByTestId('layer-image')).toHaveCount(1);await page.getByTestId('file-upload').setInputFiles(path.join(fixtures,'synthetic.webp'));await expect(page.getByTestId('layer-image')).toHaveCount(2);const p=await snapshot(page);
- const jpg=Object.values(p.assets).find(a=>a.mime==='image/jpeg')!;const webp=Object.values(p.assets).find(a=>a.mime==='image/webp')!;expect(jpg).toMatchObject({width:640,height:960});expect(webp).toMatchObject({width:960,height:640});expect(Buffer.from(jpg.dataUrl.split(',')[1],'base64')).toEqual(fs.readFileSync(path.join(fixtures,'synthetic-exif.jpg')));const el=p.pages[0].elements.find(e=>e.assetId===jpg.id)!;expect(el.width/el.height).toBeCloseTo(640/960,6);await output(page,'PPTX · 편집 가능한 객체','formats-images.pptx');
+ const jpg=Object.values(p.assets).find(a=>a.mime==='image/jpeg')!;const webp=Object.values(p.assets).find(a=>a.mime==='image/webp')!;expect(jpg).toMatchObject({width:640,height:960});expect(webp).toMatchObject({width:960,height:640});expect(Buffer.from(jpg.dataUrl.split(',')[1],'base64')).toEqual(fs.readFileSync(path.join(fixtures,'synthetic-exif.jpg')));const el=p.pages[0].elements.find(e=>e.assetId===jpg.id)!;expect(el.width/el.height).toBeCloseTo(640/960,6);await output(page,'PPTX · 편집 가능한 객체 (실험)','formats-images.pptx');
 });
 
 test("Local repair and grayscale PNG mask: synthetic fixture, invalidation, persistence and native exports", async ({ page }) => {
@@ -540,7 +547,7 @@ test("Local repair and grayscale PNG mask: synthetic fixture, invalidation, pers
   fs.writeFileSync(path.join(evidence, "local-repair-project.json"), JSON.stringify(project));
   await output(page, "PNG · 현재 페이지", "local-repair.png");
   await output(page, "PDF · 모든 페이지", "local-repair.pdf");
-  await output(page, "PPTX · 편집 가능한 객체", "local-repair.pptx");
+  await output(page, "PPTX · 편집 가능한 객체 (실험)", "local-repair.pptx");
   await page.reload();
   await expect(page.getByRole("button", { name: "텍스트 추가", exact: true })).toBeVisible();
   expect((await snapshot(page)).pages.at(-1)!.elements).toEqual(rebuilt.elements);
@@ -576,7 +583,7 @@ test("Real Korean source: manual title repair, native text, preserved original a
   await page.screenshot({ path: path.join(evidence, "real-korean-title-moved.png") });
   await output(page, "PNG · 현재 페이지", "real-manual.png");
   await output(page, "PDF · 모든 페이지", "real-manual.pdf");
-  await output(page, "PPTX · 편집 가능한 객체", "real-manual.pptx");
+  await output(page, "PPTX · 편집 가능한 객체 (실험)", "real-manual.pptx");
   await page.reload();
   await expect(page.getByRole("button", { name: "텍스트 추가", exact: true })).toBeVisible();
   expect((await snapshot(page)).pages[1].elements).toEqual(project.pages[1].elements);
@@ -626,7 +633,9 @@ test("Recorded LIVE Gemini Korean result: real regions, CPU repair, independent 
   await page.screenshot({path:path.join(evidence,"live-result-after-edit.png")});
   await output(page,"PNG · 현재 페이지","live-result.png");
   await output(page,"PDF · 모든 페이지","live-result.pdf");
-  await output(page,"PPTX · 편집 가능한 객체","live-result.pptx");
+  await output(page,"PPTX · 편집 가능한 객체 (실험)","live-result.pptx");
+  await output(page,"PPTX 다운로드 — 발표용","live-presentation.pptx");
+  await output(page,"프로젝트 ZIP · 편집 원본","live-project.studio.zip");
   await page.reload();
   await expect(page.getByRole("button",{name:"텍스트 추가",exact:true})).toBeVisible();
   expect((await snapshot(page)).pages[1].elements).toEqual(project.pages[1].elements);

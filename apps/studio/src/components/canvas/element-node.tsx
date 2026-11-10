@@ -1,8 +1,10 @@
 "use client";
 
+import { barGeometry } from "@/lib/bar-chart";
 import Konva from "konva";
 import { memo, useCallback, useEffect, useRef } from "react";
 import {
+  Arrow,
   Ellipse,
   Group,
   Image as KonvaImage,
@@ -824,7 +826,7 @@ function ElementNodeImpl({
       };
       if (l.arrowStart || l.arrowEnd) {
         return (
-          <Line
+          <Arrow
             {...shared}
             fill={l.stroke}
             pointerLength={Math.max(10, l.strokeWidth * 2.4)}
@@ -868,6 +870,14 @@ function ElementNodeImpl({
       return <VideoNode el={vd} common={common} />;
     }
 
+    case "chart": return <Group {...common} width={el.width} height={el.height}>
+      <Rect width={el.width} height={el.height} fill="rgba(0,0,0,0)"/>
+      {barGeometry(el).map((b,i)=><Group key={i}>
+        <Rect x={b.x} y={b.y} width={b.width} height={b.height} fill={el.fill}/>
+        <Text x={b.labelX} y={Math.max(0,b.y-el.fontSize-4)} width={b.labelW} text={b.value} align="center" fontFamily={el.fontFamily} fontSize={el.fontSize} fill={el.textColor}/>
+        <Text x={b.labelX} y={b.labelY} width={b.labelW} height={b.labelH} text={b.label} align="center" fontFamily={el.fontFamily} fontSize={el.fontSize} fill={el.textColor} ellipsis/>
+      </Group>)}
+    </Group>;
     case "table": {
       const tb = el as TableElement;
       return (

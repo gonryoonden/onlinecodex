@@ -16,6 +16,8 @@ export async function POST(req: Request) {
   busy = true;
   try {
     const p = projectSchema.parse(await boundedJson(req, 100 * 1024 * 1024));
+    if(p.pages.some(page=>page.elements.some(e=>(e.type==="table"||e.type==="chart"))))
+      return Response.json({error:"표·차트가 있는 프로젝트는 편집기의 브라우저 PPTX 출력을 사용하세요."},{status:422});
     const script = path.resolve(process.cwd(), "../../scripts/studio-pptx.py");
     const result = await new Promise<Buffer>((resolve, reject) => {
       const child = spawn(

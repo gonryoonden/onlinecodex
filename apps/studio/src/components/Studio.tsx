@@ -36,6 +36,10 @@ import {
   createTextElement,
   createShapeElement,
   createLineElement,
+  createTableElement,
+  createPage,
+  type TableElement,
+  uid,
 } from "@/lib/types";
 import {
   newProject,
@@ -43,12 +47,18 @@ import {
   type Project,
   type Asset,
 } from "@/lib/project";
-import { listProjects, saveProject } from "@/lib/storage";
+import { listProjects, saveProject, listRecoveryProjects } from "@/lib/storage";
 import { imageAsset, pdfImporter, placeAsset } from "@/lib/imports";
 import { download, projectZip, importZip, fromDataURL } from "@/lib/archive";
 import { exportPDF, renderPage } from "@/lib/render";
 import StudioCanvas from "./canvas/StudioCanvas";
 import MagicDialog from "./MagicDialog";
+import MaskEditor from "./MaskEditor";
+import ProblemDialog from "./ProblemDialog";
+import { recordBetaEvent,errorCode } from "@/lib/beta-diagnostics";
+import TableDialog from "./TableDialog";
+import ChartDialog from "./ChartDialog";
+import { withLiveStages, statusLabels, warningLabels, snapshotStage, elementItems } from "@/lib/magic-layers/diagnostics";
 function message(e: unknown) {
   return e instanceof Error ? e.message : "작업을 완료하지 못했습니다.";
 }
@@ -63,10 +73,21 @@ export default function Studio() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [library, setLibrary] = useState<Project[] | null>(null);
+  const [recoveryMode,setRecoveryMode]=useState(false);
+  const [problemOpen,setProblemOpen]=useState(false);
+  const [uploaded,setUploaded]=useState<Asset|null>(null);
+  const [damagedRecords, setDamagedRecords] = useState<unknown[]>([]);
+  const [chartTable,setChartTable]=useState<TableElement|null>(null);
+  const [tableSource,setTableSource]=useState<Asset|null>(null);
   const [magic, setMagic] = useState<Asset | null>(null);
+  const [maskEdit,setMaskEdit]=useState<{id:string;current:Asset;base:Asset}|null>(null);
   const [exportOpen, setExportOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [exportScale, setExportScale] = useState(1);
+  const [exportProgress, setExportProgress] = useState("");
+  const exportAbort = useRef<AbortController | null>(null);
   const [tool, setTool] = useState("elements");
+  const [mobilePanel,setMobilePanel]=useState<"tools"|"layers"|null>(null);
   const file = useRef<HTMLInputElement>(null);
   const archive = useRef<HTMLInputElement>(null);
   const [size, setSize] = useState({ width: 960, height: 640 });
@@ -87,6 +108,7 @@ export default function Studio() {
       width: store.width,
       height: store.height,
       pages: livePages,
+      diagnostics: Object.fromEntries(Object.entries(meta.current.diagnostics ?? {}).filter(([pid])=>livePages.some(p=>p.id===pid))),
       sources: Object.fromEntries(
         Object.entries(meta.current.sources).filter(([pid]) =>
           livePages.some((p) => p.id === pid),
@@ -98,13 +120,17 @@ export default function Studio() {
   const save = useCallback(async () => {
     try {
       const p = capture();
+      for (const [pid, trace] of Object.entries(p.diagnostics ?? {})) {
+        p.diagnostics![pid] = withLiveStages(trace, p.pages.find(page=>page.id===pid)!.elements, "saved");
+      }
       const pages = useEditorStore.getState().pages;
       setStatus("저장 중…");
       const pending = queue.current.catch(() => {}).then(() => saveProject(p));
       queue.current = pending;
       await pending;
+      recordBetaEvent({feature:'storage',stage:'save',outcome:'ok',code:'none'});
       if (meta.current?.id === p.id) {
-        meta.current = { ...meta.current, updatedAt: p.updatedAt };
+        meta.current = { ...meta.current, updatedAt: p.updatedAt, diagnostics: {...meta.current.diagnostics,...p.diagnostics} };
         const live = useEditorStore.getState();
         if (
           live.pages === pages &&
@@ -117,12 +143,14 @@ export default function Studio() {
         }
       }
     } catch (e) {
+      recordBetaEvent({feature:'storage',stage:'save',outcome:'error',code:errorCode(e)});
       setStatus("저장 실패 · ZIP 백업 필요");
       setError(message(e));
       throw e;
     }
   }, [capture]);
   function open(p: Project) {
+    setUploaded(null);
     meta.current = p;
     setProjectMeta(p);
     useEditorStore.getState().loadDesign(p);
@@ -136,7 +164,7 @@ export default function Studio() {
   }
   useEffect(() => {
     let active = true;
-    void listProjects()
+    void listProjects(records=>{if(active)setDamagedRecords(records);})
       .then(async (items) => {
         if (!active) return;
         let id: string | null = null;
@@ -213,7 +241,7 @@ export default function Studio() {
         void save().catch(() => {});
         return;
       }
-      if (editing || magic || library) return;
+      if (editing || magic || library || tableSource || chartTable || maskEdit || problemOpen) return;
       if (e.ctrlKey || e.metaKey) {
         if (e.key.toLowerCase() === "z") {
           e.preventDefault();
@@ -258,7 +286,7 @@ export default function Studio() {
     }
     window.addEventListener("keydown", key);
     return () => window.removeEventListener("keydown", key);
-  }, [magic, library, save]);
+  }, [magic, library, tableSource, chartTable, maskEdit, problemOpen, save]);
   function addAsset(a: Asset) {
     if (meta.current) {
       meta.current = {
@@ -297,6 +325,7 @@ export default function Studio() {
           meta.current.sources[s.pages[s.currentPage].id] = a.id;
         s.addElement(placeAsset(a, s.width, s.height));
         setNotice(`${a.name} · 원본 ${a.width} × ${a.height}px 보존`);
+        setUploaded(a);recordBetaEvent({feature:'upload',stage:'input',outcome:'ok',code:'none'});
       }
     } catch (e) {
       setError(message(e));
@@ -332,21 +361,39 @@ export default function Studio() {
     }
   }
   async function showLibrary() {
+    setRecoveryMode(false);
     try {
       await save();
-      setLibrary(await listProjects());
+      setLibrary(await listProjects(setDamagedRecords));
     } catch (e) {
       setError(message(e));
     }
   }
+  async function restoreCheckpoint(p:Project){
+    try{await save();const recovered={...p,id:uid('project'),name:`${p.name} (정상 복구본)`.slice(0,120),updatedAt:new Date().toISOString()};await saveProject(recovered);open(recovered);setRecoveryMode(false);setNotice('이전 정상 저장본을 새 프로젝트로 열었습니다. 기존 기록은 유지됩니다.');recordBetaEvent({feature:'storage',stage:'restore',outcome:'ok',code:'none'});}
+    catch(e){setError(message(e));recordBetaEvent({feature:'storage',stage:'restore',outcome:'error',code:errorCode(e)});}
+  }
   async function output(format: string) {
+    if(format==='support'){setExportOpen(false);setProblemOpen(true);return;}
+    if(format==='recovery'){setExportOpen(false);try{const records=await listRecoveryProjects();setRecoveryMode(true);setLibrary(records);}catch(e){setError(message(e));}return;}
     setBusy(true);
     setError("");
     setExportOpen(false);
+    const controller = new AbortController();
+    exportAbort.current = controller;
+    setExportProgress(["png", "pdf", "pptx"].includes(format) ? "출력 준비 중" : "");
+    const options = { scale: exportScale, signal: controller.signal,
+      onProgress: (done: number, total: number) => setExportProgress(`출력 ${done}/${total}페이지`) };
     let browserPptx = false;
     try {
       const p = capture();
-      if (format === "zip")
+      if (format === "diagnostic") {
+        for (const [pid, trace] of Object.entries(p.diagnostics ?? {})) {
+          p.diagnostics![pid]=withLiveStages(trace,p.pages.find(page=>page.id===pid)!.elements,"visible-export");
+        }
+        download(new Blob([JSON.stringify({version:1,pages:p.diagnostics??{}},null,2)],{type:"application/json"}),"studio-diagnostics.json");
+      }
+      else if (format === "zip")
         download(await projectZip(p), `${p.name}.studio.zip`);
       else if (format === "png")
         download(
@@ -354,7 +401,7 @@ export default function Studio() {
             [
               new Uint8Array(
                 fromDataURL(
-                  await renderPage(p.pages[s.currentPage], p.width, p.height),
+                  await renderPage(p.pages[s.currentPage], p.width, p.height, options),
                 ),
               ).buffer,
             ],
@@ -362,17 +409,30 @@ export default function Studio() {
           ),
           `${p.name}-${s.currentPage + 1}.png`,
         );
-      else if (format === "pdf") download(await exportPDF(p), `${p.name}.pdf`);
+      else if (format === "pdf") download(await exportPDF(p, options), `${p.name}.pdf`);
+      else if (format === "pptx") {
+        const { exportPresentationPPTX } = await import("@/lib/presentation-pptx");
+        download(await exportPresentationPPTX(p, { ...options, scale: Math.max(2, exportScale) }), `${p.name}-발표용.pptx`);
+      }
       else {
         const { exportNativePPTX } = await import("@/lib/native-pptx");
         const browserDownload = async () => {
-          download(await exportNativePPTX(p), `${p.name}.pptx`);
+          const blob = await exportNativePPTX(p);
+          const { verifyNativePptx } = await import("@/lib/pptx-diagnostics");
+          const reports = await verifyNativePptx(blob,p);
+          if (meta.current?.id===p.id) {
+            meta.current.diagnostics={...meta.current.diagnostics,...reports};
+            // Persist actual export evidence after successful OOXML verification.
+            try { await save(); }
+            catch { setError("PPTX 파일은 생성됐지만 진단 기록 저장에 실패했습니다. 진단 JSON과 ZIP을 내려받으세요."); }
+          }
+          download(blob, `${p.name}.pptx`);
           browserPptx = true;
         };
         // Hosted Next.js cannot spawn our Python fidelity worker. Large JSON
         // payloads also fail before the API receives them (HTTP 413).
         const local = ["127.0.0.1", "localhost"].includes(window.location.hostname);
-        if (!local) {
+        if (!local || Object.keys(p.diagnostics ?? {}).length > 0 || p.pages.some(page=>page.elements.some(e=>(e.type==="table"||e.type==="chart")))) {
           await browserDownload();
         } else {
           const payload = JSON.stringify(p);
@@ -396,12 +456,16 @@ export default function Studio() {
           }
         }
       }
-      setNotice(browserPptx
-        ? "PPTX를 브라우저에서 생성했습니다. 글자·도형·이미지는 독립 객체이며, 원본과 완전히 같은 재현을 보장하지 않습니다."
+      recordBetaEvent({feature:'export',stage:'output',outcome:'ok',code:'none',method:format==='png'||format==='pdf'||format==='pptx'||format==='zip'?format:'other'});
+      setNotice(format === "pptx" ? "발표용 PPTX를 생성했습니다. 각 슬라이드는 완성된 페이지 이미지입니다. 수정은 Studio에서 프로젝트 ZIP을 열어 진행하세요." : browserPptx
+        ? "PPTX를 브라우저에서 생성했습니다. 글자·도형·이미지·표·차트는 독립 객체이며, 원본과 완전히 같은 재현을 보장하지 않습니다."
         : `${format.toUpperCase()} 파일을 생성했습니다.`);
     } catch (e) {
+      recordBetaEvent({feature:'export',stage:'output',outcome:controller.signal.aborted?'cancelled':'error',code:errorCode(e)});
       setError(message(e));
     } finally {
+      exportAbort.current = null;
+      setExportProgress("");
       setBusy(false);
     }
   }
@@ -438,6 +502,15 @@ export default function Studio() {
       useEditorStore.getState().pages[useEditorStore.getState().currentPage];
     if (meta.current?.sources[originalId])
       meta.current.sources[next.id] = meta.current.sources[originalId];
+    const originalTrace = meta.current?.diagnostics?.[originalId];
+    if (originalTrace && meta.current) {
+      const copy=structuredClone(originalTrace);
+      copy.runId=crypto.randomUUID();delete copy.pptxVerifiedAt;
+      copy.stages=copy.stages.filter(stage=>!["reconstructed","saved","visible-export","pptx"].includes(stage.name));
+      copy.stages.push(snapshotStage("reconstructed",elementItems(next.elements),originalTrace.stages.find(stage=>stage.name==="reconstructed")?.omitted));
+      meta.current.diagnostics={...meta.current.diagnostics,[next.id]:copy};
+      setProjectMeta({...meta.current});
+    }
   }
   if (!ready)
     return (
@@ -505,11 +578,20 @@ export default function Studio() {
             </button>
             {exportOpen && (
               <div className="export-menu">
+                <p>수정은 Studio에서 · 편집 원본은 프로젝트 ZIP</p>
+                <label>출력 해상도 <select aria-label="출력 해상도" value={exportScale} onChange={e=>setExportScale(Number(e.target.value))}>
+                  <option value={1}>원본 1배 · 발표용 PPTX 2배</option><option value={2}>고해상도 2배</option><option value={3}>고해상도 3배</option>
+                </select></label>
+                <small>큰 문서는 메모리 한도 내에서 해상도를 조정합니다.</small>
                 {[
                   ["png", "PNG · 현재 페이지"],
                   ["pdf", "PDF · 모든 페이지"],
-                  ["pptx", "PPTX · 편집 가능한 객체"],
-                  ["zip", "프로젝트 ZIP · 재편집 백업"],
+                  ["pptx", "PPTX 다운로드 — 발표용"],
+                  ["pptx-native", "PPTX · 편집 가능한 객체 (실험)"],
+                  ["zip", "프로젝트 ZIP · 편집 원본"],
+                  ["diagnostic", "변환 진단 JSON · 이미지·본문 제외"],
+                  ["support", "문제 진단 ZIP · 로컬 기록"],
+                  ["recovery", "이전 정상 저장본 복구"],
                 ].map(([f, label]) => (
                   <button key={f} onClick={() => void output(f)}>
                     {label}
@@ -518,8 +600,25 @@ export default function Studio() {
               </div>
             )}
           </div>
+          {busy && exportProgress && <div role="status">{exportProgress || "출력 준비 중"}<button onClick={()=>exportAbort.current?.abort(new Error("출력을 취소했습니다. 편집 내용은 유지됩니다."))}>출력 취소</button></div>}
         </div>
       </header>
+      {damagedRecords.length>0 && <div role="alert" className="notice">
+        저장된 프로젝트 {damagedRecords.length}개의 데이터 오류가 있습니다. 원본 기록은 삭제하지 않았으며 정상 프로젝트는 계속 편집할 수 있습니다.
+        <button onClick={()=>{
+          try {download(new Blob([JSON.stringify({format:"studio-recovery-1",records:damagedRecords},null,2)],{type:"application/json"}),"studio-recovery.json");}
+          catch {setError("손상 기록을 JSON으로 보존하지 못했습니다. 기존 브라우저 데이터를 유지해 주세요.");}
+        }}>손상 기록 보존 다운로드</button>
+      </div>}
+      {uploaded&&<div className="notice" role="status">업로드한 원본이 저장 대상에 추가됐습니다. 필요한 부분부터 편집하세요.
+        <button onClick={()=>setMagic(uploaded)}>분석·영역 교정 열기</button><button onClick={()=>setUploaded(null)}>수동 편집 계속</button>
+      </div>}
+      {page.elements.length===0&&<div className="notice"><button onClick={()=>file.current?.click()}>이미지로 시작</button><span> PNG/JPG를 올린 뒤 자동 처리 또는 직접 영역 지정을 선택하세요. 편집 원본은 프로젝트 ZIP으로 보관합니다.</span></div>}
+      <div className="mobile-controls" aria-label="모바일 편집 패널">
+        <button aria-expanded={mobilePanel==="tools"} aria-controls="studio-tools" onClick={()=>setMobilePanel(mobilePanel==="tools"?null:"tools")}>도구 패널</button>
+        <button aria-expanded={mobilePanel==="layers"} aria-controls="studio-inspector" onClick={()=>setMobilePanel(mobilePanel==="layers"?null:"layers")}>레이어 패널</button>
+        <button onClick={()=>setMobilePanel(null)}>캔버스 보기</button>
+      </div>
       <div className="workspace">
         <nav className="tool-rail" aria-label="디자인 도구">
           {[
@@ -531,7 +630,7 @@ export default function Studio() {
             <button
               key={t.id}
               className={tool === t.id ? "active" : ""}
-              onClick={() => setTool(t.id)}
+              onClick={() => {setTool(t.id);setMobilePanel("tools");}}
             >
               <t.icon size={22} />
               <span>{t.label}</span>
@@ -559,7 +658,7 @@ export default function Studio() {
             LOCAL
           </div>
         </nav>
-        <aside className="tools-panel">
+        <aside id="studio-tools" className={`tools-panel ${mobilePanel==="tools"?"mobile-open":""}`}>
           <div className="panel-heading">
             <span className="eyebrow">DESIGN TOOLS</span>
             <h2>
@@ -652,6 +751,8 @@ export default function Studio() {
                 <Type size={17} />
                 텍스트 추가
               </button>
+              <button className="wide" onClick={()=>s.addElement(createTableElement({name:"표",fontFamily:"Noto Sans KR",width:420,header:["항목","값","메모"]}))}>빈 표 추가</button>
+              <button className="wide" disabled={!source||s.pages.length>=30} onClick={()=>source&&setTableSource(source)}>이미지에서 표 구조 찾기</button>
               <div className="tip-card">
                 <ScanLine size={25} />
                 <h3>한 장에서, 여러 레이어로</h3>
@@ -936,6 +1037,17 @@ export default function Studio() {
               </button>
             </div>
           )}
+          {projectMeta?.diagnostics?.[page.id] && <div className="notice" role="status">
+            <strong>{statusLabels[projectMeta.diagnostics[page.id].status]}</strong>
+            {projectMeta.diagnostics[page.id].warnings.map(w=><p key={w}>{warningLabels[w]??w}</p>)}
+            <button onClick={()=>{
+              const originalId=meta.current?.sources[page.id];
+              const original=originalId&&meta.current?.assets[originalId];
+              if(original){const restored={...page,id:crypto.randomUUID(),elements:[placeAsset(original,s.width,s.height)]};
+                if(s.pages.length>=30){setError("최대 30페이지입니다.");return;}
+                meta.current!.sources[restored.id]=original.id;s.appendPage(restored);setNotice("원본을 새 페이지에 복원했습니다. 되돌리기로 취소할 수 있습니다.");}
+            }}>원본을 새 페이지로 복원</button>
+          </div>}
           {notice && (
             <div className="banner" role="status">
               {notice}
@@ -1028,7 +1140,7 @@ export default function Studio() {
             </div>
           </footer>
         </section>
-        <aside className="inspector">
+        <aside id="studio-inspector" className={`inspector ${mobilePanel==="layers"?"mobile-open":""}`}>
           <div className="inspector-top">
             <h2>
               <Layers size={16} />
@@ -1243,6 +1355,20 @@ export default function Studio() {
                           />
                         </label>
                       </div>
+                      <div className="field-grid">
+                        <label>행간<input aria-label="텍스트 행간" type="number" min="0.5" max="5" step="0.05" value={el.lineHeight} onChange={e=>patch({lineHeight:Number(e.target.value)})}/></label>
+                        <label>자간 (px)<input aria-label="텍스트 자간" type="number" min="-100" max="100" step="0.1" value={el.letterSpacing} onChange={e=>patch({letterSpacing:Number(e.target.value)})}/></label>
+                      </div>
+                      <button onClick={async()=>{
+                        try {
+                          const {fitTextToBox}=await import("@/lib/text-layout");
+                          const fontSize=await fitTextToBox(el);
+                          const current=useEditorStore.getState().pages[s.currentPage]?.elements.find(e=>e.id===el.id);
+                          if(current!==el) throw new Error("텍스트가 변경되었습니다. 상자 맞춤을 다시 실행하세요.");
+                          s.updateElements([el.id],{fontSize});
+                          setNotice(fontSize<8?"작은 글자가 됐습니다. 상자를 늘려 가독성을 확인하세요.":"문자와 줄바꿈을 유지하며 글자 크기를 상자에 맞췄습니다.");
+                        } catch(e){setError(message(e));}
+                      }}>텍스트 상자에 맞춤</button>
                       <div className="button-row">
                         <button
                           aria-pressed={el.bold}
@@ -1276,6 +1402,20 @@ export default function Studio() {
                       </div>
                     </>
                   )}
+                  {el.type === "chart" && <>
+                    <p className="muted">검토한 단일 계열 · 네이티브 막대 차트</p>
+                    {el.data.map((d,i)=><div key={i}><label>항목 {i+1}<input aria-label={`차트 항목 ${i+1}`} value={d.label} maxLength={120} onChange={e=>{if(e.target.value)s.updateElements([el.id],{data:el.data.map((v,j)=>j===i?{...v,label:e.target.value}:v)});}}/></label>
+                      <label>값 {i+1}<input aria-label={`차트 값 ${i+1}`} type="number" min="0" max="1000000000" step="any" value={d.value} onChange={e=>{const value=e.target.valueAsNumber;if(Number.isFinite(value)&&value>=0&&value<=1e9)s.updateElements([el.id],{data:el.data.map((v,j)=>j===i?{...v,value}:v)});}}/></label></div>)}
+                  </>}
+                  {el.type === "table" && <>
+                    <p className="muted">표 {el.rows}행 × {el.cols}열 · 셀을 직접 수정합니다. 긴 글자는 높이·너비를 늘려 확인하세요.</p>
+                    <label>표 글자 크기<input aria-label="표 글자 크기" type="number" min="1" max="1000" value={el.fontSize} onChange={e=>s.updateElements([el.id],{fontSize:Number(e.target.value)})}/></label>
+                    <button onClick={()=>setChartTable(structuredClone(el))}>이 표로 막대 차트 만들기</button>
+                    <div className="table-cell-editor">{el.cells.map((cell,i)=><label key={i}>{Math.floor(i/el.cols)+1}행 {i%el.cols+1}열
+                      <textarea id={`table-cell-${i}`} aria-label={`표 ${Math.floor(i/el.cols)+1}행 ${i%el.cols+1}열`} value={cell.text} maxLength={2000}
+                        onChange={e=>s.updateElements([el.id],{cells:el.cells.map((v,j)=>j===i?{...v,text:e.target.value}:v)})}/>
+                    </label>)}</div>
+                  </>}
                   {(el.type === "rect" || el.type === "ellipse") && (
                     <>
                       <label>
@@ -1380,6 +1520,10 @@ export default function Studio() {
                     </button>
                   ))}
                 </div>
+                {el.type==='image'&&el.assetId&&<button disabled={el.locked} onClick={()=>{
+                  const current=meta.current?.assets[el.assetId!],base=meta.current?.assets[el.provenance?.alphaEdit?.baseAssetId??el.assetId!];
+                  if(current&&base)setMaskEdit({id:el.id,current,base});
+                }}>이미지 경계 보정</button>}
                 {el.provenance && (
                   <p className="muted provenance">
                     출처: {el.provenance.source}
@@ -1425,23 +1569,50 @@ export default function Studio() {
           e.target.value = "";
         }}
       />
+      {chartTable&&<ChartDialog table={chartTable} onClose={()=>setChartTable(null)} onApply={chart=>{
+        if(useEditorStore.getState().pages.length>=30)throw new Error("최대 30페이지입니다.");
+        const p=createPage();chart.width=Math.max(32,s.width*.8);chart.height=Math.max(32,s.height*.65);chart.x=s.width*.1;chart.y=s.height*.15;p.elements=[chart];s.appendPage(p);
+        setNotice("검토한 숫자로 새 막대 차트를 만들었습니다. 레이어를 선택해 항목과 값을 수정하세요.");
+      }}/>}
+      {tableSource&&<TableDialog source={tableSource} width={s.width} height={s.height} onClose={()=>setTableSource(null)} onApply={p=>{
+        if(useEditorStore.getState().pages.length>=30)throw new Error("최대 30페이지입니다.");
+        if(meta.current)meta.current.sources[p.id]=tableSource.id;
+        s.appendPage(p);setNotice("검토한 표를 새 페이지에 추가했습니다. 셀별 편집·크기 조정 후 출력하세요. 원본은 이전 페이지에 보존됩니다.");
+      }}/>}
+      {problemOpen&&<ProblemDialog getProject={capture} onClose={()=>setProblemOpen(false)}/>}
+      {maskEdit&&<MaskEditor current={maskEdit.current} base={maskEdit.base} onClose={()=>setMaskEdit(null)} onApply={dataUrl=>{
+        const live=useEditorStore.getState(),target=live.pages.flatMap(p=>p.elements).find(e=>e.id===maskEdit.id);
+        if(!target||target.type!=='image'||target.locked||target.assetId!==maskEdit.current.id)throw new Error('이미지 상태가 바뀌었습니다. 다시 선택해 주세요.');
+        const asset:Asset={...maskEdit.current,id:uid('asset'),name:'수동 경계 보정',mime:'image/png',dataUrl,original:false};
+        const provenance={...(target.provenance??{source:maskEdit.base.id,method:'manual-alpha',review:true}),alphaEdit:{baseAssetId:maskEdit.base.id},review:true};
+        const changes={assetId:asset.id,src:dataUrl,provenance};
+        const project=capture();
+        validateProject({...project,assets:{...project.assets,[asset.id]:asset},pages:project.pages.map(p=>({...p,elements:p.elements.map(e=>e.id===target.id?{...e,...changes}:e)}))});
+        addAsset(asset);live.updateElements([target.id],changes);
+        recordBetaEvent({feature:'correction',stage:'apply',outcome:'ok',code:'none',correction:'alpha',method:'manual'});
+        setNotice('경계를 보정했습니다. 원본과 배경은 보존되며 되돌리기와 프로젝트 ZIP을 지원합니다.');
+      }}/>}
       {magic && (
         <MagicDialog
           source={magic}
           width={s.width}
           height={s.height}
           onClose={() => setMagic(null)}
-          onApply={(newPage, assets, original) => {
+          onApply={(newPage, assets, original, diagnostic) => {
             if (useEditorStore.getState().pages.length >= 30)
               throw new Error(
                 "최대 30페이지입니다. 새 프로젝트에서 레이어를 생성하세요.",
               );
             assets.forEach(addAsset);
             addAsset(original);
-            if (meta.current) meta.current.sources[newPage.id] = original.id;
+            if (meta.current) {
+              meta.current.sources[newPage.id] = original.id;
+              meta.current.diagnostics={...meta.current.diagnostics,[newPage.id]:diagnostic};
+              setProjectMeta({...meta.current});
+            }
             s.appendPage(newPage);
             setNotice(
-              "새 페이지에 편집 레이어를 추가했습니다. 원본과 비교해 확인하세요.",
+              `${statusLabels[diagnostic.status]} · 새 페이지에 추가했습니다.`,
             );
           }}
         />
@@ -1466,6 +1637,8 @@ export default function Studio() {
                 <X size={20} />
               </button>
             </header>
+            {recoveryMode&&<p className="notice">이전 정상 저장본을 선택하면 새 프로젝트로 복원합니다. 기존 기록은 유지되며, 동일 내용의 반복 저장은 복구본을 교체하지 않습니다.</p>}
+            {recoveryMode&&library.length===0&&<p>복구본이 없습니다. 첫 저장 이후 내용이 바뀌어 정상 저장되면 직전 상태를 보관합니다.</p>}
             <div className="library-grid">
               <button className="new-project" onClick={() => void create()}>
                 <Plus size={28} />
@@ -1478,7 +1651,7 @@ export default function Studio() {
                 <button
                   className="project-card"
                   key={p.id}
-                  onClick={() => open(p)}
+                  onClick={() => recoveryMode?void restoreCheckpoint(p):open(p)}
                 >
                   <Layers size={30} />
                   <strong>{p.name}</strong>

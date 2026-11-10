@@ -20,6 +20,7 @@ export function toDataURL(bytes: Uint8Array, mime: string) {
 export async function projectZip(input: Project) {
   const p = structuredClone(validateProject(input));
   const zip = new JSZip();
+  zip.file("README.txt", "Personal Magic Studio 편집 원본\nStudio의 프로젝트 ZIP 가져오기로 여세요.\nproject.json과 assets/를 함께 보존하세요. PNG/PDF/발표용 PPTX는 출력본이며 원본 편집 데이터가 아닙니다.\n");
   const assets: Record<string, unknown> = {};
   for (const [id, a] of Object.entries(p.assets)) {
     const bytes = fromDataURL(a.dataUrl);
@@ -95,6 +96,9 @@ export function download(blob: Blob, name: string) {
   const a = document.createElement("a");
   a.href = url;
   a.download = name;
+  // Attached anchors and a longer lifetime support mobile download hand-off.
+  document.body.appendChild(a);
   a.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
 }
