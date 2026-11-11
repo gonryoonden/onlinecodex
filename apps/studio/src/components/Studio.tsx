@@ -356,7 +356,7 @@ export default function Studio() {
             }
             s.appendPage(newPage);
             setNotice(
-              `${statusLabels[diagnostic.status]} · 새 페이지에 추가했습니다.`,
+              diagnostic.candidates?.some(c=>c.decision)?`자동 처리 결과 · 편집 가능 ${diagnostic.candidates.filter(c=>c.decision==='ready'||c.decision==='warning').length}개 · 예외 후보를 보존했습니다.`:`${statusLabels[diagnostic.status]} · 새 페이지에 추가했습니다.`,
             );
           };
   async function importArchive(f: File) {
@@ -1082,6 +1082,7 @@ export default function Studio() {
               </button>
             </div>
           )}
+          {page.magicReview&&!projectMeta?.diagnostics?.[page.id]&&<button onClick={()=>source&&setAutomatic(source)}>저장된 분석으로 자동 편집 재개</button>}
           {projectMeta?.diagnostics?.[page.id]?.candidates?.some(c=>c.decision)&&(()=>{
             const candidates=projectMeta.diagnostics![page.id].candidates!,n=summarize(candidates);
             return <div className="banner" data-testid="auto-summary"><span>편집 가능 {n.ready+n.warning}개 · 품질 경고 {n.warning}개 · 상세 검토 {n.review}개 · 분리 실패 {n.failed}개</span><button onClick={()=>setExceptions(!exceptions)}>문제 객체 상세 검토</button><button onClick={()=>source&&setAutomatic(source)}>저장된 분석으로 다시 처리</button>

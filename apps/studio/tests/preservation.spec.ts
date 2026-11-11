@@ -26,7 +26,7 @@ test("P0: residual pixels, atomic Korean replacement, image deletion, diagnostic
     {id:"diamond",type:"image",bbox:[625,437.5,225,375],polygon:[[737.5,458.333],[837.5,625],[737.5,791.667],[637.5,625]],zIndex:1,review:true}];
   const stages=["ai-raw","normalized"].map(name=>({name,objects:regions.map(r=>({id:r.id,type:r.type})),omitted:[],counts:{text:1,shape:0,image:1}}));
   await page.route("**/api/ai/magic-layers",r=>r.fulfill({json:{analysis:{background:{kind:"solid",from:"#ffffff",to:"#ffffff",angle:0},regions,notes:"TEST ONLY synthetic regions"},provenance:{model:"fixture-NOT-LIVE"},trace:{build:"fixture",stages}}}));
-  await page.getByRole("button",{name:/AI 레이어 분해/}).click();const dialog=page.getByRole("dialog");
+  await page.getByRole("button",{name:"고급 수동 교정",exact:true}).click();const dialog=page.getByRole("dialog");
   await dialog.getByLabel("외부 Gemini API로 이미지 전송에 동의합니다.").check();await dialog.getByRole("button",{name:"AI 레이어 분해",exact:true}).click();
   await expect(dialog.locator(".region-row")).toHaveCount(2);await dialog.getByLabel("입력 이미지 종류").selectOption("illustrated");
   await dialog.getByRole("button",{name:"결과 미리보기",exact:true}).click();await expect(dialog.getByAltText("레이어 변환 결과")).toBeVisible();

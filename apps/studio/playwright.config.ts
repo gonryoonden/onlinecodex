@@ -6,6 +6,7 @@ export default defineConfig({
   timeout: 120000,
   expect: { timeout: 15000 },
   use: {
+    storageState: process.env.STUDIO_PREVIEW_STORAGE,
     baseURL: process.env.STUDIO_TEST_BASE_URL || "http://127.0.0.1:3000",
     actionTimeout: 15000,
     viewport: { width: 1366, height: 768 },
@@ -14,10 +15,10 @@ export default defineConfig({
       args: ["--no-sandbox", "--disable-dev-shm-usage"],
     },
     screenshot: "only-on-failure",
-    trace: "retain-on-failure",
+    trace: process.env.STUDIO_PREVIEW_STORAGE ? "off" : "retain-on-failure",
   },
   reporter: [["list"], ["html", { open: "never" }]],
-  webServer: {
+  webServer: process.env.STUDIO_PREVIEW_STORAGE ? undefined : {
     command: "npm run dev",
     url: process.env.STUDIO_TEST_BASE_URL || "http://127.0.0.1:3000",
     reuseExistingServer: true,

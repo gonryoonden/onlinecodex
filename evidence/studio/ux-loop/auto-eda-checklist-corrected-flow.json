@@ -1,0 +1,55 @@
+{
+  "nativeTextEdited": true,
+  "manualNativeShapeEdited": true,
+  "PNG": true,
+  "PDF": true,
+  "nativePPTX": true,
+  "ZIPRestoredInNewBrowser": true,
+  "outsideRepairPixelsChanged": 0,
+  "manualMaskCorrection": true,
+  "explicitManualFlatBackground": false,
+  "candidates": [
+    {
+      "id": "title",
+      "type": "text",
+      "status": "generated",
+      "decision": "ready",
+      "elementId": "text_mwbs23cqrv6dny",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          707,
+          112,
+          1067,
+          78
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "icon",
+      "type": "image",
+      "status": "generated",
+      "decision": "ready",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs23cqq82lis",
+      "maskOrigin": "manual",
+      "extraction": "model-mask",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          213,
+          433,
+          116,
+          186
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    }
+  ]
+}

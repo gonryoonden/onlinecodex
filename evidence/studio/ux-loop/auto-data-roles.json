@@ -1,0 +1,44 @@
+{
+  "source": "data-roles",
+  "sourceKind": "JPEG",
+  "analysis": "human box inventory",
+  "freshGeminiCalls": 0,
+  "manualImageMasks": 0,
+  "analysisCalls": 1,
+  "elapsedMs": 9008,
+  "perObjectApprovals": 0,
+  "manualSAMClicks": 0,
+  "layerCreateApprovals": 0,
+  "total": 2,
+  "ready": 0,
+  "warning": 0,
+  "review": 2,
+  "failed": 0,
+  "masks": 1,
+  "inventory": [
+    {
+      "id": "title",
+      "type": "text",
+      "status": "correction-needed",
+      "decision": "review",
+      "elementId": "text_mwbs2kxx97ffgs",
+      "reason": "inpaint-nonsmooth-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "icon",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0.0013024730808746795
+      },
+      "elementId": "image_mwbs2kxx89mzi4",
+      "reason": "inpaint-nonsmooth-boundary",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    }
+  ]
+}

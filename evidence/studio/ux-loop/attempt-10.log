@@ -1,0 +1,123 @@
+COMMAND ["python", "-m", "unittest", "discover", "-s", "tests/loop", "-v"]
+test_budget (test_runner.Runner.test_budget) ... ok
+test_prerequisite_and_failed_gate (test_runner.Runner.test_prerequisite_and_failed_gate) ... ok
+test_recovery_does_not_refund_attempt (test_runner.Runner.test_recovery_does_not_refund_attempt) ... ok
+test_restricted_preview_never_completes_a_blocked_product_gate (test_runner.Runner.test_restricted_preview_never_completes_a_blocked_product_gate) ... ok
+test_same_cause (test_runner.Runner.test_same_cause) ... ok
+test_separate_budget_preserves_old (test_ux_runner.UXRunner.test_separate_budget_preserves_old) ... ok
+test_three_failures_halt_and_interruption_consumes (test_ux_runner.UXRunner.test_three_failures_halt_and_interruption_consumes) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.001s
+
+OK
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "test"]
+
+> personal-magic-studio@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/pms-beta/apps/studio
+
+
+ Test Files  18 passed | 1 skipped (19)
+      Tests  119 passed | 1 skipped (120)
+   Start at  07:06:30
+   Duration  4.97s (transform 390ms, setup 0ms, import 1.48s, tests 1.31s, environment 1ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "run", "lint"]
+
+> personal-magic-studio@0.1.0 lint
+> eslint src tests
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npx", "playwright", "test", "tests/auto-edit.spec.ts", "tests/auto-cancel.spec.ts", "tests/independent-layers.spec.ts", "tests/preservation.spec.ts", "tests/sam-cancel.spec.ts"]
+[WebServer] (node:34026) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:34039) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:34051) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 9 tests using 1 worker
+
+(node:34082) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/auto-cancel.spec.ts:4:5 › automatic cancellation and retry reuse completed real Gemini response (23.8s)
+  ✓  2 tests/auto-edit.spec.ts:27:63 › automatic edit flow korean: no object approvals or manual model actions (57.5s)
+  ✓  3 tests/auto-edit.spec.ts:27:63 › automatic edit flow eda-checklist: no object approvals or manual model actions (23.2s)
+  ✓  4 tests/auto-edit.spec.ts:27:63 › automatic edit flow data-roles: no object approvals or manual model actions (49.5s)
+  ✓  5 tests/independent-layers.spec.ts:46:5 › recorded REAL Gemini 46-candidate response: failed repair preserves native candidates and no opaque image successes (50.7s)
+  ✓  6 tests/independent-layers.spec.ts:83:54 › actual infographic eda-checklist: explicit human corrections, alpha, native edits, ZIP and exports (NOT Gemini recognition) (15.9s)
+  ✓  7 tests/independent-layers.spec.ts:83:54 › actual infographic data-roles: explicit human corrections, alpha, native edits, ZIP and exports (NOT Gemini recognition) (38.8s)
+  ✓  8 tests/preservation.spec.ts:15:5 › P0: residual pixels, atomic Korean replacement, image deletion, diagnostics and restore (11.2s)
+  ✓  9 tests/sam-cancel.spec.ts:4:5 › REAL cached Gemini candidates survive model cancellation and a subsequent retry (20.1s)
+
+  9 passed (4.9m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["python", "scripts/evaluation/verify-ux-artifacts.py"]
+[{"source": "auto-korean", "pdfPages": 2, "pptxOpened": true, "allXmlParsed": true, "allInternalRelationshipsResolved": true, "libreOfficeRendered": true, "renderedPdfPages": 2, "nativeEditedTextSurvived": true}, {"source": "auto-eda-checklist-corrected", "pdfPages": 3, "pptxOpened": true, "allXmlParsed": true, "allInternalRelationshipsResolved": true, "libreOfficeRendered": true, "renderedPdfPages": 3, "nativeEditedTextSurvived": true}, {"source": "auto-data-roles-corrected", "pdfPages": 3, "pptxOpened": true, "allXmlParsed": true, "allInternalRelationshipsResolved": true, "libreOfficeRendered": true, "renderedPdfPages": 3, "nativeEditedTextSurvived": true}]
+COMMAND ["npm", "run", "build"]
+
+> personal-magic-studio@0.1.0 build
+> next build
+
+▲ Next.js 16.4.3 (Turbopack)
+✓ Running next.config.ts took 46ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.1s
+  Running TypeScript ...
+  Finished TypeScript in 6.1s ...
+  Collecting page data using 2 workers ...
+  Generating static pages using 2 workers (0/6) ...
+  Generating static pages using 2 workers (1/6) 
+  Generating static pages using 2 workers (2/6) 
+  Generating static pages using 2 workers (4/6) 
+✓ Generating static pages using 2 workers (6/6) in 379ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/ai/connection
+├ ƒ /api/ai/magic-layers
+├ ƒ /api/capabilities
+├ ƒ /api/export/pptx
+└ ƒ /api/magic-layers/background
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

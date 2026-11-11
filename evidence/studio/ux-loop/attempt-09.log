@@ -1,0 +1,154 @@
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "test"]
+
+> personal-magic-studio@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/pms-beta/apps/studio
+
+
+ Test Files  18 passed | 1 skipped (19)
+      Tests  119 passed | 1 skipped (120)
+   Start at  07:03:32
+   Duration  4.92s (transform 414ms, setup 0ms, import 1.58s, tests 1.23s, environment 2ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "run", "lint"]
+
+> personal-magic-studio@0.1.0 lint
+> eslint src tests
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npx", "playwright", "test", "tests/auto-edit.spec.ts"]
+[WebServer] (node:33306) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:33319) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:33331) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:33349) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/auto-edit.spec.ts:27:63 › automatic edit flow korean: no object approvals or manual model actions (56.7s)
+  ✘  2 tests/auto-edit.spec.ts:27:63 › automatic edit flow eda-checklist: no object approvals or manual model actions (12.2s)
+(node:33580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/auto-edit.spec.ts:27:63 › automatic edit flow data-roles: no object approvals or manual model actions (14.1s)
+
+
+  1) tests/auto-edit.spec.ts:27:63 › automatic edit flow eda-checklist: no object approvals or manual model actions 
+
+    Error: locator.click: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+        at Object.INPUT (<anonymous>:3337:25)
+        at getImplicitAriaRole (<anonymous>:3435:106)
+        at computeAriaRole (<anonymous>:3554:12)
+        at getAriaRole (<anonymous>:3547:16)
+        at match (<anonymous>:5471:9)
+        at query (<anonymous>:5515:7)
+        at queryRole (<anonymous>:5521:3)
+        at Object.queryAll (<anonymous>:5534:16)
+        at InjectedScript._queryEngineAll (<anonymous>:7241:49)
+        at InjectedScript.querySelectorAll (<anonymous>:7228:30)
+    Call log:
+      - waiting for getByRole('dialog').getByRole('button', { name: '단색 내부 배경 제거 (수동)', exact: true })
+
+        at Object.INPUT (<anonymous>:3337:25)
+        at getImplicitAriaRole (<anonymous>:3435:106)
+        at computeAriaRole (<anonymous>:3554:12)
+        at getAriaRole (<anonymous>:3547:16)
+        at match (<anonymous>:5471:9)
+        at query (<anonymous>:5515:7)
+        at queryRole (<anonymous>:5521:3)
+        at Object.queryAll (<anonymous>:5534:16)
+        at InjectedScript._queryEngineAll (<anonymous>:7241:49)
+        at InjectedScript.querySelectorAll (<anonymous>:7228:30)
+        at /workspace/pms-beta/apps/studio/tests/auto-edit.spec.ts:62:81
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-083b9-als-or-manual-model-actions/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/auto-edit-automatic-edit-f-083b9-als-or-manual-model-actions/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-083b9-als-or-manual-model-actions/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/auto-edit-automatic-edit-f-083b9-als-or-manual-model-actions/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/auto-edit.spec.ts:27:63 › automatic edit flow data-roles: no object approvals or manual model actions 
+
+    Error: locator.fill: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+        at Object.INPUT (<anonymous>:3337:25)
+        at getImplicitAriaRole (<anonymous>:3435:106)
+        at computeAriaRole (<anonymous>:3554:12)
+        at getAriaRole (<anonymous>:3547:16)
+        at match (<anonymous>:5471:9)
+        at query (<anonymous>:5515:7)
+        at queryRole (<anonymous>:5521:3)
+        at Object.queryAll (<anonymous>:5534:16)
+        at InjectedScript._queryEngineAll (<anonymous>:7241:49)
+        at InjectedScript.querySelectorAll (<anonymous>:7228:30)
+    Call log:
+      - waiting for getByRole('dialog').getByLabel('수동 배경색')
+
+        at Object.INPUT (<anonymous>:3337:25)
+        at getImplicitAriaRole (<anonymous>:3435:106)
+        at computeAriaRole (<anonymous>:3554:12)
+        at getAriaRole (<anonymous>:3547:16)
+        at match (<anonymous>:5471:9)
+        at query (<anonymous>:5515:7)
+        at queryRole (<anonymous>:5521:3)
+        at Object.queryAll (<anonymous>:5534:16)
+        at InjectedScript._queryEngineAll (<anonymous>:7241:49)
+        at InjectedScript.querySelectorAll (<anonymous>:7228:30)
+        at /workspace/pms-beta/apps/studio/tests/auto-edit.spec.ts:64:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-0672a-als-or-manual-model-actions/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/auto-edit-automatic-edit-f-0672a-als-or-manual-model-actions/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-0672a-als-or-manual-model-actions/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/auto-edit-automatic-edit-f-0672a-als-or-manual-model-actions/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/auto-edit.spec.ts:27:63 › automatic edit flow eda-checklist: no object approvals or manual model actions 
+    tests/auto-edit.spec.ts:27:63 › automatic edit flow data-roles: no object approvals or manual model actions 
+  1 passed (1.5m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

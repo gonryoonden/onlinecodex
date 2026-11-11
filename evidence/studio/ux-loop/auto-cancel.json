@@ -1,0 +1,9 @@
+{
+  "cancelled": "actual model encoder",
+  "retried": true,
+  "analysisRequests": 1,
+  "freshGeminiCalls": 0,
+  "candidates": 46,
+  "duplicateConsentClicks": 0,
+  "perObjectApprovals": 0
+}

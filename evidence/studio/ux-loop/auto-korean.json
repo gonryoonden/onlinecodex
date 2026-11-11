@@ -1,0 +1,809 @@
+{
+  "source": "korean",
+  "sourceKind": "PNG",
+  "analysis": "stored actual Gemini",
+  "freshGeminiCalls": 0,
+  "manualImageMasks": 0,
+  "analysisCalls": 1,
+  "elapsedMs": 16519,
+  "perObjectApprovals": 0,
+  "manualSAMClicks": 0,
+  "layerCreateApprovals": 0,
+  "total": 46,
+  "ready": 12,
+  "warning": 8,
+  "review": 25,
+  "failed": 1,
+  "masks": 26,
+  "inventory": [
+    {
+      "id": "r0",
+      "type": "text",
+      "status": "generated",
+      "decision": "warning",
+      "evidence": {
+        "directionalDisagreementP95": 4.1523047158884765,
+        "chromaP95": 4.4941864013671875,
+        "gradientP99": 0,
+        "shading": false
+      },
+      "elementId": "text_mwbs0z4q66tcw0",
+      "reason": "measured-native-background-approximation",
+      "extraction": "native",
+      "repair": {
+        "method": "directional-inpaint",
+        "rect": [
+          430,
+          59,
+          1889,
+          87
+        ],
+        "radius": 6
+      },
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r1",
+      "type": "text",
+      "status": "generated",
+      "decision": "ready",
+      "elementId": "text_mwbs0z4q7fpstu",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          638,
+          165,
+          1473,
+          90
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "r2",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0.0006934207686408494
+      },
+      "elementId": "image_mwbs0z55aeq11q",
+      "reason": "inpaint-neighbor-conflict",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r3",
+      "type": "text",
+      "status": "correction-needed",
+      "decision": "review",
+      "parentId": "r2",
+      "elementId": "text_mwbs0z56bhp0fx",
+      "reason": "inpaint-neighbor-conflict",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r4",
+      "type": "image",
+      "status": "generated",
+      "decision": "ready",
+      "evidence": {
+        "interiorBackgroundFraction": 0.00003374502260916515
+      },
+      "elementId": "image_mwbs0z58e7q0hp",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          663,
+          343,
+          528,
+          69
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "r5",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0.03431051424828038
+      },
+      "elementId": "image_mwbs0z59h45uvg",
+      "reason": "interior-background-in-mask",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r6",
+      "type": "image",
+      "status": "generated",
+      "decision": "warning",
+      "evidence": {
+        "interiorBackgroundFraction": 0.006701030927835051,
+        "directionalDisagreementP95": 4.821154194493431,
+        "chromaP95": 4.1756757370968955,
+        "gradientP99": 0,
+        "shading": false
+      },
+      "elementId": "image_mwbs0z5aky0njt",
+      "reason": "measured-smooth-background-approximation",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "repair": {
+        "method": "directional-inpaint",
+        "rect": [
+          651,
+          460,
+          92,
+          60
+        ],
+        "radius": 6
+      },
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r7",
+      "type": "text",
+      "status": "generated",
+      "decision": "ready",
+      "elementId": "text_mwbs0z5als7znm",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          767,
+          474,
+          505,
+          35
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "r9",
+      "type": "text",
+      "status": "correction-needed",
+      "decision": "review",
+      "elementId": "text_mwbs0z5amaubyo",
+      "reason": "inpaint-nonsmooth-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r10",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs0z5bpk5tr5",
+      "reason": "inpaint-nonsmooth-boundary",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r11",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0.22238478419897587
+      },
+      "elementId": "image_mwbs0z5cs7oyke",
+      "reason": "interior-background-in-mask",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r12",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0.061556603773584906
+      },
+      "elementId": "image_mwbs0z5dvun8lt",
+      "reason": "interior-background-in-mask",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r13",
+      "type": "text",
+      "status": "correction-needed",
+      "decision": "review",
+      "elementId": "text_mwbs0z5dwo5ryk",
+      "reason": "inpaint-nonsmooth-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r14",
+      "type": "text",
+      "status": "correction-needed",
+      "decision": "review",
+      "elementId": "text_mwbs0z5dxs7qnb",
+      "reason": "inpaint-nonsmooth-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r15",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs0z5e104cgwv",
+      "reason": "inpaint-nonsmooth-boundary",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r16",
+      "type": "image",
+      "status": "generated",
+      "decision": "warning",
+      "evidence": {
+        "interiorBackgroundFraction": 0,
+        "directionalDisagreementP95": 33.70794021984764,
+        "chromaP95": 5.518210080590592,
+        "gradientP99": 8,
+        "shading": true
+      },
+      "elementId": "image_mwbs0z5f13wxsvm",
+      "reason": "measured-smooth-shading-approximation",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "repair": {
+        "method": "directional-inpaint",
+        "rect": [
+          814,
+          769,
+          75,
+          135
+        ],
+        "radius": 6
+      },
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r17",
+      "type": "text",
+      "status": "generated",
+      "decision": "ready",
+      "elementId": "text_mwbs0z5f14its5z",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          919,
+          772,
+          372,
+          69
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "r18",
+      "type": "text",
+      "status": "correction-needed",
+      "decision": "review",
+      "elementId": "text_mwbs0z5f1543uqn",
+      "reason": "inpaint-nonsmooth-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r19",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs0z5g18zwjln",
+      "reason": "inpaint-nonsmooth-boundary",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r20",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0.0010227700920493084
+      },
+      "elementId": "image_mwbs0z5i1bk8v1c",
+      "reason": "inpaint-nonsmooth-boundary",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r21",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs0z5m1ep58he",
+      "reason": "inpaint-nonsmooth-boundary",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r22",
+      "type": "image",
+      "status": "separation-failed",
+      "decision": "failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r23",
+      "type": "image",
+      "status": "generated",
+      "decision": "ready",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs0z5o1hbscw1",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          1459,
+          765,
+          275,
+          143
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "r24",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs0z5y1kqnhaw",
+      "reason": "inpaint-neighbor-conflict",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r25",
+      "type": "text",
+      "status": "correction-needed",
+      "decision": "review",
+      "parentId": "r24",
+      "elementId": "text_mwbs0z5y1lrhb42",
+      "reason": "inpaint-neighbor-conflict",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r26",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0.044174894217207335
+      },
+      "elementId": "image_mwbs0z601ohqr6x",
+      "reason": "interior-background-in-mask",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r27",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs0z681r7v7qu",
+      "reason": "inpaint-nonsmooth-boundary",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r28",
+      "type": "image",
+      "status": "generated",
+      "decision": "warning",
+      "evidence": {
+        "interiorBackgroundFraction": 0,
+        "directionalDisagreementP95": 14.781824285333812,
+        "chromaP95": 4.320556959465364,
+        "gradientP99": 5,
+        "shading": true
+      },
+      "elementId": "image_mwbs0z6e1uwcthc",
+      "reason": "measured-smooth-shading-approximation",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "repair": {
+        "method": "directional-inpaint",
+        "rect": [
+          2592,
+          527,
+          52,
+          353
+        ],
+        "radius": 6
+      },
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r65",
+      "type": "text",
+      "status": "generated",
+      "decision": "ready",
+      "elementId": "text_mwbs0z6e1v90kb0",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          1585,
+          961,
+          213,
+          84
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "r66",
+      "type": "text",
+      "status": "generated",
+      "decision": "ready",
+      "elementId": "text_mwbs0z6e1wtzmwz",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          2218,
+          961,
+          325,
+          84
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "r29",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs0z6q1zrkr38",
+      "reason": "inpaint-neighbor-conflict",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r30",
+      "type": "text",
+      "status": "correction-needed",
+      "decision": "review",
+      "parentId": "r29",
+      "elementId": "text_mwbs0z6q203bp1o",
+      "reason": "inpaint-neighbor-conflict",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r31",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0.05443159922928709
+      },
+      "elementId": "image_mwbs0z6t23fyky8",
+      "reason": "interior-background-in-mask",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r32",
+      "type": "image",
+      "status": "generated",
+      "decision": "warning",
+      "evidence": {
+        "interiorBackgroundFraction": 0.00009828009828009828,
+        "directionalDisagreementP95": 12.353843156681478,
+        "chromaP95": 6.280043017956615,
+        "gradientP99": 4,
+        "shading": true
+      },
+      "elementId": "image_mwbs0z6u26gi1g6",
+      "reason": "measured-smooth-shading-approximation",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "repair": {
+        "method": "directional-inpaint",
+        "rect": [
+          728,
+          1013,
+          196,
+          181
+        ],
+        "radius": 6
+      },
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r33",
+      "type": "image",
+      "status": "generated",
+      "decision": "warning",
+      "evidence": {
+        "interiorBackgroundFraction": 0,
+        "directionalDisagreementP95": 32.99812198952199,
+        "chromaP95": 6.906741672092011,
+        "gradientP99": 5,
+        "shading": true
+      },
+      "elementId": "image_mwbs0z6w29mntmw",
+      "reason": "measured-smooth-shading-approximation",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "repair": {
+        "method": "directional-inpaint",
+        "rect": [
+          734,
+          1217,
+          184,
+          221
+        ],
+        "radius": 6
+      },
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r34",
+      "type": "image",
+      "status": "generated",
+      "decision": "warning",
+      "evidence": {
+        "interiorBackgroundFraction": 0.017958123185083295,
+        "directionalDisagreementP95": 25.238779381860667,
+        "chromaP95": 5.025449382725043,
+        "gradientP99": 6,
+        "shading": true
+      },
+      "elementId": "image_mwbs0z6y2csh6uu",
+      "reason": "measured-smooth-shading-approximation",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "repair": {
+        "method": "directional-inpaint",
+        "rect": [
+          931,
+          1346,
+          347,
+          95
+        ],
+        "radius": 6
+      },
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r35",
+      "type": "text",
+      "status": "generated",
+      "decision": "ready",
+      "elementId": "text_mwbs0z6y2dexfe6",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          960,
+          1079,
+          276,
+          81
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "r36",
+      "type": "text",
+      "status": "generated",
+      "decision": "ready",
+      "elementId": "text_mwbs0z6y2e2469t",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          960,
+          1239,
+          246,
+          76
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "r37",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0.000030432136335970785
+      },
+      "elementId": "image_mwbs0z702hz2fk7",
+      "reason": "inpaint-nonsmooth-boundary",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r38",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs0z712kqivw9",
+      "reason": "inpaint-nonsmooth-boundary",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r39",
+      "type": "text",
+      "status": "generated",
+      "decision": "ready",
+      "elementId": "text_mwbs0z712ly74f5",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          1667,
+          1122,
+          260,
+          78
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "r40",
+      "type": "text",
+      "status": "generated",
+      "decision": "ready",
+      "elementId": "text_mwbs0z712mo6giy",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          1664,
+          1324,
+          277,
+          77
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    },
+    {
+      "id": "r41",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs0z732p18x7j",
+      "reason": "inpaint-nonsmooth-boundary",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r42",
+      "type": "text",
+      "status": "generated",
+      "decision": "warning",
+      "evidence": {
+        "directionalDisagreementP95": 4.898782348632807,
+        "chromaP95": 4.3902435302734375,
+        "gradientP99": 0,
+        "shading": false
+      },
+      "elementId": "text_mwbs0z732qilyhw",
+      "reason": "measured-native-background-approximation",
+      "extraction": "native",
+      "repair": {
+        "method": "directional-inpaint",
+        "rect": [
+          2285,
+          1143,
+          329,
+          46
+        ],
+        "radius": 6
+      },
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r43",
+      "type": "image",
+      "status": "correction-needed",
+      "decision": "review",
+      "evidence": {
+        "interiorBackgroundFraction": 0
+      },
+      "elementId": "image_mwbs0z742tn4d4w",
+      "reason": "inpaint-nonsmooth-boundary",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r44",
+      "type": "text",
+      "status": "generated",
+      "decision": "ready",
+      "elementId": "text_mwbs0z742um6q32",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          2292,
+          1324,
+          301,
+          77
+        ],
+        "radius": 0
+      },
+      "background": "local-flat"
+    }
+  ]
+}

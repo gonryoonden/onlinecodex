@@ -33,6 +33,15 @@ export async function restoreCandidateBackground(source:Asset,regions:Region[],s
   const patch=plan.patches.find(p=>p.id===o.id);
   if(!patch){
    const region=regions.find(r=>r.id===o.id)!;
+   if(reviewed==='automatic'&&el.type!=='image'){
+    try{
+     const [rx,ry,rw,rh]=toPixels(region.bbox,source.width,source.height),x=Math.floor(rx),y=Math.floor(ry),w=Math.ceil(rx+rw)-x,h=Math.ceil(ry+rh)-y;
+     if(w*h>500000)throw new Error('inpaint-area-limit');
+     const proof=inpaintSupport(pixels.data,source.width,source.height,{alpha:new Uint8Array(w*h).fill(255),x,y,width:w,height:h},regions.filter(r=>r.id!==o.id).map(r=>toPixels(r.bbox,source.width,source.height)),Math.max(2,Math.min(12,Math.round(source.width/500))),true);
+     o.evidence={directionalDisagreementP95:proof.disagreementP95,chromaP95:proof.chromaP95,gradientP99:Number.isFinite(proof.gradientP99)?proof.gradientP99:0,shading:proof.shading};
+     repaired++;inpainted++;el.visible=true;el.name=el.name?.replace('배경 보정 대기 · ','');o.status='generated';o.background='inpaint-review';o.repair={method:'directional-inpaint',rect:proof.rect,radius:proof.radius};o.reason='measured-native-background-approximation';continue;
+    }catch(e){o.reason=e instanceof Error?e.message:'native-inpaint-failed';continue;}
+   }
    if(reviewed&&el.type==='image'&&region.maskOrigin==='segmenter'&&region.segmentation){
     try{
      const crop=await loadImage(el.src),c=document.createElement('canvas');c.width=crop.naturalWidth;c.height=crop.naturalHeight;const cx=c.getContext('2d')!;cx.drawImage(crop,0,0);const rgba=cx.getImageData(0,0,c.width,c.height).data,alpha=new Uint8Array(c.width*c.height);for(let i=0;i<alpha.length;i++)alpha[i]=rgba[i*4+3];

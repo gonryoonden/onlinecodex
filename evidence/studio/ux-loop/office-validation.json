@@ -1,0 +1,32 @@
+[
+  {
+    "source": "auto-korean",
+    "pdfPages": 2,
+    "pptxOpened": true,
+    "allXmlParsed": true,
+    "allInternalRelationshipsResolved": true,
+    "libreOfficeRendered": true,
+    "renderedPdfPages": 2,
+    "nativeEditedTextSurvived": true
+  },
+  {
+    "source": "auto-eda-checklist-corrected",
+    "pdfPages": 3,
+    "pptxOpened": true,
+    "allXmlParsed": true,
+    "allInternalRelationshipsResolved": true,
+    "libreOfficeRendered": true,
+    "renderedPdfPages": 3,
+    "nativeEditedTextSurvived": true
+  },
+  {
+    "source": "auto-data-roles-corrected",
+    "pdfPages": 3,
+    "pptxOpened": true,
+    "allXmlParsed": true,
+    "allInternalRelationshipsResolved": true,
+    "libreOfficeRendered": true,
+    "renderedPdfPages": 3,
+    "nativeEditedTextSurvived": true
+  }
+]

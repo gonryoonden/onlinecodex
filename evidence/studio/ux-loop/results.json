@@ -1,0 +1,96 @@
+{
+  "realSources": 3,
+  "freshGeminiCalls": 0,
+  "rows": [
+    {
+      "source": "korean",
+      "sourceKind": "PNG",
+      "analysis": "stored actual Gemini",
+      "freshGeminiCalls": 0,
+      "manualImageMasks": 0,
+      "analysisCalls": 1,
+      "elapsedMs": 16519,
+      "perObjectApprovals": 0,
+      "manualSAMClicks": 0,
+      "layerCreateApprovals": 0,
+      "total": 46,
+      "ready": 12,
+      "warning": 8,
+      "review": 25,
+      "failed": 1,
+      "masks": 26
+    },
+    {
+      "source": "eda-checklist",
+      "sourceKind": "PNG",
+      "analysis": "human box inventory",
+      "freshGeminiCalls": 0,
+      "manualImageMasks": 0,
+      "analysisCalls": 1,
+      "elapsedMs": 8058,
+      "perObjectApprovals": 0,
+      "manualSAMClicks": 0,
+      "layerCreateApprovals": 0,
+      "total": 2,
+      "ready": 1,
+      "warning": 0,
+      "review": 1,
+      "failed": 0,
+      "masks": 1
+    },
+    {
+      "source": "data-roles",
+      "sourceKind": "JPEG",
+      "analysis": "human box inventory",
+      "freshGeminiCalls": 0,
+      "manualImageMasks": 0,
+      "analysisCalls": 1,
+      "elapsedMs": 9008,
+      "perObjectApprovals": 0,
+      "manualSAMClicks": 0,
+      "layerCreateApprovals": 0,
+      "total": 2,
+      "ready": 0,
+      "warning": 0,
+      "review": 2,
+      "failed": 0,
+      "masks": 1
+    }
+  ],
+  "semanticAnnotations": [
+    {
+      "id": "r11",
+      "problem": "paperclip interior hole filled",
+      "decision": "review",
+      "caught": true
+    },
+    {
+      "id": "r12",
+      "problem": "two clips and their interior background merged",
+      "decision": "review",
+      "caught": true
+    },
+    {
+      "id": "r26",
+      "problem": "glasses lenses filled with source background",
+      "decision": "review",
+      "caught": true
+    },
+    {
+      "id": "r31",
+      "problem": "scissors handle holes filled",
+      "decision": "review",
+      "caught": true
+    }
+  ],
+  "annotatedSeriousMissed": 0,
+  "unnecessaryReviewCount": "unmeasured: full background truth unavailable",
+  "unannotatedSeriousErrors": "unknown",
+  "residual": {
+    "region": "r33 helmet source-pixel rectangle",
+    "originalYellowPixels": 18235,
+    "repairedYellowPixels": 0,
+    "metricScope": "body-color ghost check, not hidden texture ground truth"
+  },
+  "priorStateSHA256": "9d1e5ccce23239242f3b4bfb80d7109aa20d61fe72810be22963ddb30ccd8df5"
+}

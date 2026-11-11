@@ -27,7 +27,7 @@ export async function reconstructIndependent(input:Analysis,source:Asset,width:n
  catch {repairFailed=true;}
  if(reviewed==='automatic')for(const o of outcomes){
   if(o.status==='merged'||o.status==='user-excluded')continue;
-  o.decision=o.status==='separation-failed'?'failed':o.status==='generated'?(o.background==='inpaint-review'?'warning':'ready'):'review';
+  o.decision=o.status==='separation-failed'?'failed':o.status==='generated'?(o.background==='inpaint-review'||o.background==='manual-flat'?'warning':'ready'):'review';
   const el=elements.find(e=>e.id===o.elementId);
   if(el?.provenance){el.provenance.review=o.decision==='review';el.provenance.backgroundWarning=o.decision==='review';}
  }

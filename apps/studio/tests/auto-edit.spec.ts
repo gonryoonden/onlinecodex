@@ -13,7 +13,7 @@ async function verifyFlow(page:Page,browser:Browser,p:Project,index:number,name:
  await page.getByRole('button',{name:'요소',exact:true}).click();await page.getByRole('button',{name:'사각형',exact:true}).click();await page.getByLabel('도형 색',{exact:true}).fill('#55aa22');
  await output(page,'PNG · 현재 페이지',`${name}.png`);await output(page,'PDF · 모든 페이지',`${name}.pdf`);await output(page,'PPTX · 편집 가능한 객체 (실험)',`${name}.pptx`);await output(page,'프로젝트 ZIP · 편집 원본',`${name}.studio.zip`);const current=await saved(page);
  expect(fs.readFileSync(path.join(out,`${name}.pdf`)).subarray(0,5).toString()).toBe('%PDF-');const pptx=await JSZip.loadAsync(fs.readFileSync(path.join(out,`${name}.pptx`))),xml=await pptx.file(`ppt/slides/slide${index+1}.xml`)!.async('string');expect(xml).toContain('Automatic alpha');expect(xml).toContain('55AA22');expect(xml).toContain('<p:pic>');
- const context=await browser.newContext(),second=await context.newPage();await second.goto('/');await second.getByRole('button',{name:'텍스트 추가',exact:true}).waitFor();await second.getByTestId('archive-upload').setInputFiles(path.join(out,`${name}.studio.zip`));await expect(second.getByText('레이어와 원본 에셋을 복원했습니다.',{exact:true})).toBeVisible();const restored=await saved(second);expect(restored.pages[index].elements).toEqual(current.pages[index].elements);expect(restored.pages[index].magicReview).toEqual(current.pages[index].magicReview);expect(restored.assets).toEqual(current.assets);await context.close();
+ const context=await browser.newContext(process.env.STUDIO_PREVIEW_STORAGE?{storageState:process.env.STUDIO_PREVIEW_STORAGE}:undefined),second=await context.newPage();await second.goto('/');await second.getByRole('button',{name:'텍스트 추가',exact:true}).waitFor();await second.getByTestId('archive-upload').setInputFiles(path.join(out,`${name}.studio.zip`));await expect(second.getByText('레이어와 원본 에셋을 복원했습니다.',{exact:true})).toBeVisible();const restored=await saved(second);expect(restored.pages[index].elements).toEqual(current.pages[index].elements);expect(restored.pages[index].magicReview).toEqual(current.pages[index].magicReview);expect(restored.assets).toEqual(current.assets);await context.close();
  const original=p.assets[p.sources[pg.id]],bg=pg.elements.find(e=>e.type==='image'&&e.locked)!,rects=p.diagnostics![pg.id].candidates!.flatMap(o=>o.repair?[o.repair.rect]:[]);
  const outside=await page.evaluate(async({source,bg,rects})=>{
   const read=async(url:string)=>{const im=new Image();im.src=url;await im.decode();const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const x=c.getContext('2d')!;x.drawImage(im,0,0);return {data:x.getImageData(0,0,c.width,c.height).data,w:c.width,h:c.height};};
@@ -54,6 +54,19 @@ for(const name of ['korean','eda-checklist','data-roles'])test(`automatic edit f
   await page.getByTestId('layer-image').filter({has:page.getByLabel(`${icon.id} 숨김`,{exact:true})}).locator('.layer-name').click();await page.getByLabel('요소 X',{exact:true}).fill('700');await page.getByLabel('요소 너비',{exact:true}).fill('100');await page.getByLabel('요소 너비',{exact:true}).blur();
   if(pg.elements.some(e=>e.type==='text'&&e.visible)){const flow=await verifyFlow(page,browser,await saved(page),1,`auto-${name}`,icon.id);fs.writeFileSync(path.join(out,`auto-${name}-flow.json`),JSON.stringify(flow,null,2));}
   await page.keyboard.press('Delete');expect((await saved(page)).pages[1].elements.some(e=>e.id===icon.id)).toBe(false);
+ }
+ if(!korean){
+  // Explicit corrections, never counted as automatic mask/background success.
+  // Magic Layers dialog has no accessible name in the legacy UI.
+  const row=page.getByTestId('exception-row').filter({hasText:'icon'});await row.getByRole('button').click();const review=page.getByRole('dialog');
+  if(eda){await review.getByRole('button',{name:'단색 내부 배경 제거 (수동)',exact:true}).click();}
+  else{
+   await review.getByLabel('수동 교정 배경색').fill('#cdd0d6');await review.getByLabel('선택 영역 수동 배경 교정 확인').check();
+   await review.locator('.region-row').filter({hasText:'WHO DOES WHAT'}).getByRole('button').click();await review.getByLabel('수동 교정 배경색').fill('#cdd0d6');await review.getByLabel('선택 영역 수동 배경 교정 확인').check();
+  }
+  await review.getByRole('button',{name:'결과 미리보기',exact:true}).click();await expect(review.getByAltText('레이어 변환 결과')).toBeVisible();await review.getByRole('button',{name:'검토한 레이어 생성',exact:true}).click();
+  const corrected=await saved(page),cp=corrected.pages[2],ci=cp.elements.find(e=>e.type==='image'&&e.visible&&e.provenance?.regionId==='icon')!;expect(ci).toBeTruthy();
+  const flow=await verifyFlow(page,browser,corrected,2,`auto-${name}-corrected`,ci.id);fs.writeFileSync(path.join(out,`auto-${name}-corrected-flow.json`),JSON.stringify({...flow,manualMaskCorrection:eda,explicitManualFlatBackground:!eda,candidates:corrected.diagnostics![cp.id].candidates},null,2));await page.keyboard.press('Delete');expect((await saved(page)).pages[2].elements.some(e=>e.id===ci.id)).toBe(false);
  }
  expect(errors).toEqual([]);
 });

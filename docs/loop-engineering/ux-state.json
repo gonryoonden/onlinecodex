@@ -90,6 +90,39 @@
       "started": "2026-11-11T07:00:41.765435+00:00",
       "finished": "2026-11-11T07:02:22.192834+00:00",
       "log": "evidence/studio/ux-loop/attempt-08.log"
+    },
+    {
+      "id": 9,
+      "phase": 4,
+      "gate": "auto",
+      "cause": "integration-corrections",
+      "hypothesis": "Three actual sources with safe native gradient repair and explicit alpha/background corrections plus native export and ZIP restoration",
+      "status": "failed",
+      "started": "2026-11-11T07:03:26.397669+00:00",
+      "finished": "2026-11-11T07:05:13.763887+00:00",
+      "log": "evidence/studio/ux-loop/attempt-09.log"
+    },
+    {
+      "id": 10,
+      "phase": 4,
+      "gate": "release",
+      "cause": "svg-controls",
+      "hypothesis": "Keep HTML controls outside SVG namespace, then verify corrections cancellation legacy exports and production build together",
+      "status": "passed",
+      "started": "2026-11-11T07:06:25.287901+00:00",
+      "finished": "2026-11-11T07:11:59.463386+00:00",
+      "log": "evidence/studio/ux-loop/attempt-10.log"
+    },
+    {
+      "id": 11,
+      "phase": 5,
+      "gate": "assessment",
+      "cause": "final-quality-assessment",
+      "hypothesis": "Preserve measured three-source evidence and distinguish partial functional success from unmet low-review and fresh-Gemini criteria",
+      "status": "passed",
+      "started": "2026-11-11T07:12:38.370274+00:00",
+      "finished": "2026-11-11T07:12:49.550452+00:00",
+      "log": "evidence/studio/ux-loop/attempt-11.log"
     }
   ],
   "phases": {
@@ -106,16 +139,18 @@
       "verifiedAttempt": 8
     },
     "4": {
-      "status": "pending"
+      "status": "passed",
+      "verifiedAttempt": 10
     },
     "5": {
-      "status": "pending"
+      "status": "blocked",
+      "reason": "Functional acceptance passed, but exception-minority goal unmet (25/46 detailed + 1 failed); new Gemini calls blocked; semantic truth limited to four problem labels"
     },
     "6": {
       "status": "pending"
     }
   },
   "halted": null,
-  "checkpoint": "051bb495d379a0d09ed0622242b89174f5a5ad7b",
+  "checkpoint": "2efe01335e573af2fd0ecc22e998f45999098b38",
   "priorStateSHA256": "9d1e5ccce23239242f3b4bfb80d7109aa20d61fe72810be22963ddb30ccd8df5"
 }

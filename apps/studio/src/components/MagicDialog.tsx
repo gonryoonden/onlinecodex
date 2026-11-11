@@ -17,6 +17,7 @@ import { stageSchema, statusLabels, warningLabels, assessInventory, type Diagnos
 import { download } from "@/lib/archive";
 import { adaptivePipeline, profileSource, localProposal, inspectMasks, mergeRegions, type PipelineResult } from "@/lib/magic-layers/adaptive";
 import { recordBetaEvent,errorCode } from "@/lib/beta-diagnostics";
+import {flatBackgroundMask} from '@/lib/magic-layers/local-detect';
 import { detectLocalImages } from "@/lib/magic-layers/local-detect";
 import MaskEditor from './MaskEditor';
 import {loadImage} from '@/lib/imports';
@@ -371,8 +372,7 @@ export default function MagicDialog({
                       ]);
                     }}
                   >
-                    {automaticReview&&<label><input type="checkbox" checked={showAll} onChange={e=>setShowAll(e.target.checked)}/>모든 후보 보기</label>}
-                {analysis.regions.filter(r=>showAll||exceptionIds?.includes(r.id)).map((r) => (
+                    {analysis.regions.map((r) => (
                       <g
                         key={r.id}
                         onClick={(e) => {
@@ -504,6 +504,9 @@ export default function MagicDialog({
               </div>
               {region && (<div><p>원본 / 분리 결과 (클릭해 확대)</p>{comparison&&<><a href={comparison.original} target="_blank" rel="noreferrer"><img src={comparison.original} alt="검토 원본" style={{maxWidth:280,maxHeight:200}}/></a><a href={comparison.cutout} target="_blank" rel="noreferrer"><img src={comparison.cutout} alt="검토 분리 결과" style={{maxWidth:280,maxHeight:200,background:"#889999"}}/></a></>}
                 {automaticReview&&<><p>{region.id} · 경계를 확대하거나 다각형·알파로 교정한 뒤 다시 적용하세요. 확인만으로 품질이 바뀌지는 않습니다.</p>
+                 <button disabled={busy||region.type!=='image'} onClick={async()=>{
+                  setBusy(true);setError('');try{const image=await loadImage(source.dataUrl),crop=await maskedCrop(image,region),c=document.createElement('canvas');c.width=crop.width;c.height=crop.height;const ctx=c.getContext('2d')!;ctx.drawImage(await loadImage(crop.dataUrl),0,0);const cutout=ctx.getImageData(0,0,c.width,c.height).data;ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(image,...crop.sourcePixels,0,0,c.width,c.height);const data=ctx.getImageData(0,0,c.width,c.height),mask=flatBackgroundMask(data.data,c.width,c.height);if(!mask)throw new Error('단색 둘레를 확인하지 못했습니다. 브러시로 경계를 교정하세요.');for(let i=0;i<mask.length;i++){const a=Math.min(mask[i],cutout[i*4+3]);data.data[i*4]=data.data[i*4+1]=data.data[i*4+2]=a;data.data[i*4+3]=255;}ctx.putImageData(data,0,0);const [x,y,w,h]=crop.sourcePixels;patch({bbox:[x/source.width*1000,y/source.height*1000,w/source.width*1000,h/source.height*1000],maskPng:c.toDataURL(),polygon:undefined,maskOrigin:'manual',segmentation:undefined});}catch(e){setError(e instanceof Error?e.message:'단색 배경 제거 실패');}finally{setBusy(false);}
+                 }}>단색 내부 배경 제거 (수동)</button>
                  <button disabled={busy||region.type!=='image'||!region.maskPng&&!region.polygon} onClick={async()=>{
                   setBusy(true);try{const image=await loadImage(source.dataUrl),crop=await maskedCrop(image,region),c=document.createElement('canvas');c.width=crop.width;c.height=crop.height;c.getContext('2d')!.drawImage(image,...crop.sourcePixels,0,0,c.width,c.height);const base:Asset={id:uid('asset'),name:'경계 원본',mime:'image/png',dataUrl:c.toDataURL(),width:c.width,height:c.height,original:false};setBoundaryEdit({base,current:{...base,id:uid('asset'),dataUrl:crop.dataUrl},rect:crop.sourcePixels});}catch(e){setError(e instanceof Error?e.message:'경계 열기 실패');}finally{setBusy(false);}
                  }}>마스크 브러시 수정</button>

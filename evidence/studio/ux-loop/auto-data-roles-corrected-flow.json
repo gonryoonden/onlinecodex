@@ -1,0 +1,55 @@
+{
+  "nativeTextEdited": true,
+  "manualNativeShapeEdited": true,
+  "PNG": true,
+  "PDF": true,
+  "nativePPTX": true,
+  "ZIPRestoredInNewBrowser": true,
+  "outsideRepairPixelsChanged": 0,
+  "manualMaskCorrection": false,
+  "explicitManualFlatBackground": true,
+  "candidates": [
+    {
+      "id": "title",
+      "type": "text",
+      "status": "generated",
+      "decision": "warning",
+      "elementId": "text_mwbs2ogfq0avfb",
+      "extraction": "native",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          272,
+          367,
+          1149,
+          130
+        ],
+        "radius": 0
+      },
+      "background": "manual-flat"
+    },
+    {
+      "id": "icon",
+      "type": "image",
+      "status": "generated",
+      "decision": "warning",
+      "evidence": {
+        "interiorBackgroundFraction": 0.0013024730808746795
+      },
+      "elementId": "image_mwbs2ogfplazub",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "repair": {
+        "method": "flat-fill",
+        "rect": [
+          634,
+          1129,
+          404,
+          396
+        ],
+        "radius": 0
+      },
+      "background": "manual-flat"
+    }
+  ]
+}

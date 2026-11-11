@@ -50,7 +50,7 @@ test('recorded REAL Gemini 46-candidate response: failed repair preserves native
  await page.route('**/api/ai/magic-layers',r=>r.fulfill({json:savedResponse}));
  await page.goto('/');await page.getByRole('button',{name:'텍스트 추가',exact:true}).waitFor();
  await page.getByTestId('file-upload').setInputFiles('../../2024년_산업안전보건교육_주요_개정_요약.png');
- await page.getByRole('button',{name:'분석·영역 교정 열기',exact:true}).click();const d=page.getByRole('dialog');
+ await page.getByRole('button',{name:'고급 수동 교정',exact:true}).click();const d=page.getByRole('dialog');
  await d.getByLabel('원본 보존 방식').selectOption('independent');
  await d.getByLabel('외부 Gemini API로 이미지 전송에 동의합니다.').check();await d.getByRole('button',{name:'AI 레이어 분해',exact:true}).click();await expect(d.locator('.region-row')).toHaveCount(46);
  await d.getByRole('button',{name:'결과 미리보기',exact:true}).click();await expect(d.getByAltText('레이어 변환 결과')).toBeVisible();await expect(d.getByText('실제 편집 가능 레이어: 0개',{exact:true})).toBeVisible();
@@ -90,7 +90,7 @@ for(const name of ['eda-checklist','data-roles'])test(`actual infographic ${name
  await page.route('**/api/capabilities',r=>r.fulfill({json:{enabled:true,model:'human-review-NOT-GEMINI'}}));
  await page.route('**/api/ai/magic-layers',r=>r.fulfill({json:{analysis:{background:{kind:'complex',from:'#ffffff',to:'#ffffff',angle:0},regions,notes:'Explicit human inventory and illustrative polygon corrections. NOT AI recognition or semantic-mask certification.'},provenance:{model:'human-inventory-NOT-AI'}}}));
  await page.goto('/');await page.getByRole('button',{name:'텍스트 추가',exact:true}).waitFor();await page.getByTestId('file-upload').setInputFiles({name:name+(isEda?'.png':'.jpg'),mimeType:isEda?'image/png':'image/jpeg',buffer:source});
- await page.getByRole('button',{name:'분석·영역 교정 열기',exact:true}).click();const d=page.getByRole('dialog');await d.getByLabel('원본 보존 방식').selectOption('independent');await d.getByLabel('외부 Gemini API로 이미지 전송에 동의합니다.').check();await d.getByRole('button',{name:'AI 레이어 분해',exact:true}).click();await expect(d.locator('.region-row')).toHaveCount(3);
+ await page.getByRole('button',{name:'고급 수동 교정',exact:true}).click();const d=page.getByRole('dialog');await d.getByLabel('원본 보존 방식').selectOption('independent');await d.getByLabel('외부 Gemini API로 이미지 전송에 동의합니다.').check();await d.getByRole('button',{name:'AI 레이어 분해',exact:true}).click();await expect(d.locator('.region-row')).toHaveCount(3);
  for(const id of ['title','icon','manual-shape']){await d.locator('.region-row').filter({has:page.getByLabel(`${id} 채택`,{exact:true})}).getByRole('button').click();await d.getByLabel('수동 교정 배경색',{exact:true}).fill(isEda?'#ffffff':'#c8c8ce');await d.getByLabel('선택 영역 수동 배경 교정 확인',{exact:true}).check();}
  await d.getByRole('button',{name:'결과 미리보기',exact:true}).click();await expect(d.getByText('실제 편집 가능 레이어: 3개',{exact:true})).toBeVisible();await d.screenshot({path:path.join(out,`${name}-review.png`)});await d.getByRole('button',{name:'검토한 레이어 생성',exact:true}).click();const p=await saved(page);
  const checks=await exercise(page,browser,p,1,name,'icon','manual-shape');
