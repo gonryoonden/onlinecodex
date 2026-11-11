@@ -73,6 +73,8 @@ export const statusLabels: Record<Diagnostic["status"],string> = {
   "original-preserved":"원본 유지 · 편집 객체 미생성", "review-required":"사용자 검토 필요", "failed":"변환 실패",
 };
 export const warningLabels: Record<string,string> = {
+  INDEPENDENT_APPROXIMATION:"독립 객체와 배경 복원을 분리했습니다. 단색 복원·픽셀 키잉은 근사이며 경계·그림자를 검토하세요.",
+  BACKGROUND_REPAIR_FAILED:"배경 처리에 실패해 추출 후보를 숨김 상태로 보존했습니다. 원본은 유지됩니다.",
   BACKGROUND_PENDING:"배경 미복원 후보는 숨겨서 보존했습니다. 원본 잔상과 겹치지 않도록 영역을 교정하세요.",
   MANUAL_FLAT_BACKGROUND:"수동 단색 교정: 질감·그림자는 복원하지 않았습니다. 이동·삭제 후 경계 이음새를 확인하세요.",
   ILLUSTRATIONS_MISSING:"삽화가 있는 입력인데 이미지 영역이 0개입니다. 원본을 보존하고 누락 영역을 지정하세요.",

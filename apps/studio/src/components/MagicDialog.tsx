@@ -46,7 +46,7 @@ export default function MagicDialog({
   const detection = useRef<AbortController | null>(null);
   const [progress,setProgress] = useState<number | null>(null);
   const [skip, setSkip] = useState<string[]>([]);
-  const [mode, setMode] = useState<"preserve" | "redraw">("preserve");
+  const [mode, setMode] = useState<"preserve" | "redraw" | "independent">("preserve");
   const [inputKind, setInputKind] = useState<Diagnostic["inputKind"]>("unknown");
   const [initialTrace, setInitialTrace] = useState<Partial<Diagnostic>>({});
   const [resultTrace, setResultTrace] = useState<Diagnostic | null>(null);
@@ -618,11 +618,13 @@ export default function MagicDialog({
               <fieldset>
                 <legend>배경 복원</legend>
                 <label>원본 보존 방식
-                  <select aria-label="원본 보존 방식" value={mode} onChange={e=>{setMode(e.target.value as "preserve" | "redraw");setConfirmed(false);setPreview("");}}>
+                  <select aria-label="원본 보존 방식" value={mode} onChange={e=>{setMode(e.target.value as "preserve" | "redraw" | "independent");setConfirmed(false);setPreview("");}}>
+                    <option value="independent">독립 레이어 · 추출과 배경 복원 분리 (베타)</option>
                     <option value="preserve">원본 보존 · 확인한 단색 영역만 부분 편집</option>
                     <option value="redraw">전체 배경 재작성 · 미탐지 장식 손실 위험</option>
                   </select>
                 </label>
+                {mode === "independent" && <p className="notice">추출과 배경 복원을 별도로 처리합니다. 미복원 텍스트·도형·알파 이미지는 숨김 교정 후보로 저장됩니다. 마스크가 없는 복잡한 이미지는 분리 성공으로 세지 않습니다. 아래의 단색 확인 또는 영역별 수동 교정 후 다시 미리보기하세요. 이 모드의 배경 복원은 브라우저에서 실행합니다.</p>}
                 <p>기본 모드는 겹치거나 배경이 불확실한 영역을 원본에 남깁니다. 원본 글자를 제거하지 못하면 새 글자를 겹치지 않습니다. 선택 영역 안의 미탐지 장식은 지워질 수 있으므로 미리보기에서 반드시 확인하세요.</p>
                 <label>로컬 복원 알고리즘
                   <select aria-label="로컬 복원 알고리즘" value={repairMethod} onChange={e => setRepairMethod(e.target.value)}>
@@ -635,7 +637,7 @@ export default function MagicDialog({
                   </select>
                 </label>
                 <div className="button-row">
-                  <button disabled={busy || analysis.regions.length === skip.length} onClick={() => void repairBackground()}>로컬 배경 보정</button>
+                  <button disabled={busy || mode === "independent" || analysis.regions.length === skip.length} onClick={() => void repairBackground()}>로컬 배경 보정</button>
                   {activeRepair && <button onClick={() => { setRepair(null); setPreview(""); }}>복원 취소</button>}
                 </div>
                 {activeRepair && <p role="status">로컬 복원 적용 · {activeRepair.warning}</p>}
@@ -721,10 +723,10 @@ export default function MagicDialog({
                       setPreview("");
                     }}
                   />{" "}
-                  {mode === "preserve" ? "선택 영역이 단색 배경이며, 국소 제거 결과를 미리보기로 검토하겠습니다." : "원본 배경을 단색/그라데이션으로 근사 재구성함을 확인했습니다."}
+                  {mode !== "redraw" ? "선택 영역이 단색 배경이며, 국소 제거 결과를 미리보기로 검토하겠습니다." : "원본 배경을 단색/그라데이션으로 근사 재구성함을 확인했습니다."}
                 </label>
                 <p className="warning">
-                  {mode === "preserve" ? "전체 디자인은 보존합니다. 국소 배경은 추정이며, 제외·중첩 영역은 원본 유지 상태입니다."
+                  {mode !== "redraw" ? "전체 디자인은 보존합니다. 국소 배경은 추정이며, 제외·중첩 영역은 원본 유지 상태입니다."
                   : !confirmed || analysis.background.kind === "complex"
                     ? "배경 보정 필요 · 원본에 글자·객체 잔상이 남을 수 있습니다. 정확한 분리가 아닙니다."
                     : "원본 배경을 새로 그립니다. 가려진 디테일·제외한 영역은 복원하지 않습니다."}
@@ -734,6 +736,10 @@ export default function MagicDialog({
               {resultTrace && previewKey === currentPreviewKey && <div role="status">
                 <p>실제 편집 가능 레이어: {resultTrace.stages.find(s=>s.name==="reconstructed")?.objects.filter(o=>o.role==="editable").length ?? 0}개</p>
                 <ul>{resultTrace.stages.find(s=>s.name==="reconstructed")?.omitted.map(o=><li key={o.id}>{o.id}: {({"unreviewed":"배경 확인 필요","overlap":"다른 객체와 충돌 — 경계 또는 채택 영역 교정","complex-boundary":"복잡한 경계 — 수동 배경 교정 필요","large-or-edge":"크기·가장자리 — 수동 교정 필요","user-excluded":"사용자 제외","original-preserved":"배경 보정 필요"} as Record<string,string>)[o.reason??""]??o.reason}</li>)}</ul>
+                {resultTrace.candidates && <div aria-label="후보별 처리 결과">
+                  <p>전체 후보 {resultTrace.candidates.length}개 · 교정 대기 {resultTrace.candidates.filter(o=>o.status==="correction-needed").length}개 · 분리 실패 {resultTrace.candidates.filter(o=>o.status==="separation-failed").length}개 · 중복 통합 {resultTrace.candidates.filter(o=>o.status==="merged").length}개</p>
+                  <ul>{resultTrace.candidates.map(o=><li key={o.id}>{o.id}: {({generated:"생성",merged:"중복 통합","correction-needed":"보정 필요","separation-failed":"분리 실패","user-excluded":"사용자 제외"})[o.status]}{o.parentId?` · 포함 도형 ${o.parentId}`:""}{o.canonicalId?` → ${o.canonicalId}`:""}{o.reason?` · ${o.reason}`:""}</li>)}</ul>
+                </div>}
                 <strong>{statusLabels[resultTrace.status]}</strong>
                 {resultTrace.warnings.map(w=><p className="warning" key={w}>{warningLabels[w]??w}</p>)}
                 <button onClick={()=>download(new Blob([JSON.stringify(resultTrace,null,2)],{type:"application/json"}),"magic-diagnostic.json")}>변환 진단 JSON</button>

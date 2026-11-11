@@ -46,6 +46,28 @@
       "started": "2026-11-11T01:42:26.459686+00:00",
       "finished": "2026-11-11T01:42:35.320153+00:00",
       "log": "evidence/studio/loop/attempt-04.log"
+    },
+    {
+      "id": 5,
+      "phase": 4,
+      "gate": "contract",
+      "cause": "independent-repair",
+      "hypothesis": "Repair edits only approved support and never drops allocated candidates on failure",
+      "status": "passed",
+      "started": "2026-11-11T01:44:28.567276+00:00",
+      "finished": "2026-11-11T01:44:40.191830+00:00",
+      "log": "evidence/studio/loop/attempt-05.log"
+    },
+    {
+      "id": 6,
+      "phase": 4,
+      "gate": "browser",
+      "cause": "browser-independent-contract",
+      "hypothesis": "Recorded real Gemini candidates survive repair denial and allocated PNGs have actual alpha",
+      "status": "passed",
+      "started": "2026-11-11T01:45:33.065065+00:00",
+      "finished": "2026-11-11T01:46:18.611163+00:00",
+      "log": "evidence/studio/loop/attempt-06.log"
     }
   ],
   "phases": {
@@ -62,7 +84,8 @@
       "verifiedAttempt": 4
     },
     "4": {
-      "status": "pending"
+      "status": "passed",
+      "verifiedAttempt": 6
     },
     "5": {
       "status": "pending"
@@ -72,5 +95,5 @@
     }
   },
   "halted": null,
-  "checkpoint": "6cb3b97b20e6d5cb11d01114f9f7296e391b1af0"
+  "checkpoint": "623818999559aa7d6db73404cf62a1b3de8f102a"
 }

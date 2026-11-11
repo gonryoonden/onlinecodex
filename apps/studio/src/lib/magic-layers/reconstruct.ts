@@ -121,7 +121,7 @@ export async function reconstructDesign(
 ): Promise<Reconstruction> {
   const originalAnalysis = analysisSchema.parse(input);
   if(options.mode==="independent") return reconstructIndependent(originalAnalysis,source,width,height,skip,provider,
-    prepared=>reconstructDesign(prepared,source,width,height,[],true,provider,undefined,{mode:"redraw"}),{...options.initial,inputKind:options.inputKind});
+    prepared=>reconstructDesign(prepared,source,width,height,[],true,provider,undefined,{mode:"redraw"}),{...options.initial,inputKind:options.inputKind},confirmedBackground);
   let analysis = originalAnalysis;
   const mode = options.mode ?? "preserve";
   const hadRepair = Boolean(repair);
