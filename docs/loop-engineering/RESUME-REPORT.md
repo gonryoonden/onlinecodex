@@ -22,7 +22,7 @@
 | 3 배경 복원 | 학습 마스크 기반 별도 국소 inpainting, 반경 확장·인접 후보 보호·영역 제한·원자적 적용. 알려진 단색/그라데이션 검사와 실제 안전모 제거 통과. 숨은 질감/그림자 정밀 복원 미완료 |
 | 4 통합 품질 | 실제 3종의 자동 모델 마스크·편집·저장·재열기·PNG/PDF/PPTX 및 16.8MP JPG 통과. 로컬 production 빌드 Worker와 실제 계산 취소/재시도도 통과. 새 Gemini 실호출/일반화 품질은 미완료 |
 
-Preview 주소/상태는 [배포 증거](../../evidence/studio/loop/sam-preview.json)에 기록한다. 정확한 재개 상태는 `state.json`의 `resume`, `halted`, `checkpoint`를 따른다.
+검증된 Preview는 https://personal-magic-studio-preview-1eqxxway6-gonryoondens-projects.vercel.app 이며 READY·보호된 capabilities/모델 manifest HTTP200과 모델 해시 일치를 확인했다. Preview 주소/상태는 [배포 증거](../../evidence/studio/loop/sam-preview.json)에 기록한다. 정확한 재개 상태는 `state.json`의 `resume`, `halted`, `checkpoint`를 따른다.
 
 ## 자동 성공 수를 구분한 결과
 

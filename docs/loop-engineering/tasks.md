@@ -19,7 +19,7 @@ Consult state.json for authoritative attempts and blockers. An unchecked task is
 - [x] 마스크 국소 inpainting과 인접 후보 보호
 - [x] 실제 3종 편집·리사이즈·ZIP 새 브라우저·PNG/PDF/PPTX
 - [x] 로컬 production 빌드에서 실제 모델 검증
-- [ ] Preview 호스팅 확인 (배포 증거에 기록)
+- [x] Preview 호스팅 READY·보호된 capabilities/모델 manifest HTTP200 확인 (sam-preview.json)
 - [ ] 내부 구멍/합성 객체/인쇄 글자/정밀 질감 및 새 Gemini 실호출 품질
 
 전체 24/24회 소진. 추가 구현 반복에는 새 승인 예산이 필요하며 기존 기록을 초기화하지 않는다.

@@ -298,16 +298,22 @@
     },
     "6": {
       "status": "blocked",
-      "reason": "Budget exhausted after production-mode model/export and recovery checks passed. Verified partial beta may be published to Preview; full visual precision and fresh Gemini coverage remain incomplete.",
+      "reason": "Verified partial beta is deployed to protected Preview, with model manifest/capability HTTP200; full quality is incomplete and the 24-attempt development budget is exhausted.",
       "previewChecks": {
         "state": "READY",
         "engineCommit": "272a7ec58cbfca9658c9e594f301e162738c5ee1",
         "evidence": "evidence/studio/loop/preview.json"
+      },
+      "resumePreviewChecks": {
+        "state": "READY",
+        "engineCommit": "53d77749f607a48126216b9be0d146a8d5a9c080",
+        "evidence": "evidence/studio/loop/sam-preview.json",
+        "manifestHashesMatch": true
       }
     }
   },
   "halted": "BUDGET_EXHAUSTED",
-  "checkpoint": "1e9e2e7e285fa963d74fc0735431aee6dcc5411d",
+  "checkpoint": "53d77749f607a48126216b9be0d146a8d5a9c080",
   "stopReason": "BUDGET_EXHAUSTED_AFTER_VERIFIED_PARTIAL_BETA: learned segmentation works; hollow masks, composites, printed-text grouping, shadows and fresh Gemini coverage remain incomplete",
   "nextAction": "No further development attempts without an authorized additional budget. Preserve all 24 attempts; resume from the verified model checkpoint after resolving quality/evidence constraints.",
   "resume": {

@@ -1,0 +1,27 @@
+{
+  "engineCommit": "53d77749f607a48126216b9be0d146a8d5a9c080",
+  "branch": "preview/pms-beta-d42d824-20261110",
+  "deploymentId": "dpl_GQMQu9h1HrYFB4BioPZUJxUXv4sN",
+  "url": "https://personal-magic-studio-preview-1eqxxway6-gonryoondens-projects.vercel.app",
+  "environment": "preview",
+  "state": "READY",
+  "capabilityHttpStatus": 200,
+  "modelVerified": false,
+  "modelManifestHttpStatus": 200,
+  "modelFiles": {
+    "encoder.onnx": {
+      "sha256": "f8ac5ff4adf95dd17f7229811c3ad827324017fba9a5028e46b9de84ca17feb4",
+      "bytes": 27969714
+    },
+    "decoder.onnx": {
+      "sha256": "2ac18d33d17616b8013b69dad70e01c7ce72f0673f1964e4ce9cc0d349ebd291",
+      "bytes": 16353273
+    }
+  },
+  "modelInferenceValidation": "Real Chromium WASM in dev and local production; hosted manifest/capability fetched; hosted end-to-end inference not separately asserted",
+  "freshGeminiCalls": 0,
+  "budgetUsed": 24,
+  "budgetLimit": 24,
+  "mainCommit": "54bf39aa957cc5ad91d947653f90867ad1b1569d",
+  "fullBetaQuality": "PARTIAL"
+}
