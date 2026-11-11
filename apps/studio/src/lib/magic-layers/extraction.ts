@@ -19,7 +19,7 @@ export async function extractAlphaCandidates(source:Asset,regions:Region[],outco
    if(r.polygon){
     const coverage=polygonCoverage(r);
     if(coverage<.005||coverage>.98)throw new Error('polygon-empty-or-opaque');
-    o.extraction='polygon';result.push(r);continue;
+    o.extraction='polygon';o.maskOrigin=r.maskOrigin??'analysis';result.push(r);continue;
    }
    if(r.maskPng){
     const mask=await loadImage(r.maskPng);
@@ -28,7 +28,7 @@ export async function extractAlphaCandidates(source:Asset,regions:Region[],outco
     const ctx=c.getContext('2d')!;ctx.drawImage(mask,0,0,c.width,c.height);const data=ctx.getImageData(0,0,c.width,c.height).data;
     const values=new Uint8Array(c.width*c.height);for(let i=0;i<values.length;i++)values[i]=Math.round(data[i*4]*data[i*4+3]/255);
     if(maskHealth(values,c.width,c.height).reject)throw new Error('mask-empty-or-opaque');
-    o.extraction='model-mask';result.push(r);continue;
+    o.extraction='model-mask';o.maskOrigin=r.maskOrigin??'analysis';result.push(r);continue;
    }
    original??=await loadImage(source.dataUrl);
    const [x,y,w,h]=toPixels(r.bbox,source.width,source.height);
@@ -41,7 +41,7 @@ export async function extractAlphaCandidates(source:Asset,regions:Region[],outco
    ctx.putImageData(pixels,0,0);
    const candidate={...r,maskPng:c.toDataURL('image/png')};
    if(candidate.maskPng.length>2*1024*1024)throw new Error('local-mask-too-large');
-   o.extraction='flat-key';result.push(candidate);
+   o.extraction='flat-key';o.maskOrigin='local';result.push(candidate);
   }catch(e){o.status='separation-failed';o.reason=e instanceof Error?e.message:'alpha-extraction-failed';}
  }
  return result;

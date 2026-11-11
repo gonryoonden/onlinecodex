@@ -1,0 +1,49 @@
+COMMAND ["python", "-m", "unittest", "discover", "-s", "tests/loop", "-v"]
+test_budget (test_runner.Runner.test_budget) ... ok
+test_prerequisite_and_failed_gate (test_runner.Runner.test_prerequisite_and_failed_gate) ... ok
+test_recovery_does_not_refund_attempt (test_runner.Runner.test_recovery_does_not_refund_attempt) ... ok
+test_restricted_preview_never_completes_a_blocked_product_gate (test_runner.Runner.test_restricted_preview_never_completes_a_blocked_product_gate) ... ok
+test_same_cause (test_runner.Runner.test_same_cause) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK
+COMMAND ["npm", "run", "build"]
+
+> personal-magic-studio@0.1.0 build
+> next build
+
+▲ Next.js 16.4.3 (Turbopack)
+✓ Running next.config.ts took 54ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.0s
+  Running TypeScript ...
+  Finished TypeScript in 6.3s ...
+  Collecting page data using 2 workers ...
+  Generating static pages using 2 workers (0/6) ...
+  Generating static pages using 2 workers (1/6) 
+  Generating static pages using 2 workers (2/6) 
+  Generating static pages using 2 workers (4/6) 
+✓ Generating static pages using 2 workers (6/6) in 180ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/ai/connection
+├ ƒ /api/ai/magic-layers
+├ ƒ /api/capabilities
+├ ƒ /api/export/pptx
+└ ƒ /api/magic-layers/background
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

@@ -1,0 +1,23 @@
+{
+  "actualSource": true,
+  "evidence": "human-inventory-and-manual-polygon-NOT-Gemini",
+  "freshLiveCall": false,
+  "inputMime": "image/png",
+  "allocated": 3,
+  "ready": 3,
+  "readyText": 1,
+  "readyShape": 1,
+  "readyImage": 1,
+  "zipReopened": true,
+  "textEdited": true,
+  "shapeEdited": true,
+  "imageMovedDeleted": true,
+  "png": true,
+  "pptxNative": true,
+  "manualRepairResidualPixels": 0,
+  "outsideChangedPixels": 0,
+  "alpha": {
+    "clear": 6488,
+    "ink": 23794
+  }
+}

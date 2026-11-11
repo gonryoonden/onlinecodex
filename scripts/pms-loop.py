@@ -11,7 +11,8 @@ def reserve(s,phase,gate,cause,hypothesis):
  if s['halted']: raise ValueError('HALTED: '+s['halted'])
  if len(s['attempts'])>=s['budget']: raise ValueError('BUDGET_EXHAUSTED')
  if any(a['status']=='running' for a in s['attempts']): raise ValueError('RECOVER_RUNNING_ATTEMPT_FIRST')
- if any(s['phases'][str(i)]['status']!='passed' for i in range(1,phase)): raise ValueError('PREREQUISITE_NOT_PASSED')
+ restricted=phase==6 and gate=='preview' and all(s['phases'][str(i)]['status']=='passed' for i in range(1,5)) and s['phases']['5']['status']=='blocked' and any(a['phase']==5 and a['status']=='passed' for a in s['attempts'])
+ if not restricted and any(s['phases'][str(i)]['status']!='passed' for i in range(1,phase)): raise ValueError('PREREQUISITE_NOT_PASSED')
  a=dict(id=len(s['attempts'])+1,phase=phase,gate=gate,cause=cause,hypothesis=hypothesis,status='running',started=now());s['attempts'].append(a);s['phases'][str(phase)]['status']='running';return a
 
 def finish(s,a,ok,log):
@@ -38,7 +39,9 @@ GATES={
  'governance':[['python','-m','unittest','discover','-s','tests/loop','-v'],['npm','test']],
  'contract':[['npm','run','typecheck'],['npm','test']],
  'browser':[['npm','run','typecheck'],['npm','test'],['npm','run','lint'],['npx','playwright','test','tests/independent-layers.spec.ts','tests/preservation.spec.ts']],
+ 'mask-review':[['npm','run','typecheck'],['npm','test'],['npx','playwright','test','tests/independent-layers.spec.ts','--grep','recorded REAL']],
  'release':[['npm','run','build']],
+ 'preview':[['python','-m','unittest','discover','-s','tests/loop','-v'],['npm','run','build']],
 }
 def main():
  p=argparse.ArgumentParser();p.add_argument('action',choices=['init','status','recover','run','pass','block','checkpoint']);p.add_argument('phase',type=int,nargs='?',choices=range(1,7));p.add_argument('gate',nargs='?',choices=GATES);p.add_argument('--cause',default='');p.add_argument('--hypothesis',default='');p.add_argument('--reason',default='');args=p.parse_args()

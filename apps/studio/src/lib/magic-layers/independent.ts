@@ -17,7 +17,7 @@ export async function reconstructIndependent(input:Analysis,source:Asset,width:n
  const elements=generated?.page.elements??[];
  for(const el of elements){
   const o=outcomes.find(o=>o.id===el.provenance?.regionId)!;o.elementId=el.id;
-  if(el.type==='image')el.provenance!.method=`${provider}:${o.extraction}`;
+  if(el.type==='image')el.provenance!.method=`${provider}:${o.maskOrigin??"analysis"}:${o.extraction}`;
   el.visible=false;el.name='배경 보정 대기 · '+(el.name??el.type);el.provenance!.backgroundWarning=true;
  }
  // Extraction is committed to inventory before repair. Repair failures leave these elements intact.

@@ -104,7 +104,7 @@ export default function MagicDialog({
     const response=await fetch('/api/ai/magic-layers',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image,consent,...(selectedModel?{model:selectedModel}:{})}),signal});
     const data=await readApiJson(response);if(!response.ok)throw new Error(response.status===503?`AI 설정 누락: ${data.error??'Preview 환경변수를 확인하세요.'}`:data.error??'분석 실패');
     const parsed = analysisSchema.parse(data.analysis);
-    return {analysis:{...parsed,regions:parsed.regions.map(r=>({...r,manualBackground:undefined}))},provider:`gemini/${data.provenance.model}`,trace:{runId:uid('run'),transport,build:typeof data.trace?.build==='string'?data.trace.build:'unknown',stages:data.trace?.stages?stageSchema.array().parse(data.trace.stages):undefined}};
+    return {analysis:{...parsed,regions:parsed.regions.map(r=>({...r,manualBackground:undefined,maskOrigin:r.polygon||r.maskPng?"analysis" as const:undefined}))},provider:`gemini/${data.provenance.model}`,trace:{runId:uid('run'),transport,build:typeof data.trace?.build==='string'?data.trace.build:'unknown',stages:data.trace?.stages?stageSchema.array().parse(data.trace.stages):undefined}};
   }
   async function analyze() {
     setBusy(true);setError('');const controller=new AbortController();detection.current=controller;setCancellable(true);
@@ -234,7 +234,7 @@ export default function MagicDialog({
         Math.max(...ys) - Math.min(...ys),
       ];
       const r = regionSchema.parse({ ...region, polygon: points, maskPng: undefined, bbox });
-      patch({...r,manualBackground:undefined});
+      patch({...r,manualBackground:undefined,maskOrigin:"manual"});
       setPoly(false);
       setPoints([]);
       setError("");
@@ -494,7 +494,7 @@ export default function MagicDialog({
                           onChange={(e) => {
                             const b = [...region.bbox] as Region["bbox"];
                             b[i] = Number(e.target.value);
-                            patch({ bbox: b, polygon: undefined, maskPng: undefined, manualBackground: undefined });
+                            patch({ bbox: b, polygon: undefined, maskPng: undefined, maskOrigin: undefined, manualBackground: undefined });
                           }}
                         />
                       </label>
@@ -605,7 +605,7 @@ export default function MagicDialog({
                       >
                         다각형 다시 지정
                       </button>
-                      <button onClick={() => patch({ polygon: undefined, maskPng: undefined })}>
+                      <button onClick={() => patch({ polygon: undefined, maskPng: undefined, maskOrigin: undefined })}>
                         마스크 제거
                       </button>
                       {poly && (

@@ -1,0 +1,22 @@
+{
+  "actualSource": true,
+  "evidence": "recorded-real-Gemini-with-explicit-manual-correction",
+  "freshLiveCall": false,
+  "allocated": 21,
+  "ready": 12,
+  "readyText": 10,
+  "readyShape": 1,
+  "readyImage": 1,
+  "zipReopened": true,
+  "textEdited": true,
+  "shapeEdited": true,
+  "imageMovedDeleted": true,
+  "png": true,
+  "pptxNative": true,
+  "manualRepairResidualPixels": 0,
+  "outsideChangedPixels": 0,
+  "alpha": {
+    "clear": 9966,
+    "ink": 33629
+  }
+}

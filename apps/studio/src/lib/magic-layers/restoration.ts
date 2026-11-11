@@ -24,7 +24,7 @@ export async function restoreCandidateBackground(source:Asset,regions:Region[],s
   const patch=plan.patches.find(p=>p.id===o.id);
   if(!patch){o.reason=plan.retained.find(r=>r.id===o.id)?.reason??'background-pending';continue;}
   try{
-   if(el.type==='image'){
+   if(el.type==='image'&&!regions.find(r=>r.id===o.id)?.manualBackground){
     const crop=await loadImage(el.src),c=document.createElement('canvas');c.width=crop.naturalWidth;c.height=crop.naturalHeight;
     const cx=c.getContext('2d')!;cx.drawImage(crop,0,0);const data=cx.getImageData(0,0,c.width,c.height).data,alpha=new Uint8Array(c.width*c.height);
     for(let i=0;i<alpha.length;i++)alpha[i]=data[i*4+3];

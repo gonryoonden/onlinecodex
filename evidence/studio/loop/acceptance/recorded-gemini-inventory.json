@@ -1,0 +1,373 @@
+{
+  "evidence": "recorded-real-Gemini-response",
+  "freshLiveCall": false,
+  "total": 47,
+  "originalModelCandidates": 46,
+  "manualShapeAdded": 1,
+  "nativeText": 19,
+  "allocatedImages": 1,
+  "ready": 12,
+  "alpha": [],
+  "inventory": [
+    {
+      "id": "r0",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbh1gvh272y4td",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r1",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbh1gvh283vfc9",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r2",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r3",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbh1gvh295qn7a",
+      "reason": "overlap",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r4",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r5",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r6",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r7",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbh1gvh2as90iy",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r9",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbh1gvh2by3qvy",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r10",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r11",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r12",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r13",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbh1gvh2ci90ga",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r14",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbh1gvh2dzscsg",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r15",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r16",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r17",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbh1gvh2e3s3z2",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r18",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbh1gvh2f3naih",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r19",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r20",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r21",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r22",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r23",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r24",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r25",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbh1gvh2giacr5",
+      "reason": "overlap",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r26",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r27",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r28",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r65",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbh1gvh2hir1it",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r66",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbh1gvh2i1z0pj",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r29",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r30",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbh1gvh2jzxp0c",
+      "reason": "overlap",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r31",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r32",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r33",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbh1gvk2lry18b",
+      "maskOrigin": "manual",
+      "extraction": "polygon",
+      "background": "manual-flat"
+    },
+    {
+      "id": "r34",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r35",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbh1gvk2mb1zpa",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r36",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbh1gvk2nevm32",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r37",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r38",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r39",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbh1gvk2oc5weg",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r40",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbh1gvk2pmtox7",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r41",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r42",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbh1gvk2q93gpk",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r43",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r44",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbh1gvk2ri3nh8",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "region_mwbh1fem1fx8gfc",
+      "type": "shape",
+      "status": "generated",
+      "elementId": "rect_mwbh1gvk2snpuo2",
+      "extraction": "native",
+      "background": "manual-flat"
+    }
+  ]
+}

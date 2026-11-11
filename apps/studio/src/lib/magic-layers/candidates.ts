@@ -3,6 +3,7 @@ export type CandidateStatus = 'generated' | 'merged' | 'correction-needed' | 'se
 export interface CandidateOutcome {
  id: string; type: Region['type']; status: CandidateStatus; canonicalId?: string;
  parentId?: string; elementId?: string; reason?: string;
+ maskOrigin?: 'analysis' | 'manual' | 'local';
  extraction?: 'native' | 'polygon' | 'model-mask' | 'flat-key';
  background: 'pending' | 'local-flat' | 'manual-flat' | 'inpaint-review';
 }

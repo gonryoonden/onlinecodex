@@ -20,3 +20,10 @@ class Runner(unittest.TestCase):
   a=m.reserve(s,1,'contract','x','test');m.finish(s,a,False,'log')
   with self.assertRaises(ValueError):m.promote(s,1)
   a=m.reserve(s,1,'contract','x','test');m.finish(s,a,True,'log');m.promote(s,1);m.reserve(s,2,'contract','x','test')
+
+ def test_restricted_preview_never_completes_a_blocked_product_gate(self):
+  s=m.initial()
+  for i in range(1,5):s['phases'][str(i)]['status']='passed'
+  a=m.reserve(s,5,'browser','external','test');m.finish(s,a,True,'log');s['phases']['5']['status']='blocked'
+  a=m.reserve(s,6,'preview','preview','test');m.finish(s,a,True,'log')
+  with self.assertRaises(ValueError):m.promote(s,6)

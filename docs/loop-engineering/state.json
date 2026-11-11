@@ -90,6 +90,61 @@
       "started": "2026-11-11T01:49:18.774050+00:00",
       "finished": "2026-11-11T01:50:03.220766+00:00",
       "log": "evidence/studio/loop/attempt-08.log"
+    },
+    {
+      "id": 9,
+      "phase": 5,
+      "gate": "browser",
+      "cause": "actual-editor-acceptance",
+      "hypothesis": "Recorded candidates can be manually masked, edited, exported and reopened with review state intact",
+      "status": "passed",
+      "started": "2026-11-11T01:51:59.754471+00:00",
+      "finished": "2026-11-11T01:53:16.132894+00:00",
+      "log": "evidence/studio/loop/attempt-09.log"
+    },
+    {
+      "id": 10,
+      "phase": 5,
+      "gate": "browser",
+      "cause": "actual-three-inputs",
+      "hypothesis": "Three actual PNG/JPG sources survive native edits, alpha movement/deletion, ZIP reopen and PNG/PPTX output; recognition provenance stays explicit",
+      "status": "passed",
+      "started": "2026-11-11T01:53:51.404814+00:00",
+      "finished": "2026-11-11T01:55:57.344634+00:00",
+      "log": "evidence/studio/loop/attempt-10.log"
+    },
+    {
+      "id": 11,
+      "phase": 5,
+      "gate": "browser",
+      "cause": "final-source-preservation",
+      "hypothesis": "Mask origin remains explicit and all pixels outside successful repair regions are preserved on all three real sources",
+      "status": "passed",
+      "started": "2026-11-11T01:56:48.504849+00:00",
+      "finished": "2026-11-11T01:59:03.260462+00:00",
+      "log": "evidence/studio/loop/attempt-11.log"
+    },
+    {
+      "id": 12,
+      "phase": 5,
+      "gate": "mask-review",
+      "cause": "manual-origin",
+      "hypothesis": "A user-drawn polygon must remain marked manual after candidate generation and archive reopen",
+      "status": "passed",
+      "started": "2026-11-11T01:59:29.746940+00:00",
+      "finished": "2026-11-11T02:00:26.949462+00:00",
+      "log": "evidence/studio/loop/attempt-12.log"
+    },
+    {
+      "id": 13,
+      "phase": 6,
+      "gate": "preview",
+      "cause": "restricted-preview",
+      "hypothesis": "Publish only technically verified opt-in changes while the full automatic editing quality gate remains blocked",
+      "status": "passed",
+      "started": "2026-11-11T02:01:12.754336+00:00",
+      "finished": "2026-11-11T02:01:23.975788+00:00",
+      "log": "evidence/studio/loop/attempt-13.log"
     }
   ],
   "phases": {
@@ -110,12 +165,23 @@
       "verifiedAttempt": 6
     },
     "5": {
-      "status": "running"
+      "status": "blocked",
+      "reason": "Technical browser checks pass on three real sources, but full automatic acceptance is blocked: Gemini host 403; the recorded response has no masks, 26 image candidates still require separation after one explicit manual correction, and 9 native candidates remain hidden pending repair. Two other sources use human inventories, not real Gemini responses.",
+      "technicalChecks": {
+        "actualSources": 3,
+        "savedRealGeminiSources": 1,
+        "humanInventorySources": 2,
+        "browserGateAttempt": 11,
+        "maskOriginGateAttempt": 12
+      }
     },
     "6": {
-      "status": "pending"
+      "status": "blocked",
+      "reason": "Restricted Preview build checks pass; full beta quality remains blocked by phase 5. Deployment readiness/capability verification is recorded separately in preview.json."
     }
   },
   "halted": null,
-  "checkpoint": "111f11a0fc68119c79bce1df4f692ae1f69e77f4"
+  "checkpoint": "f8236484f1e0c59ce77f92165a4d807ed8b86875",
+  "stopReason": "FULL_AUTOMATIC_EDITING_QUALITY_BLOCKED: missing real alpha masks, unresolved nested/complex backgrounds, and blocked Gemini host",
+  "nextAction": "Resume phase 5 after resolving evidence/environment constraints; preserve attempts and phase 1-4 checkpoints."
 }
