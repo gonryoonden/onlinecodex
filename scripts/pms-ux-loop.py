@@ -16,7 +16,7 @@ loop.GATES.clear();loop.GATES.update({
  'auto':[['npm','run','typecheck'],['npm','test'],['npm','run','lint'],['npx','playwright','test','tests/auto-edit.spec.ts']],
  'regression':[['npm','test'],['npx','playwright','test','tests/independent-layers.spec.ts','tests/preservation.spec.ts','tests/sam-cancel.spec.ts']],
  'assessment':[['python','scripts/evaluation/ux-results.py'],['python','-m','unittest','discover','-s','tests/loop','-v'],['npm','run','typecheck'],['npm','run','lint']],
- 'hosted':[['npx','playwright','test','tests/auto-edit.spec.ts']],
+ 'preview':[['npx','playwright','test','tests/auto-edit.spec.ts']],
  'release':[['python','-m','unittest','discover','-s','tests/loop','-v'],['npm','run','typecheck'],['npm','test'],['npm','run','lint'],['npx','playwright','test','tests/auto-edit.spec.ts','tests/auto-cancel.spec.ts','tests/independent-layers.spec.ts','tests/preservation.spec.ts','tests/sam-cancel.spec.ts'],['python','scripts/evaluation/verify-ux-artifacts.py'],['npm','run','build']],
 })
 # Namespace attempt logs without changing the original runner or its history.
