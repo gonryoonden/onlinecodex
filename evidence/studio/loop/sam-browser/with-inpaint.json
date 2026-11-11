@@ -1,0 +1,442 @@
+{
+  "freshGeminiCall": false,
+  "manualMasks": 0,
+  "totalImageCandidates": 27,
+  "readyLearnedImages": 23,
+  "modelImageMovedResizedDeleted": true,
+  "allocatedLearnedImages": 26,
+  "elapsedMs": 13387,
+  "alpha": {
+    "clear": 10343,
+    "ink": 24847,
+    "referenceIoU": 0.9980713596914176
+  },
+  "network": [],
+  "inventory": [
+    {
+      "id": "r0",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbiczqo30j5mg2",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r1",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbiczqo31zm5cy",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r2",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbiczrj34auzhw",
+      "reason": "inpaint-neighbor-conflict",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r3",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbiczrj35pqlrh",
+      "reason": "overlap",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r4",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczrn38pabrt",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "local-flat"
+    },
+    {
+      "id": "r5",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczro3budubd",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "local-flat"
+    },
+    {
+      "id": "r6",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczrp3e927r7",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r7",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbiczrp3fo39zi",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r9",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbiczrp3g3kgo5",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r10",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczrr3jfj0fm",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r11",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczrs3mjj685",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r12",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczrt3p67m32",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r13",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbiczrt3qrqhd5",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r14",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbiczrt3rjpwme",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r15",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczrv3uid9y5",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r16",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczrw3xopmv4",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r17",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbiczrw3ya96bw",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r18",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbiczrw3zvscky",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r19",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczrz42z035a",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r20",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczs245io047",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r21",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczs8489oz5g",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r22",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r23",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczsb4bn7mzx",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "local-flat"
+    },
+    {
+      "id": "r24",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbiczsq4e0xxjg",
+      "reason": "inpaint-neighbor-conflict",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r25",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbiczsq4fn8nw9",
+      "reason": "overlap",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r26",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczst4i37gz9",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r27",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczt04l58snw",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r28",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczt34oesd3l",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r65",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbiczt34pvhnov",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r66",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbiczt34qkcm2t",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r29",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbicztx4t70m95",
+      "reason": "inpaint-neighbor-conflict",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r30",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbicztx4u2u5ni",
+      "reason": "overlap",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r31",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczu24xokc9z",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r32",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczu8509ptx4",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r33",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczuc53nhzz3",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r34",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczue56sa2il",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r35",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbiczue57kuhs2",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r36",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbiczue58jjdmb",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r37",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczui5b3bm70",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r38",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczuj5e3q1lc",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r39",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbiczuj5f7njb9",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r40",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbiczuj5g6aqlc",
+      "extraction": "native",
+      "background": "local-flat"
+    },
+    {
+      "id": "r41",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczul5j3gyka",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r42",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbiczul5kj4xj3",
+      "reason": "complex-boundary",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r43",
+      "type": "image",
+      "status": "generated",
+      "elementId": "image_mwbiczum5nk7v5x",
+      "reason": "directional-inpaint-review-required",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "inpaint-review"
+    },
+    {
+      "id": "r44",
+      "type": "text",
+      "status": "generated",
+      "elementId": "text_mwbiczum5oqk4x8",
+      "extraction": "native",
+      "background": "local-flat"
+    }
+  ]
+}

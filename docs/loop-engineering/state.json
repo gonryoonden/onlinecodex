@@ -211,6 +211,17 @@
       "started": "2026-11-11T02:32:39.778516+00:00",
       "finished": "2026-11-11T02:33:23.325783+00:00",
       "log": "evidence/studio/loop/attempt-19.log"
+    },
+    {
+      "id": 20,
+      "phase": 5,
+      "gate": "sam-browser",
+      "cause": "mask-based-restoration",
+      "hypothesis": "A learned foreground mask must become a movable/resizable/deletable layer after bounded inpainting, while neighboring candidates remain protected",
+      "status": "passed",
+      "started": "2026-11-11T02:36:08.420878+00:00",
+      "finished": "2026-11-11T02:37:03.974600+00:00",
+      "log": "evidence/studio/loop/attempt-20.log"
     }
   ],
   "phases": {
@@ -252,7 +263,7 @@
     }
   },
   "halted": null,
-  "checkpoint": "0e887b33837f020f8d4b78f75f663af6803bd7c7",
+  "checkpoint": "4b97e3e927c8d9ed7a7144197df18931db91ab40",
   "stopReason": "FULL_AUTOMATIC_EDITING_QUALITY_BLOCKED: missing real alpha masks, unresolved nested/complex backgrounds, and blocked Gemini host",
   "nextAction": "Resume phase 5 after resolving evidence/environment constraints; preserve attempts and phase 1-4 checkpoints."
 }
