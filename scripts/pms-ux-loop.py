@@ -13,7 +13,7 @@ loop.initial=initial
 loop.GATES.clear();loop.GATES.update({
  'audit':[['python','scripts/evaluation/ux-audit.py']],
  'policy':[['npm','run','typecheck'],['npm','test']],
- 'auto':[['npm','run','typecheck'],['npm','run','lint'],['npx','playwright','test','tests/auto-edit.spec.ts']],
+ 'auto':[['npm','run','typecheck'],['npm','test'],['npm','run','lint'],['npx','playwright','test','tests/auto-edit.spec.ts']],
  'regression':[['npm','test'],['npx','playwright','test','tests/independent-layers.spec.ts','tests/preservation.spec.ts','tests/sam-cancel.spec.ts']],
  'release':[['npm','run','build']],
 })

@@ -1,0 +1,52 @@
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "run", "lint"]
+
+> personal-magic-studio@0.1.0 lint
+> eslint src tests
+
+
+/workspace/pms-beta/apps/studio/src/components/AutoEditDialog.tsx
+  12:2  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+/workspace/pms-beta/apps/studio/src/components/AutoEditDialog.tsx:12:2
+  10 |  const initialSaved=useRef(saved);
+  11 |  const running=useRef<AbortController|null>(null),callbacks=useRef({persist,onApply});
+> 12 |  callbacks.current={persist,onApply};
+     |  ^^^^^^^^^^^^^^^^^ Cannot update ref during render
+  13 |  const execute=useRef<(v?:SavedAnalysis,allow?:boolean)=>Promise<void>>(async()=>{});
+  14 |  execute.current=async(v,allow=false)=>{
+  15 |   if(running.current)return;const controller=new AbortController();running.current=controller;setBusy(true);setError('');                                                                                                                                                                                                                                                                     react-hooks/refs
+  14:2  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+/workspace/pms-beta/apps/studio/src/components/AutoEditDialog.tsx:14:2
+  12 |  callbacks.current={persist,onApply};
+  13 |  const execute=useRef<(v?:SavedAnalysis,allow?:boolean)=>Promise<void>>(async()=>{});
+> 14 |  execute.current=async(v,allow=false)=>{
+     |  ^^^^^^^^^^^^^^^ Cannot update ref during render
+  15 |   if(running.current)return;const controller=new AbortController();running.current=controller;setBusy(true);setError('');
+  16 |   const timeout=setTimeout(()=>controller.abort(),240000);
+  17 |   try{const result=await automaticEdit({source,width,height,consent:allow,saved:v,signal:controller.signal,progress:setStatus,persist:value=>{setAvailable(value);callbacks.current.persist(value);}});controller.signal.throwIfAborted();callbacks.current.onApply(result.page,result.assets,source,result.diagnostic);onClose();}  react-hooks/refs
+
+/workspace/pms-beta/apps/studio/src/lib/magic-layers/restoration.ts
+  27:9  warning  'region' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 3 problems (2 errors, 1 warning)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

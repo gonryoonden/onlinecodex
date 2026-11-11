@@ -16,7 +16,7 @@ export function inpaintSupport(data:Uint8ClampedArray,width:number,height:number
   if(protectedRects.some(([px,py,pw,ph])=>xx>=px&&xx<px+pw&&yy>=py&&yy<py+ph))throw new Error('inpaint-neighbor-conflict');
  }
  if(!count)throw new Error('inpaint-empty');
- const disagreement:number[]=[];
+ const disagreement:number[]=[],chroma:number[]=[];
  const sum=new Float32Array(w*h*3),weight=new Uint8Array(w*h);
  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
   if(!mask[y*w+x])continue;const start=x;while(x<w&&mask[y*w+x])x++;const end=x;
@@ -26,11 +26,22 @@ export function inpaintSupport(data:Uint8ClampedArray,width:number,height:number
  for(let x=0;x<w;x++)for(let y=0;y<h;y++){
   if(!mask[y*w+x])continue;const start=y;while(y<h&&mask[y*w+x])y++;const end=y;
   if(start===0||end===h)throw new Error('inpaint-boundary-missing');
-  for(let yy=start;yy<end;yy++){const f=(yy-start+1)/(end-start+1),p=yy*w+x,a=((t+start-1)*width+l+x)*4,b=((t+end)*width+l+x)*4;let diff=0;for(let k=0;k<3;k++){const v=data[a+k]*(1-f)+data[b+k]*f;diff=Math.max(diff,Math.abs(v-sum[p*3+k]));sum[p*3+k]+=v;}disagreement.push(diff);weight[p]++;}
+  for(let yy=start;yy<end;yy++){const f=(yy-start+1)/(end-start+1),p=yy*w+x,a=((t+start-1)*width+l+x)*4,b=((t+end)*width+l+x)*4;let diff=0;const delta:number[]=[];for(let k=0;k<3;k++){const v=data[a+k]*(1-f)+data[b+k]*f;delta.push(v-sum[p*3+k]);diff=Math.max(diff,Math.abs(v-sum[p*3+k]));sum[p*3+k]+=v;}disagreement.push(diff);chroma.push(Math.max(...delta)-Math.min(...delta));weight[p]++;}
  }
  disagreement.sort((a,b)=>a-b);const disagreementP95=disagreement[Math.floor(disagreement.length*.95)]??Infinity;
- if(verifySmooth&&disagreementP95>10)throw new Error('inpaint-nonsmooth-boundary');
+ // A separate bounded shading path: chromatic background, smooth observed exterior,
+ // mostly luminance-only disagreement. An abrupt line/texture cannot use this path.
+ const gradients:number[]=[],colors:number[][]=[];
+ if(verifySmooth&&disagreementP95>10)for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  if(mask[y*w+x])continue;const p=((t+y)*width+l+x)*4;colors.push([data[p],data[p+1],data[p+2]]);
+  for(const [nx,ny] of [[x+1,y],[x,y+1]])if(nx<w&&ny<h&&!mask[ny*w+nx]){const q=((t+ny)*width+l+nx)*4;gradients.push(Math.max(...[0,1,2].map(k=>Math.abs(data[p+k]-data[q+k]))));}
+ }
+ gradients.sort((a,b)=>a-b);chroma.sort((a,b)=>a-b);
+ const chromaP95=chroma[Math.floor(chroma.length*.95)]??Infinity,gradientP99=gradients[Math.floor(gradients.length*.99)]??Infinity,gradientMax=gradients.at(-1)??Infinity;
+ const median=[0,1,2].map(k=>colors.map(c=>c[k]).sort((a,b)=>a-b)[Math.floor(colors.length/2)]??0);
+ const shading=disagreementP95<=40&&chromaP95<=10&&gradientP99<=10&&gradientMax<=40&&Math.max(...median)-Math.min(...median)>=20;
+ if(verifySmooth&&disagreementP95>10&&!shading)throw new Error('inpaint-nonsmooth-boundary');
  // Commit only after every guard has passed; failure never partially erases a source.
  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const p=y*w+x;if(!mask[p])continue;const q=((t+y)*width+l+x)*4;for(let k=0;k<3;k++)data[q+k]=Math.round(sum[p*3+k]/weight[p]);data[q+3]=255;}
- return {pixels:count,radius,disagreementP95,rect:[l,t,w,h] as [number,number,number,number]};
+ return {pixels:count,radius,disagreementP95,chromaP95,gradientP99,shading,rect:[l,t,w,h] as [number,number,number,number]};
 }

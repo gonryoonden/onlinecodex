@@ -1,0 +1,170 @@
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "run", "lint"]
+
+> personal-magic-studio@0.1.0 lint
+> eslint src tests
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npx", "playwright", "test", "tests/auto-edit.spec.ts"]
+[WebServer] (node:23188) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:23201) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:23213) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:23235) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/auto-edit.spec.ts:27:63 › automatic edit flow korean: no object approvals or manual model actions (19.0s)
+(node:23416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/auto-edit.spec.ts:27:63 › automatic edit flow eda-checklist: no object approvals or manual model actions (17.6s)
+(node:23575) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/auto-edit.spec.ts:27:63 › automatic edit flow data-roles: no object approvals or manual model actions (18.2s)
+
+
+  1) tests/auto-edit.spec.ts:27:63 › automatic edit flow korean: no object approvals or manual model actions 
+
+    TimeoutError: locator.check: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: '자동 편집 준비' }).getByLabel('외부 Gemini API로 이 이미지 전송에 동의하고 자동 편집을 시작합니다.')
+        - locator resolved to <input type="checkbox"/>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - performing click action
+        - click action done
+        - waiting for scheduled navigations to finish
+        - navigations have finished
+
+
+      37 |  await page.getByTestId('file-upload').setInputFiles({name:name+(name==='data-roles'?'.jpg':'.png'),mimeType:name==='data-roles'?'image/jpeg':'image/png',buffer});
+      38 |  const d=page.getByRole('dialog',{name:'자동 편집 준비'});await expect(d).toBeVisible();const start=Date.now();
+    > 39 |  await d.getByLabel('외부 Gemini API로 이 이미지 전송에 동의하고 자동 편집을 시작합니다.').check();
+         |                                                                    ^
+      40 |  await expect(page.getByTestId('auto-summary')).toBeVisible({timeout:180000});const elapsedMs=Date.now()-start;
+      41 |  const p=await saved(page),pg=p.pages[1],candidates=p.diagnostics![pg.id].candidates!;
+      42 |  expect(analysisCalls).toBe(1);expect(candidates).toHaveLength(korean?46:2);
+        at /workspace/pms-beta/apps/studio/tests/auto-edit.spec.ts:39:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-a4e3d-als-or-manual-model-actions/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/auto-edit-automatic-edit-f-a4e3d-als-or-manual-model-actions/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-a4e3d-als-or-manual-model-actions/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/auto-edit-automatic-edit-f-a4e3d-als-or-manual-model-actions/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/auto-edit.spec.ts:27:63 › automatic edit flow eda-checklist: no object approvals or manual model actions 
+
+    TimeoutError: locator.check: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: '자동 편집 준비' }).getByLabel('외부 Gemini API로 이 이미지 전송에 동의하고 자동 편집을 시작합니다.')
+        - locator resolved to <input type="checkbox"/>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - performing click action
+        - click action done
+        - waiting for scheduled navigations to finish
+        - navigations have finished
+
+
+      37 |  await page.getByTestId('file-upload').setInputFiles({name:name+(name==='data-roles'?'.jpg':'.png'),mimeType:name==='data-roles'?'image/jpeg':'image/png',buffer});
+      38 |  const d=page.getByRole('dialog',{name:'자동 편집 준비'});await expect(d).toBeVisible();const start=Date.now();
+    > 39 |  await d.getByLabel('외부 Gemini API로 이 이미지 전송에 동의하고 자동 편집을 시작합니다.').check();
+         |                                                                    ^
+      40 |  await expect(page.getByTestId('auto-summary')).toBeVisible({timeout:180000});const elapsedMs=Date.now()-start;
+      41 |  const p=await saved(page),pg=p.pages[1],candidates=p.diagnostics![pg.id].candidates!;
+      42 |  expect(analysisCalls).toBe(1);expect(candidates).toHaveLength(korean?46:2);
+        at /workspace/pms-beta/apps/studio/tests/auto-edit.spec.ts:39:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-083b9-als-or-manual-model-actions/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/auto-edit-automatic-edit-f-083b9-als-or-manual-model-actions/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-083b9-als-or-manual-model-actions/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/auto-edit-automatic-edit-f-083b9-als-or-manual-model-actions/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/auto-edit.spec.ts:27:63 › automatic edit flow data-roles: no object approvals or manual model actions 
+
+    TimeoutError: locator.check: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: '자동 편집 준비' }).getByLabel('외부 Gemini API로 이 이미지 전송에 동의하고 자동 편집을 시작합니다.')
+        - locator resolved to <input type="checkbox"/>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - performing click action
+        - click action done
+        - waiting for scheduled navigations to finish
+        - navigations have finished
+
+
+      37 |  await page.getByTestId('file-upload').setInputFiles({name:name+(name==='data-roles'?'.jpg':'.png'),mimeType:name==='data-roles'?'image/jpeg':'image/png',buffer});
+      38 |  const d=page.getByRole('dialog',{name:'자동 편집 준비'});await expect(d).toBeVisible();const start=Date.now();
+    > 39 |  await d.getByLabel('외부 Gemini API로 이 이미지 전송에 동의하고 자동 편집을 시작합니다.').check();
+         |                                                                    ^
+      40 |  await expect(page.getByTestId('auto-summary')).toBeVisible({timeout:180000});const elapsedMs=Date.now()-start;
+      41 |  const p=await saved(page),pg=p.pages[1],candidates=p.diagnostics![pg.id].candidates!;
+      42 |  expect(analysisCalls).toBe(1);expect(candidates).toHaveLength(korean?46:2);
+        at /workspace/pms-beta/apps/studio/tests/auto-edit.spec.ts:39:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-0672a-als-or-manual-model-actions/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/auto-edit-automatic-edit-f-0672a-als-or-manual-model-actions/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-0672a-als-or-manual-model-actions/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/auto-edit-automatic-edit-f-0672a-als-or-manual-model-actions/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/auto-edit.spec.ts:27:63 › automatic edit flow korean: no object approvals or manual model actions 
+    tests/auto-edit.spec.ts:27:63 › automatic edit flow eda-checklist: no object approvals or manual model actions 
+    tests/auto-edit.spec.ts:27:63 › automatic edit flow data-roles: no object approvals or manual model actions 
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

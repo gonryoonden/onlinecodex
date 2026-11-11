@@ -19,3 +19,11 @@ describe('evidence-based exceptions',()=>{
   expect(summarize([{id:'a',type:'image',status:'generated',background:'local-flat',decision:'ready'},{id:'b',type:'image',status:'merged',background:'pending',canonicalId:'a'}])).toEqual({total:2,ready:1,warning:0,review:0,failed:0,merged:1,excluded:0});
  });
 });
+it('permits measured smooth chromatic shading but blocks abrupt background geometry',()=>{
+ const w=100,h=100,data=new Uint8ClampedArray(w*h*4);
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){const shade=Math.max(0,30-Math.hypot(x-55,y-55));data.set([170-shade,220-shade,200-shade,255],(y*w+x)*4);}
+ const support={alpha:new Uint8Array(20*20).fill(255),x:40,y:40,width:20,height:20};
+ const proof=inpaintSupport(data,w,h,support,[],2,true);expect(proof.disagreementP95).toBeLessThanOrEqual(40);
+ const geometry=data.slice();for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(x>60)geometry.set([10,60,40,255],(y*w+x)*4);
+ expect(()=>inpaintSupport(geometry,w,h,support,[],2,true)).toThrow('nonsmooth');
+});

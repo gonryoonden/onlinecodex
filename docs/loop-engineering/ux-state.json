@@ -46,6 +46,50 @@
       "started": "2026-11-11T04:40:31.349045+00:00",
       "finished": "2026-11-11T04:40:42.130261+00:00",
       "log": "evidence/studio/ux-loop/attempt-04.log"
+    },
+    {
+      "id": 5,
+      "phase": 3,
+      "gate": "auto",
+      "cause": "automatic-flow",
+      "hypothesis": "Upload consent launches Gemini model quality repair and page transaction automatically",
+      "status": "failed",
+      "started": "2026-11-11T04:41:30.871764+00:00",
+      "finished": "2026-11-11T04:41:42.163141+00:00",
+      "log": "evidence/studio/ux-loop/attempt-05.log"
+    },
+    {
+      "id": 6,
+      "phase": 3,
+      "gate": "auto",
+      "cause": "automatic-flow",
+      "hypothesis": "Stable effect-managed callbacks satisfy React rules while auto pipeline remains cancellable",
+      "status": "failed",
+      "started": "2026-11-11T04:42:03.439134+00:00",
+      "finished": "2026-11-11T04:43:17.203728+00:00",
+      "log": "evidence/studio/ux-loop/attempt-06.log"
+    },
+    {
+      "id": 7,
+      "phase": 3,
+      "gate": "auto",
+      "cause": "consent-unmount",
+      "hypothesis": "Keep consent input mounted through asynchronous pipeline to preserve accessibility and browser click state",
+      "status": "failed",
+      "started": "2026-11-11T06:55:32.972361+00:00",
+      "finished": "2026-11-11T06:56:39.884631+00:00",
+      "log": "evidence/studio/ux-loop/attempt-07.log"
+    },
+    {
+      "id": 8,
+      "phase": 3,
+      "gate": "auto",
+      "cause": "measured-shading",
+      "hypothesis": "Bounded chromatic smooth shading is a nonblocking approximation; abrupt texture and filled holes remain blocked",
+      "status": "passed",
+      "started": "2026-11-11T07:00:41.765435+00:00",
+      "finished": "2026-11-11T07:02:22.192834+00:00",
+      "log": "evidence/studio/ux-loop/attempt-08.log"
     }
   ],
   "phases": {
@@ -58,7 +102,8 @@
       "verifiedAttempt": 4
     },
     "3": {
-      "status": "pending"
+      "status": "passed",
+      "verifiedAttempt": 8
     },
     "4": {
       "status": "pending"
@@ -71,6 +116,6 @@
     }
   },
   "halted": null,
-  "checkpoint": "ac6ed55fe0a3c8b6210544412afed8c7d480099f",
+  "checkpoint": "051bb495d379a0d09ed0622242b89174f5a5ad7b",
   "priorStateSHA256": "9d1e5ccce23239242f3b4bfb80d7109aa20d61fe72810be22963ddb30ccd8df5"
 }

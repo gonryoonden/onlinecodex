@@ -9,7 +9,7 @@ import {
   type Analysis,
   type Region,
 } from "@/lib/magic-layers/schema";
-import { reconstructDesign, type RepairedSource } from "@/lib/magic-layers/reconstruct";
+import { maskedCrop, reconstructDesign, type RepairedSource } from "@/lib/magic-layers/reconstruct";
 import { renderPage } from "@/lib/render";
 import { uid } from "@/lib/types";
 import { prepareAiImageWithMetadata, readApiJson } from "@/lib/ai-transport";
@@ -18,8 +18,11 @@ import { download } from "@/lib/archive";
 import { adaptivePipeline, profileSource, localProposal, inspectMasks, mergeRegions, type PipelineResult } from "@/lib/magic-layers/adaptive";
 import { recordBetaEvent,errorCode } from "@/lib/beta-diagnostics";
 import { detectLocalImages } from "@/lib/magic-layers/local-detect";
+import MaskEditor from './MaskEditor';
+import {loadImage} from '@/lib/imports';
 interface Props {
   source: Asset;
+  initialSelected?:string; automaticReview?:boolean; exceptionIds?:string[];
   review?: PageData["magicReview"];
   width: number;
   height: number;
@@ -28,6 +31,7 @@ interface Props {
 }
 export default function MagicDialog({
   source,
+  initialSelected="", automaticReview=false, exceptionIds,
   review,
   width,
   height,
@@ -65,7 +69,11 @@ export default function MagicDialog({
   const [busy, setBusy] = useState(false);
   const [cancellable,setCancellable]=useState(false);
   const [error, setError] = useState("");
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(initialSelected);
+  const [showAll,setShowAll]=useState(!automaticReview);
+  const [boundaryEdit,setBoundaryEdit]=useState<{current:Asset;base:Asset;rect:[number,number,number,number]}|null>(null);
+  const [comparison,setComparison]=useState<{original:string;cutout:string}|null>(null);
+  useEffect(()=>{let active=true;setTimeout(()=>{if(active)setComparison(null);},0);if(regionForComparison()){void (async()=>{const region=regionForComparison()!;const image=await loadImage(source.dataUrl),crop=await maskedCrop(image,region),c=document.createElement('canvas');c.width=crop.width;c.height=crop.height;c.getContext('2d')!.drawImage(image,...crop.sourcePixels,0,0,c.width,c.height);if(active)setComparison({original:c.toDataURL(),cutout:crop.dataUrl});})().catch(()=>{});}return()=>{active=false;};function regionForComparison(){return analysis.regions.find(r=>r.id===selected);}},[analysis,selected,source]);
   const [manualColors, setManualColors] = useState<Record<string,string>>({});
   const [preview, setPreview] = useState("");
   const [previewKey, setPreviewKey] = useState("");
@@ -192,7 +200,7 @@ export default function MagicDialog({
         confirmed,
         provider,
         activeRepair,
-        { mode, inputKind, initial: initialTrace },
+        { mode, inputKind, initial: initialTrace, automatic:automaticReview },
       );
       setResultWarnings(result.warnings);
       setResultTrace(result.diagnostic);
@@ -363,7 +371,8 @@ export default function MagicDialog({
                       ]);
                     }}
                   >
-                    {analysis.regions.map((r) => (
+                    {automaticReview&&<label><input type="checkbox" checked={showAll} onChange={e=>setShowAll(e.target.checked)}/>모든 후보 보기</label>}
+                {analysis.regions.filter(r=>showAll||exceptionIds?.includes(r.id)).map((r) => (
                       <g
                         key={r.id}
                         onClick={(e) => {
@@ -456,7 +465,8 @@ export default function MagicDialog({
                     AI 키 없이도 원본을 보며 영역을 직접 지정할 수 있습니다.
                   </p>
                 )}
-                {analysis.regions.map((r) => (
+                {automaticReview&&<label><input type="checkbox" checked={showAll} onChange={e=>setShowAll(e.target.checked)}/>모든 후보 보기</label>}
+                {analysis.regions.filter(r=>showAll||exceptionIds?.includes(r.id)).map((r) => (
                   <div
                     key={r.id}
                     className={`region-row ${selected === r.id ? "active" : ""}`}
@@ -492,6 +502,17 @@ export default function MagicDialog({
                   </div>
                 ))}
               </div>
+              {region && (<div><p>원본 / 분리 결과 (클릭해 확대)</p>{comparison&&<><a href={comparison.original} target="_blank" rel="noreferrer"><img src={comparison.original} alt="검토 원본" style={{maxWidth:280,maxHeight:200}}/></a><a href={comparison.cutout} target="_blank" rel="noreferrer"><img src={comparison.cutout} alt="검토 분리 결과" style={{maxWidth:280,maxHeight:200,background:"#889999"}}/></a></>}
+                {automaticReview&&<><p>{region.id} · 경계를 확대하거나 다각형·알파로 교정한 뒤 다시 적용하세요. 확인만으로 품질이 바뀌지는 않습니다.</p>
+                 <button disabled={busy||region.type!=='image'||!region.maskPng&&!region.polygon} onClick={async()=>{
+                  setBusy(true);try{const image=await loadImage(source.dataUrl),crop=await maskedCrop(image,region),c=document.createElement('canvas');c.width=crop.width;c.height=crop.height;c.getContext('2d')!.drawImage(image,...crop.sourcePixels,0,0,c.width,c.height);const base:Asset={id:uid('asset'),name:'경계 원본',mime:'image/png',dataUrl:c.toDataURL(),width:c.width,height:c.height,original:false};setBoundaryEdit({base,current:{...base,id:uid('asset'),dataUrl:crop.dataUrl},rect:crop.sourcePixels});}catch(e){setError(e instanceof Error?e.message:'경계 열기 실패');}finally{setBusy(false);}
+                 }}>마스크 브러시 수정</button>
+                 <button disabled={busy||region.type!=='image'} onClick={async()=>{
+                   setBusy(true);setError('');const controller=new AbortController();detection.current=controller;setCancellable(true);
+                   try{const {segmentObjects}=await import('@/lib/magic-layers/segment');const result=await segmentObjects(source,[{...region,maskPng:undefined,polygon:undefined,maskOrigin:undefined,segmentation:undefined}],controller.signal,setSegmentStatus);setAnalysis(a=>({...a,regions:a.regions.map(r=>r.id===region.id?result.regions[0]:r)}));setPreview('');}
+                   catch(e){setError(e instanceof Error?e.message:'재분리 실패');}finally{setBusy(false);setCancellable(false);detection.current=null;}
+                 }}>선택 객체 재분리</button><button disabled={busy} onClick={()=>void reconstruct(false)}>배경 복원 재검사</button><button disabled={busy} onClick={()=>{setSkip(ids=>[...new Set([...ids,region.id])]);setPreview('');}}>이 객체 원본 유지</button></>}
+              </div>)}
               {region && (
                 <fieldset>
                   <legend>선택 영역 수정 · 좌표 0–1000</legend>
@@ -783,6 +804,9 @@ export default function MagicDialog({
           </button>
         </footer>
       </section>
+      {boundaryEdit&&<MaskEditor current={boundaryEdit.current} base={boundaryEdit.base} onClose={()=>setBoundaryEdit(null)} onApply={url=>{
+        const rect=boundaryEdit.rect;setBusy(true);void (async()=>{const image=await loadImage(url),c=document.createElement('canvas');c.width=image.naturalWidth;c.height=image.naturalHeight;const ctx=c.getContext('2d')!;ctx.drawImage(image,0,0);const data=ctx.getImageData(0,0,c.width,c.height);for(let i=0;i<data.data.length;i+=4){data.data[i]=data.data[i+1]=data.data[i+2]=data.data[i+3];data.data[i+3]=255;}ctx.putImageData(data,0,0);patch({bbox:[rect[0]/source.width*1000,rect[1]/source.height*1000,rect[2]/source.width*1000,rect[3]/source.height*1000],maskPng:c.toDataURL(),polygon:undefined,maskOrigin:'manual',segmentation:undefined});})().catch(e=>setError(e instanceof Error?e.message:'경계 적용 실패')).finally(()=>setBusy(false));
+      }}/>}
     </div>
   );
 }

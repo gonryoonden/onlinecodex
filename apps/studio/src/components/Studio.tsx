@@ -39,6 +39,7 @@ import {
   createTableElement,
   createPage,
   type TableElement,
+  type PageData,
   uid,
 } from "@/lib/types";
 import {
@@ -58,10 +59,12 @@ import ProblemDialog from "./ProblemDialog";
 import { recordBetaEvent,errorCode } from "@/lib/beta-diagnostics";
 import TableDialog from "./TableDialog";
 import ChartDialog from "./ChartDialog";
-import { withLiveStages, statusLabels, warningLabels, snapshotStage, elementItems } from "@/lib/magic-layers/diagnostics";
+import { type Diagnostic, withLiveStages, statusLabels, warningLabels, snapshotStage, elementItems } from "@/lib/magic-layers/diagnostics";
 function message(e: unknown) {
   return e instanceof Error ? e.message : "작업을 완료하지 못했습니다.";
 }
+import AutoEditDialog from './AutoEditDialog';
+import {summarize} from '@/lib/magic-layers/quality';
 export default function Studio() {
   const s = useEditorStore();
   const meta = useRef<Project | null>(null);
@@ -79,6 +82,9 @@ export default function Studio() {
   const [damagedRecords, setDamagedRecords] = useState<unknown[]>([]);
   const [chartTable,setChartTable]=useState<TableElement|null>(null);
   const [tableSource,setTableSource]=useState<Asset|null>(null);
+  const [automatic,setAutomatic]=useState<Asset|null>(null);
+  const [exceptions,setExceptions]=useState(false);
+  const [reviewTarget,setReviewTarget]=useState('');
   const [magic, setMagic] = useState<Asset | null>(null);
   const [maskEdit,setMaskEdit]=useState<{id:string;current:Asset;base:Asset}|null>(null);
   const [exportOpen, setExportOpen] = useState(false);
@@ -241,7 +247,7 @@ export default function Studio() {
         void save().catch(() => {});
         return;
       }
-      if (editing || magic || library || tableSource || chartTable || maskEdit || problemOpen) return;
+      if (editing || automatic || magic || library || tableSource || chartTable || maskEdit || problemOpen) return;
       if (e.ctrlKey || e.metaKey) {
         if (e.key.toLowerCase() === "z") {
           e.preventDefault();
@@ -286,7 +292,7 @@ export default function Studio() {
     }
     window.addEventListener("keydown", key);
     return () => window.removeEventListener("keydown", key);
-  }, [magic, library, tableSource, chartTable, maskEdit, problemOpen, save]);
+  }, [automatic, magic, library, tableSource, chartTable, maskEdit, problemOpen, save]);
   function addAsset(a: Asset) {
     if (meta.current) {
       meta.current = {
@@ -328,7 +334,7 @@ export default function Studio() {
         s.addElement(placed);
         s.setZoom(1);setMobilePanel(null);
         setNotice("");
-        setUploaded(a);recordBetaEvent({feature:'upload',stage:'input',outcome:'ok',code:'none'});
+        setUploaded(a);setAutomatic(a);recordBetaEvent({feature:'upload',stage:'input',outcome:'ok',code:'none'});
       }
     } catch (e) {
       setError(message(e));
@@ -336,6 +342,23 @@ export default function Studio() {
       setBusy(false);
     }
   }
+  const applyMagic = (newPage:PageData, assets:Asset[], original:Asset, diagnostic:Diagnostic) => {
+            if (useEditorStore.getState().pages.length >= 30)
+              throw new Error(
+                "최대 30페이지입니다. 새 프로젝트에서 레이어를 생성하세요.",
+              );
+            assets.forEach(addAsset);
+            addAsset(original);
+            if (meta.current) {
+              meta.current.sources[newPage.id] = original.id;
+              meta.current.diagnostics={...meta.current.diagnostics,[newPage.id]:diagnostic};
+              setProjectMeta({...meta.current});
+            }
+            s.appendPage(newPage);
+            setNotice(
+              `${statusLabels[diagnostic.status]} · 새 페이지에 추가했습니다.`,
+            );
+          };
   async function importArchive(f: File) {
     setBusy(true);
     setError("");
@@ -1059,7 +1082,13 @@ export default function Studio() {
               </button>
             </div>
           )}
-          {page.elements.some((e) => e.provenance?.backgroundWarning) && (
+          {projectMeta?.diagnostics?.[page.id]?.candidates?.some(c=>c.decision)&&(()=>{
+            const candidates=projectMeta.diagnostics![page.id].candidates!,n=summarize(candidates);
+            return <div className="banner" data-testid="auto-summary"><span>편집 가능 {n.ready+n.warning}개 · 품질 경고 {n.warning}개 · 상세 검토 {n.review}개 · 분리 실패 {n.failed}개</span><button onClick={()=>setExceptions(!exceptions)}>문제 객체 상세 검토</button><button onClick={()=>source&&setAutomatic(source)}>저장된 분석으로 다시 처리</button>
+             {exceptions&&<div aria-label="예외 객체 목록">{candidates.filter(c=>c.decision==='review'||c.decision==='failed').map(c=><div key={c.id} data-testid="exception-row"><span>{c.id} · {c.reason}</span><button onClick={()=>{const original=source;if(original){setReviewTarget(c.id);setMagic(original);}}}>원본 비교·마스크·배경 교정</button></div>)}</div>}
+            </div>;
+          })()}
+          {!projectMeta?.diagnostics?.[page.id]?.candidates?.some(c=>c.decision) && page.elements.some((e) => e.provenance?.backgroundWarning) && (
             <div className="banner warning">
               배경 보정 필요 · 원본에 글자/객체 잔상이 남아 있습니다. 정확한
               분리 결과가 아닙니다.
@@ -1192,7 +1221,7 @@ export default function Studio() {
                             ? "선"
                             : "도형")}
                     <small>
-                      {e.provenance?.method.includes("approximate")
+                      {projectMeta?.diagnostics?.[page.id]?.candidates?.find(c=>c.elementId===e.id)?.decision === 'warning' ? '품질 경고' : projectMeta?.diagnostics?.[page.id]?.candidates?.find(c=>c.elementId===e.id)?.decision === 'ready' ? '편집 준비 완료' : e.provenance?.method.includes("approximate")
                         ? "근사 크롭"
                         : e.provenance?.backgroundWarning
                           ? "배경 보정 필요"
@@ -1595,32 +1624,29 @@ export default function Studio() {
         recordBetaEvent({feature:'correction',stage:'apply',outcome:'ok',code:'none',correction:'alpha',method:'manual'});
         setNotice('경계를 보정했습니다. 원본과 배경은 보존되며 되돌리기와 프로젝트 ZIP을 지원합니다.');
       }}/>}
+      {automatic&&<AutoEditDialog key={automatic.id} source={automatic} width={s.width} height={s.height}
+        saved={s.pages.find(p=>p.magicReview?.sourceId===automatic.id)?.magicReview}
+        persist={value=>{const live=useEditorStore.getState();useEditorStore.setState({pages:live.pages.map(p=>p.id===page.id?{...p,magicReview:value}:p),dirty:true});}}
+        onApply={applyMagic} onClose={()=>setAutomatic(null)} onAdvanced={()=>{setAutomatic(null);setMagic(automatic);}}/>}
       {magic && (
         <MagicDialog
           source={magic}
+          initialSelected={reviewTarget}
+          automaticReview={Boolean(projectMeta?.diagnostics?.[page.id]?.candidates?.some(c=>c.decision))}
+          exceptionIds={projectMeta?.diagnostics?.[page.id]?.candidates?.filter(c=>c.decision==='review'||c.decision==='failed').map(c=>c.id)}
           review={page.magicReview?.sourceId===magic.id?{...page.magicReview,analysis:{...page.magicReview.analysis,regions:page.magicReview.analysis.regions.map(r=>{
             const edited=page.elements.find(e=>e.provenance?.regionId===r.id);
             return r.type==="text"&&edited?.type==="text"?{...r,text:edited.text}:r;
           })}}:undefined}
           width={s.width}
           height={s.height}
-          onClose={() => setMagic(null)}
-          onApply={(newPage, assets, original, diagnostic) => {
-            if (useEditorStore.getState().pages.length >= 30)
-              throw new Error(
-                "최대 30페이지입니다. 새 프로젝트에서 레이어를 생성하세요.",
-              );
-            assets.forEach(addAsset);
-            addAsset(original);
-            if (meta.current) {
-              meta.current.sources[newPage.id] = original.id;
-              meta.current.diagnostics={...meta.current.diagnostics,[newPage.id]:diagnostic};
-              setProjectMeta({...meta.current});
+          onClose={() => {setMagic(null);setReviewTarget('');}}
+          onApply={(newPage,assets,original,diagnostic)=>{
+            if(projectMeta?.diagnostics?.[page.id]?.candidates?.some(c=>c.decision)){
+              const preserve=new Set(projectMeta.diagnostics![page.id].candidates!.filter(c=>c.decision==='ready'||c.decision==='warning').map(c=>c.id));
+              newPage.elements=newPage.elements.map(el=>{const id=el.provenance?.regionId,old=id&&preserve.has(id)&&page.elements.find(e=>e.provenance?.regionId===id);return old?{...old,id:el.id}:el;});
             }
-            s.appendPage(newPage);
-            setNotice(
-              `${statusLabels[diagnostic.status]} · 새 페이지에 추가했습니다.`,
-            );
+            applyMagic(newPage,assets,original,diagnostic);
           }}
         />
       )}

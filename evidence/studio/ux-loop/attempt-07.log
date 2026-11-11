@@ -1,0 +1,77 @@
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "run", "lint"]
+
+> personal-magic-studio@0.1.0 lint
+> eslint src tests
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npx", "playwright", "test", "tests/auto-edit.spec.ts"]
+[WebServer] (node:31978) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:31991) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:32003) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:32033) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/auto-edit.spec.ts:27:63 › automatic edit flow korean: no object approvals or manual model actions (23.3s)
+(node:32208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/auto-edit.spec.ts:27:63 › automatic edit flow eda-checklist: no object approvals or manual model actions (11.3s)
+  ✓  3 tests/auto-edit.spec.ts:27:63 › automatic edit flow data-roles: no object approvals or manual model actions (11.5s)
+
+
+  1) tests/auto-edit.spec.ts:27:63 › automatic edit flow korean: no object approvals or manual model actions 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "warning"
+    Received: "review"
+
+      45 |  if(korean){
+      46 |   for(const id of ['r11','r12','r26','r31'])expect(candidates.find(c=>c.id===id)).toMatchObject({decision:'review',reason:'interior-background-in-mask'});
+    > 47 |   expect(candidates.find(c=>c.id==='r33')?.decision).toBe('warning');
+         |                                                      ^
+      48 |   expect(metrics.ready+metrics.warning).toBeGreaterThan(0);expect(metrics.review/metrics.total).toBeLessThan(.7);
+      49 |  }
+      50 |  await page.getByRole('button',{name:'문제 객체 상세 검토',exact:true}).click();await expect(page.getByTestId('exception-row')).toHaveCount(metrics.review+metrics.failed);
+        at /workspace/pms-beta/apps/studio/tests/auto-edit.spec.ts:47:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-a4e3d-als-or-manual-model-actions/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/auto-edit-automatic-edit-f-a4e3d-als-or-manual-model-actions/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/auto-edit-automatic-edit-f-a4e3d-als-or-manual-model-actions/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/auto-edit-automatic-edit-f-a4e3d-als-or-manual-model-actions/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/auto-edit.spec.ts:27:63 › automatic edit flow korean: no object approvals or manual model actions 
+  2 passed (53.3s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
