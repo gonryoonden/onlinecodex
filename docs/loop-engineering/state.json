@@ -68,6 +68,28 @@
       "started": "2026-11-11T01:45:33.065065+00:00",
       "finished": "2026-11-11T01:46:18.611163+00:00",
       "log": "evidence/studio/loop/attempt-06.log"
+    },
+    {
+      "id": 7,
+      "phase": 5,
+      "gate": "browser",
+      "cause": "review-persistence",
+      "hypothesis": "A saved candidate page must reopen all 46 candidates without calling Gemini again",
+      "status": "failed",
+      "started": "2026-11-11T01:47:31.937013+00:00",
+      "finished": "2026-11-11T01:48:28.858185+00:00",
+      "log": "evidence/studio/loop/attempt-07.log"
+    },
+    {
+      "id": 8,
+      "phase": 5,
+      "gate": "browser",
+      "cause": "review-persistence",
+      "hypothesis": "Persist validated analysis on each page and reopen without new Gemini calls",
+      "status": "passed",
+      "started": "2026-11-11T01:49:18.774050+00:00",
+      "finished": "2026-11-11T01:50:03.220766+00:00",
+      "log": "evidence/studio/loop/attempt-08.log"
     }
   ],
   "phases": {
@@ -88,12 +110,12 @@
       "verifiedAttempt": 6
     },
     "5": {
-      "status": "pending"
+      "status": "running"
     },
     "6": {
       "status": "pending"
     }
   },
   "halted": null,
-  "checkpoint": "623818999559aa7d6db73404cf62a1b3de8f102a"
+  "checkpoint": "111f11a0fc68119c79bce1df4f692ae1f69e77f4"
 }

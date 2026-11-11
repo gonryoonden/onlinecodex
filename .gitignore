@@ -29,3 +29,5 @@ evidence/studio/beta/
 
 # Loop state lock is ephemeral
 docs/loop-engineering/state.lock
+
+/work/

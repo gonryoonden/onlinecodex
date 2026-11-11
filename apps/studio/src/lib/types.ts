@@ -430,6 +430,7 @@ export type Background =
   | { type: "gradient"; from: string; to: string; angle: number };
 
 export interface PageData {
+  magicReview?: { sourceId:string; analysis:import("./magic-layers/schema").Analysis; skip:string[]; provider:string };
   id: string;
   background: Background;
   elements: AnyElement[];

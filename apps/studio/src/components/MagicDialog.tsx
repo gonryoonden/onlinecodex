@@ -20,6 +20,7 @@ import { recordBetaEvent,errorCode } from "@/lib/beta-diagnostics";
 import { detectLocalImages } from "@/lib/magic-layers/local-detect";
 interface Props {
   source: Asset;
+  review?: PageData["magicReview"];
   width: number;
   height: number;
   onClose: () => void;
@@ -27,6 +28,7 @@ interface Props {
 }
 export default function MagicDialog({
   source,
+  review,
   width,
   height,
   onClose,
@@ -38,15 +40,15 @@ export default function MagicDialog({
     reason: string;
     candidates?: string[];
   } | null>(null);
-  const [analysis, setAnalysis] = useState<Analysis>({
+  const [analysis, setAnalysis] = useState<Analysis>(review?.analysis ?? {
     background: { kind: "solid", from: "#FFFFFF", to: "#FFFFFF", angle: 90 },
     regions: [],
     notes: "수동 영역 지정 · AI 분석을 실행하지 않았습니다.",
   });
   const detection = useRef<AbortController | null>(null);
   const [progress,setProgress] = useState<number | null>(null);
-  const [skip, setSkip] = useState<string[]>([]);
-  const [mode, setMode] = useState<"preserve" | "redraw" | "independent">("preserve");
+  const [skip, setSkip] = useState<string[]>(review?.skip ?? []);
+  const [mode, setMode] = useState<"preserve" | "redraw" | "independent">(review?"independent":"preserve");
   const [inputKind, setInputKind] = useState<Diagnostic["inputKind"]>("unknown");
   const [initialTrace, setInitialTrace] = useState<Partial<Diagnostic>>({});
   const [resultTrace, setResultTrace] = useState<Diagnostic | null>(null);
@@ -67,7 +69,7 @@ export default function MagicDialog({
   const [preview, setPreview] = useState("");
   const [previewKey, setPreviewKey] = useState("");
   const currentPreviewKey = JSON.stringify([repairKey, confirmed, activeRepair?.key, mode, inputKind]);
-  const [provider, setProvider] = useState("manual");
+  const [provider, setProvider] = useState(review?.provider ?? "manual");
   const [poly, setPoly] = useState(false);
   const [points, setPoints] = useState<[number, number][]>([]);
   const [zoom, setZoom] = useState(1);

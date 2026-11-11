@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { color } from "../project";
+import { color } from "../colors";
 const n = z.number().finite().min(0).max(1000);
 export const bboxSchema = z
   .tuple([n, n, n.positive(), n.positive()])

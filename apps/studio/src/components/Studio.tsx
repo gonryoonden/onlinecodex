@@ -476,7 +476,7 @@ export default function Studio() {
   const selected = page.elements.filter((el) => s.selectedIds.includes(el.id));
   const el = selected[0];
   const selectedImage = selected.find((e) => e.type === "image");
-  const sourceId = selectedImage?.assetId ?? projectMeta?.sources[page.id];
+  const sourceId = projectMeta?.sources[page.id] ?? selectedImage?.assetId;
   const source = sourceId ? projectMeta?.assets[sourceId] : undefined;
   function patch(p: Partial<Record<string, unknown>>) {
     s.updateElements(
@@ -1598,6 +1598,10 @@ export default function Studio() {
       {magic && (
         <MagicDialog
           source={magic}
+          review={page.magicReview?.sourceId===magic.id?{...page.magicReview,analysis:{...page.magicReview.analysis,regions:page.magicReview.analysis.regions.map(r=>{
+            const edited=page.elements.find(e=>e.provenance?.regionId===r.id);
+            return r.type==="text"&&edited?.type==="text"?{...r,text:edited.text}:r;
+          })}}:undefined}
           width={s.width}
           height={s.height}
           onClose={() => setMagic(null)}

@@ -1,0 +1,107 @@
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "test"]
+
+> personal-magic-studio@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/pms-beta/apps/studio
+
+
+ Test Files  15 passed | 1 skipped (16)
+      Tests  111 passed | 1 skipped (112)
+   Start at  01:47:35
+   Duration  4.30s (transform 364ms, setup 0ms, import 1.55s, tests 897ms, environment 2ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "run", "lint"]
+
+> personal-magic-studio@0.1.0 lint
+> eslint src tests
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npx", "playwright", "test", "tests/independent-layers.spec.ts", "tests/preservation.spec.ts"]
+[WebServer] (node:7866) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7879) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7898) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:7916) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/independent-layers.spec.ts:10:5 › recorded REAL Gemini 46-candidate response: failed repair preserves native candidates and no opaque image successes (24.6s)
+(node:8041) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/preservation.spec.ts:15:5 › P0: residual pixels, atomic Korean replacement, image deletion, diagnostics and restore (11.8s)
+
+
+  1) tests/independent-layers.spec.ts:10:5 › recorded REAL Gemini 46-candidate response: failed repair preserves native candidates and no opaque image successes 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog').locator('.region-row')
+    Expected: 46
+    Received: 0
+    Timeout:  15000ms
+
+    Call log:
+      - Expect "toHaveCount" getByRole('dialog').locator('.region-row') with timeout 15000ms
+      - waiting for getByRole('dialog').locator('.region-row')
+        33 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      28 |  for(const a of alpha){expect(a.transparent).toBeGreaterThan(0);expect(a.foreground).toBeGreaterThan(0);}
+      29 |  await page.getByRole('button',{name:'분석·영역 교정 열기',exact:true}).click();
+    > 30 |  await expect(d.locator('.region-row')).toHaveCount(46); // Must resume without an API call.
+         |                                         ^
+      31 |  await d.getByLabel(/선택 영역이 단색 배경/).check();await d.getByRole('button',{name:'결과 미리보기',exact:true}).click();await expect(d.getByAltText('레이어 변환 결과')).toBeVisible();await d.screenshot({path:path.join(out,'recorded-gemini-review.png')});await d.getByRole('button',{name:'검토한 레이어 생성',exact:true}).click();p=await saved(page);trace=p.diagnostics![p.pages[2].id];
+      32 |  fs.writeFileSync(path.join(out,'recorded-gemini-result.json'),JSON.stringify({evidence:'recorded-real-Gemini-response',freshLiveCall:false,total:46,nativeText:p.pages[2].elements.filter(e=>e.type==='text').length,allocatedImages:p.pages[2].elements.filter(e=>e.type==='image'&&e.provenance?.regionId).length,ready:p.pages[2].elements.filter(e=>e.provenance?.regionId&&e.visible).length,alpha,inventory:trace.candidates},null,2));
+      33 |  expect(trace.candidates).toHaveLength(46);
+        at /workspace/pms-beta/apps/studio/tests/independent-layers.spec.ts:30:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/independent-layers-recorde-8f503-d-no-opaque-image-successes/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/independent-layers-recorde-8f503-d-no-opaque-image-successes/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/independent-layers-recorde-8f503-d-no-opaque-image-successes/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/independent-layers-recorde-8f503-d-no-opaque-image-successes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/independent-layers.spec.ts:10:5 › recorded REAL Gemini 46-candidate response: failed repair preserves native candidates and no opaque image successes 
+  1 passed (41.7s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

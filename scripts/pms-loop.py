@@ -57,7 +57,8 @@ def main():
    with log.open('w') as stream:
     for cmd in GATES[args.gate]:
      cwd=ROOT if cmd[0]=='python' else ROOT/'apps/studio';stream.write('COMMAND '+json.dumps(cmd)+'\n');stream.flush()
-     try:r=subprocess.run(cmd,cwd=cwd,stdout=stream,stderr=subprocess.STDOUT,timeout=600)
+     env=os.environ.copy();env.setdefault('STUDIO_EVIDENCE_DIR',str(ROOT/'work/loop-browser/legacy'));env.setdefault('STUDIO_LOOP_EVIDENCE',str(ROOT/'work/loop-browser'))
+     try:r=subprocess.run(cmd,cwd=cwd,env=env,stdout=stream,stderr=subprocess.STDOUT,timeout=600)
      except subprocess.TimeoutExpired:ok=False;break
      if r.returncode:ok=False;break
    finish(s,a,ok,str(log.relative_to(ROOT)));save(s);print(json.dumps(a));return 0 if ok else 1

@@ -2,7 +2,9 @@ import { z } from "zod";
 import { createPage, uid, type DesignRecord, type AnyElement } from "./types";
 import { diagnosticSchema, type Diagnostic } from "./magic-layers/diagnostics";
 const finite = z.number().finite();
-export const color = z.string().regex(/^#[0-9a-fA-F]{6}$/);
+import { color } from "./colors";
+import { analysisSchema } from "./magic-layers/schema";
+export { color } from "./colors";
 export const imageData = z
   .string()
   .max(24 * 1024 * 1024)
@@ -140,6 +142,7 @@ export const projectSchema = z
           id,
           background: backgroundSchema,
           elements: z.array(elementSchema).max(500),
+          magicReview: z.object({sourceId:id,analysis:analysisSchema,skip:z.array(id).max(80),provider:z.string().max(100)}).optional(),
         }),
       )
       .min(1)
