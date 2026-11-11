@@ -1,0 +1,6 @@
+{
+  "object": "r33 safety helmet",
+  "check": "Source-specific yellow foreground residual in original prompt box; not a universal mask/texture quality metric",
+  "before": 25028,
+  "afterBackgroundRepair": 0
+}

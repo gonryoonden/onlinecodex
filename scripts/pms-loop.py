@@ -11,7 +11,7 @@ def reserve(s,phase,gate,cause,hypothesis):
  if s['halted']: raise ValueError('HALTED: '+s['halted'])
  if len(s['attempts'])>=s['budget']: raise ValueError('BUDGET_EXHAUSTED')
  if any(a['status']=='running' for a in s['attempts']): raise ValueError('RECOVER_RUNNING_ATTEMPT_FIRST')
- restricted=phase==6 and gate in ('preview','sam-preview','sam-production') and all(s['phases'][str(i)]['status']=='passed' for i in range(1,5)) and s['phases']['5']['status']=='blocked' and any(a['phase']==5 and a['status']=='passed' for a in s['attempts'])
+ restricted=phase==6 and gate in ('preview','sam-preview','sam-production','sam-recovery') and all(s['phases'][str(i)]['status']=='passed' for i in range(1,5)) and s['phases']['5']['status']=='blocked' and any(a['phase']==5 and a['status']=='passed' for a in s['attempts'])
  if not restricted and any(s['phases'][str(i)]['status']!='passed' for i in range(1,phase)): raise ValueError('PREREQUISITE_NOT_PASSED')
  a=dict(id=len(s['attempts'])+1,phase=phase,gate=gate,cause=cause,hypothesis=hypothesis,status='running',started=now());s['attempts'].append(a);s['phases'][str(phase)]['status']='running';return a
 
@@ -41,6 +41,7 @@ GATES={
  'sam-acceptance':[['npm','run','typecheck'],['npm','test'],['npm','run','lint'],['npx','playwright','test','tests/sam-browser.spec.ts','tests/independent-layers.spec.ts','tests/preservation.spec.ts']],
  'sam-preview':[['python','scripts/evaluation/verify-sam-artifacts.py'],['python','-m','unittest','discover','-s','tests/loop','-v'],['npm','run','build']],
  'sam-production':[['npm','run','typecheck'],['npm','run','lint'],['npm','run','build'],['python','scripts/evaluation/test-sam-production.py']],
+ 'sam-recovery':[['npm','run','typecheck'],['npm','run','lint'],['npx','playwright','test','tests/sam-cancel.spec.ts']],
  'sam-probe':[['python','scripts/evaluation/probe-mobile-sam.py']],
  'governance':[['python','-m','unittest','discover','-s','tests/loop','-v'],['npm','test']],
  'contract':[['npm','run','typecheck'],['npm','test']],

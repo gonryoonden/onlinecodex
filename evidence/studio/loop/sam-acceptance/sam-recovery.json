@@ -1,0 +1,9 @@
+{
+  "source": "stored REAL Gemini 46 candidates",
+  "cancelledAt": "encoder",
+  "candidatesBefore": 46,
+  "candidatesAfterCancellation": 46,
+  "retryModelMasks": 26,
+  "manualMasks": 0,
+  "passed": true
+}

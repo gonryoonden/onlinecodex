@@ -24,3 +24,7 @@ Base: `115b8ec`, branch `preview/pms-beta-d42d824-20261110`. User goal: Gemini c
 `python scripts/pms-loop.py status` prints the next phase and consumed budget. `run PHASE GATE --cause ROOT_CAUSE --hypothesis TEXT` reserves an attempt atomically before executing fixed checks; stores log and result; incomplete attempts become interrupted on `recover`. `pass PHASE` requires passed verification and prior complete phases. `block PHASE --reason TEXT` records an external limit. `checkpoint` records current Git SHA. No automatic retry, model invocation or deployment is performed by the runner. The coding agent reads the result, investigates the cause, edits and calls the next bounded verification. State is in `docs/loop-engineering/state.json`; immutable attempt logs are in `evidence/studio/loop/`. Every successful phase has a commit, then a checkpoint in the next commit.
 
 Stop at >=24 attempts, 3 consecutive failed attempts with the same cause, unmet prerequisite, or external blocker that cannot be resolved in authorized scope. On interruption inspect `git status`, `recover`, and last verified checkpoint; do not reset budget or discard work. A success requires executed gate evidence, not just a status edit.
+
+## ec29b63 후속 검증
+
+[SEGMENTATION-PLAN.md](SEGMENTATION-PLAN.md)와 사용자 통합 마스터 요청을 적용했다. 모델 실행·마스크/복원 분리·실제 3종 편집·PNG/PDF/PPTX·복구를 기존 24회 한도 내에서 검증했다. 현재 결과와 미충족 품질은 [RESUME-REPORT.md](RESUME-REPORT.md)에 기록한다. 기존 1~13회 기준과 기록을 유지한다.

@@ -1,0 +1,7 @@
+{
+  "original13AttemptsUnchanged": true,
+  "budget": 24,
+  "attempts": 24,
+  "failed": 4,
+  "halted": "BUDGET_EXHAUSTED"
+}

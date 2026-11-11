@@ -1,0 +1,21 @@
+{
+  "sourceKind": "JPEG",
+  "freshGeminiCall": false,
+  "boxSource": "human",
+  "manualImageMasks": 0,
+  "automaticAllocatedMasks": 1,
+  "readyImages": 1,
+  "alpha": {
+    "clear": 39589,
+    "ink": 123611
+  },
+  "flow": {
+    "nativeTextEdited": true,
+    "manualNativeShapeEdited": true,
+    "PNG": true,
+    "PDF": true,
+    "nativePPTX": true,
+    "ZIPRestoredInNewBrowser": true,
+    "outsideRepairPixelsChanged": 0
+  }
+}

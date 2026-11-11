@@ -244,6 +244,28 @@
       "started": "2026-11-11T02:48:41.445765+00:00",
       "finished": "2026-11-11T02:49:02.107737+00:00",
       "log": "evidence/studio/loop/attempt-22.log"
+    },
+    {
+      "id": 23,
+      "phase": 6,
+      "gate": "sam-production",
+      "cause": "production-worker-validation",
+      "hypothesis": "Verify the exact production-mode worker bundle and tracked reference fixture before Preview deployment, without changing Production hosting",
+      "status": "passed",
+      "started": "2026-11-11T02:51:36.902361+00:00",
+      "finished": "2026-11-11T02:52:44.770261+00:00",
+      "log": "evidence/studio/loop/attempt-23.log"
+    },
+    {
+      "id": 24,
+      "phase": 6,
+      "gate": "sam-recovery",
+      "cause": "bounded-model-recovery",
+      "hypothesis": "The final budgeted verification must cancel actual encoder work without losing candidates, then complete a fresh local-model retry",
+      "status": "passed",
+      "started": "2026-11-11T02:54:33.182330+00:00",
+      "finished": "2026-11-11T02:55:10.442894+00:00",
+      "log": "evidence/studio/loop/attempt-24.log"
     }
   ],
   "phases": {
@@ -275,8 +297,8 @@
       }
     },
     "6": {
-      "status": "running",
-      "reason": "Restricted Preview build checks pass; full beta quality remains blocked by phase 5. Deployment readiness/capability verification is recorded separately in preview.json.",
+      "status": "blocked",
+      "reason": "Budget exhausted after production-mode model/export and recovery checks passed. Verified partial beta may be published to Preview; full visual precision and fresh Gemini coverage remain incomplete.",
       "previewChecks": {
         "state": "READY",
         "engineCommit": "272a7ec58cbfca9658c9e594f301e162738c5ee1",
@@ -284,8 +306,30 @@
       }
     }
   },
-  "halted": null,
-  "checkpoint": "fae5af5db4b9900f50c2a84d16b76589fb4ad5c9",
-  "stopReason": "FULL_AUTOMATIC_EDITING_QUALITY_BLOCKED: missing real alpha masks, unresolved nested/complex backgrounds, and blocked Gemini host",
-  "nextAction": "Resume phase 5 after resolving evidence/environment constraints; preserve attempts and phase 1-4 checkpoints."
+  "halted": "BUDGET_EXHAUSTED",
+  "checkpoint": "1e9e2e7e285fa963d74fc0735431aee6dcc5411d",
+  "stopReason": "BUDGET_EXHAUSTED_AFTER_VERIFIED_PARTIAL_BETA: learned segmentation works; hollow masks, composites, printed-text grouping, shadows and fresh Gemini coverage remain incomplete",
+  "nextAction": "No further development attempts without an authorized additional budget. Preserve all 24 attempts; resume from the verified model checkpoint after resolving quality/evidence constraints.",
+  "resume": {
+    "startCommit": "ec29b638aee3501f804a728b9c93495967e655ea",
+    "startAttempt": 14,
+    "endAttempt": 24,
+    "previousCheckpoint": "272a7ec58cbfca9658c9e594f301e162738c5ee1",
+    "history1to13Preserved": true,
+    "automaticProof": {
+      "originalGeminiImageCandidates": 27,
+      "learnedMaskOutputs": 26,
+      "readyLearnedImages": 23,
+      "conservativelyVisuallyVerified": 1,
+      "manualImageMasks": 0
+    },
+    "validation": {
+      "unitPassed": 115,
+      "unitSkipped": 1,
+      "devBrowserTestsPassed": 7,
+      "localProductionBrowserPassed": 1,
+      "cancellationRecoveryPassed": 1,
+      "OfficeExportsOpenedRendered": 3
+    }
+  }
 }
