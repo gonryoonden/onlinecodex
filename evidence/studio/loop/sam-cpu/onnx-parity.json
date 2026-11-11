@@ -1,0 +1,9 @@
+{
+  "encoderSecondsCPU": 1.434495142999367,
+  "embeddingMaxError": 4.291534423828125e-06,
+  "decoderMaxError": 0.0001678466796875,
+  "scoreMaxError": 1.7881393432617188e-07,
+  "modelBytes": 44322987,
+  "source": "Actual original infographic, r33 REAL Gemini box",
+  "onnxRuntime": "1.21.0"
+}

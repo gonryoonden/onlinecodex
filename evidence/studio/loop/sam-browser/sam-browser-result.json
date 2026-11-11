@@ -1,0 +1,453 @@
+{
+  "freshGeminiCall": false,
+  "manualMasks": 0,
+  "totalImageCandidates": 27,
+  "allocatedLearnedImages": 26,
+  "elapsedMs": 12393,
+  "alpha": {
+    "clear": 10343,
+    "ink": 24847,
+    "referenceIoU": 0.9980713596914176
+  },
+  "network": [],
+  "inventory": [
+    {
+      "id": "r0",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fx72zza9cl",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r1",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fx730i8xbk",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r2",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fy8331g42k",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r3",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fy834ekuvf",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r4",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fyb37ucvnc",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r5",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fyd3a8t53a",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r6",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fye3dvf01o",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r7",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fye3efplnj",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r9",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fye3f9rbze",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r10",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fyh3i10cn7",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r11",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fyi3lw6tzj",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r12",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fyj3o35x6o",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r13",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fyj3ptlad9",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r14",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fyj3qi5fd6",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r15",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fyl3tlz0bl",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r16",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fym3w46hfx",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r17",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fym3xgvnlx",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r18",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fym3yhknaw",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r19",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fyo41t1q39",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r20",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fyr44fuzvy",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r21",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fyx47i1cyg",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r22",
+      "type": "image",
+      "status": "separation-failed",
+      "reason": "ambiguous-background-use-polygon-or-alpha-brush",
+      "background": "pending"
+    },
+    {
+      "id": "r23",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fz24a6wf56",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r24",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fze4dw0hdl",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r25",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fzf4e8ghsn",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r26",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fzh4hsyvi6",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r27",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fzr4kwvwiu",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r28",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8fzu4nheoi7",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r65",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fzu4odpz6c",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r66",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8fzu4p7ykwh",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r29",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8g044s9n1x3",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r30",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8g044ts5xu9",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r31",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8g0k4wbq7hf",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r32",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8g0m4zs8hcy",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r33",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8g0o52l4bqc",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r34",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8g0q55e1nfq",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r35",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8g0q56i3gnj",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r36",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8g0q571ze7h",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r37",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8g0s5af18b8",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r38",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8g0v5dqiv2a",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r39",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8g0v5essq8r",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r40",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8g0v5fq81n8",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r41",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8g0x5ic5mvt",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r42",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8g0x5j862fr",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    },
+    {
+      "id": "r43",
+      "type": "image",
+      "status": "correction-needed",
+      "elementId": "image_mwbi8g0y5mnbdub",
+      "reason": "unreviewed",
+      "maskOrigin": "segmenter",
+      "extraction": "learned-mask",
+      "background": "pending"
+    },
+    {
+      "id": "r44",
+      "type": "text",
+      "status": "correction-needed",
+      "elementId": "text_mwbi8g0y5n6xpe4",
+      "reason": "unreviewed",
+      "extraction": "native",
+      "background": "pending"
+    }
+  ]
+}

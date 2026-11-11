@@ -1,0 +1,14 @@
+COMMAND ["python", "scripts/evaluation/export-mobile-sam.py"]
+/workspace/work/segmentation/MobileSAM/mobile_sam/modeling/tiny_vit_sam.py:338: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  assert L == H * W, "input feature has wrong size"
+/workspace/work/segmentation/MobileSAM/mobile_sam/modeling/tiny_vit_sam.py:136: TracerWarning: Using len to get tensor shape might cause the trace to be incorrect. Recommended usage would be tensor.shape[0]. Passing a tensor of different shape might lead to errors or silently give incorrect results.
+  B = len(x)
+/workspace/work/segmentation/venv/lib/python3.12/site-packages/torch/onnx/_internal/jit_utils.py:308: UserWarning: Constant folding - Only steps=1 can be constant folded for opset >= 10 onnx::Slice op. Constant folding not applied. (Triggered internally at /pytorch/torch/csrc/jit/passes/onnx/constant_fold.cpp:178.)
+  _C._jit_pass_onnx_node_shape_type_inference(node, params_dict, opset_version)
+/workspace/work/segmentation/venv/lib/python3.12/site-packages/torch/onnx/utils.py:657: UserWarning: Constant folding - Only steps=1 can be constant folded for opset >= 10 onnx::Slice op. Constant folding not applied. (Triggered internally at /pytorch/torch/csrc/jit/passes/onnx/constant_fold.cpp:178.)
+  _C._jit_pass_onnx_graph_shape_type_inference(
+/workspace/work/segmentation/venv/lib/python3.12/site-packages/torch/onnx/utils.py:1127: UserWarning: Constant folding - Only steps=1 can be constant folded for opset >= 10 onnx::Slice op. Constant folding not applied. (Triggered internally at /pytorch/torch/csrc/jit/passes/onnx/constant_fold.cpp:178.)
+  _C._jit_pass_onnx_graph_shape_type_inference(
+/workspace/work/segmentation/MobileSAM/mobile_sam/modeling/transformer.py:232: TracerWarning: Converting a tensor to a Python float might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  attn = attn / math.sqrt(c_per_head)
+{"encoderSecondsCPU": 1.434495142999367, "embeddingMaxError": 4.291534423828125e-06, "decoderMaxError": 0.0001678466796875, "scoreMaxError": 1.7881393432617188e-07, "modelBytes": 44322987, "source": "Actual original infographic, r33 REAL Gemini box", "onnxRuntime": "1.21.0"}

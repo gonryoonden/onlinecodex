@@ -167,6 +167,50 @@
       "started": "2026-11-11T02:23:14.130003+00:00",
       "finished": "2026-11-11T02:23:25.648343+00:00",
       "log": "evidence/studio/loop/attempt-15.log"
+    },
+    {
+      "id": 16,
+      "phase": 5,
+      "gate": "sam-export",
+      "cause": "onnx-parity",
+      "hypothesis": "Self-hosted ONNX encoder and box decoder must match the pinned PyTorch reference before browser adoption",
+      "status": "passed",
+      "started": "2026-11-11T02:26:55.704662+00:00",
+      "finished": "2026-11-11T02:27:07.452306+00:00",
+      "log": "evidence/studio/loop/attempt-16.log"
+    },
+    {
+      "id": 17,
+      "phase": 5,
+      "gate": "sam-browser",
+      "cause": "browser-learned-mask",
+      "hypothesis": "The self-hosted model must execute in a real browser worker, preserve actual alpha, and match CPU reference without any image upload",
+      "status": "failed",
+      "started": "2026-11-11T02:30:09.830725+00:00",
+      "finished": "2026-11-11T02:30:13.750825+00:00",
+      "log": "evidence/studio/loop/attempt-17.log"
+    },
+    {
+      "id": 18,
+      "phase": 5,
+      "gate": "sam-browser",
+      "cause": "wasm-browser-runtime",
+      "hypothesis": "Use the package public API types for its WASM-only export, then verify actual worker inference",
+      "status": "failed",
+      "started": "2026-11-11T02:30:53.271846+00:00",
+      "finished": "2026-11-11T02:30:57.009568+00:00",
+      "log": "evidence/studio/loop/attempt-18.log"
+    },
+    {
+      "id": 19,
+      "phase": 5,
+      "gate": "sam-browser",
+      "cause": "onnx-subpath-types",
+      "hypothesis": "Resolve the WASM subpath against the canonical onnxruntime-common API instead of its unresolved root ambient module",
+      "status": "passed",
+      "started": "2026-11-11T02:32:39.778516+00:00",
+      "finished": "2026-11-11T02:33:23.325783+00:00",
+      "log": "evidence/studio/loop/attempt-19.log"
     }
   ],
   "phases": {
@@ -208,7 +252,7 @@
     }
   },
   "halted": null,
-  "checkpoint": "ec29b638aee3501f804a728b9c93495967e655ea",
+  "checkpoint": "0e887b33837f020f8d4b78f75f663af6803bd7c7",
   "stopReason": "FULL_AUTOMATIC_EDITING_QUALITY_BLOCKED: missing real alpha masks, unresolved nested/complex backgrounds, and blocked Gemini host",
   "nextAction": "Resume phase 5 after resolving evidence/environment constraints; preserve attempts and phase 1-4 checkpoints."
 }

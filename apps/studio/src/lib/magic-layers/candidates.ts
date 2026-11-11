@@ -3,8 +3,8 @@ export type CandidateStatus = 'generated' | 'merged' | 'correction-needed' | 'se
 export interface CandidateOutcome {
  id: string; type: Region['type']; status: CandidateStatus; canonicalId?: string;
  parentId?: string; elementId?: string; reason?: string;
- maskOrigin?: 'analysis' | 'manual' | 'local';
- extraction?: 'native' | 'polygon' | 'model-mask' | 'flat-key';
+ maskOrigin?: 'analysis' | 'manual' | 'local' | 'segmenter';
+ extraction?: 'native' | 'polygon' | 'model-mask' | 'flat-key' | 'learned-mask';
  background: 'pending' | 'local-flat' | 'manual-flat' | 'inpaint-review';
 }
 function intersection(a:Region,b:Region) {

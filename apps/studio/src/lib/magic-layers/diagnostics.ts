@@ -19,7 +19,7 @@ export const diagnosticSchema = z.object({
   provider: z.string().max(100), build: z.string().max(100).optional(),
   inputKind: z.enum(["unknown", "text-only", "illustrated"]),
   mode: z.enum(["preserve", "redraw", "local-repair", "independent"]),
-  candidates: z.array(z.object({id,type:kind,status:z.enum(["generated","merged","correction-needed","separation-failed","user-excluded"]),canonicalId:id.optional(),parentId:id.optional(),elementId:id.optional(),reason:z.string().max(200).optional(),maskOrigin:z.enum(["analysis","manual","local"]).optional(),extraction:z.enum(["native","polygon","model-mask","flat-key"]).optional(),background:z.enum(["pending","local-flat","manual-flat","inpaint-review"])})).max(80).optional(),
+  candidates: z.array(z.object({id,type:kind,status:z.enum(["generated","merged","correction-needed","separation-failed","user-excluded"]),canonicalId:id.optional(),parentId:id.optional(),elementId:id.optional(),reason:z.string().max(200).optional(),maskOrigin:z.enum(["analysis","manual","local","segmenter"]).optional(),extraction:z.enum(["native","polygon","model-mask","flat-key","learned-mask"]).optional(),background:z.enum(["pending","local-flat","manual-flat","inpaint-review"])})).max(80).optional(),
   status: z.enum(["full-editable", "partial-editable", "original-preserved", "review-required", "failed"]),
   background: z.enum(["original", "local-patches", "inpaint-approximation", "redrawn"]),
   transport: z.object({ width: z.number().int().positive(), height: z.number().int().positive(),

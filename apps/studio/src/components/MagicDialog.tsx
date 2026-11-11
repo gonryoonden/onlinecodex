@@ -46,6 +46,7 @@ export default function MagicDialog({
     notes: "수동 영역 지정 · AI 분석을 실행하지 않았습니다.",
   });
   const detection = useRef<AbortController | null>(null);
+  const [segmentStatus,setSegmentStatus] = useState("");
   const [progress,setProgress] = useState<number | null>(null);
   const [skip, setSkip] = useState<string[]>(review?.skip ?? []);
   const [mode, setMode] = useState<"preserve" | "redraw" | "independent">(review?"independent":"preserve");
@@ -148,6 +149,16 @@ export default function MagicDialog({
     } catch(e) {setError(controller.signal.aborted?"후보 탐지를 취소했습니다. 기존 영역은 유지됩니다.":e instanceof Error?e.message:"후보 탐지 실패");}
     finally {setBusy(false);setProgress(null);detection.current=null;setCancellable(false);}
   }
+  async function segmentImages(){
+    setBusy(true);setError("");setSegmentStatus("기기 분할 준비 중");const controller=new AbortController();detection.current=controller;setCancellable(true);
+    const deadline=setTimeout(()=>controller.abort(),180000);
+    try {const {segmentObjects}=await import("@/lib/magic-layers/segment");const result=await segmentObjects(source,analysis.regions,controller.signal,setSegmentStatus);
+      controller.signal.throwIfAborted();setBeforeAutomatic({analysis,skip,provider});setAnalysis(a=>({...a,regions:result.regions}));setMode("independent");setPreview("");setConfirmed(false);
+      setSegmentStatus(`모델 마스크 ${result.accepted}개 · 검토 필요 ${result.rejected}개 · ${(result.elapsedMs/1000).toFixed(1)}초`);
+      setResultWarnings(["학습 모델이 제안한 마스크입니다. 내부 구멍·글자·그림자·겹친 객체의 경계를 확인하세요. 모델 점수는 정확도 보증이 아닙니다. 배경 복원은 별도 과정입니다."]);
+    }catch(e){setError(controller.signal.aborted?"분할을 취소하거나 시간 한도에 도달했습니다. 기존 후보는 유지됩니다.":e instanceof Error?e.message:"기기 분할 실패");}
+    finally{clearTimeout(deadline);setBusy(false);setCancellable(false);detection.current=null;}
+  }
   function add(type: Region["type"]) {
     const r: Region = {
       id: uid("region"),
@@ -234,7 +245,7 @@ export default function MagicDialog({
         Math.max(...ys) - Math.min(...ys),
       ];
       const r = regionSchema.parse({ ...region, polygon: points, maskPng: undefined, bbox });
-      patch({...r,manualBackground:undefined,maskOrigin:"manual"});
+      patch({...r,manualBackground:undefined,maskOrigin:"manual",segmentation:undefined});
       setPoly(false);
       setPoints([]);
       setError("");
@@ -424,6 +435,9 @@ export default function MagicDialog({
                   : provider === "adaptive-pipeline" ? "자동 경로 · 후보 검토 필요" : provider === "local-pixel-candidates" ? "로컬 픽셀 후보 · 의미 인식 아님" : "수동 지정 · AI 결과 아님"}
               </div>
               <div className="button-row">
+                <button disabled={busy || !analysis.regions.some(r=>r.type==="image"&&!r.polygon&&!r.maskPng)} onClick={()=>void segmentImages()}>AI 객체 투명 분리 · 기기에서 실행</button>
+                {segmentStatus&&<p role="status" aria-label="기기 분할 상태">{segmentStatus}</p>}
+                <span className="muted">최초 모델·실행 파일 약 57MB · CPU 사용 · 이미지 외부 전송 없음 · 취소 가능</span>
                 <button disabled={busy} onClick={()=>void localDetect()}>로컬 전경 후보 찾기</button>
                 {progress!==null && <><span role="status">후보 검사 {progress}%</span><button onClick={()=>detection.current?.abort()}>탐지 취소</button></>}
                 <button onClick={() => add("text")}>
@@ -494,7 +508,7 @@ export default function MagicDialog({
                           onChange={(e) => {
                             const b = [...region.bbox] as Region["bbox"];
                             b[i] = Number(e.target.value);
-                            patch({ bbox: b, polygon: undefined, maskPng: undefined, maskOrigin: undefined, manualBackground: undefined });
+                            patch({ bbox: b, polygon: undefined, maskPng: undefined, maskOrigin: undefined, segmentation: undefined, manualBackground: undefined });
                           }}
                         />
                       </label>
@@ -605,7 +619,7 @@ export default function MagicDialog({
                       >
                         다각형 다시 지정
                       </button>
-                      <button onClick={() => patch({ polygon: undefined, maskPng: undefined, maskOrigin: undefined })}>
+                      <button onClick={() => patch({ polygon: undefined, maskPng: undefined, maskOrigin: undefined, segmentation: undefined })}>
                         마스크 제거
                       </button>
                       {poly && (

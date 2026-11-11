@@ -44,7 +44,8 @@ export const regionSchema = z
     bbox: bboxSchema,
     polygon: polygonSchema.optional(),
     edgeRefinement: z.boolean().optional(),
-    maskOrigin: z.enum(["analysis", "manual", "local"]).optional(),
+    segmentation: z.object({model:z.literal("MobileSAM-vit_t"),revision:z.string().max(100),score:z.number().finite(),promptBox:bboxSchema}).optional(),
+    maskOrigin: z.enum(["analysis", "manual", "local", "segmenter"]).optional(),
     // Explicit user correction, never populated by automatic analysis.
     manualBackground: z.object({ color, confirmed: z.literal(true) }).optional(),
     maskPng: z

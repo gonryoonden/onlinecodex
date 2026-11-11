@@ -1,0 +1,20 @@
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+src/lib/magic-layers/segment.worker.ts(6,7): error TS2339: Property 'env' does not exist on type 'typeof import("onnxruntime-web/wasm")'.
+src/lib/magic-layers/segment.worker.ts(6,33): error TS2339: Property 'env' does not exist on type 'typeof import("onnxruntime-web/wasm")'.
+src/lib/magic-layers/segment.worker.ts(6,58): error TS2339: Property 'env' does not exist on type 'typeof import("onnxruntime-web/wasm")'.
+src/lib/magic-layers/segment.worker.ts(6,117): error TS2339: Property 'env' does not exist on type 'typeof import("onnxruntime-web/wasm")'.
+src/lib/magic-layers/segment.worker.ts(14,23): error TS2339: Property 'InferenceSession' does not exist on type 'typeof import("onnxruntime-web/wasm")'.
+src/lib/magic-layers/segment.worker.ts(14,100): error TS2339: Property 'InferenceSession' does not exist on type 'typeof import("onnxruntime-web/wasm")'.
+src/lib/magic-layers/segment.worker.ts(16,46): error TS2339: Property 'Tensor' does not exist on type 'typeof import("onnxruntime-web/wasm")'.
+src/lib/magic-layers/segment.worker.ts(18,57): error TS2339: Property 'Tensor' does not exist on type 'typeof import("onnxruntime-web/wasm")'.
+src/lib/magic-layers/segment.worker.ts(18,127): error TS2339: Property 'Tensor' does not exist on type 'typeof import("onnxruntime-web/wasm")'.
+src/lib/magic-layers/segment.worker.ts(22,46): error TS18046: 'tensor' is of type 'unknown'.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

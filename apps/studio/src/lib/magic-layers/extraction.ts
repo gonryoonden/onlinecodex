@@ -28,7 +28,7 @@ export async function extractAlphaCandidates(source:Asset,regions:Region[],outco
     const ctx=c.getContext('2d')!;ctx.drawImage(mask,0,0,c.width,c.height);const data=ctx.getImageData(0,0,c.width,c.height).data;
     const values=new Uint8Array(c.width*c.height);for(let i=0;i<values.length;i++)values[i]=Math.round(data[i*4]*data[i*4+3]/255);
     if(maskHealth(values,c.width,c.height).reject)throw new Error('mask-empty-or-opaque');
-    o.extraction='model-mask';o.maskOrigin=r.maskOrigin??'analysis';result.push(r);continue;
+    o.extraction=r.maskOrigin==='segmenter'?'learned-mask':'model-mask';o.maskOrigin=r.maskOrigin??'analysis';result.push(r);continue;
    }
    original??=await loadImage(source.dataUrl);
    const [x,y,w,h]=toPixels(r.bbox,source.width,source.height);
