@@ -1,0 +1,433 @@
+{
+  "source": "cached actual Gemini; real browser MobileSAM, prior measured runs",
+  "candidates": 46,
+  "imageCandidates": 27,
+  "beforeReasons": {
+    "unreviewed": 45,
+    "ambiguous-background-use-polygon-or-alpha-brush": 1
+  },
+  "afterReasons": {
+    "complex-boundary": 6,
+    "null": 13,
+    "inpaint-neighbor-conflict": 3,
+    "overlap": 3,
+    "directional-inpaint-review-required": 20,
+    "ambiguous-background-use-polygon-or-alpha-brush": 1
+  },
+  "rows": [
+    {
+      "id": "r0",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "complex-boundary",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r1",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r2",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "inpaint-neighbor-conflict",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r3",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "overlap",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r4",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r5",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r6",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r7",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r9",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "complex-boundary",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r10",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r11",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r12",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r13",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "complex-boundary",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r14",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "complex-boundary",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r15",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r16",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r17",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r18",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "complex-boundary",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r19",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r20",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r21",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r22",
+      "type": "image",
+      "extraction": null,
+      "withoutConfirmation": "ambiguous-background-use-polygon-or-alpha-brush",
+      "withConfirmation": "ambiguous-background-use-polygon-or-alpha-brush",
+      "visibleAfterConfirmation": false,
+      "allocated": false
+    },
+    {
+      "id": "r23",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r24",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "inpaint-neighbor-conflict",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r25",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "overlap",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r26",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r27",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r28",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r65",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r66",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r29",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "inpaint-neighbor-conflict",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r30",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "overlap",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r31",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r32",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r33",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r34",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r35",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r36",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r37",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r38",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r39",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r40",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r41",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r42",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "complex-boundary",
+      "visibleAfterConfirmation": false,
+      "allocated": true
+    },
+    {
+      "id": "r43",
+      "type": "image",
+      "extraction": "learned-mask",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": "directional-inpaint-review-required",
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    },
+    {
+      "id": "r44",
+      "type": "text",
+      "extraction": "native",
+      "withoutConfirmation": "unreviewed",
+      "withConfirmation": null,
+      "visibleAfterConfirmation": true,
+      "allocated": true
+    }
+  ]
+}

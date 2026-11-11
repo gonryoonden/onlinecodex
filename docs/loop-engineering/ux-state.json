@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "base": "f5db094",
+  "budget": 12,
+  "attempts": [
+    {
+      "id": 1,
+      "phase": 1,
+      "gate": "audit",
+      "cause": "review-audit",
+      "hypothesis": "Confirmation gates and generic provenance conflate processing with quality",
+      "status": "passed",
+      "started": "2026-11-11T04:36:32.990440+00:00",
+      "finished": "2026-11-11T04:36:33.024015+00:00",
+      "log": "evidence/studio/ux-loop/attempt-01.log"
+    }
+  ],
+  "phases": {
+    "1": {
+      "status": "passed",
+      "verifiedAttempt": 1
+    },
+    "2": {
+      "status": "pending"
+    },
+    "3": {
+      "status": "pending"
+    },
+    "4": {
+      "status": "pending"
+    },
+    "5": {
+      "status": "pending"
+    },
+    "6": {
+      "status": "pending"
+    }
+  },
+  "halted": null,
+  "checkpoint": "f5db094",
+  "priorStateSHA256": "9d1e5ccce23239242f3b4bfb80d7109aa20d61fe72810be22963ddb30ccd8df5"
+}

@@ -1,0 +1,2 @@
+COMMAND ["python", "scripts/evaluation/ux-audit.py"]
+{"source": "cached actual Gemini; real browser MobileSAM, prior measured runs", "candidates": 46, "imageCandidates": 27, "beforeReasons": {"unreviewed": 45, "ambiguous-background-use-polygon-or-alpha-brush": 1}, "afterReasons": {"complex-boundary": 6, "null": 13, "inpaint-neighbor-conflict": 3, "overlap": 3, "directional-inpaint-review-required": 20, "ambiguous-background-use-polygon-or-alpha-brush": 1}}
