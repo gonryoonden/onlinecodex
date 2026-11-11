@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "base": "115b8ec",
+  "budget": 24,
+  "attempts": [
+    {
+      "id": 1,
+      "phase": 1,
+      "gate": "governance",
+      "cause": "baseline",
+      "hypothesis": "Existing tests are reusable and bounded runner survives restart",
+      "status": "passed",
+      "started": "2026-11-11T01:39:03.326576+00:00",
+      "finished": "2026-11-11T01:39:08.833779+00:00",
+      "log": "evidence/studio/loop/attempt-01.log"
+    }
+  ],
+  "phases": {
+    "1": {
+      "status": "passed",
+      "verifiedAttempt": 1
+    },
+    "2": {
+      "status": "pending"
+    },
+    "3": {
+      "status": "pending"
+    },
+    "4": {
+      "status": "pending"
+    },
+    "5": {
+      "status": "pending"
+    },
+    "6": {
+      "status": "pending"
+    }
+  },
+  "halted": null,
+  "checkpoint": "115b8ec"
+}

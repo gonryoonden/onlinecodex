@@ -1,0 +1,32 @@
+COMMAND ["python", "-m", "unittest", "discover", "-s", "tests/loop", "-v"]
+test_budget (test_runner.Runner.test_budget) ... ok
+test_prerequisite_and_failed_gate (test_runner.Runner.test_prerequisite_and_failed_gate) ... ok
+test_recovery_does_not_refund_attempt (test_runner.Runner.test_recovery_does_not_refund_attempt) ... ok
+test_same_cause (test_runner.Runner.test_same_cause) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+COMMAND ["npm", "test"]
+
+> personal-magic-studio@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/pms-beta/apps/studio
+
+
+ Test Files  12 passed | 1 skipped (13)
+      Tests  104 passed | 1 skipped (105)
+   Start at  01:39:04
+   Duration  4.55s (transform 409ms, setup 0ms, import 1.70s, tests 1.08s, environment 1ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

@@ -1,0 +1,3 @@
+# Personal Magic Studio autonomous loop
+
+For the editing-engine task, read `docs/loop-engineering/PRD.md`, `tasks.md`, `state.json` and the last attempt log before continuing. Run `python scripts/pms-loop.py status`; recover interrupted attempts with `recover`. Preserve consumed attempts and checkpoints. Use existing app AGENTS.md and tests. Make a verified commit per successful stage and update checkpoint on the next stage. Stop at 24 attempts or three consecutive failures of the same cause. Never mark an unmet gate passed. Saved real Gemini responses are replay evidence, not fresh API calls; manual inventories and synthetic cases are separate. Only the authorized Preview branch may be pushed; main/production, credentials, protection and paid API scope stay unchanged.
