@@ -1,0 +1,60 @@
+{
+  "browserTestsPassed": 3,
+  "mode": "local Next optimized production build; not hosted Preview",
+  "rows": [
+    {
+      "source": "korean",
+      "sourceKind": "PNG",
+      "analysis": "stored actual Gemini",
+      "freshGeminiCalls": 0,
+      "manualImageMasks": 0,
+      "analysisCalls": 1,
+      "elapsedMs": 17057,
+      "perObjectApprovals": 0,
+      "manualSAMClicks": 0,
+      "layerCreateApprovals": 0,
+      "total": 46,
+      "ready": 12,
+      "warning": 8,
+      "review": 25,
+      "failed": 1,
+      "masks": 26
+    },
+    {
+      "source": "eda-checklist",
+      "sourceKind": "PNG",
+      "analysis": "human box inventory",
+      "freshGeminiCalls": 0,
+      "manualImageMasks": 0,
+      "analysisCalls": 1,
+      "elapsedMs": 7266,
+      "perObjectApprovals": 0,
+      "manualSAMClicks": 0,
+      "layerCreateApprovals": 0,
+      "total": 2,
+      "ready": 1,
+      "warning": 0,
+      "review": 1,
+      "failed": 0,
+      "masks": 1
+    },
+    {
+      "source": "data-roles",
+      "sourceKind": "JPEG",
+      "analysis": "human box inventory",
+      "freshGeminiCalls": 0,
+      "manualImageMasks": 0,
+      "analysisCalls": 1,
+      "elapsedMs": 9132,
+      "perObjectApprovals": 0,
+      "manualSAMClicks": 0,
+      "layerCreateApprovals": 0,
+      "total": 2,
+      "ready": 0,
+      "warning": 0,
+      "review": 2,
+      "failed": 0,
+      "masks": 1
+    }
+  ]
+}

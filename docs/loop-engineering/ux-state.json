@@ -34,7 +34,8 @@
       "status": "failed",
       "started": "2026-11-11T04:39:51.284039+00:00",
       "finished": "2026-11-11T04:39:56.098618+00:00",
-      "log": "evidence/studio/ux-loop/attempt-03.log"
+      "log": "evidence/studio/ux-loop/attempt-03.log",
+      "failureFinding": "Missing Studio TypeScript type imports after callback extraction; corrected in attempt4."
     },
     {
       "id": 4,
@@ -56,7 +57,8 @@
       "status": "failed",
       "started": "2026-11-11T04:41:30.871764+00:00",
       "finished": "2026-11-11T04:41:42.163141+00:00",
-      "log": "evidence/studio/ux-loop/attempt-05.log"
+      "log": "evidence/studio/ux-loop/attempt-05.log",
+      "failureFinding": "React forbids ref assignments during render; moved callback refresh to effect."
     },
     {
       "id": 6,
@@ -67,7 +69,8 @@
       "status": "failed",
       "started": "2026-11-11T04:42:03.439134+00:00",
       "finished": "2026-11-11T04:43:17.203728+00:00",
-      "log": "evidence/studio/ux-loop/attempt-06.log"
+      "log": "evidence/studio/ux-loop/attempt-06.log",
+      "failureFinding": "Consent input unmounted immediately after click, breaking checked-state accessibility; retained input during work."
     },
     {
       "id": 7,
@@ -78,7 +81,8 @@
       "status": "failed",
       "started": "2026-11-11T06:55:32.972361+00:00",
       "finished": "2026-11-11T06:56:39.884631+00:00",
-      "log": "evidence/studio/ux-loop/attempt-07.log"
+      "log": "evidence/studio/ux-loop/attempt-07.log",
+      "failureFinding": "Smooth shadows were conflated with arbitrary background texture; added separate bounded chroma/gradient evidence without removing neighbor/alpha protection."
     },
     {
       "id": 8,
@@ -100,7 +104,8 @@
       "status": "failed",
       "started": "2026-11-11T07:03:26.397669+00:00",
       "finished": "2026-11-11T07:05:13.763887+00:00",
-      "log": "evidence/studio/ux-loop/attempt-09.log"
+      "log": "evidence/studio/ux-loop/attempt-09.log",
+      "failureFinding": "HTML controls accidentally inserted into SVG namespace; removed them and kept controls in HTML before successful full regression."
     },
     {
       "id": 10,
@@ -123,6 +128,17 @@
       "started": "2026-11-11T07:12:38.370274+00:00",
       "finished": "2026-11-11T07:12:49.550452+00:00",
       "log": "evidence/studio/ux-loop/attempt-11.log"
+    },
+    {
+      "id": 12,
+      "phase": 6,
+      "gate": "sam-production",
+      "cause": "hosted-network-denied",
+      "hypothesis": "Preview network is explicitly proxy-blocked; verify all three actual automatic and corrected workflows on the identical local production build without claiming hosted browser success",
+      "status": "passed",
+      "started": "2026-11-11T07:19:37.787353+00:00",
+      "finished": "2026-11-11T07:21:36.816644+00:00",
+      "log": "evidence/studio/ux-loop/attempt-12.log"
     }
   ],
   "phases": {
@@ -147,10 +163,52 @@
       "reason": "Functional acceptance passed, but exception-minority goal unmet (25/46 detailed + 1 failed); new Gemini calls blocked; semantic truth limited to four problem labels"
     },
     "6": {
-      "status": "pending"
+      "status": "partial",
+      "verifiedAttempt": 12,
+      "localProductionBrowser": "passed: all 3 sources",
+      "previewDeployment": "READY, connector capabilities/manifest HTTP200",
+      "hostedBrowser": "blocked: environment proxy CONNECT HTTP403; no hosted flow success claim"
     }
   },
-  "halted": null,
-  "checkpoint": "7caaff415b75b7f086f6112e40c7ef98d4e1c162",
-  "priorStateSHA256": "9d1e5ccce23239242f3b4bfb80d7109aa20d61fe72810be22963ddb30ccd8df5"
+  "halted": "BUDGET_EXHAUSTED",
+  "checkpoint": "1e1dc3fb3850de0c244864516c497637fefb8942",
+  "priorStateSHA256": "9d1e5ccce23239242f3b4bfb80d7109aa20d61fe72810be22963ddb30ccd8df5",
+  "overall": "partial-beta; full user acceptance unmet",
+  "resume": {
+    "stop": "Authorized separate 12-attempt budget exhausted; do not reset old or new history.",
+    "lastVerifiedAppCommit": "7caaff4",
+    "deployedCommit": "1e1dc3fb3850de0c244864516c497637fefb8942",
+    "preview": "https://personal-magic-studio-preview-9hb66gkaa-gonryoondens-projects.vercel.app",
+    "remaining": [
+      "Detailed review still25/46 plus1 separation failure; exception-minority target unmet.",
+      "Image cards with printed text need safe internal foreground cleanup and hierarchy repair.",
+      "Hidden texture/shadow geometry and semantic accuracy beyond four labeled problem examples remain unproven.",
+      "New live Gemini analysis unavailable in this environment; only one cached real response plus two human box inventories tested.",
+      "Hosted Preview browser access blocked by execution network proxy; same optimized code passed 3 local production browser flows."
+    ],
+    "validation": {
+      "unitPassed": 119,
+      "unitSkipped": 1,
+      "loopTestsPassed": 7,
+      "devBrowserPassed": 9,
+      "localProductionBrowserPassed": 3,
+      "officeExportsOpenedRendered": 3
+    },
+    "counts": {
+      "candidates": 46,
+      "allocatedLayers": 45,
+      "ready": 12,
+      "warning": 8,
+      "automaticEditable": 20,
+      "readyNativeText": 12,
+      "readyImage": 8,
+      "review": 25,
+      "failed": 1,
+      "automaticImageMasks": 26,
+      "manualImageMasksForKorean": 0,
+      "annotatedProblemsCaught": 4,
+      "annotatedProblemsMissed": 0,
+      "unannotatedErrors": "unknown"
+    }
+  }
 }

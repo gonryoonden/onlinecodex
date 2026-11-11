@@ -1,0 +1,30 @@
+{
+  "engineCommit": "1e1dc3fb3850de0c244864516c497637fefb8942",
+  "appCodeCheckpoint": "7caaff4",
+  "branch": "preview/pms-beta-d42d824-20261110",
+  "deploymentId": "dpl_J7nPgUofZYNxYEhnh7GgQR7qzh1i",
+  "url": "https://personal-magic-studio-preview-9hb66gkaa-gonryoondens-projects.vercel.app",
+  "target": "preview",
+  "state": "READY",
+  "connectorCapabilitiesHTTP": 200,
+  "capabilitiesEnabled": true,
+  "liveModelVerified": false,
+  "connectorManifestHTTP": 200,
+  "manifestMatchesValidatedModel": true,
+  "modelBinaryDownloadReverified": false,
+  "hostedBrowser": {
+    "status": "blocked",
+    "cause": "Execution environment CONNECT proxy rejects Preview hostname with HTTP403 before Vercel authentication; local Browser extension tools absent",
+    "fullFlowClaimed": false
+  },
+  "localProductionBrowserPassed": 3,
+  "freshGeminiCalls": 0,
+  "temporaryConnectorShareAccess": "created for testing and revoked without regeneration; private local access files removed",
+  "ssoProtection": "enabled for all deployments, unchanged",
+  "main": "54bf39aa957cc5ad91d947653f90867ad1b1569d",
+  "productionDeployment": "dpl_ANVtTBW3zzB3agS8AKdMbELcSumw",
+  "productionCommit": "9c93c58b9f48c2b208ded3f9f64f4e4244f0a844",
+  "budgetUsed": 12,
+  "budgetLimit": 12,
+  "fullAcceptance": false
+}

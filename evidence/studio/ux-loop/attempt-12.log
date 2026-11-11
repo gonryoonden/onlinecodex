@@ -1,0 +1,16 @@
+COMMAND ["python", "scripts/evaluation/test-ux-production.py"]
+
+Running 3 tests using 1 worker
+
+(node:35614) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/auto-edit.spec.ts:27:63 › automatic edit flow korean: no object approvals or manual model actions (51.9s)
+  ✓  2 tests/auto-edit.spec.ts:27:63 › automatic edit flow eda-checklist: no object approvals or manual model actions (19.0s)
+  ✓  3 tests/auto-edit.spec.ts:27:63 › automatic edit flow data-roles: no object approvals or manual model actions (44.2s)
+
+  3 passed (1.9m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
