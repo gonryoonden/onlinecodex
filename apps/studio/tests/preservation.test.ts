@@ -35,3 +35,22 @@ describe("source-preserving replacements",()=>{
   expect(unexplainedLosses(before,snapshotStage("reviewed",[],[{id:"title",type:"text",reason:"user-excluded"}]))).toEqual([]);
  });
 });
+
+it("keeps a containing card raster while extracting its isolated text",()=>{
+ const card:Region={id:"card",type:"shape",shape:"rect",bbox:[100,100,700,700],zIndex:0,review:true};
+ const plan=planLocalReplacement(pixels(),100,100,[card,region],[],true);
+ expect(plan.accepted.map(r=>r.id)).toEqual(["title"]);
+ expect(plan.retained.find(r=>r.id==="card")?.reason).toBe("overlap");
+});
+it("supports explicit per-region manual flat repair without global approval",()=>{
+ const manual={...region,manualBackground:{color:"#ffffff",confirmed:true as const}};
+ expect(planLocalReplacement(pixels(),100,100,[manual],[],false).accepted).toHaveLength(1);
+ // A user correction never bypasses a collision with another object.
+ expect(planLocalReplacement(pixels(),100,100,[manual,{...region,id:"other"}],[],false).accepted).toHaveLength(0);
+});
+
+it("manual repair cannot erase excluded or out-of-bounds objects",()=>{
+ const manual={...region,manualBackground:{color:"#ffffff",confirmed:true as const}};
+ expect(planLocalReplacement(pixels(),100,100,[manual],["title"],true).accepted).toHaveLength(0);
+ expect(planLocalReplacement(pixels(),100,100,[{...manual,bbox:[990,990,200,200]}],[],true).accepted).toHaveLength(0);
+});

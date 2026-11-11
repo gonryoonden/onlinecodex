@@ -1,0 +1,85 @@
+{
+  "liveAI": false,
+  "cases": [
+    {
+      "kind": "complex-manual",
+      "liveAI": false,
+      "actualSource": false,
+      "editableBeforeEdit": 2,
+      "textLayers": 1,
+      "imageLayers": 1,
+      "editableAfterDelete": 1,
+      "zipRestored": true,
+      "pixelCheck": {
+        "outsideChanged": 0,
+        "nonuniform": 0,
+        "erasedPixels": 16764
+      },
+      "backgroundQuality": "authored regression"
+    },
+    {
+      "kind": "data-roles",
+      "liveAI": false,
+      "actualSource": true,
+      "editableBeforeEdit": 2,
+      "textLayers": 1,
+      "imageLayers": 1,
+      "editableAfterDelete": 1,
+      "zipRestored": true,
+      "pixelCheck": {
+        "outsideChanged": 0,
+        "nonuniform": 0,
+        "erasedPixels": 335969
+      },
+      "backgroundQuality": "manual flat approximation; texture NOT restored"
+    },
+    {
+      "kind": "eda-checklist",
+      "liveAI": false,
+      "actualSource": true,
+      "editableBeforeEdit": 2,
+      "textLayers": 1,
+      "imageLayers": 1,
+      "editableAfterDelete": 1,
+      "zipRestored": true,
+      "pixelCheck": {
+        "outsideChanged": 0,
+        "nonuniform": 0,
+        "erasedPixels": 112270
+      },
+      "backgroundQuality": "manual flat approximation; texture NOT restored"
+    },
+    {
+      "kind": "nested-card",
+      "liveAI": false,
+      "actualSource": false,
+      "editableBeforeEdit": 2,
+      "textLayers": 1,
+      "imageLayers": 1,
+      "editableAfterDelete": 1,
+      "zipRestored": true,
+      "pixelCheck": {
+        "outsideChanged": 0,
+        "nonuniform": 0,
+        "erasedPixels": 16764
+      },
+      "backgroundQuality": "authored regression"
+    },
+    {
+      "kind": "real-korean",
+      "liveAI": false,
+      "actualSource": true,
+      "editableBeforeEdit": 2,
+      "textLayers": 1,
+      "imageLayers": 1,
+      "editableAfterDelete": 1,
+      "zipRestored": true,
+      "pixelCheck": {
+        "outsideChanged": 0,
+        "nonuniform": 0,
+        "erasedPixels": 220023
+      },
+      "backgroundQuality": "manual flat approximation; texture NOT restored"
+    }
+  ]
+}

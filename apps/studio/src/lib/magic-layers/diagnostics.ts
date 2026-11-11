@@ -72,6 +72,7 @@ export const statusLabels: Record<Diagnostic["status"],string> = {
   "original-preserved":"원본 유지 · 편집 객체 미생성", "review-required":"사용자 검토 필요", "failed":"변환 실패",
 };
 export const warningLabels: Record<string,string> = {
+  MANUAL_FLAT_BACKGROUND:"수동 단색 교정: 질감·그림자는 복원하지 않았습니다. 이동·삭제 후 경계 이음새를 확인하세요.",
   ILLUSTRATIONS_MISSING:"삽화가 있는 입력인데 이미지 영역이 0개입니다. 원본을 보존하고 누락 영역을 지정하세요.",
   CHECK_INPUT_KIND_IMAGE_ZERO:"이미지 영역이 0개입니다. 텍스트 전용 입력인지 확인하세요.",
   CHECK_CARDS_CHARTS_AND_SHADOWS:"카드·표·차트·그림자가 영역 목록에 빠지지 않았는지 원본과 비교하세요.",

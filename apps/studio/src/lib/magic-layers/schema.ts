@@ -44,6 +44,8 @@ export const regionSchema = z
     bbox: bboxSchema,
     polygon: polygonSchema.optional(),
     edgeRefinement: z.boolean().optional(),
+    // Explicit user correction, never populated by automatic analysis.
+    manualBackground: z.object({ color, confirmed: z.literal(true) }).optional(),
     maskPng: z
       .string()
       .max(2 * 1024 * 1024)

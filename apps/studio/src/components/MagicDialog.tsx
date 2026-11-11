@@ -63,6 +63,7 @@ export default function MagicDialog({
   const [cancellable,setCancellable]=useState(false);
   const [error, setError] = useState("");
   const [selected, setSelected] = useState("");
+  const [manualColors, setManualColors] = useState<Record<string,string>>({});
   const [preview, setPreview] = useState("");
   const [previewKey, setPreviewKey] = useState("");
   const currentPreviewKey = JSON.stringify([repairKey, confirmed, activeRepair?.key, mode, inputKind]);
@@ -100,7 +101,8 @@ export default function MagicDialog({
     const {image,transport}=await prepareAiImageWithMetadata(source.dataUrl);signal?.throwIfAborted();
     const response=await fetch('/api/ai/magic-layers',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image,consent,...(selectedModel?{model:selectedModel}:{})}),signal});
     const data=await readApiJson(response);if(!response.ok)throw new Error(response.status===503?`AI 설정 누락: ${data.error??'Preview 환경변수를 확인하세요.'}`:data.error??'분석 실패');
-    return {analysis:analysisSchema.parse(data.analysis),provider:`gemini/${data.provenance.model}`,trace:{runId:uid('run'),transport,build:typeof data.trace?.build==='string'?data.trace.build:'unknown',stages:data.trace?.stages?stageSchema.array().parse(data.trace.stages):undefined}};
+    const parsed = analysisSchema.parse(data.analysis);
+    return {analysis:{...parsed,regions:parsed.regions.map(r=>({...r,manualBackground:undefined}))},provider:`gemini/${data.provenance.model}`,trace:{runId:uid('run'),transport,build:typeof data.trace?.build==='string'?data.trace.build:'unknown',stages:data.trace?.stages?stageSchema.array().parse(data.trace.stages):undefined}};
   }
   async function analyze() {
     setBusy(true);setError('');const controller=new AbortController();detection.current=controller;setCancellable(true);
@@ -181,7 +183,9 @@ export default function MagicDialog({
       );
       setResultWarnings(result.warnings);
       setResultTrace(result.diagnostic);
-      recordBetaEvent({feature:'preview',stage:apply?'apply':'review',outcome:'review',code:result.diagnostic.status==='original-preserved'?'source-preserved':'none',count:result.page.elements.length});
+      const editableCount = result.page.elements.filter(e=>e.provenance?.regionId).length;
+      recordBetaEvent({feature:'preview',stage:apply?'apply':'review',outcome:'review',code:result.diagnostic.status==='original-preserved'?'source-preserved':'none',count:editableCount});
+      if (apply && !editableCount) throw new Error("편집 레이어가 0개여서 적용할 수 없습니다. 영역과 배경을 교정하세요.");
       if (apply) {
         onApply(result.page, result.assets, source, result.diagnostic);
         onClose();
@@ -228,7 +232,7 @@ export default function MagicDialog({
         Math.max(...ys) - Math.min(...ys),
       ];
       const r = regionSchema.parse({ ...region, polygon: points, maskPng: undefined, bbox });
-      patch(r);
+      patch({...r,manualBackground:undefined});
       setPoly(false);
       setPoints([]);
       setError("");
@@ -488,7 +492,7 @@ export default function MagicDialog({
                           onChange={(e) => {
                             const b = [...region.bbox] as Region["bbox"];
                             b[i] = Number(e.target.value);
-                            patch({ bbox: b, polygon: undefined, maskPng: undefined });
+                            patch({ bbox: b, polygon: undefined, maskPng: undefined, manualBackground: undefined });
                           }}
                         />
                       </label>
@@ -564,6 +568,14 @@ export default function MagicDialog({
                       />
                     </label>
                   )}
+                  <fieldset>
+                    <legend>수동 배경 교정 · 선택 영역만 단색으로 지우기</legend>
+                    <p>좌표·마스크를 먼저 교정하세요. 지정한 사각 영역의 원본을 지운 뒤 편집 객체로 교체합니다. 질감·그림자는 복원하지 않습니다. 다른 객체와 충돌하는 영역은 계속 차단합니다.</p>
+                    <label>수동 교정 배경색<input aria-label="수동 교정 배경색" type="color" value={manualColors[region.id]??region.manualBackground?.color??analysis.background.from}
+                      onChange={e=>{setManualColors(c=>({...c,[region.id]:e.target.value}));patch({manualBackground:undefined});}}/></label>
+                    <label><input aria-label="선택 영역 수동 배경 교정 확인" type="checkbox" checked={Boolean(region.manualBackground)}
+                      onChange={e=>patch({manualBackground:e.target.checked?{color:manualColors[region.id]??analysis.background.from,confirmed:true}:undefined})}/>이 영역의 배경을 지정한 단색으로 교체하고 잔상을 검토하겠습니다.</label>
+                  </fieldset>
                   <label>
                     겹침 순서
                     <input
@@ -720,6 +732,8 @@ export default function MagicDialog({
               </fieldset>
               {resultWarnings.map(w => <p className="warning" key={w}>{w}</p>)}
               {resultTrace && previewKey === currentPreviewKey && <div role="status">
+                <p>실제 편집 가능 레이어: {resultTrace.stages.find(s=>s.name==="reconstructed")?.objects.filter(o=>o.role==="editable").length ?? 0}개</p>
+                <ul>{resultTrace.stages.find(s=>s.name==="reconstructed")?.omitted.map(o=><li key={o.id}>{o.id}: {({"unreviewed":"배경 확인 필요","overlap":"다른 객체와 충돌 — 경계 또는 채택 영역 교정","complex-boundary":"복잡한 경계 — 수동 배경 교정 필요","large-or-edge":"크기·가장자리 — 수동 교정 필요","user-excluded":"사용자 제외","original-preserved":"배경 보정 필요"} as Record<string,string>)[o.reason??""]??o.reason}</li>)}</ul>
                 <strong>{statusLabels[resultTrace.status]}</strong>
                 {resultTrace.warnings.map(w=><p className="warning" key={w}>{warningLabels[w]??w}</p>)}
                 <button onClick={()=>download(new Blob([JSON.stringify(resultTrace,null,2)],{type:"application/json"}),"magic-diagnostic.json")}>변환 진단 JSON</button>
@@ -739,7 +753,7 @@ export default function MagicDialog({
           </button>
           <button
             className="primary"
-            disabled={busy || analysis.regions.length === skip.length || previewKey !== currentPreviewKey || !preview}
+            disabled={busy || resultTrace?.status === "original-preserved" || analysis.regions.length === skip.length || previewKey !== currentPreviewKey || !preview}
             onClick={() => void reconstruct(true)}
           >
             <Check size={16} />

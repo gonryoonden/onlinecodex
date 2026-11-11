@@ -219,10 +219,10 @@ export async function reconstructDesign(
     const provenance: NonNullable<AnyElement["provenance"]> = {
       source: source.id,
       regionId: r.id,
-      method: `${provider}:${r.type === "image" ? (hadRepair ? "local-repaired-crop" : r.maskPng ? "png-mask" : r.polygon ? "polygon-mask" : "approximate-crop") : "native-" + r.type}`,
+      method: `${r.manualBackground ? "manual-flat-correction" : provider}:${r.type === "image" ? (hadRepair ? "local-repaired-crop" : r.maskPng ? "png-mask" : r.polygon ? "polygon-mask" : "approximate-crop") : "native-" + r.type}`,
       sourcePixels: pixels,
       review: r.review || provider !== "manual",
-      backgroundWarning: mode === "preserve" && !hadRepair ? false : unsafe,
+      backgroundWarning: Boolean(r.manualBackground) || (mode === "preserve" && !hadRepair ? false : unsafe),
     };
     let el: AnyElement;
     if (r.type === "text")
@@ -306,11 +306,16 @@ export async function reconstructDesign(
     snapshotStage("reconstructed",elementItems(elements),retained.filter(r=>r.reason!=="user-excluded"))];
   for(let i=1;i<stages.length;i++)for(const id of unexplainedLosses(stages[i-1],stages[i]))warningCodes.push(`UNEXPLAINED_LOSS:${id}`);
   const nativeCount = elements.filter(e=>e.provenance?.regionId).length;
+  if (mode === "preserve" && !hadRepair && analysis.regions.some(r=>r.manualBackground)) {
+    warningCodes.push("MANUAL_FLAT_BACKGROUND");
+    warnings.push("수동 배경 교정: 지정 영역을 단색으로 교체했습니다. 질감·그림자 복원이 아니며 경계 이음새를 확인하세요.");
+  }
+  if (!nativeCount) warnings.push("편집 레이어가 0개입니다. 영역별 제외 사유를 확인하고 경계·배경색을 수동 교정하세요.");
   const diagnostic: Diagnostic = {
     version:1,runId:options.initial?.runId ?? uid("run"),sourceId:source.id,createdAt:new Date().toISOString(),
     provider,build:options.initial?.build,transport:options.initial?.transport,
     inputKind: options.inputKind ?? "unknown",mode:hadRepair?"local-repair":mode,
-    status: mode==="preserve"&&!hadRepair ? nativeCount?"partial-editable":"original-preserved" : "review-required",
+    status: !nativeCount ? "original-preserved" : mode==="preserve"&&!hadRepair ? "partial-editable" : "review-required",
     background:hadRepair?"inpaint-approximation":mode==="preserve"?localPatchCount?"local-patches":"original":unsafe?"original":"redrawn",
     stages,warnings:warningCodes,
   };
