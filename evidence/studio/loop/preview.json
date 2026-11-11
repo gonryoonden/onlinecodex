@@ -1,0 +1,18 @@
+{
+  "engineCommit": "272a7ec58cbfca9658c9e594f301e162738c5ee1",
+  "branch": "preview/pms-beta-d42d824-20261110",
+  "deploymentId": "dpl_59sPnpTiz2TUdNX5HXQ4Vwu7vW6p",
+  "url": "https://personal-magic-studio-preview-bo8udygje-gonryoondens-projects.vercel.app",
+  "environment": "preview",
+  "state": "READY",
+  "protectedCapabilityHttpStatus": 200,
+  "capabilityConfigured": true,
+  "modelVerified": false,
+  "freshGeminiGenerationCalls": 0,
+  "fullBetaQuality": "BLOCKED",
+  "mainBeforeAndAfter": "54bf39aa957cc5ad91d947653f90867ad1b1569d",
+  "productionDeploymentBeforeAndAfter": "dpl_ANVtTBW3zzB3agS8AKdMbELcSumw",
+  "attemptsUsed": 13,
+  "budget": 24,
+  "verificationFailures": 1
+}

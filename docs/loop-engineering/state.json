@@ -177,11 +177,16 @@
     },
     "6": {
       "status": "blocked",
-      "reason": "Restricted Preview build checks pass; full beta quality remains blocked by phase 5. Deployment readiness/capability verification is recorded separately in preview.json."
+      "reason": "Restricted Preview build checks pass; full beta quality remains blocked by phase 5. Deployment readiness/capability verification is recorded separately in preview.json.",
+      "previewChecks": {
+        "state": "READY",
+        "engineCommit": "272a7ec58cbfca9658c9e594f301e162738c5ee1",
+        "evidence": "evidence/studio/loop/preview.json"
+      }
     }
   },
   "halted": null,
-  "checkpoint": "f8236484f1e0c59ce77f92165a4d807ed8b86875",
+  "checkpoint": "272a7ec58cbfca9658c9e594f301e162738c5ee1",
   "stopReason": "FULL_AUTOMATIC_EDITING_QUALITY_BLOCKED: missing real alpha masks, unresolved nested/complex backgrounds, and blocked Gemini host",
   "nextAction": "Resume phase 5 after resolving evidence/environment constraints; preserve attempts and phase 1-4 checkpoints."
 }
