@@ -1,0 +1,5 @@
+COMMAND ["python", "scripts/evaluation/probe-mobile-sam.py"]
+Traceback (most recent call last):
+  File "/workspace/pms-beta/scripts/evaluation/probe-mobile-sam.py", line 8, in <module>
+    import numpy as np,torch
+ModuleNotFoundError: No module named 'torch'

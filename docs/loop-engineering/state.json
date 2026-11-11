@@ -145,6 +145,28 @@
       "started": "2026-11-11T02:01:12.754336+00:00",
       "finished": "2026-11-11T02:01:23.975788+00:00",
       "log": "evidence/studio/loop/attempt-13.log"
+    },
+    {
+      "id": 14,
+      "phase": 5,
+      "gate": "sam-probe",
+      "cause": "learned-box-segmentation",
+      "hypothesis": "A pinned MobileSAM CPU model can generate actual nonrectangular alpha masks from the original 27 Gemini boxes without manual masks",
+      "status": "failed",
+      "started": "2026-11-11T02:23:04.684692+00:00",
+      "finished": "2026-11-11T02:23:04.904578+00:00",
+      "log": "evidence/studio/loop/attempt-14.log"
+    },
+    {
+      "id": 15,
+      "phase": 5,
+      "gate": "sam-probe",
+      "cause": "learned-box-segmentation",
+      "hypothesis": "Use the actual task virtual environment, since symlink realpaths incorrectly skipped activation",
+      "status": "passed",
+      "started": "2026-11-11T02:23:14.130003+00:00",
+      "finished": "2026-11-11T02:23:25.648343+00:00",
+      "log": "evidence/studio/loop/attempt-15.log"
     }
   ],
   "phases": {
@@ -165,7 +187,7 @@
       "verifiedAttempt": 6
     },
     "5": {
-      "status": "blocked",
+      "status": "running",
       "reason": "Technical browser checks pass on three real sources, but full automatic acceptance is blocked: Gemini host 403; the recorded response has no masks, 26 image candidates still require separation after one explicit manual correction, and 9 native candidates remain hidden pending repair. Two other sources use human inventories, not real Gemini responses.",
       "technicalChecks": {
         "actualSources": 3,
@@ -186,7 +208,7 @@
     }
   },
   "halted": null,
-  "checkpoint": "272a7ec58cbfca9658c9e594f301e162738c5ee1",
+  "checkpoint": "ec29b638aee3501f804a728b9c93495967e655ea",
   "stopReason": "FULL_AUTOMATIC_EDITING_QUALITY_BLOCKED: missing real alpha masks, unresolved nested/complex backgrounds, and blocked Gemini host",
   "nextAction": "Resume phase 5 after resolving evidence/environment constraints; preserve attempts and phase 1-4 checkpoints."
 }

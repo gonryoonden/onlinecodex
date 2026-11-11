@@ -36,6 +36,7 @@ def promote(s,phase):
  s['phases'][str(phase)].update(status='passed',verifiedAttempt=a['id'])
 
 GATES={
+ 'sam-probe':[['python','scripts/evaluation/probe-mobile-sam.py']],
  'governance':[['python','-m','unittest','discover','-s','tests/loop','-v'],['npm','test']],
  'contract':[['npm','run','typecheck'],['npm','test']],
  'browser':[['npm','run','typecheck'],['npm','test'],['npm','run','lint'],['npx','playwright','test','tests/independent-layers.spec.ts','tests/preservation.spec.ts']],

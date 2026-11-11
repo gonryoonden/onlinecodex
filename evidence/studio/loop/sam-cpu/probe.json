@@ -1,0 +1,609 @@
+{
+  "model": "MobileSAM vit_t",
+  "weightSHA256": "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f",
+  "sourceSHA256": "0d0e21aa7914feaa3adfe06c72260070cfe126a2db32a947c54300b77e05f000",
+  "input": "stored-real-Gemini-boxes",
+  "freshGeminiCall": false,
+  "manualMasks": 0,
+  "modelEncodeSeconds": 1.8911352850000185,
+  "peakRSSMiB": 680.58984375,
+  "structurallyAccepted": 26,
+  "total": 27,
+  "visualQuality": "pending-independent-review",
+  "candidates": [
+    {
+      "id": "r2",
+      "predictedIoU": 1.0086472034454346,
+      "foreground": 217889,
+      "boxCoverage": 0.9568251042491367,
+      "spill": 0.0,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.26144414999998844,
+      "sourceBox": [
+        44,
+        223,
+        148,
+        364
+      ],
+      "maskBox": [
+        126,
+        346,
+        405,
+        558
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r4",
+      "predictedIoU": 0.985500693321228,
+      "foreground": 29665,
+      "boxCoverage": 0.8838031124721563,
+      "spill": 0.008629698297657171,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.24792815599994356,
+      "sourceBox": [
+        239,
+        223,
+        192,
+        41
+      ],
+      "maskBox": [
+        663,
+        345,
+        526,
+        66
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r5",
+      "predictedIoU": 0.8657019138336182,
+      "foreground": 12541,
+      "boxCoverage": 0.9112957328515668,
+      "spill": 0.12766127103101826,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.16685741699984646,
+      "sourceBox": [
+        239,
+        272,
+        142,
+        20
+      ],
+      "maskBox": [
+        659,
+        412,
+        394,
+        49
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r6",
+      "predictedIoU": 0.9576115608215332,
+      "foreground": 1955,
+      "boxCoverage": 0.8305770734231853,
+      "spill": 0.012276214833759591,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.19072042599964334,
+      "sourceBox": [
+        241,
+        308,
+        25,
+        22
+      ],
+      "maskBox": [
+        662,
+        471,
+        71,
+        40
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r10",
+      "predictedIoU": 0.9964303970336914,
+      "foreground": 19136,
+      "boxCoverage": 0.9224594961091265,
+      "spill": 0.006427675585284281,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.18322538299980806,
+      "sourceBox": [
+        239,
+        379,
+        53,
+        92
+      ],
+      "maskBox": [
+        662,
+        582,
+        148,
+        147
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r11",
+      "predictedIoU": 0.9182658195495605,
+      "foreground": 1389,
+      "boxCoverage": 0.6346094134520733,
+      "spill": 0.02663786897048236,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.16684480700041604,
+      "sourceBox": [
+        299,
+        386,
+        24,
+        21
+      ],
+      "maskBox": [
+        823,
+        599,
+        71,
+        31
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r12",
+      "predictedIoU": 0.9442579746246338,
+      "foreground": 4261,
+      "boxCoverage": 0.8944333270783036,
+      "spill": 0.0,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.15805451100004575,
+      "sourceBox": [
+        300,
+        418,
+        23,
+        49
+      ],
+      "maskBox": [
+        824,
+        639,
+        68,
+        81
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r15",
+      "predictedIoU": 0.9935094118118286,
+      "foreground": 18527,
+      "boxCoverage": 0.9203594194550966,
+      "spill": 0.013062017595941059,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.13598320599976432,
+      "sourceBox": [
+        241,
+        493,
+        50,
+        94
+      ],
+      "maskBox": [
+        661,
+        763,
+        144,
+        144
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r16",
+      "predictedIoU": 0.9743571281433105,
+      "foreground": 4893,
+      "boxCoverage": 0.8725675354243905,
+      "spill": 0.06376456161863887,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.13585481100017205,
+      "sourceBox": [
+        299,
+        508,
+        18,
+        69
+      ],
+      "maskBox": [
+        825,
+        778,
+        55,
+        116
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r19",
+      "predictedIoU": 0.9980517625808716,
+      "foreground": 18525,
+      "boxCoverage": 0.8834035773026315,
+      "spill": 0.004210526315789474,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.1562204499996369,
+      "sourceBox": [
+        530,
+        232,
+        52,
+        95
+      ],
+      "maskBox": [
+        1459,
+        362,
+        145,
+        147
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r20",
+      "predictedIoU": 0.974196195602417,
+      "foreground": 18611,
+      "boxCoverage": 0.627628113051628,
+      "spill": 0.0,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.17936504899989814,
+      "sourceBox": [
+        595,
+        212,
+        61,
+        115
+      ],
+      "maskBox": [
+        1644,
+        326,
+        154,
+        180
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r21",
+      "predictedIoU": 0.9892690181732178,
+      "foreground": 58527,
+      "boxCoverage": 0.9531184025806623,
+      "spill": 0.018640969125360944,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.20945455199944263,
+      "sourceBox": [
+        530,
+        351,
+        108,
+        132
+      ],
+      "maskBox": [
+        1458,
+        537,
+        306,
+        211
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r22",
+      "predictedIoU": 0.9467852115631104,
+      "foreground": 6968,
+      "boxCoverage": 0.8119082945956091,
+      "spill": 0.2395235361653272,
+      "structurallyAccepted": false,
+      "decodeSeconds": 0.25992278500052635,
+      "sourceBox": [
+        646,
+        398,
+        8,
+        193
+      ],
+      "maskBox": [
+        1777,
+        613,
+        34,
+        291
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r23",
+      "predictedIoU": 1.001544713973999,
+      "foreground": 35240,
+      "boxCoverage": 0.9054784345286658,
+      "spill": 0.0,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.23449472099946433,
+      "sourceBox": [
+        530,
+        496,
+        99,
+        93
+      ],
+      "maskBox": [
+        1460,
+        765,
+        273,
+        143
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r24",
+      "predictedIoU": 1.0026392936706543,
+      "foreground": 222265,
+      "boxCoverage": 0.985330832513991,
+      "spill": 5.8488740917373407e-05,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.28784695099966484,
+      "sourceBox": [
+        672,
+        226,
+        147,
+        363
+      ],
+      "maskBox": [
+        1848,
+        345,
+        409,
+        564
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r26",
+      "predictedIoU": 0.9604445695877075,
+      "foreground": 17999,
+      "boxCoverage": 0.8055257155705863,
+      "spill": 0.004166898161008945,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.19939270000031684,
+      "sourceBox": [
+        843,
+        234,
+        94,
+        56
+      ],
+      "maskBox": [
+        2321,
+        358,
+        263,
+        93
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r27",
+      "predictedIoU": 1.0022456645965576,
+      "foreground": 113884,
+      "boxCoverage": 0.9310104487454066,
+      "spill": 0.0,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.22993623599995772,
+      "sourceBox": [
+        833,
+        318,
+        106,
+        273
+      ],
+      "maskBox": [
+        2293,
+        489,
+        288,
+        415
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r28",
+      "predictedIoU": 0.946311354637146,
+      "foreground": 8208,
+      "boxCoverage": 0.934599004689444,
+      "spill": 0.06432748538011696,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.19673731199964095,
+      "sourceBox": [
+        946,
+        353,
+        9,
+        216
+      ],
+      "maskBox": [
+        2600,
+        537,
+        34,
+        334
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r29",
+      "predictedIoU": 1.0039122104644775,
+      "foreground": 142462,
+      "boxCoverage": 0.9290751883016161,
+      "spill": 0.00014038831407673624,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.2728903329998502,
+      "sourceBox": [
+        53,
+        655,
+        130,
+        279
+      ],
+      "maskBox": [
+        142,
+        1009,
+        366,
+        428
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r31",
+      "predictedIoU": 0.9703017473220825,
+      "foreground": 27021,
+      "boxCoverage": 0.4199918086645863,
+      "spill": 0.0015913548721364864,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.20752254699982586,
+      "sourceBox": [
+        188,
+        672,
+        58,
+        262
+      ],
+      "maskBox": [
+        516,
+        1038,
+        166,
+        401
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r32",
+      "predictedIoU": 0.9763925075531006,
+      "foreground": 20259,
+      "boxCoverage": 0.7827512459185599,
+      "spill": 0.010267041808578903,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.1726388359993507,
+      "sourceBox": [
+        271,
+        668,
+        60,
+        101
+      ],
+      "maskBox": [
+        739,
+        1022,
+        175,
+        163
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r33",
+      "predictedIoU": 0.9995458126068115,
+      "foreground": 24881,
+      "boxCoverage": 0.7733684735456586,
+      "spill": 0.0,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.2528472759995566,
+      "sourceBox": [
+        271,
+        799,
+        59,
+        129
+      ],
+      "maskBox": [
+        744,
+        1228,
+        164,
+        200
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r34",
+      "predictedIoU": 0.9620887041091919,
+      "foreground": 13155,
+      "boxCoverage": 0.4636567773678935,
+      "spill": 0.0003040668947168377,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.19160324000040418,
+      "sourceBox": [
+        339,
+        875,
+        122,
+        55
+      ],
+      "maskBox": [
+        941,
+        1355,
+        326,
+        78
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r37",
+      "predictedIoU": 0.9858261346817017,
+      "foreground": 32812,
+      "boxCoverage": 0.9514382602322956,
+      "spill": 0.004723881506765818,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.15384661400003097,
+      "sourceBox": [
+        530,
+        698,
+        56,
+        145
+      ],
+      "maskBox": [
+        1460,
+        1068,
+        156,
+        234
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r38",
+      "predictedIoU": 0.9536843299865723,
+      "foreground": 10794,
+      "boxCoverage": 0.6642925616106647,
+      "spill": 0.0,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.182662065999466,
+      "sourceBox": [
+        530,
+        862,
+        62,
+        62
+      ],
+      "maskBox": [
+        1459,
+        1324,
+        164,
+        99
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r41",
+      "predictedIoU": 0.9824402332305908,
+      "foreground": 12878,
+      "boxCoverage": 0.8310408860932632,
+      "spill": 0.003804938655070663,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.1819494070005021,
+      "sourceBox": [
+        773,
+        713,
+        44,
+        83
+      ],
+      "maskBox": [
+        2127,
+        1102,
+        124,
+        125
+      ],
+      "manualMask": false
+    },
+    {
+      "id": "r43",
+      "predictedIoU": 0.9794591069221497,
+      "foreground": 9760,
+      "boxCoverage": 0.666356952694162,
+      "spill": 0.0,
+      "structurallyAccepted": true,
+      "decodeSeconds": 0.13270210999962728,
+      "sourceBox": [
+        773,
+        848,
+        45,
+        77
+      ],
+      "maskBox": [
+        2129,
+        1307,
+        120,
+        112
+      ],
+      "manualMask": false
+    }
+  ]
+}

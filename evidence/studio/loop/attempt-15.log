@@ -1,0 +1,2 @@
+COMMAND ["python", "scripts/evaluation/probe-mobile-sam.py"]
+{"model": "MobileSAM vit_t", "weightSHA256": "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f", "sourceSHA256": "0d0e21aa7914feaa3adfe06c72260070cfe126a2db32a947c54300b77e05f000", "input": "stored-real-Gemini-boxes", "freshGeminiCall": false, "manualMasks": 0, "modelEncodeSeconds": 1.8911352850000185, "peakRSSMiB": 680.58984375, "structurallyAccepted": 26, "total": 27, "visualQuality": "pending-independent-review"}

@@ -1,0 +1,10 @@
+{
+  "input": "Original 27 REAL cached Gemini boxes; no manual masks or points",
+  "model": "MobileSAM vit_t",
+  "structuralAcceptance": {"accepted":26,"total":27},
+  "independentlyVisuallyVerified": [{"id":"r33","object":"yellow safety helmet","result":"Complete nonrectangular helmet foreground and transparent exterior; no interior holes required; acceptable for further move/resize testing"}],
+  "conservativeVerifiedAutomaticCount":1,
+  "notClaimedAsAccurate":26,
+  "knownLimitations":["r11/r12 paperclip and r26 glasses masks fill background holes","objects containing printed text still require independent text/background treatment","shadows are not guaranteed part of foreground; inpainting must be evaluated separately","predicted IoU is uncalibrated and may exceed 1; never a probability or quality certificate"],
+  "visualEvidence":["contact-1.png","contact-2.png","contact-3.png"]
+}
