@@ -1,3 +1,4 @@
+import { inspectInteriorBackground } from './quality';
 import { inpaintSupport } from './inpaint';
 import { toPixels } from './schema';
 import { loadImage } from '../imports';
@@ -16,13 +17,20 @@ export function writeRepair(data:Uint8ClampedArray,width:number,height:number,pa
   const p=(y*width+x)*4;data[p]=patch.color[0];data[p+1]=patch.color[1];data[p+2]=patch.color[2];data[p+3]=255;
  }
 }
-export async function restoreCandidateBackground(source:Asset,regions:Region[],skip:string[],elements:AnyElement[],outcomes:CandidateOutcome[],reviewed:boolean) {
+export async function restoreCandidateBackground(source:Asset,regions:Region[],skip:string[],elements:AnyElement[],outcomes:CandidateOutcome[],reviewed:boolean|'automatic') {
  const image=await loadImage(source.dataUrl),canvas=document.createElement('canvas');canvas.width=source.width;canvas.height=source.height;
  const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)throw new Error('Canvas 사용 불가');ctx.drawImage(image,0,0);
  const pixels=ctx.getImageData(0,0,source.width,source.height),plan=planLocalReplacement(pixels.data,source.width,source.height,regions,skip,reviewed);
  let repaired=0,inpainted=0;
  for(const el of elements){
   const o=outcomes.find(o=>o.id===el.provenance?.regionId)!;
+  const region=regions.find(r=>r.id===o.id)!;
+  if(reviewed==='automatic'&&el.type==='image'){
+   const crop=await loadImage(el.src),c=document.createElement('canvas');c.width=crop.naturalWidth;c.height=crop.naturalHeight;const cx=c.getContext('2d')!;cx.drawImage(crop,0,0);const rgba=cx.getImageData(0,0,c.width,c.height).data,alpha=new Uint8Array(c.width*c.height);for(let i=0;i<alpha.length;i++)alpha[i]=rgba[i*4+3];
+   const [x,y]=el.provenance!.sourcePixels!;cx.clearRect(0,0,c.width,c.height);cx.drawImage(image,x,y,c.width,c.height,0,0,c.width,c.height);
+   const proof=inspectInteriorBackground(cx.getImageData(0,0,c.width,c.height).data,alpha,c.width,c.height);o.evidence={interiorBackgroundFraction:proof.fraction};
+   if(proof.blocked){o.reason='interior-background-in-mask';continue;}
+  }
   const patch=plan.patches.find(p=>p.id===o.id);
   if(!patch){
    const region=regions.find(r=>r.id===o.id)!;
@@ -31,7 +39,8 @@ export async function restoreCandidateBackground(source:Asset,regions:Region[],s
      const crop=await loadImage(el.src),c=document.createElement('canvas');c.width=crop.naturalWidth;c.height=crop.naturalHeight;const cx=c.getContext('2d')!;cx.drawImage(crop,0,0);const rgba=cx.getImageData(0,0,c.width,c.height).data,alpha=new Uint8Array(c.width*c.height);for(let i=0;i<alpha.length;i++)alpha[i]=rgba[i*4+3];
      const [x,y]=el.provenance!.sourcePixels!;
      const protectedRects=regions.filter(r=>r.id!==o.id).map(r=>toPixels(r.bbox,source.width,source.height));
-     const proof=inpaintSupport(pixels.data,source.width,source.height,{alpha,x,y,width:c.width,height:c.height},protectedRects,Math.max(2,Math.min(12,Math.round(source.width/500))));
+     const proof=inpaintSupport(pixels.data,source.width,source.height,{alpha,x,y,width:c.width,height:c.height},protectedRects,Math.max(2,Math.min(12,Math.round(source.width/500))),reviewed==='automatic');
+     o.evidence={...o.evidence,directionalDisagreementP95:proof.disagreementP95};
      repaired++;inpainted++;el.visible=true;el.name=el.name?.replace('배경 보정 대기 · ','');o.status='generated';o.background='inpaint-review';o.repair={method:'directional-inpaint',rect:proof.rect,radius:proof.radius};o.reason='directional-inpaint-review-required';continue;
     }catch(e){o.reason=e instanceof Error?e.message:'inpaint-failed';continue;}
    }

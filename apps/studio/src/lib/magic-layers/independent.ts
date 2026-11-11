@@ -10,7 +10,7 @@ export interface Reconstruction { page:PageData; assets:Asset[]; warnings:string
 /** Extraction is an independent transaction. A missing repair never drops native candidates.
  * Until a repair is approved, candidates are hidden to avoid duplicating source ink. */
 export async function reconstructIndependent(input:Analysis,source:Asset,width:number,height:number,skip:string[],provider:string,
- generate:(input:Analysis)=>Promise<Reconstruction>,initial:Partial<Diagnostic>={},reviewed=false) :Promise<Reconstruction> {
+ generate:(input:Analysis)=>Promise<Reconstruction>,initial:Partial<Diagnostic>={},reviewed:boolean|'automatic'=false) :Promise<Reconstruction> {
  const {canonical,outcomes}=reconcileCandidates(input.regions,skip);
  const extractable=await extractAlphaCandidates(source,canonical,outcomes);
  const generated=extractable.length?await generate({...input,background:{...input.background,kind:'solid'},regions:extractable}):undefined;
@@ -25,9 +25,15 @@ export async function reconstructIndependent(input:Analysis,source:Asset,width:n
  let repairFailed=false;
  try {restored=await restoreCandidateBackground(source,[...canonical,...input.regions.filter(r=>skip.includes(r.id))],skip,elements,outcomes,reviewed);}
  catch {repairFailed=true;}
- const backgroundAsset:Asset|undefined=restored?.repaired?{...source,id:uid('asset'),name:'독립 레이어 국소 복원 배경 · 검토 필요',dataUrl:restored.dataUrl,mime:'image/png',original:false}:undefined;
+ if(reviewed==='automatic')for(const o of outcomes){
+  if(o.status==='merged'||o.status==='user-excluded')continue;
+  o.decision=o.status==='separation-failed'?'failed':o.status==='generated'?(o.background==='inpaint-review'?'warning':'ready'):'review';
+  const el=elements.find(e=>e.id===o.elementId);
+  if(el?.provenance){el.provenance.review=o.decision==='review';el.provenance.backgroundWarning=o.decision==='review';}
+ }
+ const backgroundAsset:Asset|undefined=restored?.repaired?{...source,id:uid('asset'),name:reviewed==='automatic'?'자동 국소 복원 배경':'독립 레이어 국소 복원 배경 · 검토 필요',dataUrl:restored.dataUrl,mime:'image/png',original:false}:undefined;
  const fit=fitSource(source.width,source.height,width,height);
- elements.unshift(createImageElement(backgroundAsset?.dataUrl??source.dataUrl,source.width,source.height,{x:fit.x,y:fit.y,width:fit.width,height:fit.height,radius:0,assetId:backgroundAsset?.id??source.id,locked:true,name:backgroundAsset?.name??'원본 보존 · 배경 보정 필요',provenance:{source:source.id,method:backgroundAsset?'independent-local-repair':'independent-pending-background',review:true,backgroundWarning:true}}));
+ elements.unshift(createImageElement(backgroundAsset?.dataUrl??source.dataUrl,source.width,source.height,{x:fit.x,y:fit.y,width:fit.width,height:fit.height,radius:0,assetId:backgroundAsset?.id??source.id,locked:true,name:backgroundAsset?.name??'원본 보존 · 배경 보정 필요',provenance:{source:source.id,method:backgroundAsset?'independent-local-repair':'independent-pending-background',review:reviewed!=='automatic',backgroundWarning:reviewed!=='automatic'}}));
  const omitted=outcomes.filter(o=>!o.elementId).map(o=>({id:o.id,type:o.type,reason:o.status==='merged'?'duplicate' as const:o.status==='user-excluded'?'user-excluded' as const:'separation-failed' as const}));
  const diagnostic:Diagnostic={version:1,runId:initial.runId??uid('run'),sourceId:source.id,createdAt:new Date().toISOString(),provider,
   inputKind:initial.inputKind??'unknown',mode:'independent',status:restored?.repaired?'partial-editable':'review-required',background:restored?.inpainted?'inpaint-approximation':restored?.repaired?'local-patches':'original',candidates:outcomes,

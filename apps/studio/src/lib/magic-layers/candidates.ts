@@ -2,6 +2,7 @@ import type { Region } from './schema';
 export type CandidateStatus = 'generated' | 'merged' | 'correction-needed' | 'separation-failed' | 'user-excluded';
 export interface CandidateOutcome {
  id: string; type: Region['type']; status: CandidateStatus; canonicalId?: string;
+ decision?: 'ready'|'warning'|'review'|'failed'; evidence?: {interiorBackgroundFraction?:number;directionalDisagreementP95?:number};
  parentId?: string; elementId?: string; reason?: string;
  maskOrigin?: 'analysis' | 'manual' | 'local' | 'segmenter';
  extraction?: 'native' | 'polygon' | 'model-mask' | 'flat-key' | 'learned-mask';

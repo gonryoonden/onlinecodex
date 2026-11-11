@@ -7,14 +7,14 @@ const intersects=(a:Rect,b:Rect)=>a[0]<b[0]+b[2]&&a[0]+a[2]>b[0]&&a[1]<b[1]+b[3]
 /** Conservative local flat-fill, NOT semantic segmentation or hidden-background recovery.
  * All tests use source pixels; fill is restricted to reviewed boxes. Unknown/overlapping
  * backgrounds stay raster. Ring statistics are a heuristic and require visual review. */
-export function planLocalReplacement(data: Uint8ClampedArray, width:number,height:number,regions:Region[],skip:string[],reviewed:boolean) {
+export function planLocalReplacement(data: Uint8ClampedArray, width:number,height:number,regions:Region[],skip:string[],reviewed:boolean|'automatic') {
   const accepted:Region[]=[], patches:LocalPatch[]=[], retained:TraceItem[]=[];
   const rects=regions.map(r=>{const [x,y,w,h]=toPixels(r.bbox,width,height);return [Math.floor(x),Math.floor(y),Math.ceil(x+w)-Math.floor(x),Math.ceil(y+h)-Math.floor(y)] as Rect;});
   regions.forEach((r,index)=>{
     const rect=rects[index], [x,y,w,h]=rect;
     let reason:TraceItem["reason"];
     if(skip.includes(r.id))reason="user-excluded";
-    else if(!reviewed&&!r.manualBackground)reason="unreviewed";
+    else if(reviewed!==true&&reviewed!=='automatic'&&!r.manualBackground)reason="unreviewed";
     else if(rects.some((b,i)=>i!==index&&intersects([x-2,y-2,w+4,h+4],b)&&!(regions[i].type==="shape"&&regions[i].zIndex<r.zIndex&&contains(b,rect))))reason="overlap";
     else if(x<0||y<0||x+w>width||y+h>height||(!r.manualBackground&&(x<3||y<3||x+w>width-3||y+h>height-3||w*h>width*height*.2)))reason="large-or-edge";
     if(reason){retained.push({id:r.id,type:r.type,reason});return;}

@@ -13,6 +13,39 @@
       "started": "2026-11-11T04:36:32.990440+00:00",
       "finished": "2026-11-11T04:36:33.024015+00:00",
       "log": "evidence/studio/ux-loop/attempt-01.log"
+    },
+    {
+      "id": 2,
+      "phase": 2,
+      "gate": "policy",
+      "cause": "quality-policy",
+      "hypothesis": "Measured automatic eligibility without confirmation, retaining semantic/background blockers",
+      "status": "passed",
+      "started": "2026-11-11T04:38:16.261564+00:00",
+      "finished": "2026-11-11T04:38:29.089341+00:00",
+      "log": "evidence/studio/ux-loop/attempt-02.log"
+    },
+    {
+      "id": 3,
+      "phase": 2,
+      "gate": "policy",
+      "cause": "quality-tests",
+      "hypothesis": "Run newly added semantic and atomic repair tests via existing test discovery",
+      "status": "failed",
+      "started": "2026-11-11T04:39:51.284039+00:00",
+      "finished": "2026-11-11T04:39:56.098618+00:00",
+      "log": "evidence/studio/ux-loop/attempt-03.log"
+    },
+    {
+      "id": 4,
+      "phase": 2,
+      "gate": "policy",
+      "cause": "quality-tests",
+      "hypothesis": "Correct TypeScript imports and execute discovered evidence guard tests",
+      "status": "passed",
+      "started": "2026-11-11T04:40:31.349045+00:00",
+      "finished": "2026-11-11T04:40:42.130261+00:00",
+      "log": "evidence/studio/ux-loop/attempt-04.log"
     }
   ],
   "phases": {
@@ -21,7 +54,8 @@
       "verifiedAttempt": 1
     },
     "2": {
-      "status": "pending"
+      "status": "passed",
+      "verifiedAttempt": 4
     },
     "3": {
       "status": "pending"
@@ -37,6 +71,6 @@
     }
   },
   "halted": null,
-  "checkpoint": "f5db094",
+  "checkpoint": "ac6ed55fe0a3c8b6210544412afed8c7d480099f",
   "priorStateSHA256": "9d1e5ccce23239242f3b4bfb80d7109aa20d61fe72810be22963ddb30ccd8df5"
 }

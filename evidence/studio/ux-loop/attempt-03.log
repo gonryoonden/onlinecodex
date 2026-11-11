@@ -1,0 +1,13 @@
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+src/components/Studio.tsx(343,31): error TS2552: Cannot find name 'PageData'. Did you mean 'ImageData'?
+src/components/Studio.tsx(343,84): error TS2304: Cannot find name 'Diagnostic'.
+src/components/Studio.tsx(357,18): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type 'Record<"failed" | "full-editable" | "partial-editable" | "original-preserved" | "review-required", string>'.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

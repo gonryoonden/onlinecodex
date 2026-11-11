@@ -117,11 +117,11 @@ export async function reconstructDesign(
   confirmedBackground: boolean,
   provider = "manual",
   repair?: RepairedSource,
-  options: { mode?: "preserve" | "redraw" | "independent"; inputKind?: Diagnostic["inputKind"]; initial?: Partial<Diagnostic> } = {},
+  options: { automatic?: boolean; mode?: "preserve" | "redraw" | "independent"; inputKind?: Diagnostic["inputKind"]; initial?: Partial<Diagnostic> } = {},
 ): Promise<Reconstruction> {
   const originalAnalysis = analysisSchema.parse(input);
   if(options.mode==="independent") return reconstructIndependent(originalAnalysis,source,width,height,skip,provider,
-    prepared=>reconstructDesign(prepared,source,width,height,[],true,provider,undefined,{mode:"redraw"}),{...options.initial,inputKind:options.inputKind},confirmedBackground);
+    prepared=>reconstructDesign(prepared,source,width,height,[],true,provider,undefined,{mode:"redraw"}),{...options.initial,inputKind:options.inputKind},options.automatic?'automatic':confirmedBackground);
   let analysis = originalAnalysis;
   const mode = options.mode ?? "preserve";
   const hadRepair = Boolean(repair);
