@@ -222,6 +222,28 @@
       "started": "2026-11-11T02:36:08.420878+00:00",
       "finished": "2026-11-11T02:37:03.974600+00:00",
       "log": "evidence/studio/loop/attempt-20.log"
+    },
+    {
+      "id": 21,
+      "phase": 5,
+      "gate": "sam-acceptance",
+      "cause": "learned-model-acceptance",
+      "hypothesis": "Actual model masks must support edit/resize/delete, protected inpainting, new-browser ZIP restore and PNG/PDF/PPTX across three actual sources",
+      "status": "passed",
+      "started": "2026-11-11T02:41:13.714660+00:00",
+      "finished": "2026-11-11T02:45:31.378872+00:00",
+      "log": "evidence/studio/loop/attempt-21.log"
+    },
+    {
+      "id": 22,
+      "phase": 6,
+      "gate": "sam-preview",
+      "cause": "office-and-release-validation",
+      "hypothesis": "Actual PNG/PDF/PPTX/ZIP artifacts must open/render and the self-hosted model app must build before a restricted Preview release",
+      "status": "passed",
+      "started": "2026-11-11T02:48:41.445765+00:00",
+      "finished": "2026-11-11T02:49:02.107737+00:00",
+      "log": "evidence/studio/loop/attempt-22.log"
     }
   ],
   "phases": {
@@ -242,8 +264,8 @@
       "verifiedAttempt": 6
     },
     "5": {
-      "status": "running",
-      "reason": "Technical browser checks pass on three real sources, but full automatic acceptance is blocked: Gemini host 403; the recorded response has no masks, 26 image candidates still require separation after one explicit manual correction, and 9 native candidates remain hidden pending repair. Two other sources use human inventories, not real Gemini responses.",
+      "status": "blocked",
+      "reason": "Actual learned-mask edit/export workflows pass on three real sources; full quality remains incomplete: fresh Gemini call is blocked, two inputs use human boxes, hollow-object masks and nested text/card restoration need review. Automatic helmet separation now verified, not 0/27.",
       "technicalChecks": {
         "actualSources": 3,
         "savedRealGeminiSources": 1,
@@ -253,7 +275,7 @@
       }
     },
     "6": {
-      "status": "blocked",
+      "status": "running",
       "reason": "Restricted Preview build checks pass; full beta quality remains blocked by phase 5. Deployment readiness/capability verification is recorded separately in preview.json.",
       "previewChecks": {
         "state": "READY",
@@ -263,7 +285,7 @@
     }
   },
   "halted": null,
-  "checkpoint": "4b97e3e927c8d9ed7a7144197df18931db91ab40",
+  "checkpoint": "fae5af5db4b9900f50c2a84d16b76589fb4ad5c9",
   "stopReason": "FULL_AUTOMATIC_EDITING_QUALITY_BLOCKED: missing real alpha masks, unresolved nested/complex backgrounds, and blocked Gemini host",
   "nextAction": "Resume phase 5 after resolving evidence/environment constraints; preserve attempts and phase 1-4 checkpoints."
 }

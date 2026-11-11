@@ -1,0 +1,32 @@
+[
+  {
+    "source": "sam-korean",
+    "pdfPages": 2,
+    "pptxOpened": true,
+    "allXmlParsed": true,
+    "allInternalRelationshipsResolved": true,
+    "libreOfficeRendered": true,
+    "renderedPdfPages": 2,
+    "nativeEditedTextSurvived": true
+  },
+  {
+    "source": "sam-eda-checklist",
+    "pdfPages": 2,
+    "pptxOpened": true,
+    "allXmlParsed": true,
+    "allInternalRelationshipsResolved": true,
+    "libreOfficeRendered": true,
+    "renderedPdfPages": 2,
+    "nativeEditedTextSurvived": true
+  },
+  {
+    "source": "sam-data-roles",
+    "pdfPages": 2,
+    "pptxOpened": true,
+    "allXmlParsed": true,
+    "allInternalRelationshipsResolved": true,
+    "libreOfficeRendered": true,
+    "renderedPdfPages": 2,
+    "nativeEditedTextSurvived": true
+  }
+]

@@ -29,5 +29,5 @@ export function inpaintSupport(data:Uint8ClampedArray,width:number,height:number
  }
  // Commit only after every guard has passed; failure never partially erases a source.
  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const p=y*w+x;if(!mask[p])continue;const q=((t+y)*width+l+x)*4;for(let k=0;k<3;k++)data[q+k]=Math.round(sum[p*3+k]/weight[p]);data[q+3]=255;}
- return {pixels:count,radius,rect:[l,t,w,h]};
+ return {pixels:count,radius,rect:[l,t,w,h] as [number,number,number,number]};
 }

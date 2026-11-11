@@ -6,7 +6,7 @@ export default defineConfig({
   timeout: 120000,
   expect: { timeout: 15000 },
   use: {
-    baseURL: "http://127.0.0.1:3000",
+    baseURL: process.env.STUDIO_TEST_BASE_URL || "http://127.0.0.1:3000",
     actionTimeout: 15000,
     viewport: { width: 1366, height: 768 },
     launchOptions: {
@@ -19,7 +19,7 @@ export default defineConfig({
   reporter: [["list"], ["html", { open: "never" }]],
   webServer: {
     command: "npm run dev",
-    url: "http://127.0.0.1:3000",
+    url: process.env.STUDIO_TEST_BASE_URL || "http://127.0.0.1:3000",
     reuseExistingServer: true,
     timeout: 120000,
   },

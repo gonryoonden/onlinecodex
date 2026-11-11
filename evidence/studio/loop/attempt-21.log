@@ -1,0 +1,68 @@
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "test"]
+
+> personal-magic-studio@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/pms-beta/apps/studio
+
+
+ Test Files  17 passed | 1 skipped (18)
+      Tests  115 passed | 1 skipped (116)
+   Start at  02:41:20
+   Duration  5.02s (transform 398ms, setup 0ms, import 1.71s, tests 1.27s, environment 2ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "run", "lint"]
+
+> personal-magic-studio@0.1.0 lint
+> eslint src tests
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npx", "playwright", "test", "tests/sam-browser.spec.ts", "tests/independent-layers.spec.ts", "tests/preservation.spec.ts"]
+[WebServer] (node:14178) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:14191) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:14204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 7 tests using 1 worker
+
+(node:14225) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/independent-layers.spec.ts:46:5 › recorded REAL Gemini 46-candidate response: failed repair preserves native candidates and no opaque image successes (45.5s)
+  ✓  2 tests/independent-layers.spec.ts:83:54 › actual infographic eda-checklist: explicit human corrections, alpha, native edits, ZIP and exports (NOT Gemini recognition) (14.9s)
+  ✓  3 tests/independent-layers.spec.ts:83:54 › actual infographic data-roles: explicit human corrections, alpha, native edits, ZIP and exports (NOT Gemini recognition) (39.3s)
+  ✓  4 tests/preservation.spec.ts:15:5 › P0: residual pixels, atomic Korean replacement, image deletion, diagnostics and restore (10.7s)
+  ✓  5 tests/sam-browser.spec.ts:26:5 › actual MobileSAM WASM on REAL Gemini boxes: automatic alpha and reference parity, no supplied masks (54.6s)
+  ✓  6 tests/sam-browser.spec.ts:50:54 › actual automatic alpha flow eda-checklist with human BOX inventory only (no masks) (21.2s)
+  ✓  7 tests/sam-browser.spec.ts:50:54 › actual automatic alpha flow data-roles with human BOX inventory only (no masks) (46.5s)
+
+  7 passed (4.0m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

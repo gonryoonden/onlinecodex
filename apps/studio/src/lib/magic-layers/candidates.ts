@@ -5,6 +5,7 @@ export interface CandidateOutcome {
  parentId?: string; elementId?: string; reason?: string;
  maskOrigin?: 'analysis' | 'manual' | 'local' | 'segmenter';
  extraction?: 'native' | 'polygon' | 'model-mask' | 'flat-key' | 'learned-mask';
+ repair?: {method:'flat-fill'|'directional-inpaint';rect:[number,number,number,number];radius:number};
  background: 'pending' | 'local-flat' | 'manual-flat' | 'inpaint-review';
 }
 function intersection(a:Region,b:Region) {
@@ -25,7 +26,7 @@ export function reconcileCandidates(regions:Region[],skip:string[]) {
   canonical.push(r);outcomes.push({id:r.id,type:r.type,status:'correction-needed',reason:'background-pending',background:'pending'});
  }
  for(const r of canonical){
-  const parent=canonical.filter(p=>p.type==='shape'&&p.zIndex<r.zIndex&&p.bbox[2]*p.bbox[3]>r.bbox[2]*r.bbox[3]&&intersection(p,r)>=r.bbox[2]*r.bbox[3]-.001).sort((a,b)=>a.bbox[2]*a.bbox[3]-b.bbox[2]*b.bbox[3])[0];
+  const parent=canonical.filter(p=>(p.type==='shape'||p.type==='image')&&p.zIndex<r.zIndex&&p.bbox[2]*p.bbox[3]>r.bbox[2]*r.bbox[3]&&intersection(p,r)>=r.bbox[2]*r.bbox[3]-.001).sort((a,b)=>a.bbox[2]*a.bbox[3]-b.bbox[2]*b.bbox[3])[0];
   if(parent)outcomes.find(o=>o.id===r.id)!.parentId=parent.id;
  }
  return {canonical,outcomes};

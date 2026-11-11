@@ -31,8 +31,8 @@ export async function restoreCandidateBackground(source:Asset,regions:Region[],s
      const crop=await loadImage(el.src),c=document.createElement('canvas');c.width=crop.naturalWidth;c.height=crop.naturalHeight;const cx=c.getContext('2d')!;cx.drawImage(crop,0,0);const rgba=cx.getImageData(0,0,c.width,c.height).data,alpha=new Uint8Array(c.width*c.height);for(let i=0;i<alpha.length;i++)alpha[i]=rgba[i*4+3];
      const [x,y]=el.provenance!.sourcePixels!;
      const protectedRects=regions.filter(r=>r.id!==o.id).map(r=>toPixels(r.bbox,source.width,source.height));
-     inpaintSupport(pixels.data,source.width,source.height,{alpha,x,y,width:c.width,height:c.height},protectedRects,Math.max(2,Math.min(12,Math.round(source.width/500))));
-     repaired++;inpainted++;el.visible=true;el.name=el.name?.replace('배경 보정 대기 · ','');o.status='generated';o.background='inpaint-review';o.reason='directional-inpaint-review-required';continue;
+     const proof=inpaintSupport(pixels.data,source.width,source.height,{alpha,x,y,width:c.width,height:c.height},protectedRects,Math.max(2,Math.min(12,Math.round(source.width/500))));
+     repaired++;inpainted++;el.visible=true;el.name=el.name?.replace('배경 보정 대기 · ','');o.status='generated';o.background='inpaint-review';o.repair={method:'directional-inpaint',rect:proof.rect,radius:proof.radius};o.reason='directional-inpaint-review-required';continue;
     }catch(e){o.reason=e instanceof Error?e.message:'inpaint-failed';continue;}
    }
    o.reason=plan.retained.find(r=>r.id===o.id)?.reason??'background-pending';continue;
@@ -46,7 +46,7 @@ export async function restoreCandidateBackground(source:Asset,regions:Region[],s
     writeRepair(pixels.data,source.width,source.height,patch,{alpha,x:rect[0],y:rect[1],width:c.width,height:c.height});
    }else writeRepair(pixels.data,source.width,source.height,patch);
    repaired++;el.visible=true;el.name=el.name?.replace('배경 보정 대기 · ','');
-   o.status='generated';o.background=regions.find(r=>r.id===o.id)?.manualBackground?'manual-flat':'local-flat';o.reason=undefined;
+   o.status='generated';o.repair={method:'flat-fill',rect:patch.rect,radius:0};o.background=regions.find(r=>r.id===o.id)?.manualBackground?'manual-flat':'local-flat';o.reason=undefined;
   }catch{o.reason='repair-failed-candidate-preserved';}
  }
  ctx.putImageData(pixels,0,0);
