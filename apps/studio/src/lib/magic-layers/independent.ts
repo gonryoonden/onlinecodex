@@ -2,6 +2,7 @@ import { createImageElement, uid, type PageData } from '../types';
 import type { Asset } from '../project';
 import { fitSource } from '../image-layout';
 import type { Analysis } from './schema';
+import { extractAlphaCandidates } from './extraction';
 import { reconcileCandidates } from './candidates';
 import { elementItems, snapshotStage, type Diagnostic } from './diagnostics';
 export interface Reconstruction { page:PageData; assets:Asset[]; warnings:string[]; diagnostic:Diagnostic; }
@@ -10,11 +11,7 @@ export interface Reconstruction { page:PageData; assets:Asset[]; warnings:string
 export async function reconstructIndependent(input:Analysis,source:Asset,width:number,height:number,skip:string[],provider:string,
  generate:(input:Analysis)=>Promise<Reconstruction>,initial:Partial<Diagnostic>={}) :Promise<Reconstruction> {
  const {canonical,outcomes}=reconcileCandidates(input.regions,skip);
- const extractable=canonical.filter(r=>{
-  const outcome=outcomes.find(o=>o.id===r.id)!;
-  if(r.type==='image'){outcome.status='separation-failed';outcome.reason='alpha-mask-required';return false;}
-  outcome.extraction='native';return true;
- });
+ const extractable=await extractAlphaCandidates(source,canonical,outcomes);
  const generated=extractable.length?await generate({...input,background:{...input.background,kind:'solid'},regions:extractable}):undefined;
  const elements=generated?.page.elements??[];
  for(const el of elements){

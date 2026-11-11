@@ -35,6 +35,17 @@
       "started": "2026-11-11T01:41:12.028763+00:00",
       "finished": "2026-11-11T01:41:19.728737+00:00",
       "log": "evidence/studio/loop/attempt-03.log"
+    },
+    {
+      "id": 4,
+      "phase": 3,
+      "gate": "contract",
+      "cause": "alpha-contract",
+      "hypothesis": "Only explicit nonrectangular masks or conservative measured keying produce image candidates",
+      "status": "passed",
+      "started": "2026-11-11T01:42:26.459686+00:00",
+      "finished": "2026-11-11T01:42:35.320153+00:00",
+      "log": "evidence/studio/loop/attempt-04.log"
     }
   ],
   "phases": {
@@ -47,7 +58,8 @@
       "verifiedAttempt": 3
     },
     "3": {
-      "status": "pending"
+      "status": "passed",
+      "verifiedAttempt": 4
     },
     "4": {
       "status": "pending"
@@ -60,5 +72,5 @@
     }
   },
   "halted": null,
-  "checkpoint": "619f25c186f07e4eb46b094959f5eb3f615c8095"
+  "checkpoint": "6cb3b97b20e6d5cb11d01114f9f7296e391b1af0"
 }
