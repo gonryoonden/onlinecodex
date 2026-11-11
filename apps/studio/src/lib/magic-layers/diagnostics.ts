@@ -3,9 +3,9 @@ import type { AnyElement } from "../types";
 import type { Region } from "./schema";
 const id = z.string().regex(/^[A-Za-z0-9_-]{1,100}$/);
 const kind = z.enum(["text", "shape", "image"]);
-const item = z.object({ id, type: kind, regionId: id.optional(), role: z.enum(["editable", "background", "unclassified"]).optional(), reason: z.enum([
+const item = z.object({ id, type: kind, regionId: id.optional(), role: z.enum(["editable", "pending", "background", "unclassified"]).optional(), reason: z.enum([
   "user-excluded", "unreviewed", "overlap", "complex-boundary", "large-or-edge",
-  "hidden", "removed-since-reconstruction", "original-preserved",
+  "hidden", "removed-since-reconstruction", "original-preserved", "duplicate", "background-pending", "separation-failed",
 ]).optional() });
 export const stageSchema = z.object({
   name: z.enum(["ai-raw", "normalized", "reviewed", "reconstructed", "saved", "visible-export", "pptx"]),
@@ -18,7 +18,8 @@ export const diagnosticSchema = z.object({
   version: z.literal(1), runId: id, sourceId: id, createdAt: z.string().max(40),
   provider: z.string().max(100), build: z.string().max(100).optional(),
   inputKind: z.enum(["unknown", "text-only", "illustrated"]),
-  mode: z.enum(["preserve", "redraw", "local-repair"]),
+  mode: z.enum(["preserve", "redraw", "local-repair", "independent"]),
+  candidates: z.array(z.object({id,type:kind,status:z.enum(["generated","merged","correction-needed","separation-failed","user-excluded"]),canonicalId:id.optional(),parentId:id.optional(),elementId:id.optional(),reason:z.string().max(200).optional(),extraction:z.enum(["native","polygon","model-mask","flat-key"]).optional(),background:z.enum(["pending","local-flat","manual-flat","inpaint-review"])})).max(80).optional(),
   status: z.enum(["full-editable", "partial-editable", "original-preserved", "review-required", "failed"]),
   background: z.enum(["original", "local-patches", "inpaint-approximation", "redrawn"]),
   transport: z.object({ width: z.number().int().positive(), height: z.number().int().positive(),
@@ -32,7 +33,7 @@ export const diagnosticSchema = z.object({
 export type Diagnostic = z.infer<typeof diagnosticSchema>;
 export function elementItems(elements: AnyElement[]): TraceItem[] {
   return elements.map(e=>({id:e.id,type:e.type==="text"?"text":e.type==="image"?"image":"shape",regionId:e.provenance?.regionId,
-    role:e.provenance?.regionId?"editable":e.provenance?.source&&e.type==="image"&&e.locked?"background":"unclassified"}));
+    role:e.provenance?.regionId?(!e.visible&&e.provenance.backgroundWarning?"pending":"editable"):e.provenance?.source&&e.type==="image"&&e.locked?"background":"unclassified"}));
 }
 export function snapshotStage(name: Stage["name"], objects: TraceItem[], omitted: TraceItem[] = []): Stage {
   // Allowlist serialization: never copy OCR text, images, arbitrary model fields or credentials.
@@ -72,6 +73,7 @@ export const statusLabels: Record<Diagnostic["status"],string> = {
   "original-preserved":"원본 유지 · 편집 객체 미생성", "review-required":"사용자 검토 필요", "failed":"변환 실패",
 };
 export const warningLabels: Record<string,string> = {
+  BACKGROUND_PENDING:"배경 미복원 후보는 숨겨서 보존했습니다. 원본 잔상과 겹치지 않도록 영역을 교정하세요.",
   MANUAL_FLAT_BACKGROUND:"수동 단색 교정: 질감·그림자는 복원하지 않았습니다. 이동·삭제 후 경계 이음새를 확인하세요.",
   ILLUSTRATIONS_MISSING:"삽화가 있는 입력인데 이미지 영역이 0개입니다. 원본을 보존하고 누락 영역을 지정하세요.",
   CHECK_INPUT_KIND_IMAGE_ZERO:"이미지 영역이 0개입니다. 텍스트 전용 입력인지 확인하세요.",

@@ -13,6 +13,28 @@
       "started": "2026-11-11T01:39:03.326576+00:00",
       "finished": "2026-11-11T01:39:08.833779+00:00",
       "log": "evidence/studio/loop/attempt-01.log"
+    },
+    {
+      "id": 2,
+      "phase": 2,
+      "gate": "contract",
+      "cause": "candidate-contract",
+      "hypothesis": "All candidate IDs survive native extraction independently of background acceptance",
+      "status": "passed",
+      "started": "2026-11-11T01:40:41.536402+00:00",
+      "finished": "2026-11-11T01:40:52.842882+00:00",
+      "log": "evidence/studio/loop/attempt-02.log"
+    },
+    {
+      "id": 3,
+      "phase": 2,
+      "gate": "contract",
+      "cause": "candidate-contract",
+      "hypothesis": "Native elements and per-ID pending outcomes persist when repair is unavailable",
+      "status": "passed",
+      "started": "2026-11-11T01:41:12.028763+00:00",
+      "finished": "2026-11-11T01:41:19.728737+00:00",
+      "log": "evidence/studio/loop/attempt-03.log"
     }
   ],
   "phases": {
@@ -21,7 +43,8 @@
       "verifiedAttempt": 1
     },
     "2": {
-      "status": "pending"
+      "status": "passed",
+      "verifiedAttempt": 3
     },
     "3": {
       "status": "pending"
@@ -37,5 +60,5 @@
     }
   },
   "halted": null,
-  "checkpoint": "115b8ec"
+  "checkpoint": "619f25c186f07e4eb46b094959f5eb3f615c8095"
 }

@@ -9,6 +9,7 @@ import {
   type AnyElement,
   type Background,
 } from "../types";
+import { reconstructIndependent, type Reconstruction } from "./independent";
 import { loadImage } from "../imports";
 import { fitSource } from "../image-layout";
 import { type Analysis, analysisSchema, toPixels, type Region } from "./schema";
@@ -116,9 +117,11 @@ export async function reconstructDesign(
   confirmedBackground: boolean,
   provider = "manual",
   repair?: RepairedSource,
-  options: { mode?: "preserve" | "redraw"; inputKind?: Diagnostic["inputKind"]; initial?: Partial<Diagnostic> } = {},
-) {
+  options: { mode?: "preserve" | "redraw" | "independent"; inputKind?: Diagnostic["inputKind"]; initial?: Partial<Diagnostic> } = {},
+): Promise<Reconstruction> {
   const originalAnalysis = analysisSchema.parse(input);
+  if(options.mode==="independent") return reconstructIndependent(originalAnalysis,source,width,height,skip,provider,
+    prepared=>reconstructDesign(prepared,source,width,height,[],true,provider,undefined,{mode:"redraw"}),{...options.initial,inputKind:options.inputKind});
   let analysis = originalAnalysis;
   const mode = options.mode ?? "preserve";
   const hadRepair = Boolean(repair);
