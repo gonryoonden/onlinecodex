@@ -1,0 +1,4 @@
+# Repository-scoped Codex delegation defaults. No model or paid service is forced.
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 3

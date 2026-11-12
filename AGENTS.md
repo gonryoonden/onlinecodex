@@ -7,3 +7,17 @@ The latest user request authorizes a separate maximum 12-attempt loop from f5db0
 Read ux-PRD.md, ux-tasks.md and ux-state.json in docs/loop-engineering.
 Use `python scripts/pms-ux-loop.py` with the same reserve/recover/three-failures rules.
 Keep old state.json and old logs immutable. UX logs are evidence/studio/ux-loop.
+
+
+## Shared AI development team (2026-11-12)
+For new feature requests, complex bugs, architectural work, or explicit "AI team" requests,
+use `.agents/skills/ai-dev-team/SKILL.md` and `docs/ai-team/TEAM-STANDARD.md`.
+The lead agent coordinates planner -> independent reviewer -> implementer -> independent QA.
+Use real Codex subagents in `.codex/agents/` when available; never claim separate
+agent review without an actual separate review. Keep routine one-step edits lightweight.
+For failures follow `.agents/skills/bug-investigation/SKILL.md`.
+This is a process layer, **not** permission to restart or rewrite the existing
+24-attempt or 12-attempt PMS loops. Existing loop state, checkpoints, test gates,
+app-specific AGENTS.md, and Preview-only protections take precedence.
+Do not change main/Production, credentials, paid APIs, or user data without
+explicit authorization; testing and evidence are mandatory before a completion claim.
