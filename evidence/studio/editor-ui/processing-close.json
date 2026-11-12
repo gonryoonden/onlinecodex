@@ -1,0 +1,9 @@
+{
+  "closedAt": "real WASM encoder",
+  "closeMs": 134,
+  "workersAfterClose": 0,
+  "unexpectedPageAfterClose": false,
+  "resumed": true,
+  "analysisRequests": 1,
+  "freshGeminiCalls": 0
+}

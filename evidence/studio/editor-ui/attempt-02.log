@@ -1,0 +1,109 @@
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "test"]
+
+> personal-magic-studio@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/pms-beta/apps/studio
+
+
+ Test Files  19 passed | 1 skipped (20)
+      Tests  120 passed | 1 skipped (121)
+   Start at  04:23:57
+   Duration  5.48s (transform 433ms, setup 0ms, import 1.70s, tests 1.35s, environment 2ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "run", "lint"]
+
+> personal-magic-studio@0.1.0 lint
+> eslint src tests
+
+
+/workspace/pms-beta/apps/studio/src/components/Studio.tsx
+  16:3  warning  'Eye' is defined but never used     @typescript-eslint/no-unused-vars
+  17:3  warning  'EyeOff' is defined but never used  @typescript-eslint/no-unused-vars
+  18:3  warning  'Lock' is defined but never used    @typescript-eslint/no-unused-vars
+  19:3  warning  'Unlock' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 4 problems (0 errors, 4 warnings)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npx", "playwright", "test", "tests/editor-layout.spec.ts"]
+[WebServer] (node:1634) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:1647) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:1659) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:1676) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/editor-layout.spec.ts:5:5 › canvas-first editor at four actual viewport sizes (9.4s)
+  ✓  2 tests/editor-layout.spec.ts:18:5 › view scale, focus, panel sizing and source comparison preserve edits and selection (9.9s)
+  ✘  3 tests/editor-layout.spec.ts:34:5 › mobile tools and properties are drawers without document overflow (16.0s)
+
+
+  1) tests/editor-layout.spec.ts:34:5 › mobile tools and properties are drawers without document overflow 
+
+    TimeoutError: locator.waitFor: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: '텍스트 추가', exact: true }) to be visible
+
+
+       at editor-helpers.ts:6
+
+      4 | export const editorOut=path.resolve(process.env.STUDIO_EDITOR_EVIDENCE||'../../work/editor-ui');
+      5 | export async function loadEditor(page:Page){
+    > 6 |  fs.mkdirSync(editorOut,{recursive:true});await page.goto('/');await page.getByRole('button',{name:'텍스트 추가',exact:true}).waitFor();
+        |                                                                                                                          ^
+      7 |  await page.getByTestId('archive-upload').setInputFiles(process.env.STUDIO_EDITOR_PROJECT||'../../work/editor-ui/baseline-project.studio.zip');
+      8 |  await expect(page.getByText('레이어와 원본 에셋을 복원했습니다.',{exact:true})).toBeVisible();await page.getByRole('button',{name:'페이지 2',exact:true}).click();await page.locator('.artboard canvas').first().waitFor();
+      9 |  await page.evaluate(()=>document.fonts.ready);await expect.poll(()=>page.locator('.layer-row').count()).toBeGreaterThan(40);
+        at loadEditor (/workspace/pms-beta/apps/studio/tests/editor-helpers.ts:6:122)
+        at /workspace/pms-beta/apps/studio/tests/editor-layout.spec.ts:35:53
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/editor-layout-mobile-tools-b61a5-s-without-document-overflow/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/editor-layout-mobile-tools-b61a5-s-without-document-overflow/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/editor-layout-mobile-tools-b61a5-s-without-document-overflow/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/editor-layout-mobile-tools-b61a5-s-without-document-overflow/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/editor-layout.spec.ts:34:5 › mobile tools and properties are drawers without document overflow 
+  2 passed (40.2s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

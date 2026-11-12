@@ -1,0 +1,169 @@
+{
+  "referenceApp": "410d3c3",
+  "rows": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "beforeCanvas": {
+        "x": 305,
+        "y": 347,
+        "width": 1351,
+        "height": 625
+      },
+      "afterCanvas": {
+        "x": 268,
+        "y": 136,
+        "width": 1388,
+        "height": 870
+      },
+      "beforeImage": {
+        "width": 841.5,
+        "height": 469.67441860465124
+      },
+      "afterImage": {
+        "width": 1257,
+        "height": 701.5813953488372
+      },
+      "actualImageAreaGainPercent": 123.13223458237607,
+      "beforeBannersHeight": 224,
+      "afterBannersHeight": 40
+    },
+    {
+      "viewport": {
+        "width": 1650,
+        "height": 928
+      },
+      "beforeCanvas": {
+        "x": 305,
+        "y": 347,
+        "width": 1081,
+        "height": 473
+      },
+      "afterCanvas": {
+        "x": 268,
+        "y": 136,
+        "width": 1118,
+        "height": 718
+      },
+      "beforeImage": {
+        "width": 613.5,
+        "height": 342.4186046511628
+      },
+      "afterImage": {
+        "width": 1029,
+        "height": 574.3255813953489
+      },
+      "actualImageAreaGainPercent": 181.32065207644618,
+      "beforeBannersHeight": 224,
+      "afterBannersHeight": 40
+    },
+    {
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "beforeCanvas": {
+        "x": 305,
+        "y": 347,
+        "width": 797,
+        "height": 313
+      },
+      "afterCanvas": {
+        "x": 268,
+        "y": 136,
+        "width": 834,
+        "height": 558
+      },
+      "beforeImage": {
+        "width": 373.5,
+        "height": 208.46511627906978
+      },
+      "afterImage": {
+        "width": 789,
+        "height": 440.37209302325584
+      },
+      "actualImageAreaGainPercent": 346.2444154126547,
+      "beforeBannersHeight": 224,
+      "afterBannersHeight": 40
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "beforeCanvas": {
+        "x": 48,
+        "y": 499.1875,
+        "width": 342,
+        "height": 248.8125
+      },
+      "afterCanvas": {
+        "x": 48,
+        "y": 206,
+        "width": 342,
+        "height": 559
+      },
+      "beforeImage": {
+        "width": 277.21875,
+        "height": 154.72674418604652
+      },
+      "afterImage": {
+        "width": 310,
+        "height": 173.0232558139535
+      },
+      "actualImageAreaGainPercent": 25.048413398315162,
+      "beforeBannersHeight": 295.1875,
+      "afterBannersHeight": 44
+    }
+  ],
+  "selection": {
+    "before": {
+      "metric": "pointerdown to second animation frame; not field INP",
+      "samples": [
+        124.8999999994412,
+        106.70000000018626,
+        103.29999999981374,
+        104.5,
+        49.200000000186265,
+        126.6000000005588,
+        110.5,
+        114.1000000005588
+      ],
+      "median": 110.5,
+      "max": 126.6000000005588
+    },
+    "after": {
+      "metric": "pointerdown to second animation frame; not field INP",
+      "samples": [
+        58.30000000074506,
+        49.09999999962747,
+        44.79999999888241,
+        62.29999999888241,
+        48.30000000074506,
+        52.899999998509884,
+        47.09999999962747,
+        69.30000000074506
+      ],
+      "median": 52.899999998509884,
+      "max": 69.30000000074506
+    },
+    "metric": "pointerdown to second animation frame; controlled Chromium dev; not field INP"
+  },
+  "close": {
+    "closedAt": "real WASM encoder",
+    "closeMs": 134,
+    "workersAfterClose": 0,
+    "unexpectedPageAfterClose": false,
+    "resumed": true,
+    "analysisRequests": 1,
+    "freshGeminiCalls": 0
+  },
+  "remaining": {
+    "canvasPNGTextParity": "failed; corresponding changes reverted",
+    "fullRegression": "not run",
+    "memoryComparison": "not established for shipped snapshot",
+    "otherBrowserFamilies": "not tested"
+  }
+}

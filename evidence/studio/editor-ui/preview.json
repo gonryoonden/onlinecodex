@@ -1,0 +1,16 @@
+{
+  "editorApplicationDeployed": false,
+  "publication": "reports/evidence/archived prototype only",
+  "reason": "Independent release review BLOCK and three repeated text-parity failures; required release checks not run",
+  "prototypeAppCommit": "410d3c3dfe276ed35411c16a5613574752ca535a",
+  "localPreservedHistory": "35bf493",
+  "unchangedRemoteAppBase": "1d7a4568bc139ed74c194d82c3ceba66140402a0",
+  "currentPriorVerifiedPreview": "https://personal-magic-studio-preview-9hb66gkaa-gonryoondens-projects.vercel.app",
+  "currentPriorPreviewIsNewEditor": false,
+  "oldMain": "54bf39aa957cc5ad91d947653f90867ad1b1569d",
+  "productionDeployment": "dpl_ANVtTBW3zzB3agS8AKdMbELcSumw",
+  "loopUsed": 8,
+  "loopBudget": 12,
+  "halted": "SAME_FAILURE_THREE_ATTEMPTS:canvas-png-parity",
+  "bundleSHA256": "05423405b10fa614ea026bc0a4b6ba3921bc2d3ed97209e3061905c0853ed2ff"
+}

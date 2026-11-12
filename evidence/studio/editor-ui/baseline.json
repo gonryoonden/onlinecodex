@@ -1,0 +1,268 @@
+{
+  "project": "actual cached Gemini/MobileSAM project from prior validated beta; not new Gemini call",
+  "rows": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 76
+      },
+      "banners": [
+        {
+          "height": 152,
+          "text": "부분 편집 가능 · 사용자 검토 필요배경 미복원 후보는 숨겨서 보존했습니다. 원본 잔상과 겹치지 않도록 영역을 교정하세요.독립 객체와 배경 복원을 분리했습니다. 단색 복원·픽셀 키"
+        },
+        {
+          "height": 36,
+          "text": "레이어와 원본 에셋을 복원했습니다."
+        },
+        {
+          "height": 36,
+          "text": "편집 가능 20개 · 품질 경고 8개 · 상세 검토 25개 · 분리 실패 1개문제 객체 상세 검토저장된 분석으로 다시 처리"
+        }
+      ],
+      "canvas": {
+        "x": 305,
+        "y": 347,
+        "width": 1351,
+        "height": 625
+      },
+      "artboard": {
+        "x": 559.75,
+        "y": 379,
+        "width": 841.5,
+        "height": 561
+      },
+      "actualSourceImage": {
+        "width": 841.5,
+        "height": 469.67441860465124
+      },
+      "left": {
+        "x": 70,
+        "y": 76,
+        "width": 235,
+        "height": 1004
+      },
+      "rail": {
+        "x": 0,
+        "y": 76,
+        "width": 70,
+        "height": 1004
+      },
+      "right": {
+        "x": 1656,
+        "y": 76,
+        "width": 264,
+        "height": 1004
+      },
+      "zoomControl": "브라우저 로컬 저장 · ZIP으로 백업하세요−맞춤 100%+",
+      "documentOverflow": false
+    },
+    {
+      "viewport": {
+        "width": 1650,
+        "height": 928
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1650,
+        "height": 76
+      },
+      "banners": [
+        {
+          "height": 152,
+          "text": "부분 편집 가능 · 사용자 검토 필요배경 미복원 후보는 숨겨서 보존했습니다. 원본 잔상과 겹치지 않도록 영역을 교정하세요.독립 객체와 배경 복원을 분리했습니다. 단색 복원·픽셀 키"
+        },
+        {
+          "height": 36,
+          "text": "레이어와 원본 에셋을 복원했습니다."
+        },
+        {
+          "height": 36,
+          "text": "편집 가능 20개 · 품질 경고 8개 · 상세 검토 25개 · 분리 실패 1개문제 객체 상세 검토저장된 분석으로 다시 처리"
+        }
+      ],
+      "canvas": {
+        "x": 305,
+        "y": 347,
+        "width": 1081,
+        "height": 473
+      },
+      "artboard": {
+        "x": 538.75,
+        "y": 379,
+        "width": 613.5,
+        "height": 409
+      },
+      "actualSourceImage": {
+        "width": 613.5,
+        "height": 342.4186046511628
+      },
+      "left": {
+        "x": 70,
+        "y": 76,
+        "width": 235,
+        "height": 852
+      },
+      "rail": {
+        "x": 0,
+        "y": 76,
+        "width": 70,
+        "height": 852
+      },
+      "right": {
+        "x": 1386,
+        "y": 76,
+        "width": 264,
+        "height": 852
+      },
+      "zoomControl": "브라우저 로컬 저장 · ZIP으로 백업하세요−맞춤 100%+",
+      "documentOverflow": false
+    },
+    {
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1366,
+        "height": 76
+      },
+      "banners": [
+        {
+          "height": 152,
+          "text": "부분 편집 가능 · 사용자 검토 필요배경 미복원 후보는 숨겨서 보존했습니다. 원본 잔상과 겹치지 않도록 영역을 교정하세요.독립 객체와 배경 복원을 분리했습니다. 단색 복원·픽셀 키"
+        },
+        {
+          "height": 36,
+          "text": "레이어와 원본 에셋을 복원했습니다."
+        },
+        {
+          "height": 36,
+          "text": "편집 가능 20개 · 품질 경고 8개 · 상세 검토 25개 · 분리 실패 1개문제 객체 상세 검토저장된 분석으로 다시 처리"
+        }
+      ],
+      "canvas": {
+        "x": 305,
+        "y": 347,
+        "width": 797,
+        "height": 313
+      },
+      "artboard": {
+        "x": 516.75,
+        "y": 379,
+        "width": 373.5,
+        "height": 249
+      },
+      "actualSourceImage": {
+        "width": 373.5,
+        "height": 208.46511627906978
+      },
+      "left": {
+        "x": 70,
+        "y": 76,
+        "width": 235,
+        "height": 692
+      },
+      "rail": {
+        "x": 0,
+        "y": 76,
+        "width": 70,
+        "height": 692
+      },
+      "right": {
+        "x": 1102,
+        "y": 76,
+        "width": 264,
+        "height": 692
+      },
+      "zoomControl": "브라우저 로컬 저장 · ZIP으로 백업하세요−맞춤 100%+",
+      "documentOverflow": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 105
+      },
+      "banners": [
+        {
+          "height": 206,
+          "text": "부분 편집 가능 · 사용자 검토 필요배경 미복원 후보는 숨겨서 보존했습니다. 원본 잔상과 겹치지 않도록 영역을 교정하세요.독립 객체와 배경 복원을 분리했습니다. 단색 복원·픽셀 키"
+        },
+        {
+          "height": 36,
+          "text": "레이어와 원본 에셋을 복원했습니다."
+        },
+        {
+          "height": 53.1875,
+          "text": "편집 가능 20개 · 품질 경고 8개 · 상세 검토 25개 · 분리 실패 1개문제 객체 상세 검토저장된 분석으로 다시 처리"
+        }
+      ],
+      "canvas": {
+        "x": 48,
+        "y": 499.1875,
+        "width": 342,
+        "height": 248.8125
+      },
+      "artboard": {
+        "x": 80.390625,
+        "y": 531.1875,
+        "width": 277.21875,
+        "height": 184.8125
+      },
+      "actualSourceImage": {
+        "width": 277.21875,
+        "height": 154.72674418604652
+      },
+      "left": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "rail": {
+        "x": 0,
+        "y": 157,
+        "width": 48,
+        "height": 687
+      },
+      "right": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "zoomControl": "브라우저 로컬 저장 · ZIP으로 백업하세요−맞춤 100%+",
+      "documentOverflow": false
+    }
+  ],
+  "performance": {
+    "metric": "pointerdown to second animation frame; not field INP",
+    "samples": [
+      124.8999999994412,
+      106.70000000018626,
+      103.29999999981374,
+      104.5,
+      49.200000000186265,
+      126.6000000005588,
+      110.5,
+      114.1000000005588
+    ],
+    "median": 110.5,
+    "max": 126.6000000005588
+  }
+}

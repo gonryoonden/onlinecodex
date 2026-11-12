@@ -1,0 +1,144 @@
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "test"]
+
+> personal-magic-studio@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/pms-beta/apps/studio
+
+
+ Test Files  20 passed | 1 skipped (21)
+      Tests  122 passed | 1 skipped (123)
+   Start at  04:31:08
+   Duration  5.39s (transform 414ms, setup 0ms, import 1.66s, tests 1.33s, environment 2ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "run", "lint"]
+
+> personal-magic-studio@0.1.0 lint
+> eslint src tests
+
+
+/workspace/pms-beta/apps/studio/src/components/AutoEditDialog.tsx
+  26:60  warning  The ref value 'generation.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'generation.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+✖ 1 problem (0 errors, 1 warning)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npx", "playwright", "test", "tests/editor-processing.spec.ts", "tests/auto-cancel.spec.ts"]
+[WebServer] (node:3008) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3021) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3033) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:3052) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/auto-cancel.spec.ts:4:5 › automatic cancellation and retry reuse completed real Gemini response (24.8s)
+  ✘  2 tests/editor-processing.spec.ts:7:5 › close during actual encoder terminates worker; saved analysis resumes without duplicate Gemini (21.4s)
+(node:3308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 tests/editor-processing.spec.ts:14:5 › download and initialization failures retain analysis and retry into real model inference (22.5s)
+  ✘  4 tests/editor-processing.spec.ts:21:5 › closing before a delayed analysis response prevents late page creation (18.2s)
+
+
+  1) tests/editor-processing.spec.ts:7:5 › close during actual encoder terminates worker; saved analysis resumes without duplicate Gemini 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('dialog', { name: '자동 편집 준비' }).getByRole('button', { name: '닫기', exact: true })
+    Expected: enabled
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" getByRole('dialog', { name: '자동 편집 준비' }).getByRole('button', { name: '닫기', exact: true }) with timeout 15000ms
+      - waiting for getByRole('dialog', { name: '자동 편집 준비' }).getByRole('button', { name: '닫기', exact: true })
+
+
+       7 | test('close during actual encoder terminates worker; saved analysis resumes without duplicate Gemini',async({page})=>{
+       8 |  test.setTimeout(180000);fs.mkdirSync(editorOut,{recursive:true});let workers=0;page.on('worker',w=>{workers++;w.on('close',()=>workers--);});const {d,calls}=await setup(page);
+    >  9 |  await expect(d.getByLabel('자동 편집 진행')).toContainText('이미지 특징 분석',{timeout:90000});await page.screenshot({path:path.join(editorOut,'processing-stages.png')});await expect(d.getByRole('button',{name:'닫기',exact:true})).toBeEnabled();
+         |                                                                                                                                                                                                                          ^
+      10 |  const start=Date.now();await d.getByRole('button',{name:'닫기',exact:true}).click();await expect(d).not.toBeVisible();const closeMs=Date.now()-start;expect(closeMs).toBeLessThan(1000);await expect.poll(()=>workers).toBe(0);await expect(page.getByRole('button',{name:'페이지 2',exact:true})).toHaveCount(0);
+      11 |  await page.getByRole('button',{name:'작업 상세',exact:true}).click();await page.screenshot({path:path.join(editorOut,'closed-analysis-resume.png')});await page.getByRole('button',{name:'저장된 분석으로 자동 편집 재개',exact:true}).click();await expect(page.getByTestId('auto-summary')).toBeVisible({timeout:120000});expect(calls()).toBe(1);
+      12 |  fs.writeFileSync(path.join(editorOut,'processing-close.json'),JSON.stringify({closedAt:'real WASM encoder',closeMs,workersAfterClose:0,unexpectedPageAfterClose:false,resumed:true,analysisRequests:calls(),freshGeminiCalls:0},null,2));
+        at /workspace/pms-beta/apps/studio/tests/editor-processing.spec.ts:9:218
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/editor-processing-close-du-477b9-es-without-duplicate-Gemini/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/editor-processing-close-du-477b9-es-without-duplicate-Gemini/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/editor-processing-close-du-477b9-es-without-duplicate-Gemini/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/editor-processing-close-du-477b9-es-without-duplicate-Gemini/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/editor-processing.spec.ts:21:5 › closing before a delayed analysis response prevents late page creation 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: '자동 편집 준비' }).getByRole('button', { name: '닫기', exact: true })
+
+
+      21 | test('closing before a delayed analysis response prevents late page creation',async({page})=>{
+      22 |  test.setTimeout(60000);let finish!:()=>void;const held=new Promise<void>(r=>{finish=r;});const cached=JSON.parse(fs.readFileSync('../../evidence/studio/phase3/gemini-live-improved.json','utf8')).result;
+    > 23 |  await page.route('**/api/capabilities',r=>r.fulfill({json:{enabled:true}}));await page.route('**/api/ai/magic-layers',async r=>{await held;await r.fulfill({json:cached}).catch(()=>{});});await page.goto('/');await page.getByLabel('프로젝트 이름',{exact:true}).waitFor();await page.getByTestId('file-upload').setInputFiles(original);const d=page.getByRole('dialog',{name:'자동 편집 준비'});await d.getByLabel('외부 Gemini API로 이 이미지 전송에 동의하고 자동 편집을 시작합니다.').check();await expect(d.getByLabel('자동 편집 진행')).toContainText('Gemini');await d.getByRole('button',{name:'닫기',exact:true}).click();finish();await expect(d).not.toBeVisible();await page.getByRole('button',{name:'저장',exact:true}).click();await expect(page.getByRole('button',{name:'페이지 2',exact:true})).toHaveCount(0);
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
+      24 |  // Explicit future task boundary rather than treating a closed dialog alone as evidence.
+      25 |  await page.evaluate(()=>new Promise<void>(resolve=>setTimeout(resolve,200)));await expect(page.getByTestId('auto-summary')).toHaveCount(0);
+      26 | });
+        at /workspace/pms-beta/apps/studio/tests/editor-processing.spec.ts:23:567
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/editor-processing-closing--73a76-prevents-late-page-creation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/editor-processing-closing--73a76-prevents-late-page-creation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/editor-processing-closing--73a76-prevents-late-page-creation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/editor-processing-closing--73a76-prevents-late-page-creation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/editor-processing.spec.ts:7:5 › close during actual encoder terminates worker; saved analysis resumes without duplicate Gemini 
+    tests/editor-processing.spec.ts:21:5 › closing before a delayed analysis response prevents late page creation 
+  2 passed (1.5m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

@@ -1,0 +1,9 @@
+# Canvas-first Personal Magic Studio editor
+New task, baseline bf1962d. Independent12 attempts; old24 and12 histories immutable.
+Scope: editor chrome, view transforms, panels, safe cancellation/progress, text bounds, measured interaction performance. Reuse Gemini/MobileSAM/extraction/repair and ZIPv1. No model/library/service replacement.
+
+Acceptance: at1650×928, record actual source image width/height, canvas viewport, header/banner/panel area and zoom. Same project and zoom conditions before/after; target compact status36–48px and >=30% more actual image area. Report measured values, never container-only claims. Four viewports1920×1080/1650×928/1366×768/390×844. Fit/FitWidth/100%/selection, manual zoom retention, focus mode/restoration, panel toggles/resizing, source comparison without project mutation.
+Close while processing aborts worker and invalidates late apply; completed analysis retained; retry no duplicate Gemini. Show actual download/integrity/runtime/encode/masks/background/layer/entry stages without fake percentages. Distinguish failure causes.
+Native text: reused font measurement, Korean explicit breaks, bounding boxes consistent with editor/PNG/PDF/PPTX; unknown original font marked approximate. Quality A/B/C remains engine evidence, not blanket review. Existing hiddenC candidates remain hidden.
+Measure real40+ candidate project pointer selection/drag/zoom and renderer causes before optimizing. No observed responsiveness regression; performance claims scoped to Chromium/environment. Save before/default/focus/progress/cancel/selection/exceptions screenshots. Real cached response and manual fixtures labeled, no live Gemini claim without call.
+Only verified Preview commits; preserve main/Production/auth/keys/models/data. Stop12 or3 consecutive same-cause failures; recover running attempt without refund. Save exact unmet acceptance if blocked.

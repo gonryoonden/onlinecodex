@@ -1,0 +1,140 @@
+{
+  "freshGeminiCalls": 0,
+  "source": "actual cached Gemini, real MobileSAM",
+  "textCandidates": 19,
+  "checks": [
+    {
+      "id": "r0",
+      "maxLine": 490.6073913574219,
+      "width": 653.76,
+      "expectedHeight": 25.125,
+      "boxHeight": 25.183255813953487
+    },
+    {
+      "id": "r1",
+      "maxLine": 462.352294921875,
+      "width": 513.6,
+      "expectedHeight": 26.79069767441861,
+      "boxHeight": 31.077209302325585
+    },
+    {
+      "id": "r3",
+      "maxLine": 61.29090881347656,
+      "width": 70.08,
+      "expectedHeight": 78.5,
+      "boxHeight": 78.7646511627907
+    },
+    {
+      "id": "r7",
+      "maxLine": 147.85467529296875,
+      "width": 175.68,
+      "expectedHeight": 11.75,
+      "boxHeight": 11.787906976744187
+    },
+    {
+      "id": "r9",
+      "maxLine": 164.20663452148438,
+      "width": 173.76,
+      "expectedHeight": 9.625,
+      "boxHeight": 9.644651162790698
+    },
+    {
+      "id": "r13",
+      "maxLine": 73.25701904296875,
+      "width": 86.4,
+      "expectedHeight": 23.5,
+      "boxHeight": 23.575813953488375
+    },
+    {
+      "id": "r14",
+      "maxLine": 97.694091796875,
+      "width": 107.52,
+      "expectedHeight": 18.75,
+      "boxHeight": 18.753488372093024
+    },
+    {
+      "id": "r17",
+      "maxLine": 109.88552856445312,
+      "width": 129.6,
+      "expectedHeight": 23.5,
+      "boxHeight": 23.575813953488375
+    },
+    {
+      "id": "r18",
+      "maxLine": 131.41641235351562,
+      "width": 134.4,
+      "expectedHeight": 20.093023255813954,
+      "boxHeight": 20.89674418604651
+    },
+    {
+      "id": "r25",
+      "maxLine": 90.78474426269531,
+      "width": 104.64,
+      "expectedHeight": 59.25000000000001,
+      "boxHeight": 59.4753488372093
+    },
+    {
+      "id": "r65",
+      "maxLine": 64.203857421875,
+      "width": 73.92,
+      "expectedHeight": 28.75,
+      "boxHeight": 28.933953488372094
+    },
+    {
+      "id": "r66",
+      "maxLine": 97.82952880859375,
+      "width": 113.28,
+      "expectedHeight": 28.75,
+      "boxHeight": 28.933953488372094
+    },
+    {
+      "id": "r30",
+      "maxLine": 76.25160217285156,
+      "width": 85.44,
+      "expectedHeight": 79,
+      "boxHeight": 79.30046511627909
+    },
+    {
+      "id": "r35",
+      "maxLine": 87.11247253417969,
+      "width": 96,
+      "expectedHeight": 26.79069767441861,
+      "boxHeight": 27.86232558139535
+    },
+    {
+      "id": "r36",
+      "maxLine": 75.79916381835938,
+      "width": 85.44,
+      "expectedHeight": 26.25,
+      "boxHeight": 26.254883720930238
+    },
+    {
+      "id": "r39",
+      "maxLine": 80.10194396972656,
+      "width": 90.24,
+      "expectedHeight": 26.79069767441861,
+      "boxHeight": 26.790697674418606
+    },
+    {
+      "id": "r40",
+      "maxLine": 86.41676330566406,
+      "width": 96,
+      "expectedHeight": 26.79069767441861,
+      "boxHeight": 26.790697674418606
+    },
+    {
+      "id": "r42",
+      "maxLine": 78.37947082519531,
+      "width": 109.44,
+      "expectedHeight": 10.625,
+      "boxHeight": 10.716279069767443
+    },
+    {
+      "id": "r44",
+      "maxLine": 99.5494384765625,
+      "width": 104.64,
+      "expectedHeight": 26.79069767441861,
+      "boxHeight": 26.790697674418606
+    }
+  ]
+}

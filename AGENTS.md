@@ -21,3 +21,6 @@ This is a process layer, **not** permission to restart or rewrite the existing
 app-specific AGENTS.md, and Preview-only protections take precedence.
 Do not change main/Production, credentials, paid APIs, or user data without
 explicit authorization; testing and evidence are mandatory before a completion claim.
+
+## Stopped editor UX prototype (2026-11-12 KST)
+Read docs/loop-engineering/editor-state.json and editor-REPORT.md. New editor loop stopped8/12 after three identical text parity failures; no automatic resume. Preview contains reports/evidence only; editor application changes are NOT deployed. Archived bundle/patch preserve local checkpoints. Do not apply or release the prototype without a new explicit task and required regression/build verification. Preserve both previous loop state files.

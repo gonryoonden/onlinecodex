@@ -1,0 +1,6 @@
+{
+  "source": "prior real cached Gemini46-candidate/MobileSAM project; includes previous QA text/image edits and green user-added rectangle, preserved for identical before/after comparison",
+  "archiveSHA256": "5d6da8aa71d49ee457bddaee1006d9dcf15c4b42993ee30c517ae84730865ef5",
+  "sourceImageSHA256": "0d0e21aa7914feaa3adfe06c72260070cfe126a2db32a947c54300b77e05f000",
+  "regenerate": "At bf1962d run STUDIO_LOOP_EVIDENCE=<path> npx playwright test tests/auto-edit.spec.ts --grep korean; copy auto-korean.studio.zip to work/editor-ui/baseline-project.studio.zip or set STUDIO_EDITOR_PROJECT. No new Gemini call; actual model inference on cached real response."
+}

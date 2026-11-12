@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "base": "bf1962d",
+  "checkpoint": "410d3c3dfe276ed35411c16a5613574752ca535a",
+  "budget": 12,
+  "attempts": [
+    {
+      "id": 1,
+      "phase": 1,
+      "gate": "audit",
+      "cause": "baseline-layout",
+      "hypothesis": "Measure actual rendered source size and interaction latency on the existing46-candidate project before design changes",
+      "status": "passed",
+      "started": "2026-11-12T04:14:54.535142+00:00",
+      "finished": "2026-11-12T04:15:09.864498+00:00",
+      "log": "evidence/studio/editor-ui/attempt-01.log"
+    },
+    {
+      "id": 2,
+      "phase": 2,
+      "gate": "layout",
+      "cause": "canvas-first-layout",
+      "hypothesis": "Collapsed status details and explicit view scaling reclaim actual image area while preserving focus and selection",
+      "status": "failed",
+      "started": "2026-11-12T04:23:52.081491+00:00",
+      "finished": "2026-11-12T04:24:52.345435+00:00",
+      "log": "evidence/studio/editor-ui/attempt-02.log"
+    },
+    {
+      "id": 3,
+      "phase": 2,
+      "gate": "layout",
+      "cause": "mobile-bootstrap",
+      "hypothesis": "Wait on the visible project heading rather than a deliberately collapsed mobile tool before importing the unchanged project",
+      "status": "passed",
+      "started": "2026-11-12T04:26:08.399035+00:00",
+      "finished": "2026-11-12T04:27:02.622243+00:00",
+      "log": "evidence/studio/editor-ui/attempt-03.log"
+    },
+    {
+      "id": 4,
+      "phase": 3,
+      "gate": "processing",
+      "cause": "cancellable-processing",
+      "hypothesis": "Abort plus run identity prevents late apply; measured model reads integrity init and worker stages remain retryable and cache-safe",
+      "status": "failed",
+      "started": "2026-11-12T04:31:02.541734+00:00",
+      "finished": "2026-11-12T04:32:54.020539+00:00",
+      "log": "evidence/studio/editor-ui/attempt-04.log"
+    },
+    {
+      "id": 5,
+      "phase": 3,
+      "gate": "processing",
+      "cause": "close-accessible-name",
+      "hypothesis": "Target the explicit accessible close name and verify enabled closing, worker termination and no late state changes",
+      "status": "passed",
+      "started": "2026-11-12T04:35:10.700407+00:00",
+      "finished": "2026-11-12T04:36:46.417297+00:00",
+      "log": "evidence/studio/editor-ui/attempt-05.log"
+    },
+    {
+      "id": 6,
+      "phase": 4,
+      "gate": "interaction",
+      "cause": "typography-and-interaction",
+      "hypothesis": "Measure actual Korean glyphs before fitting explicit lines and verify pointer behavior and exported text position on the real editor",
+      "status": "failed",
+      "started": "2026-11-12T04:40:56.582192+00:00",
+      "finished": "2026-11-12T04:42:31.299494+00:00",
+      "log": "evidence/studio/editor-ui/attempt-06.log",
+      "failureFamily": "canvas-png-parity",
+      "finding": "Identical bitmap difference: fraction0.005185546875, mean channel error0.6359109157986111, ink bottom186 vs187; shared-font hypothesis did not change it."
+    },
+    {
+      "id": 7,
+      "phase": 4,
+      "gate": "text-audit",
+      "cause": "canvas-export-pixels",
+      "hypothesis": "Capture exact scene bitmap and PNG before changing rendering; investigate glyph spacing or persistent draw state rather than loosening pixel criteria",
+      "status": "failed",
+      "started": "2026-11-12T04:45:00.016045+00:00",
+      "finished": "2026-11-12T04:45:11.369987+00:00",
+      "log": "evidence/studio/editor-ui/attempt-07.log",
+      "failureFamily": "canvas-png-parity",
+      "finding": "Identical bitmap difference: fraction0.005185546875, mean channel error0.6359109157986111, ink bottom186 vs187; shared-font hypothesis did not change it."
+    },
+    {
+      "id": 8,
+      "phase": 4,
+      "gate": "interaction",
+      "cause": "shared-font-lifecycle",
+      "hypothesis": "Unify exact glyph loading across fitting editor and export, then rebuild cached Konva text after font readiness; retain strict pixel comparison",
+      "status": "failed",
+      "started": "2026-11-12T04:49:14.097758+00:00",
+      "finished": "2026-11-12T04:50:48.302668+00:00",
+      "log": "evidence/studio/editor-ui/attempt-08.log",
+      "failureFamily": "canvas-png-parity",
+      "finding": "Identical bitmap difference: fraction0.005185546875, mean channel error0.6359109157986111, ink bottom186 vs187; shared-font hypothesis did not change it."
+    }
+  ],
+  "phases": {
+    "1": {
+      "status": "passed",
+      "verifiedAttempt": 1
+    },
+    "2": {
+      "status": "passed",
+      "verifiedAttempt": 3
+    },
+    "3": {
+      "status": "passed",
+      "verifiedAttempt": 5
+    },
+    "4": {
+      "status": "blocked",
+      "reason": "Identical canvas/PNG discrepancy in attempts6,7,8; unverified typography/font changes restored to verified410d3c3."
+    },
+    "5": {
+      "status": "blocked",
+      "reason": "Full edit/export regression not completed; no further implementation loop after stop rule."
+    },
+    "6": {
+      "status": "blocked",
+      "reason": "Independent release review BLOCK: full regression/optimized build/browser unmet, source-level allocation/pivot/cache risks; no editor application deployment."
+    }
+  },
+  "halted": "SAME_FAILURE_THREE_ATTEMPTS:canvas-png-parity",
+  "previousStateSHA256": {
+    "state.json": "9d1e5ccce23239242f3b4bfb80d7109aa20d61fe72810be22963ddb30ccd8df5",
+    "ux-state.json": "33dcbe235e86043d04cee66311c7c9c403c79fa2303aa961417abc27bdfd5359"
+  },
+  "overall": "partial editor UX; stopped per user rule",
+  "resume": {
+    "lastVerifiedAppCommit": "410d3c3dfe276ed35411c16a5613574752ca535a",
+    "consumedAttempts": 8,
+    "remainingBudget": 4,
+    "automaticResumeAllowed": false,
+    "reason": "Three identical canvas/PNG failures; do not change cause labels or reset state to continue.",
+    "delivered": [
+      "compact status40px",
+      "actual canvas/image enlargement",
+      "focus mode and panel toggles/width controls",
+      "fit/width/document100%/selection view",
+      "source comparison",
+      "memoized layer rows and stable canvas callbacks",
+      "close cancels Worker and blocks late apply",
+      "actual model transfer/integrity/init/embedding/mask stages and verified buffer cache"
+    ],
+    "notDelivered": [
+      "new typography fit/render changes: reverted",
+      "complete PNG/canvas text parity",
+      "full legacy edit/ZIP/PDF/PPTX regression",
+      "optimized local production browser verification",
+      "hosted Preview browser verification"
+    ],
+    "releaseReview": {
+      "agent": "/root/release_review",
+      "independent": true,
+      "scope": "Read-only source and existing evidence review; no new tests/build/API",
+      "decision": "BLOCK",
+      "findings": [
+        "P1 full release regression/build/browser not run",
+        "P1 full-document Stage has no allocation cap at8x",
+        "P2 rotated ellipse/star selection bounds use wrong pivot",
+        "P2 oversized cached model response does not get evicted on retry"
+      ]
+    },
+    "remoteIntegration": {
+      "observedCommit": "1d7a4568bc139ed74c194d82c3ceba66140402a0",
+      "scope": "AI-team process documents only, merged without overwriting",
+      "applicationPreviewPublication": false
+    }
+  }
+}

@@ -1,0 +1,108 @@
+COMMAND ["npm", "run", "typecheck"]
+
+> personal-magic-studio@0.1.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "test"]
+
+> personal-magic-studio@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/pms-beta/apps/studio
+
+
+ Test Files  20 passed | 1 skipped (21)
+      Tests  122 passed | 1 skipped (123)
+   Start at  04:49:19
+   Duration  5.41s (transform 421ms, setup 0ms, import 1.66s, tests 1.36s, environment 2ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npm", "run", "lint"]
+
+> personal-magic-studio@0.1.0 lint
+> eslint src tests
+
+
+/workspace/pms-beta/apps/studio/src/components/AutoEditDialog.tsx
+  26:60  warning  The ref value 'generation.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'generation.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+✖ 1 problem (0 errors, 1 warning)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+COMMAND ["npx", "playwright", "test", "tests/editor-layout.spec.ts", "tests/editor-interaction.spec.ts"]
+[WebServer] (node:5949) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:5962) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:5974) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:5994) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/editor-interaction.spec.ts:9:5 › Korean explicit lines, measured bounds and native export positions match the actual canvas (5.4s)
+(node:6127) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/editor-interaction.spec.ts:22:5 › new AI text is fitted from the real cached analysis without additional implicit wraps (21.5s)
+  ✓  3 tests/editor-interaction.spec.ts:27:5 › real47-layer pointer selection drag zoom and JS heap sample (11.8s)
+  ✓  4 tests/editor-layout.spec.ts:5:5 › canvas-first editor at four actual viewport sizes (9.1s)
+  ✓  5 tests/editor-layout.spec.ts:18:5 › view scale, focus, panel sizing and source comparison preserve edits and selection (10.3s)
+  ✓  6 tests/editor-layout.spec.ts:34:5 › mobile tools and properties are drawers without document overflow (11.7s)
+
+
+  1) tests/editor-interaction.spec.ts:9:5 › Korean explicit lines, measured bounds and native export positions match the actual canvas 
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 0.2
+    Received:   0.6359109157986111
+
+      15 |  const compare=await page.evaluate(async({canvas,png})=>{
+      16 |   const load=async(src:string)=>{const im=new Image();im.src=src;await im.decode();const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const ctx=c.getContext('2d')!;ctx.drawImage(im,0,0);return {rgba:ctx.getImageData(0,0,c.width,c.height).data,w:c.width,h:c.height};};const a=await load(canvas),b=await load(png);let changed=0,sum=0;const ink=(d:Uint8ClampedArray,w:number)=>{let l=Infinity,t=Infinity,r=0,bt=0;for(let i=0;i<d.length;i+=4)if(Math.min(d[i],d[i+1],d[i+2])<220){const x=i/4%w,y=Math.floor(i/4/w);l=Math.min(l,x);t=Math.min(t,y);r=Math.max(r,x);bt=Math.max(bt,y);}return [l,t,r,bt];};for(let i=0;i<a.rgba.length;i+=4){let max=0;for(let k=0;k<3;k++){const diff=Math.abs(a.rgba[i+k]-b.rgba[i+k]);sum+=diff;max=Math.max(max,diff);}if(max>3)changed++;}return {canvasSize:[a.w,a.h],exportSize:[b.w,b.h],changedFraction:changed/(a.w*a.h),meanChannelError:sum/(a.w*a.h*3),canvasInk:ink(a.rgba,a.w),exportInk:ink(b.rgba,b.w)};
+    > 17 |  },{canvas,png:`data:image/png;base64,${fs.readFileSync(png).toString('base64')}`});fs.writeFileSync(path.join(editorOut,'text-pixel-comparison.json'),JSON.stringify(compare,null,2));expect(compare.canvasSize).toEqual(compare.exportSize);expect(compare.changedFraction).toBeLessThan(.01);expect(compare.meanChannelError).toBeLessThan(.2);expect(compare.canvasInk).toEqual(compare.exportInk);
+         |                                                                                                                                                                                                                                                                                                                                  ^
+      18 |  const zip=await JSZip.loadAsync(fs.readFileSync(pptx)),xml=await zip.file('ppt/slides/slide1.xml')!.async('string');expect(xml).toContain('한글 OCR 검토 2026');expect(xml).toContain('교육 A-12');expect(xml).toContain(`x="${Math.round(t.x*9525)}" y="${Math.round(t.y*9525)}"`);
+      19 |  const c=await browser.newContext(),fresh=await c.newPage();await fresh.goto('/');await fresh.getByLabel('프로젝트 이름',{exact:true}).waitFor();await fresh.getByTestId('archive-upload').setInputFiles(archive);await expect(fresh.getByText('레이어와 원본 에셋을 복원했습니다.',{exact:true})).toBeVisible();expect((await saved(fresh)).pages).toEqual(p.pages);await c.close();
+      20 |  fs.writeFileSync(path.join(editorOut,'text-layout.json'),JSON.stringify({textUnchanged:true,explicitLines:2,fontSize:t.fontSize,height:t.height,PNG:compare,PDF:true,PPTXNativePositionPreserved:true,ZIPReopened:true,originalFontRecovery:'not claimed; Noto Sans KR fallback'},null,2));
+        at /workspace/pms-beta/apps/studio/tests/editor-interaction.spec.ts:17:322
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/editor-interaction-Korean--0f9a2-ons-match-the-actual-canvas/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/editor-interaction-Korean--0f9a2-ons-match-the-actual-canvas/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/editor-interaction-Korean--0f9a2-ons-match-the-actual-canvas/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/editor-interaction-Korean--0f9a2-ons-match-the-actual-canvas/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/editor-interaction.spec.ts:9:5 › Korean explicit lines, measured bounds and native export positions match the actual canvas 
+  5 passed (1.2m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

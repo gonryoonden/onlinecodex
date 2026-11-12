@@ -1,0 +1,31 @@
+{
+  "projectLayers": 47,
+  "selection": {
+    "metric": "pointerdown to second animation frame; not field INP",
+    "samples": [
+      49.19999999925494,
+      44.19999999925494,
+      54.5,
+      52.399999998509884,
+      40.09999999962747,
+      47.19999999925494,
+      42.40000000037253,
+      38.80000000074506
+    ],
+    "median": 47.19999999925494,
+    "max": 54.5
+  },
+  "canvasPointerToSecondFrameMs": [
+    46.59999999962747,
+    45.69999999925494,
+    42.19999999925494,
+    47.5,
+    49.09999999962747,
+    42.5
+  ],
+  "dragGestureWallMs": 314,
+  "zoomClickToSecondFrameWallMs": 124,
+  "JSHeapUsedSize": 137188632,
+  "memoryScope": "CDP JS heap only; decoded images/WASM/native memory excluded",
+  "fieldINP": "not measured; controlled Chromium interaction proxies"
+}

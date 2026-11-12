@@ -1,0 +1,235 @@
+{
+  "rows": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 56
+      },
+      "banners": [
+        {
+          "height": 40,
+          "text": "편집 가능 20개품질 경고 8개상세 검토 25개분리 실패 1개문제 객체 상세 검토작업 상세"
+        }
+      ],
+      "canvas": {
+        "x": 268,
+        "y": 136,
+        "width": 1388,
+        "height": 870
+      },
+      "artboard": {
+        "x": 333.5,
+        "y": 152,
+        "width": 1257,
+        "height": 838
+      },
+      "actualSourceImage": {
+        "width": 1257,
+        "height": 701.5813953488372
+      },
+      "left": {
+        "x": 56,
+        "y": 56,
+        "width": 212,
+        "height": 1024
+      },
+      "rail": {
+        "x": 0,
+        "y": 56,
+        "width": 56,
+        "height": 1024
+      },
+      "right": {
+        "x": 1656,
+        "y": 56,
+        "width": 264,
+        "height": 1024
+      },
+      "zoomControl": "브라우저 로컬 저장 · ZIP으로 백업하세요−131%+화면 맞춤너비 맞춤100%선택 맞춤",
+      "documentOverflow": false
+    },
+    {
+      "viewport": {
+        "width": 1650,
+        "height": 928
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1650,
+        "height": 56
+      },
+      "banners": [
+        {
+          "height": 40,
+          "text": "편집 가능 20개품질 경고 8개상세 검토 25개분리 실패 1개문제 객체 상세 검토작업 상세"
+        }
+      ],
+      "canvas": {
+        "x": 268,
+        "y": 136,
+        "width": 1118,
+        "height": 718
+      },
+      "artboard": {
+        "x": 312.5,
+        "y": 152,
+        "width": 1029,
+        "height": 686
+      },
+      "actualSourceImage": {
+        "width": 1029,
+        "height": 574.3255813953489
+      },
+      "left": {
+        "x": 56,
+        "y": 56,
+        "width": 212,
+        "height": 872
+      },
+      "rail": {
+        "x": 0,
+        "y": 56,
+        "width": 56,
+        "height": 872
+      },
+      "right": {
+        "x": 1386,
+        "y": 56,
+        "width": 264,
+        "height": 872
+      },
+      "zoomControl": "브라우저 로컬 저장 · ZIP으로 백업하세요−107%+화면 맞춤너비 맞춤100%선택 맞춤",
+      "documentOverflow": false
+    },
+    {
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1366,
+        "height": 56
+      },
+      "banners": [
+        {
+          "height": 40,
+          "text": "편집 가능 20개품질 경고 8개상세 검토 25개분리 실패 1개문제 객체 상세 검토작업 상세"
+        }
+      ],
+      "canvas": {
+        "x": 268,
+        "y": 136,
+        "width": 834,
+        "height": 558
+      },
+      "artboard": {
+        "x": 290.5,
+        "y": 152,
+        "width": 789,
+        "height": 526
+      },
+      "actualSourceImage": {
+        "width": 789,
+        "height": 440.37209302325584
+      },
+      "left": {
+        "x": 56,
+        "y": 56,
+        "width": 212,
+        "height": 712
+      },
+      "rail": {
+        "x": 0,
+        "y": 56,
+        "width": 56,
+        "height": 712
+      },
+      "right": {
+        "x": 1102,
+        "y": 56,
+        "width": 264,
+        "height": 712
+      },
+      "zoomControl": "브라우저 로컬 저장 · ZIP으로 백업하세요−82%+화면 맞춤너비 맞춤100%선택 맞춤",
+      "documentOverflow": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 82
+      },
+      "banners": [
+        {
+          "height": 44,
+          "text": "편집 가능 20개품질 경고 8개상세 검토 25개분리 실패 1개문제 객체 상세 검토작업 상세"
+        }
+      ],
+      "canvas": {
+        "x": 48,
+        "y": 206,
+        "width": 342,
+        "height": 559
+      },
+      "artboard": {
+        "x": 64,
+        "y": 382.171875,
+        "width": 310,
+        "height": 206.65625
+      },
+      "actualSourceImage": {
+        "width": 310,
+        "height": 173.0232558139535
+      },
+      "left": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "rail": {
+        "x": 0,
+        "y": 124,
+        "width": 48,
+        "height": 720
+      },
+      "right": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "zoomControl": "브라우저 로컬 저장 · ZIP으로 백업하세요−32%+화면 맞춤너비 맞춤100%선택 맞춤",
+      "documentOverflow": false
+    }
+  ],
+  "performance": {
+    "metric": "pointerdown to second animation frame; not field INP",
+    "samples": [
+      58.30000000074506,
+      49.09999999962747,
+      44.79999999888241,
+      62.29999999888241,
+      48.30000000074506,
+      52.899999998509884,
+      47.09999999962747,
+      69.30000000074506
+    ],
+    "median": 52.899999998509884,
+    "max": 69.30000000074506
+  }
+}

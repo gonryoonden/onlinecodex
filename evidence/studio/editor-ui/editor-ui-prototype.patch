@@ -1,0 +1,1029 @@
+diff --git a/apps/studio/src/app/globals.css b/apps/studio/src/app/globals.css
+index e655782..6c8dcab 100644
+--- a/apps/studio/src/app/globals.css
++++ b/apps/studio/src/app/globals.css
+@@ -1034,3 +1034,121 @@ h3 {
+   .dialog-footer button { white-space: normal; }
+   .table-dialog-body input, .table-dialog-body textarea, .properties input, .properties textarea { font-size: 16px; }
+ }
++/* Canvas-first editor chrome. Existing brand tokens and tools are preserved. */
++:root { --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --danger:#9f3737; }
++.topbar { height:56px; gap:16px; padding:0 16px; }
++.brand { min-width:212px; font-size:14px; }
++.brand-mark { width:32px; height:32px; }
++.brand small { font-size:7px; margin-top:3px; }
++.project-heading input { max-width:260px; font-size:13px; }
++.save-status { margin-top:2px; }
++.workspace { grid-template-columns:56px var(--tools-width,212px) minmax(0,1fr) var(--inspector-width,264px); }
++.workspace.tools-collapsed { grid-template-columns:56px 0 minmax(0,1fr) var(--inspector-width,264px); }
++.workspace.inspector-collapsed { grid-template-columns:56px var(--tools-width,212px) minmax(0,1fr) 0; }
++.workspace.tools-collapsed.inspector-collapsed { grid-template-columns:56px 0 minmax(0,1fr) 0; }
++.tools-collapsed .tools-panel,.inspector-collapsed .inspector { display:none; }
++.tool-rail { padding:8px 3px; gap:6px; }
++.tool-rail button { min-height:52px; }
++.tools-panel { min-width:0; padding:16px 12px; }
++.panel-heading h2 { font-size:16px; }
++.panel-heading p,.studio .feature-card { display:none; }
++.canvas-toolbar { min-height:40px; height:40px; padding:4px 8px; gap:6px; flex-shrink:0; }
++.canvas-toolbar .separator { margin:0 6px; }
++.canvas-toolbar button { min-height:30px; padding:4px 6px; }
++.panel-toggles { flex-shrink:0; }
++.canvas-viewport { overscroll-behavior:contain; }
++.canvas-mat { padding:16px; }
++.artboard { position:relative; box-shadow:0 3px 12px #18333b15; }
++.source-comparison { position:absolute; inset:0; background:white; pointer-events:auto; }
++.page-bar { min-height:40px; height:40px; padding:4px 8px; }
++.page-tabs { gap:4px; }
++.page-tabs button { min-width:38px; min-height:28px; height:28px; font-size:11px; }
++.page-tabs small { margin-left:3px; }
++.canvas-footer { min-height:34px; padding:2px 8px; }
++.view-controls { display:flex; align-items:center; gap:3px; white-space:nowrap; }
++.view-controls button { min-height:28px; font-size:10px; padding:3px 5px; }
++.view-controls output { min-width:36px; text-align:center; font-size:11px; font-variant-numeric:tabular-nums; }
++.view-controls button[aria-pressed=true] { background:var(--green-light); color:var(--green); }
++.editor-status { display:flex; align-items:center; justify-content:space-between; flex-shrink:0; height:40px; min-height:40px; gap:8px; padding:4px 10px; background:#f1f6f4; border-bottom:1px solid var(--line); font-size:11px; }
++.status-counts,.status-actions { display:flex; align-items:center; gap:10px; white-space:nowrap; min-width:0; }
++.status-counts { overflow:auto; font-variant-numeric:tabular-nums; }
++.status-counts b { font-weight:600; }
++.status-caution { color:#875120; }
++.status-actions { flex-shrink:0; gap:3px; }
++.status-actions button { border:0; background:transparent; font-size:10px; padding:3px 5px; min-height:30px; }
++.editor-toast { position:fixed; right:20px; bottom:48px; max-width:min(520px,calc(100vw - 32px)); padding:10px 14px; display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--line); border-radius:8px; z-index:8; box-shadow:0 3px 16px #18333b22; font-size:12px; }
++.upload-toast { bottom:100px; }
++.editor-dialog { width:min(680px,100%); max-height:85dvh; overflow:hidden; background:#fff; border-radius:10px; display:flex; flex-direction:column; }
++.editor-dialog-body { overflow:auto; padding:16px; }
++.editor-dialog-body p { font-size:12px; }
++.exception-item { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); }
++.exception-item p { margin:4px 0; color:var(--muted); }
++.exception-item button { flex-shrink:0; }
++.inspector-top { padding:12px; }
++.layer-filters { display:flex; flex-shrink:0; gap:4px; padding:6px; }
++.layer-filters input { min-width:0; flex:1; font-size:11px; }
++.layer-filters select { max-width:84px; font-size:11px; padding:4px; }
++.layers-list { max-height:32%; min-height:120px; }
++.layer-row { min-height:40px; }
++.layer-name > span:last-child { max-width:none; flex:1; }
++.layer-name small { font-family:inherit; font-size:9px; }
++.properties { padding:12px; }
++.provenance { font-size:11px; word-break:normal; }
++.provenance small { word-break:break-all; }
++.focus-mode .topbar { height:48px; }
++.focus-mode .brand small,.focus-mode .save-status { display:none; }
++.focus-mode .editor-status { height:32px; min-height:32px; }
++.focus-mode .canvas-toolbar { height:36px; min-height:36px; }
++.focus-mode .page-bar { height:32px; min-height:32px; padding:2px 8px; }
++.focus-mode .page-tabs button { height:26px; min-height:26px; }
++.focus-mode .canvas-footer { min-height:30px; }
++@media(max-width:1200px) { .brand { min-width:170px; } .topbar { gap:10px; } .status-counts { gap:8px; } .status-actions button { font-size:9px; } }
++@media(max-width:900px) {
++ .workspace,.workspace.tools-collapsed,.workspace.inspector-collapsed,.workspace.tools-collapsed.inspector-collapsed { position:relative; grid-template-columns:48px minmax(0,1fr); }
++ .tools-panel,.inspector { display:none; position:absolute; top:0; bottom:0; z-index:6; width:min(320px,calc(100% - 48px)); background:white; box-shadow:0 3px 12px #18333b22; overflow:auto; }
++ .workspace .tools-panel.mobile-open,.workspace .inspector.mobile-open { display:flex; flex-direction:column; }
++ .tools-panel { left:48px; } .inspector { right:0; }
++ .mobile-controls { display:flex; gap:4px; padding:3px 8px; }
++ .mobile-controls button { min-height:36px; flex:1; }
++ .panel-toggles { display:none!important; }
++ .editor-status { height:44px; min-height:44px; padding:3px 6px; gap:3px; }
++ .status-counts { gap:8px; font-size:10px; }
++ .status-actions button { max-width:56px; white-space:normal; line-height:1.2; min-height:36px; }
++ .canvas-toolbar { height:38px; min-height:38px; font-size:9px; }
++ .canvas-toolbar button { min-height:32px; padding:3px; font-size:10px; }
++ .canvas-toolbar small,.canvas-toolbar .separator { display:none; }
++ .canvas-toolbar>span { overflow:hidden; white-space:nowrap; }
++ .canvas-footer { overflow-x:auto; justify-content:center; min-height:40px; }
++ .canvas-footer>span { display:none; }
++ .view-controls button { min-height:36px; }
++ .focus-mode .mobile-controls { padding:2px 8px; }
++ .focus-mode .mobile-controls button { min-height:32px; }
++ .focus-mode .editor-status { min-height:40px; height:40px; }
++}
++@media(max-width:700px) {
++ .studio { min-height:0; }
++ .topbar,.focus-mode .topbar { height:auto; min-height:82px; padding:5px 8px; }
++ .top-actions { gap:3px; }
++ .top-actions button { min-height:36px; padding:4px 5px; font-size:10px; }
++ .project-heading input { max-width:none; font-size:14px; }
++ .project-heading { display:flex; align-items:center; gap:6px; flex-basis:100%; }
++ .save-status { flex-shrink:0; font-size:9px; }
++ .page-bar { flex-wrap:nowrap; height:38px; min-height:38px; }
++ .page-actions { gap:0; }
++ .page-actions button { min-height:28px; padding:3px; }
++ .exception-item { align-items:flex-start; flex-direction:column; }
++ .editor-dialog { max-height:92dvh; }
++}
++.workspace>.tool-rail { grid-column:1; grid-row:1; }
++.workspace>.tools-panel { grid-column:2; grid-row:1; }
++.workspace>.canvas-section { grid-column:3; grid-row:1; }
++.workspace>.inspector { grid-column:4; grid-row:1; }
++@media(max-width:900px) { .workspace>.canvas-section { grid-column:2; } .workspace>.tools-panel,.workspace>.inspector { grid-column:auto; } }
++.auto-edit-content p { margin-bottom:12px; }
++.auto-progress { padding:12px; border:1px solid var(--line); border-radius:6px; min-height:48px; display:flex; align-items:center; gap:10px; background:#f5f8f7; font-size:12px; font-variant-numeric:tabular-nums; }
++.processing-dot { display:inline-block; width:8px; height:8px; flex-shrink:0; background:var(--green); border-radius:50%; }
++.notice.error { color:var(--danger); background:#fbeeee; }
++.process-stages { list-style:none; margin:12px 0; padding:0; display:flex; flex-wrap:wrap; gap:4px 12px; font-size:11px; color:var(--muted); }
++.process-stages li:before { content:'✓ '; color:var(--green); }
++.process-stages li[aria-current=step] { color:var(--ink); font-weight:600; }
++.process-stages li[aria-current=step]:before { content:'• '; }
+diff --git a/apps/studio/src/components/AutoEditDialog.tsx b/apps/studio/src/components/AutoEditDialog.tsx
+index 15fce5e..a76388a 100644
+--- a/apps/studio/src/components/AutoEditDialog.tsx
++++ b/apps/studio/src/components/AutoEditDialog.tsx
+@@ -4,28 +4,33 @@ import type {Asset} from '@/lib/project';
+ import type {Diagnostic} from '@/lib/magic-layers/diagnostics';
+ import type {PageData} from '@/lib/types';
+ import {automaticEdit,cachedAnalysis,sourceKey,type SavedAnalysis} from '@/lib/magic-layers/automatic';
++import EditorDialog from './EditorDialog';
+ export default function AutoEditDialog({source,width,height,saved,persist,onApply,onClose,onAdvanced}:{source:Asset;width:number;height:number;saved?:SavedAnalysis;persist:(v:SavedAnalysis)=>void;onApply:(p:PageData,a:Asset[],s:Asset,d:Diagnostic)=>void;onClose:()=>void;onAdvanced:()=>void}){
+- const [consent,setConsent]=useState(false),[status,setStatus]=useState('저장된 분석 확인 중'),[error,setError]=useState(''),[busy,setBusy]=useState(false);
+- const [available,setAvailable]=useState<SavedAnalysis|undefined>(saved);
+- const initialSaved=useRef(saved);
+- const [requiresConsent]=useState(()=>!saved);
+- const running=useRef<AbortController|null>(null),callbacks=useRef({persist,onApply,onClose});
++ const [consent,setConsent]=useState(false),[status,setStatus]=useState('저장된 분석 확인 중'),[error,setError]=useState(''),[busy,setBusy]=useState(false),[available,setAvailable]=useState<SavedAnalysis|undefined>(saved),[requiresConsent]=useState(()=>!saved);
++ const [stages,setStages]=useState<string[]>([]);
++ const initialSaved=useRef(saved),running=useRef<AbortController|null>(null),generation=useRef(0),mounted=useRef(false),callbacks=useRef({persist,onApply,onClose});
+  useEffect(()=>{callbacks.current={persist,onApply,onClose};},[persist,onApply,onClose]);
++ const dismiss=useCallback(()=>{generation.current++;const controller=running.current;running.current=null;controller?.abort();callbacks.current.onClose();},[]);
+  const execute=useCallback(async(v?:SavedAnalysis,allow=false)=>{
+-  if(running.current)return;const controller=new AbortController();running.current=controller;setBusy(true);setError('');
++  if(running.current||!mounted.current)return;const controller=new AbortController(),id=++generation.current;running.current=controller;setBusy(true);setError('');setStages([]);
++  const active=()=>mounted.current&&generation.current===id&&!controller.signal.aborted;
+   const timeout=setTimeout(()=>controller.abort(),240000);
+-  try{const result=await automaticEdit({source,width,height,consent:allow,saved:v,signal:controller.signal,progress:setStatus,persist:value=>{setAvailable(value);callbacks.current.persist(value);}});controller.signal.throwIfAborted();callbacks.current.onApply(result.page,result.assets,source,result.diagnostic);callbacks.current.onClose();}
+-  catch(e){setError(controller.signal.aborted?'처리를 취소했거나 시간 한도에 도달했습니다. 원본과 완료된 분석은 보존됩니다.':e instanceof Error?e.message:'자동 처리 실패');}
+-  finally{clearTimeout(timeout);if(running.current===controller)running.current=null;setBusy(false);}
++  try{
++   const result=await automaticEdit({source,width,height,consent:allow,saved:v,signal:controller.signal,progress:message=>{if(active()){setStatus(message);const label=/Gemini|저장된 분석/.test(message)?'이미지 분석':/모델 파일|모델 재사용/.test(message)?'모델 파일 읽기':/무결성/.test(message)?'파일 무결성 검사':/초기화/.test(message)?'실행 환경 초기화':/특징 분석/.test(message)?'이미지 특징 분석':/마스크/.test(message)?'객체 마스크 생성':/배경 복원/.test(message)?'배경 복원':/독립 레이어/.test(message)?'레이어 구성':null;if(label)setStages(prev=>prev.includes(label)?prev:[...prev,label]);}},persist:value=>{if(active()){setAvailable(value);callbacks.current.persist(value);}}});
++   if(!active())return;setStatus('편집 화면 진입');callbacks.current.onApply(result.page,result.assets,source,result.diagnostic);callbacks.current.onClose();
++  }catch(e){if(mounted.current&&generation.current===id)setError(controller.signal.aborted?'처리를 취소했습니다. 원본과 완료된 분석은 보존됐습니다. 재시도하면 저장된 분석을 재사용합니다.':e instanceof Error?e.message:'자동 처리에 실패했습니다. 재시도하거나 고급 수동 교정을 열어 주세요.');}
++  finally{clearTimeout(timeout);if(running.current===controller)running.current=null;if(mounted.current&&generation.current===id)setBusy(false);}
+  },[source,width,height]);
+  useEffect(()=>{
+-  let active=true;void sourceKey(source).then(key=>{if(!active)return;const v=initialSaved.current??cachedAnalysis(key);if(v){setAvailable(v);void execute(v);}else setStatus('이 이미지의 외부 전송 동의가 필요합니다.');});
+-  return()=>{active=false;running.current?.abort();};
++  mounted.current=true;let active=true;void sourceKey(source).then(key=>{if(!active)return;const v=initialSaved.current??cachedAnalysis(key);if(v){setAvailable(v);void execute(v);}else setStatus('이 이미지의 외부 전송 동의가 필요합니다.');});
++  return()=>{active=false;mounted.current=false;generation.current++;running.current?.abort();running.current=null;};
+  },[source,execute]);
+- return <div className="modal-backdrop"><section className="magic-dialog" role="dialog" aria-modal="true" aria-label="자동 편집 준비"><header className="dialog-header"><h2>이미지에서 편집 레이어로</h2><button disabled={busy} onClick={onClose}>닫기</button></header><div className="magic-body"><div>
+- <p>텍스트·도형·이미지를 자동 처리하고, 문제가 있는 후보만 상세 검토에 남깁니다.</p><p>기기 분리 모델은 최초 약 57MB를 다운로드합니다. 이미지 분리는 이 기기에서 실행합니다.</p>
++ return <EditorDialog title="자동 편집 준비" onClose={dismiss}><div className="auto-edit-content">
++ <p>텍스트·도형·이미지를 자동 처리하고, 문제가 있는 후보만 상세 검토에 남깁니다.</p><p className="muted">처음에는 기기 분리 모델·실행 파일 약57MB를 읽습니다. 이후 저장된 모델을 검증해 재사용합니다. 이미지 분리는 이 기기에서 실행합니다.</p>
+  {requiresConsent&&<label><input type="checkbox" disabled={busy||Boolean(available)} checked={consent} onChange={e=>{setConsent(e.target.checked);if(e.target.checked)void execute(undefined,true);}}/>외부 Gemini API로 이 이미지 전송에 동의하고 자동 편집을 시작합니다.</label>}
+- <p role="status" aria-label="자동 편집 진행">{status}</p>{error&&<p role="alert">{error}</p>}
+- {busy?<button onClick={()=>running.current?.abort()}>자동 처리 취소</button>:<>{error&&<button onClick={()=>void execute(available,consent)}>자동 처리 재시도</button>}<button onClick={onAdvanced}>고급 수동 교정</button></>}
+- </div></div></section></div>;
++ {stages.length>0&&<ol className="process-stages" aria-label="진행 단계">{stages.map((stage,i)=><li key={stage} aria-current={busy&&i===stages.length-1?'step':undefined}>{stage}</li>)}</ol>}
++ <div className="auto-progress" role="status" aria-live="polite" aria-label="자동 편집 진행"><span className={busy?'processing-dot':''} aria-hidden="true"/>{status}</div>
++ {busy&&<p className="muted">닫으면 현재 작업을 취소합니다. 완료된 분석과 원본은 보존됩니다.</p>}{error&&<p role="alert" className="notice error">{error}</p>}
++ <div className="button-row">{busy?<button onClick={()=>running.current?.abort()}>자동 처리 취소</button>:<>{error&&<button onClick={()=>void execute(available,consent)}>자동 처리 재시도</button>}<button onClick={onAdvanced}>고급 수동 교정</button></>}</div>
++ </div></EditorDialog>;
+ }
+diff --git a/apps/studio/src/components/CanvasViewControls.tsx b/apps/studio/src/components/CanvasViewControls.tsx
+new file mode 100644
+index 0000000..f2276f1
+--- /dev/null
++++ b/apps/studio/src/components/CanvasViewControls.tsx
+@@ -0,0 +1,8 @@
++'use client';
++import {useCanvasView,selectionBounds} from '@/store/canvas-view';
++import {useEditorStore} from '@/store/editor-store';
++export default function CanvasViewControls(){
++ const scale=useCanvasView(v=>v.renderedScale),mode=useCanvasView(v=>v.mode),selected=useEditorStore(s=>s.selectedIds);
++ return <div className="view-controls" aria-label="캔버스 보기"><button aria-label="축소" onClick={()=>useCanvasView.getState().zoom(1/1.2)}>−</button><output aria-label="현재 확대 비율">{Math.round(scale*100)}%</output><button aria-label="확대" onClick={()=>useCanvasView.getState().zoom(1.2)}>+</button>
++ <button aria-pressed={mode==='fit'} aria-label="작업영역에 맞춤" onClick={()=>useCanvasView.getState().fit()}>화면 맞춤</button><button aria-pressed={mode==='width'} onClick={()=>useCanvasView.getState().width()}>너비 맞춤</button><button onClick={()=>useCanvasView.getState().actual()}>100%</button><button disabled={!selected.length} onClick={()=>{const s=useEditorStore.getState(),b=selectionBounds(s.pages[s.currentPage].elements.filter(e=>s.selectedIds.includes(e.id)));if(b)useCanvasView.getState().selection(b);}}>선택 맞춤</button></div>;
++}
+diff --git a/apps/studio/src/components/EditorDialog.tsx b/apps/studio/src/components/EditorDialog.tsx
+new file mode 100644
+index 0000000..8dd3c71
+--- /dev/null
++++ b/apps/studio/src/components/EditorDialog.tsx
+@@ -0,0 +1,9 @@
++'use client';
++import {useEffect,useRef,type ReactNode} from 'react';
++export default function EditorDialog({title,onClose,children}:{title:string;onClose:()=>void;children:ReactNode}){
++ const root=useRef<HTMLElement>(null);
++ useEffect(()=>{const previous=document.activeElement as HTMLElement|null;root.current?.focus();return()=>{if(previous?.isConnected)previous.focus();};},[]);
++ return <div className="modal-backdrop editor-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget)onClose();}}><section ref={root} tabIndex={-1} role="dialog" aria-modal="true" aria-label={title} className="editor-dialog" onKeyDown={e=>{
++  e.stopPropagation();if(e.key==='Escape'){e.preventDefault();onClose();}if(e.key==='Tab'){const items=[...e.currentTarget.querySelectorAll<HTMLElement>('button:not(:disabled),input:not(:disabled),select:not(:disabled),a[href]')].filter(n=>n.getClientRects().length),first=items[0],last=items.at(-1);if(e.shiftKey&&(document.activeElement===first||document.activeElement===root.current)){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}
++ }}><header className="dialog-header"><h2>{title}</h2><button aria-label={`${title} 닫기`} onClick={onClose}>닫기</button></header><div className="editor-dialog-body">{children}</div></section></div>;
++}
+diff --git a/apps/studio/src/components/EditorLayers.tsx b/apps/studio/src/components/EditorLayers.tsx
+new file mode 100644
+index 0000000..330f786
+--- /dev/null
++++ b/apps/studio/src/components/EditorLayers.tsx
+@@ -0,0 +1,18 @@
++'use client';
++import {memo,useEffect,useMemo,useRef,useState} from 'react';
++import {Eye,EyeOff,Lock,Unlock} from 'lucide-react';
++import {useEditorStore} from '@/store/editor-store';
++import type {AnyElement} from '@/lib/types';
++import type {Diagnostic} from '@/lib/magic-layers/diagnostics';
++export function layerStateLabel(decision?:string){return ({ready:'편집 준비 완료',warning:'품질 경고 · 편집 가능',review:'상세 검토 필요',failed:'자동 분리 실패'} as Record<string,string>)[decision??''];}
++const LayerRow=memo(function LayerRow({element:e,selected,decision}:{element:AnyElement;selected:boolean;decision?:string}){
++ const label=layerStateLabel(decision),name=(e.name??(e.type==='text'?e.text:'이미지')).replace(/^(?:확인 필요|배경 보정 대기) · /,'');
++ return <div className={`layer-row ${selected?'selected':''}`} data-testid={`layer-${e.type}`} data-layer-id={e.id}><button className="layer-name" title={name} aria-pressed={selected} onClick={event=>{const s=useEditorStore.getState();if(event.shiftKey)s.selectToggle(e.id);else s.setSelection([e.id]);}}><span className="layer-type">{e.type==='text'?'T':e.type==='image'?'▧':'□'}</span><span>{name}<small>{label??(e.provenance?.backgroundWarning?'배경 보정 필요':e.provenance?.review?'출처·경계 확인':e.locked?'잠긴 원본':'편집 가능')}</small></span></button><button aria-label={`${e.id} ${e.visible?'숨김':'표시'}`} disabled={!e.visible&&(decision==='review'||decision==='failed')} title={!e.visible&&decision==='review'?'교정 전 원본과 중복 표시하지 않습니다.':'표시/숨김'} onClick={()=>useEditorStore.getState().setVisible([e.id],!e.visible)}>{e.visible?<Eye size={13}/>:<EyeOff size={13}/>}</button><button aria-label={`${e.id} ${e.locked?'잠금 해제':'잠금'}`} onClick={()=>useEditorStore.getState().setLock([e.id],!e.locked)}>{e.locked?<Lock size={13}/>:<Unlock size={13}/>}</button></div>;
++});
++export default function EditorLayers({candidates}:{candidates?:Diagnostic['candidates']}){
++ const elements=useEditorStore(s=>s.pages[s.currentPage].elements),selected=useEditorStore(s=>s.selectedIds),[search,setSearch]=useState(''),[type,setType]=useState('all'),root=useRef<HTMLDivElement>(null);
++ const decisions=useMemo(()=>new Map(candidates?.map(c=>[c.elementId,c.decision])),[candidates]);
++ const rows=useMemo(()=>[...elements].reverse().filter(e=>(type==='all'||type==='shape'&&!['text','image'].includes(e.type)||e.type===type)&&(!search||`${e.name??''} ${e.type==='text'?e.text:''}`.toLocaleLowerCase().includes(search.toLocaleLowerCase()))),[elements,type,search]);
++ useEffect(()=>{const row=root.current?.querySelector<HTMLElement>('.selected');if(row?.getClientRects().length)row.scrollIntoView({block:'nearest'});},[selected]);
++ return <><div className="layer-filters"><input aria-label="레이어 검색" type="search" placeholder="레이어 검색" value={search} onChange={e=>setSearch(e.target.value)}/><select aria-label="레이어 유형" value={type} onChange={e=>setType(e.target.value)}><option value="all">전체</option><option value="text">텍스트</option><option value="image">이미지</option><option value="shape">도형</option></select></div><div className="layers-list" ref={root}>{rows.map(e=><LayerRow key={e.id} element={e} selected={selected.includes(e.id)} decision={decisions.get(e.id)}/>)}{!rows.length&&<p className="muted">{elements.length?'검색 결과가 없습니다.':'왼쪽에서 요소를 추가하세요.'}</p>}</div></>;
++}
+diff --git a/apps/studio/src/components/EditorStatus.tsx b/apps/studio/src/components/EditorStatus.tsx
+new file mode 100644
+index 0000000..83a18e8
+--- /dev/null
++++ b/apps/studio/src/components/EditorStatus.tsx
+@@ -0,0 +1,15 @@
++'use client';
++import {useState} from 'react';
++import type {Diagnostic} from '@/lib/magic-layers/diagnostics';
++import {statusLabels,warningLabels} from '@/lib/magic-layers/diagnostics';
++import {summarize} from '@/lib/magic-layers/quality';
++import EditorDialog from './EditorDialog';
++export function candidateReason(reason?:string){return ({'inpaint-neighbor-conflict':'다른 객체와 겹쳐 배경을 안전하게 지우지 못했습니다.','interior-background-in-mask':'객체 내부에 원본 배경이 포함됐습니다. 경계를 교정하세요.','inpaint-nonsmooth-boundary':'배경 무늬나 경계가 복잡해 자동 복원을 보류했습니다.','ambiguous-background-use-polygon-or-alpha-brush':'투명 경계를 분리하지 못했습니다. 마스크를 직접 지정하세요.','measured-smooth-shading-approximation':'그림자 색을 근사했습니다. 이동·삭제 후 경계를 확인하세요.','measured-smooth-background-approximation':'주변 색으로 배경을 추정했습니다.','measured-native-background-approximation':'텍스트 뒤의 배경색을 근사했습니다.','overlap':'인접 객체와 겹칩니다.','complex-boundary':'배경 경계가 복잡합니다.','unreviewed':'기존 프로젝트의 배경 교정 대기 상태입니다.'} as Record<string,string>)[reason??'']??'마스크 또는 배경 보정을 확인하세요.';}
++export default function EditorStatus({diagnostic,onRestore,onAuto,onInspect,onAdvanced,canProcess,canResume}:{diagnostic?:Diagnostic;onRestore:()=>void;onAuto:()=>void;onInspect:(id:string)=>void;onAdvanced:()=>void;canProcess:boolean;canResume:boolean}){
++ const [details,setDetails]=useState(false),[exceptions,setExceptions]=useState(false);const candidates=diagnostic?.candidates??[],classified=candidates.some(c=>c.decision),n=summarize(candidates);
++ return <><div className="editor-status" data-testid={classified?'auto-summary':'editor-status'} role="status"><div className="status-counts">{classified?<><span>편집 가능 <b>{n.ready+n.warning}</b>개</span><span>품질 경고 <b>{n.warning}</b>개</span><span className={n.review+n.failed?'status-caution':''}>상세 검토 <b>{n.review}</b>개</span><span>분리 실패 <b>{n.failed}</b>개</span></>:<span>{diagnostic?statusLabels[diagnostic.status]:canResume?'저장된 분석이 있습니다. 자동 편집을 재개할 수 있습니다.':'이미지를 올리거나 레이어를 선택해 편집하세요.'}</span>}</div><div className="status-actions">{classified&&<button onClick={()=>setExceptions(true)}>문제 객체 상세 검토</button>}<button aria-expanded={details} onClick={()=>setDetails(true)}>작업 상세</button></div></div>
++ {details&&<EditorDialog title="작업 상세" onClose={()=>setDetails(false)}>{diagnostic&&<><h3>{statusLabels[diagnostic.status]}</h3>{diagnostic.warnings.map(w=><p key={w}>{warningLabels[w]??w}</p>)}</>}
++ <div className="button-row"><button disabled={!canProcess} onClick={()=>{setDetails(false);onAuto();}}>{canResume?'저장된 분석으로 자동 편집 재개':'저장된 분석으로 다시 처리'}</button><button disabled={!canProcess} onClick={()=>{setDetails(false);onAdvanced();}}>분석·영역 교정 열기</button><button disabled={!canProcess} onClick={()=>{onRestore();setDetails(false);}}>원본을 새 페이지로 복원</button></div></EditorDialog>}
++ {exceptions&&<EditorDialog title="문제 객체 상세 검토" onClose={()=>setExceptions(false)}><p>정상 레이어는 계속 편집할 수 있습니다. 아래 후보는 원본과 겹치지 않도록 숨겨 보존했습니다.</p><div aria-label="예외 객체 목록">{candidates.filter(c=>c.decision==='review'||c.decision==='failed').map(c=><div key={c.id} className="exception-item" data-testid="exception-row"><div><b>{c.id} · {c.type==='text'?'텍스트':c.type==='image'?'이미지':'도형'}</b><p>{candidateReason(c.reason)}</p></div><button onClick={()=>{setExceptions(false);onInspect(c.id);}}>원본 비교·마스크·배경 교정</button></div>)}{!n.review&&!n.failed&&<p>상세 검토할 후보가 없습니다.</p>}</div></EditorDialog>}
++ </>;
++}
+diff --git a/apps/studio/src/components/Studio.tsx b/apps/studio/src/components/Studio.tsx
+index 8bee244..b37b16a 100644
+--- a/apps/studio/src/components/Studio.tsx
++++ b/apps/studio/src/components/Studio.tsx
+@@ -1,5 +1,5 @@
+ "use client";
+-import { useCallback, useEffect, useRef, useState } from "react";
++import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
+ import {
+   Plus,
+   Type,
+@@ -13,10 +13,6 @@ import {
+   Save,
+   Undo2,
+   Redo2,
+-  Eye,
+-  EyeOff,
+-  Lock,
+-  Unlock,
+   ChevronUp,
+   ChevronDown,
+   Copy,
+@@ -59,12 +55,16 @@ import ProblemDialog from "./ProblemDialog";
+ import { recordBetaEvent,errorCode } from "@/lib/beta-diagnostics";
+ import TableDialog from "./TableDialog";
+ import ChartDialog from "./ChartDialog";
+-import { type Diagnostic, withLiveStages, statusLabels, warningLabels, snapshotStage, elementItems } from "@/lib/magic-layers/diagnostics";
++import { type Diagnostic, withLiveStages, statusLabels, snapshotStage, elementItems } from "@/lib/magic-layers/diagnostics";
+ function message(e: unknown) {
+   return e instanceof Error ? e.message : "작업을 완료하지 못했습니다.";
+ }
+ import AutoEditDialog from './AutoEditDialog';
+-import {summarize} from '@/lib/magic-layers/quality';
++import EditorStatus, {candidateReason} from './EditorStatus';
++import EditorLayers, {layerStateLabel} from './EditorLayers';
++import EditorDialog from './EditorDialog';
++import CanvasViewControls from './CanvasViewControls';
++import {useCanvasView} from '@/store/canvas-view';
+ export default function Studio() {
+   const s = useEditorStore();
+   const meta = useRef<Project | null>(null);
+@@ -83,7 +83,11 @@ export default function Studio() {
+   const [chartTable,setChartTable]=useState<TableElement|null>(null);
+   const [tableSource,setTableSource]=useState<Asset|null>(null);
+   const [automatic,setAutomatic]=useState<Asset|null>(null);
+-  const [exceptions,setExceptions]=useState(false);
++  const [focusMode,setFocusMode]=useState(false),[leftOpen,setLeftOpen]=useState(true),[rightOpen,setRightOpen]=useState(true),[panelSettings,setPanelSettings]=useState(false),[compareSource,setCompareSource]=useState(false);
++  const [leftWidth,setLeftWidth]=useState(212),[rightWidth,setRightWidth]=useState(264);
++  const previousPanels=useRef({left:true,right:true});
++  function toggleFocus(){if(!focusMode){previousPanels.current={left:leftOpen,right:rightOpen};setLeftOpen(false);setRightOpen(false);setMobilePanel(null);}else{setLeftOpen(previousPanels.current.left);setRightOpen(previousPanels.current.right);}setFocusMode(!focusMode);}
++
+   const [reviewTarget,setReviewTarget]=useState('');
+   const [magic, setMagic] = useState<Asset | null>(null);
+   const [maskEdit,setMaskEdit]=useState<{id:string;current:Asset;base:Asset}|null>(null);
+@@ -94,6 +98,8 @@ export default function Studio() {
+   const exportAbort = useRef<AbortController | null>(null);
+   const [tool, setTool] = useState("elements");
+   const [mobilePanel,setMobilePanel]=useState<"tools"|"layers"|null>(null);
++  useEffect(()=>{if(!notice)return;const id=setTimeout(()=>setNotice(''),6000);return()=>clearTimeout(id);},[notice]);
++  useEffect(()=>{if(!uploaded)return;const id=setTimeout(()=>setUploaded(null),6000);return()=>clearTimeout(id);},[uploaded]);
+   const file = useRef<HTMLInputElement>(null);
+   const archive = useRef<HTMLInputElement>(null);
+   const [size, setSize] = useState({ width: 960, height: 640 });
+@@ -156,7 +162,7 @@ export default function Studio() {
+     }
+   }, [capture]);
+   function open(p: Project) {
+-    setUploaded(null);
++    setUploaded(null);setCompareSource(false);useCanvasView.getState().fit();
+     meta.current = p;
+     setProjectMeta(p);
+     useEditorStore.getState().loadDesign(p);
+@@ -332,7 +338,7 @@ export default function Studio() {
+         const placed=placeAsset(a, s.width, s.height);
+         if(s.pages[s.currentPage].elements.length===0){const k=Math.min(s.width/a.width,s.height/a.height);placed.width=a.width*k;placed.height=a.height*k;placed.x=(s.width-placed.width)/2;placed.y=(s.height-placed.height)/2;}
+         s.addElement(placed);
+-        s.setZoom(1);setMobilePanel(null);
++        if(s.pages[s.currentPage].elements.length===0)useCanvasView.getState().fit();setMobilePanel(null);
+         setNotice("");
+         setUploaded(a);setAutomatic(a);recordBetaEvent({feature:'upload',stage:'input',outcome:'ok',code:'none'});
+       }
+@@ -354,7 +360,7 @@ export default function Studio() {
+               meta.current.diagnostics={...meta.current.diagnostics,[newPage.id]:diagnostic};
+               setProjectMeta({...meta.current});
+             }
+-            s.appendPage(newPage);
++            s.appendPage(newPage);setCompareSource(false);useCanvasView.getState().fit();
+             setNotice(
+               diagnostic.candidates?.some(c=>c.decision)?`자동 처리 결과 · 편집 가능 ${diagnostic.candidates.filter(c=>c.decision==='ready'||c.decision==='warning').length}개 · 예외 후보를 보존했습니다.`:`${statusLabels[diagnostic.status]} · 새 페이지에 추가했습니다.`,
+             );
+@@ -545,7 +551,7 @@ export default function Studio() {
+       </main>
+     );
+   return (
+-    <main className="studio">
++    <main className={`studio ${focusMode?"focus-mode":""}`}>
+       <header className="topbar">
+         <div className="brand" aria-label="Personal Magic Studio">
+           <span className="brand-mark">
+@@ -568,7 +574,7 @@ export default function Studio() {
+             {status}
+           </span>
+         </div>
+-        <div className="top-actions">
++        <div className="top-actions"><button aria-pressed={focusMode} onClick={toggleFocus}>{focusMode?"집중 편집 끝내기":"집중 편집"}</button>
+           <button onClick={() => void showLibrary()}>
+             <FolderOpen size={16} />
+             프로젝트
+@@ -636,16 +642,13 @@ export default function Studio() {
+           catch {setError("손상 기록을 JSON으로 보존하지 못했습니다. 기존 브라우저 데이터를 유지해 주세요.");}
+         }}>손상 기록 보존 다운로드</button>
+       </div>}
+-      {uploaded&&<div className="notice studio-banner" role="status"><span>이미지 준비 완료</span>
+-        <button onClick={()=>setMagic(uploaded)}>분석·영역 교정 열기</button><button onClick={()=>setUploaded(null)} aria-label="업로드 안내 닫기">닫기</button>
+-      </div>}
+-      {page.elements.length===0&&<div className="notice studio-banner"><button onClick={()=>file.current?.click()}>이미지로 시작</button><span>PNG/JPG 업로드 → 분석 → 편집</span></div>}
++      {uploaded&&<div className="editor-toast upload-toast" role="status"><span>이미지 준비 완료</span><button onClick={()=>setMagic(uploaded)}>분석·영역 교정 열기</button><button aria-label="업로드 안내 닫기" onClick={()=>setUploaded(null)}>닫기</button></div>}
+       <div className="mobile-controls" aria-label="모바일 편집 패널">
+         <button aria-expanded={mobilePanel==="tools"} aria-controls="studio-tools" onClick={()=>setMobilePanel(mobilePanel==="tools"?null:"tools")}>도구 패널</button>
+         <button aria-expanded={mobilePanel==="layers"} aria-controls="studio-inspector" onClick={()=>setMobilePanel(mobilePanel==="layers"?null:"layers")}>레이어 패널</button>
+         <button onClick={()=>setMobilePanel(null)}>캔버스 보기</button>
+       </div>
+-      <div className="workspace">
++      <div className={`workspace ${leftOpen?'':'tools-collapsed'} ${rightOpen?'':'inspector-collapsed'}`} style={{'--tools-width':`${leftWidth}px`,'--inspector-width':`${rightWidth}px`} as CSSProperties}>
+         <nav className="tool-rail" aria-label="디자인 도구">
+           {[
+             { id: "elements", label: "요소", icon: Square },
+@@ -656,7 +659,7 @@ export default function Studio() {
+             <button
+               key={t.id}
+               className={tool === t.id ? "active" : ""}
+-              onClick={() => {setTool(t.id);setMobilePanel("tools");}}
++              onClick={() => {setTool(t.id);setLeftOpen(true);setMobilePanel("tools");}}
+             >
+               <t.icon size={22} />
+               <span>{t.label}</span>
+@@ -1033,13 +1036,14 @@ export default function Studio() {
+             if (f) void importFile(f);
+           }}
+         >
+-          <div className="canvas-toolbar">
++          <div className="canvas-toolbar"><div className="panel-toggles"><button aria-controls="studio-tools" aria-label={leftOpen?'도구 패널 접기':'도구 패널 열기'} onClick={()=>{setLeftOpen(!leftOpen);setMobilePanel(null);}}>{leftOpen?'◧':'▧'}</button><button aria-controls="studio-inspector" aria-label={rightOpen?'레이어·속성 패널 접기':'레이어·속성 패널 열기'} onClick={()=>{setRightOpen(!rightOpen);setMobilePanel(null);}}>{rightOpen?'◨':'▧'}</button><button aria-label="패널 너비 설정" onClick={()=>setPanelSettings(true)}>패널</button></div>
+             <span>
+               {s.width} × {s.height}
+               <span className="separator">/</span>페이지 {s.currentPage + 1} /{" "}
+               {s.pages.length}
+             </span>
+             <div>
++              <button disabled={!source} aria-pressed={compareSource} onClick={()=>setCompareSource(!compareSource)}>{compareSource?'편집 결과 보기':'원본 비교'}</button>
+               <button
+                 disabled={!source || busy}
+                 onClick={() => source && setMagic(source)}
+@@ -1063,38 +1067,11 @@ export default function Studio() {
+               </button>
+             </div>
+           )}
+-          {projectMeta?.diagnostics?.[page.id] && <div className="notice" role="status">
+-            <strong>{statusLabels[projectMeta.diagnostics[page.id].status]}</strong>
+-            {projectMeta.diagnostics[page.id].warnings.map(w=><p key={w}>{warningLabels[w]??w}</p>)}
+-            <button onClick={()=>{
+-              const originalId=meta.current?.sources[page.id];
+-              const original=originalId&&meta.current?.assets[originalId];
+-              if(original){const restored={...page,id:crypto.randomUUID(),elements:[placeAsset(original,s.width,s.height)]};
+-                if(s.pages.length>=30){setError("최대 30페이지입니다.");return;}
+-                meta.current!.sources[restored.id]=original.id;s.appendPage(restored);setNotice("원본을 새 페이지에 복원했습니다. 되돌리기로 취소할 수 있습니다.");}
+-            }}>원본을 새 페이지로 복원</button>
+-          </div>}
+-          {notice && (
+-            <div className="banner" role="status">
+-              {notice}
+-              <button onClick={() => setNotice("")} aria-label="알림 닫기">
+-                <X size={14} />
+-              </button>
+-            </div>
+-          )}
+-          {page.magicReview&&!projectMeta?.diagnostics?.[page.id]&&<button onClick={()=>source&&setAutomatic(source)}>저장된 분석으로 자동 편집 재개</button>}
+-          {projectMeta?.diagnostics?.[page.id]?.candidates?.some(c=>c.decision)&&(()=>{
+-            const candidates=projectMeta.diagnostics![page.id].candidates!,n=summarize(candidates);
+-            return <div className="banner" data-testid="auto-summary"><span>편집 가능 {n.ready+n.warning}개 · 품질 경고 {n.warning}개 · 상세 검토 {n.review}개 · 분리 실패 {n.failed}개</span><button onClick={()=>setExceptions(!exceptions)}>문제 객체 상세 검토</button><button onClick={()=>source&&setAutomatic(source)}>저장된 분석으로 다시 처리</button>
+-             {exceptions&&<div aria-label="예외 객체 목록">{candidates.filter(c=>c.decision==='review'||c.decision==='failed').map(c=><div key={c.id} data-testid="exception-row"><span>{c.id} · {c.reason}</span><button onClick={()=>{const original=source;if(original){setReviewTarget(c.id);setMagic(original);}}}>원본 비교·마스크·배경 교정</button></div>)}</div>}
+-            </div>;
+-          })()}
+-          {!projectMeta?.diagnostics?.[page.id]?.candidates?.some(c=>c.decision) && page.elements.some((e) => e.provenance?.backgroundWarning) && (
+-            <div className="banner warning">
+-              배경 보정 필요 · 원본에 글자/객체 잔상이 남아 있습니다. 정확한
+-              분리 결과가 아닙니다.
+-            </div>
+-          )}
++          <EditorStatus diagnostic={projectMeta?.diagnostics?.[page.id]} canProcess={Boolean(source)} canResume={Boolean(page.magicReview)} onAuto={()=>source&&setAutomatic(source)} onAdvanced={()=>source&&setMagic(source)} onInspect={id=>{if(source){setReviewTarget(id);setMagic(source);}}} onRestore={()=>{
++            if(!source)return;if(s.pages.length>=30){setError('최대 30페이지입니다.');return;}
++            const restored={...page,id:crypto.randomUUID(),elements:[placeAsset(source,s.width,s.height)]};if(meta.current)meta.current.sources[restored.id]=source.id;s.appendPage(restored);useCanvasView.getState().fit();setNotice('원본을 새 페이지에 복원했습니다. 되돌리기로 취소할 수 있습니다.');
++          }}/>
++          {notice&&<div className="editor-toast" role="status">{notice}<button onClick={()=>setNotice('')} aria-label="알림 닫기"><X size={14}/></button></div>}
+           {(page.elements.length >= 500 ||
+             page.elements.length + selected.length > 500) && (
+             <div className="banner warning">
+@@ -1102,7 +1079,7 @@ export default function Studio() {
+               옮기거나 선택을 줄이세요.
+             </div>
+           )}
+-          <StudioCanvas />
++          <StudioCanvas original={compareSource&&source?source:undefined}/>
+           <div className="page-bar">
+             <div className="page-tabs">
+               {s.pages.map((p, i) => (
+@@ -1160,17 +1137,7 @@ export default function Studio() {
+           </div>
+           <footer className="canvas-footer">
+             <span>브라우저 로컬 저장 · ZIP으로 백업하세요</span>
+-            <div>
+-              <button aria-label="축소" onClick={s.zoomOut}>
+-                −
+-              </button>
+-              <button onClick={() => s.setZoom(1)} aria-label="작업영역에 맞춤" title="작업영역에 맞춤">
+-                맞춤 {Math.round(s.zoom * 100)}%
+-              </button>
+-              <button aria-label="확대" onClick={s.zoomIn}>
+-                +
+-              </button>
+-            </div>
++            <CanvasViewControls/>
+           </footer>
+         </section>
+         <aside id="studio-inspector" className={`inspector ${mobilePanel==="layers"?"mobile-open":""}`}>
+@@ -1181,74 +1148,7 @@ export default function Studio() {
+             </h2>
+             <span>{page.elements.length}</span>
+           </div>
+-          <div className="layers-list">
+-            {page.elements.length === 0 && (
+-              <div className="empty-layers">
+-                <Layers size={26} />
+-                <p>아직 비어 있습니다</p>
+-                <small>왼쪽에서 요소를 추가하세요.</small>
+-              </div>
+-            )}
+-            {[...page.elements].reverse().map((e, i) => (
+-              <div
+-                key={e.id}
+-                className={`layer-row ${s.selectedIds.includes(e.id) ? "selected" : ""}`}
+-                data-testid={`layer-${e.type}`}
+-              >
+-                <button
+-                  className="layer-name"
+-                  onClick={(event) =>
+-                    event.shiftKey
+-                      ? s.selectToggle(e.id)
+-                      : s.setSelection([e.id])
+-                  }
+-                >
+-                  <span className="layer-type">
+-                    {e.type === "text"
+-                      ? "T"
+-                      : e.type === "image"
+-                        ? "▧"
+-                        : e.type === "ellipse"
+-                          ? "○"
+-                          : "□"}
+-                  </span>
+-                  <span>
+-                    {e.name ??
+-                      (e.type === "text"
+-                        ? e.text.slice(0, 18)
+-                        : e.type === "image"
+-                          ? "이미지"
+-                          : e.type === "line"
+-                            ? "선"
+-                            : "도형")}
+-                    <small>
+-                      {projectMeta?.diagnostics?.[page.id]?.candidates?.find(c=>c.elementId===e.id)?.decision === 'warning' ? '품질 경고' : projectMeta?.diagnostics?.[page.id]?.candidates?.find(c=>c.elementId===e.id)?.decision === 'ready' ? '편집 준비 완료' : e.provenance?.method.includes("approximate")
+-                        ? "근사 크롭"
+-                        : e.provenance?.backgroundWarning
+-                          ? "배경 보정 필요"
+-                          : e.provenance?.review
+-                            ? "확인 필요"
+-                            : `${String(page.elements.length - i).padStart(2, "0")}`}
+-                    </small>
+-                  </span>
+-                </button>
+-                <button
+-                  aria-label={`${e.id} ${e.visible ? "숨김" : "표시"}`}
+-                  title="표시/숨김"
+-                  onClick={() => s.setVisible([e.id], !e.visible)}
+-                >
+-                  {e.visible ? <Eye size={13} /> : <EyeOff size={13} />}
+-                </button>
+-                <button
+-                  aria-label={`${e.id} ${e.locked ? "잠금 해제" : "잠금"}`}
+-                  title="잠금/해제"
+-                  onClick={() => s.setLock([e.id], !e.locked)}
+-                >
+-                  {e.locked ? <Lock size={13} /> : <Unlock size={13} />}
+-                </button>
+-              </div>
+-            ))}
+-          </div>
++          <EditorLayers candidates={projectMeta?.diagnostics?.[page.id]?.candidates}/>
+           <div className="properties">
+             <div className="section-label">
+               {selected.length > 1
+@@ -1557,17 +1457,7 @@ export default function Studio() {
+                   const current=meta.current?.assets[el.assetId!],base=meta.current?.assets[el.provenance?.alphaEdit?.baseAssetId??el.assetId!];
+                   if(current&&base)setMaskEdit({id:el.id,current,base});
+                 }}>이미지 경계 보정</button>}
+-                {el.provenance && (
+-                  <p className="muted provenance">
+-                    출처: {el.provenance.source}
+-                    <br />
+-                    {el.provenance.method}
+-                    <br />
+-                    {el.provenance.review
+-                      ? "확인 필요 · 보정 가능"
+-                      : "사용자 지정"}
+-                  </p>
+-                )}
++                {el.provenance&&<details className="provenance"><summary>선택 레이어 상태·출처</summary><p>{layerStateLabel(projectMeta?.diagnostics?.[page.id]?.candidates?.find(c=>c.id===el.provenance?.regionId)?.decision)??'사용자 편집 객체'}</p><p>{candidateReason(projectMeta?.diagnostics?.[page.id]?.candidates?.find(c=>c.id===el.provenance?.regionId)?.reason)}</p><small>{el.provenance.method}</small></details>}
+               </>
+             ) : (
+               <p className="muted">
+@@ -1625,6 +1515,7 @@ export default function Studio() {
+         recordBetaEvent({feature:'correction',stage:'apply',outcome:'ok',code:'none',correction:'alpha',method:'manual'});
+         setNotice('경계를 보정했습니다. 원본과 배경은 보존되며 되돌리기와 프로젝트 ZIP을 지원합니다.');
+       }}/>}
++      {panelSettings&&<EditorDialog title="패널 너비 설정" onClose={()=>setPanelSettings(false)}><label>도구 패널 너비 · {leftWidth}px<input aria-label="도구 패널 너비" type="range" min="180" max="300" value={leftWidth} onChange={e=>setLeftWidth(Number(e.target.value))}/></label><label>레이어·속성 패널 너비 · {rightWidth}px<input aria-label="레이어·속성 패널 너비" type="range" min="240" max="400" value={rightWidth} onChange={e=>setRightWidth(Number(e.target.value))}/></label></EditorDialog>}
+       {automatic&&<AutoEditDialog key={automatic.id} source={automatic} width={s.width} height={s.height}
+         saved={s.pages.find(p=>p.magicReview?.sourceId===automatic.id)?.magicReview}
+         persist={value=>{const live=useEditorStore.getState();useEditorStore.setState({pages:live.pages.map(p=>p.id===page.id?{...p,magicReview:value}:p),dirty:true});}}
+diff --git a/apps/studio/src/components/canvas/StudioCanvas.tsx b/apps/studio/src/components/canvas/StudioCanvas.tsx
+index 90ce5cc..de0b332 100644
+--- a/apps/studio/src/components/canvas/StudioCanvas.tsx
++++ b/apps/studio/src/components/canvas/StudioCanvas.tsx
+@@ -1,117 +1,37 @@
+-"use client";
+-import { useCallback, useEffect, useRef, useState } from "react";
+-import Konva from "konva";
+-import { Stage, Layer, Rect, Transformer } from "react-konva";
+-import { useEditorStore } from "@/store/editor-store";
+-import { gradientProps } from "@/lib/editor-utils";
+-import { ElementNode } from "./element-node";
+-export default function StudioCanvas() {
+-  const s = useEditorStore();
+-  const page = s.pages[s.currentPage];
+-  const tr = useRef<Konva.Transformer>(null);
+-  const nodes = useRef(new Map<string, Konva.Node>());
+-  const outer = useRef<HTMLDivElement>(null);
+-  const [viewport, setViewport] = useState({ width: 600, height: 450 });
+-  const register = useCallback((id: string, node: Konva.Node | null) => {
+-    if (node) nodes.current.set(id, node);
+-    else nodes.current.delete(id);
+-  }, []);
+-  useEffect(() => {
+-    tr.current?.nodes(
+-      s.selectedIds.flatMap((id) => {
+-        const node = nodes.current.get(id);
+-        const el = page.elements.find((e) => e.id === id);
+-        return node && el && !el.locked && el.visible ? [node] : [];
+-      }),
+-    );
+-    tr.current?.getLayer()?.batchDraw();
+-  }, [s.selectedIds, page]);
+-  useEffect(() => {
+-    if (!outer.current) return;
+-    const obs = new ResizeObserver(([entry]) => {
+-      const { width, height } = entry.contentRect;
+-      setViewport({ width, height });
+-    });
+-    obs.observe(outer.current);
+-    return () => obs.disconnect();
+-  }, []);
+-  const fit = Math.min(
+-    (viewport.width - 64) / s.width,
+-    (viewport.height - 64) / s.height,
+-  );
+-  const scale = Math.max(0.05, fit) * s.zoom;
+-  return (
+-    <div className="canvas-viewport" ref={outer} data-testid="canvas-viewport">
+-      <div
+-        className="canvas-mat"
+-        style={{
+-          minWidth: Math.max(viewport.width, s.width * scale + 64),
+-          minHeight: Math.max(viewport.height, s.height * scale + 64),
+-        }}
+-      >
+-        <div
+-          className="artboard"
+-          style={{ width: s.width * scale, height: s.height * scale }}
+-          data-testid="artboard"
+-        >
+-          <Stage
+-            width={s.width * scale}
+-            height={s.height * scale}
+-            scaleX={scale}
+-            scaleY={scale}
+-            onMouseDown={(e) => {
+-              if (
+-                e.target === e.target.getStage() ||
+-                e.target.name() === "page-background"
+-              )
+-                s.clearSelection();
+-            }}
+-          >
+-            <Layer>
+-              <Rect
+-                name="page-background"
+-                width={s.width}
+-                height={s.height}
+-                {...(page.background.type === "solid"
+-                  ? { fill: page.background.color }
+-                  : gradientProps(
+-                      page.background.from,
+-                      page.background.to,
+-                      page.background.angle,
+-                      s.width,
+-                      s.height,
+-                    ))}
+-              />
+-              {page.elements.map((el) => (
+-                <ElementNode
+-                  key={el.id}
+-                  element={el}
+-                  interactive
+-                  registerNode={register}
+-                  onDoubleClick={(id, cell) => {
+-                    s.setSelection([id]);
+-                    const el=page.elements.find(e=>e.id===id);
+-                    requestAnimationFrame(()=>document.getElementById(cell&&el?.type==="table"?`table-cell-${cell.row*el.cols+cell.col}`:"text-editor")?.focus());
+-                  }}
+-                />
+-              ))}
+-              <Transformer
+-                ref={tr}
+-                rotateEnabled
+-                keepRatio={s.selectedIds.some((id) =>
+-                  page.elements.some((e) => e.id === id && e.type === "image"),
+-                )}
+-                flipEnabled={false}
+-                boundBoxFunc={(old, next) =>
+-                  Math.abs(next.width) < 4 || Math.abs(next.height) < 4
+-                    ? old
+-                    : next
+-                }
+-              />
+-            </Layer>
+-          </Stage>
+-        </div>
+-      </div>
+-    </div>
+-  );
++'use client';
++import {memo,useCallback,useEffect,useLayoutEffect,useRef,useState} from 'react';
++import Konva from 'konva';
++import {Stage,Layer,Rect,Transformer} from 'react-konva';
++import {useEditorStore} from '@/store/editor-store';
++import {useCanvasView,viewScale} from '@/store/canvas-view';
++import {gradientProps} from '@/lib/editor-utils';
++import {fitSource} from '@/lib/image-layout';
++import type {Asset} from '@/lib/project';
++import type {AnyElement} from '@/lib/types';
++import {ElementNode} from './element-node';
++import type {ElementNodeProps} from './element-node';
++const PageNodes=memo(function PageNodes({elements,register,onDoubleClick}:{elements:AnyElement[];register:NonNullable<ElementNodeProps['registerNode']>;onDoubleClick:NonNullable<ElementNodeProps['onDoubleClick']>}){return elements.map(el=><ElementNode key={el.id} element={el} interactive registerNode={register} onDoubleClick={onDoubleClick}/>);});
++export default function StudioCanvas({original}:{original?:Asset}){
++ const page=useEditorStore(s=>s.pages[s.currentPage]),width=useEditorStore(s=>s.width),height=useEditorStore(s=>s.height),selected=useEditorStore(s=>s.selectedIds);
++ const mode=useCanvasView(v=>v.mode),manual=useCanvasView(v=>v.manualScale),target=useCanvasView(v=>v.target),request=useCanvasView(v=>v.request);
++ const tr=useRef<Konva.Transformer>(null),nodes=useRef(new Map<string,Konva.Node>()),outer=useRef<HTMLDivElement>(null),previous=useRef<{scale:number;width:number;height:number;mode:string;request:number}|null>(null);
++ const [viewport,setViewport]=useState({x:0,y:0,width:600,height:450});
++ const register=useCallback((id:string,node:Konva.Node|null)=>{if(node)nodes.current.set(id,node);else nodes.current.delete(id);},[]);
++ const doubleClick=useCallback<NonNullable<ElementNodeProps['onDoubleClick']>>((id,cell)=>{const s=useEditorStore.getState();s.setSelection([id]);const el=s.pages[s.currentPage].elements.find(e=>e.id===id);requestAnimationFrame(()=>document.getElementById(cell&&el?.type==='table'?`table-cell-${cell.row*el.cols+cell.col}`:'text-editor')?.focus());},[]);
++ useEffect(()=>{tr.current?.nodes(selected.flatMap(id=>{const n=nodes.current.get(id),el=page.elements.find(e=>e.id===id);return n&&el&&!el.locked&&el.visible?[n]:[];}));tr.current?.getLayer()?.batchDraw();},[selected,page]);
++ useEffect(()=>{if(!outer.current)return;const obs=new ResizeObserver(([entry])=>{const {width,height}=entry.contentRect;setViewport(v=>v.width===width&&v.height===height?v:{x:0,y:0,width,height});});obs.observe(outer.current);return()=>obs.disconnect();},[]);
++ const scale=viewScale(mode,viewport,{x:0,y:0,width,height},manual,target),matWidth=Math.max(viewport.width,width*scale+32),matHeight=Math.max(viewport.height,height*scale+32);
++ useEffect(()=>{useCanvasView.getState().rendered(scale);},[scale]);
++ useLayoutEffect(()=>{
++  const o=outer.current,p=previous.current;if(!o)return;
++  if(mode==='selection'&&target){o.scrollLeft=(matWidth-width*scale)/2+(target.x+target.width/2)*scale-viewport.width/2;o.scrollTop=(matHeight-height*scale)/2+(target.y+target.height/2)*scale-viewport.height/2;}
++  else if(mode==='fit'||mode==='width'&&p?.request!==request){o.scrollLeft=0;o.scrollTop=0;}
++  else if(mode==='manual'&&p){const ox=(Math.max(p.width,width*p.scale+32)-width*p.scale)/2,oy=(Math.max(p.height,height*p.scale+32)-height*p.scale)/2;o.scrollLeft=(matWidth-width*scale)/2+(o.scrollLeft+p.width/2-ox)/p.scale*scale-viewport.width/2;o.scrollTop=(matHeight-height*scale)/2+(o.scrollTop+p.height/2-oy)/p.scale*scale-viewport.height/2;}
++  previous.current={scale,width:viewport.width,height:viewport.height,mode,request};
++ },[scale,mode,target,request,matWidth,matHeight,width,height,viewport]);
++ const fit=original&&fitSource(original.width,original.height,width,height);
++ return <div className="canvas-viewport" ref={outer} data-testid="canvas-viewport"><div className="canvas-mat" style={{width:matWidth,height:matHeight}}><div className="artboard" data-testid="artboard" data-scale={scale} data-view-mode={mode} style={{width:width*scale,height:height*scale}}>
++ <Stage width={width*scale} height={height*scale} scaleX={scale} scaleY={scale} listening={!original} onMouseDown={e=>{if(e.target===e.target.getStage()||e.target.name()==='page-background')useEditorStore.getState().clearSelection();}}><Layer><Rect name="page-background" width={width} height={height} {...(page.background.type==='solid'?{fill:page.background.color}:gradientProps(page.background.from,page.background.to,page.background.angle,width,height))}/><PageNodes elements={page.elements} register={register} onDoubleClick={doubleClick}/><Transformer ref={tr} rotateEnabled keepRatio={selected.some(id=>page.elements.some(e=>e.id===id&&e.type==='image'))} flipEnabled={false} boundBoxFunc={(old,next)=>Math.abs(next.width)<4||Math.abs(next.height)<4?old:next}/></Layer></Stage>
++ {original&&fit&&<div className="source-comparison" aria-label="원본 비교 보기"><img src={original.dataUrl} alt="보존된 원본" style={{position:'absolute',left:fit.x*scale,top:fit.y*scale,width:fit.width*scale,height:fit.height*scale}}/></div>}
++ </div></div></div>;
+ }
+diff --git a/apps/studio/src/lib/magic-layers/automatic.ts b/apps/studio/src/lib/magic-layers/automatic.ts
+index 93c007f..46ac15b 100644
+--- a/apps/studio/src/lib/magic-layers/automatic.ts
++++ b/apps/studio/src/lib/magic-layers/automatic.ts
+@@ -17,7 +17,7 @@ export async function automaticEdit(options:{source:Asset;width:number;height:nu
+   progress('AI 연결 확인');const capabilities=await readApiJson(await fetch('/api/capabilities',{signal}));
+   if(!capabilities.enabled)throw new Error(capabilities.reason??'AI 연결을 확인할 수 없습니다.');
+   progress('Gemini 이미지 분석 중');const {image,transport}=await prepareAiImageWithMetadata(source.dataUrl);signal.throwIfAborted();
+-  const response=await fetch('/api/ai/magic-layers',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image,consent:true}),signal});const data=await readApiJson(response);
++  const response=await fetch('/api/ai/magic-layers',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image,consent:true}),signal});const data=await readApiJson(response);signal.throwIfAborted();
+   if(!response.ok)throw new Error(data.error??'이미지 분석 실패');
+   const parsed=analysisSchema.parse(data.analysis);
+   saved={sourceId:source.id,analysis:{...parsed,regions:parsed.regions.map(r=>({...r,manualBackground:undefined,maskOrigin:r.maskPng||r.polygon?'analysis':undefined}))},skip:[],provider:`gemini/${data.provenance.model}`};
+@@ -25,14 +25,14 @@ export async function automaticEdit(options:{source:Asset;width:number;height:nu
+   // Cache and persist immediately: a later model cancellation must not repeat Gemini.
+   rememberAnalysis(key,saved);options.persist(saved);
+  }
+- signal.throwIfAborted();progress(`분석 후보 ${saved.analysis.regions.length}개 · 객체 분리`);
++ signal.throwIfAborted();progress(`저장된 분석 재사용 · 후보 ${saved.analysis.regions.length}개`);
+  if(saved.analysis.regions.some(r=>r.type==='image'&&!r.maskPng&&!r.polygon&&!saved!.skip.includes(r.id))){
+   const {segmentObjects}=await import('./segment');
+   const result=await segmentObjects(source,saved.analysis.regions.filter(r=>!saved!.skip.includes(r.id)),signal,progress);
+   const changes=new Map(result.regions.map(r=>[r.id,r]));saved={...saved,analysis:{...saved.analysis,regions:saved.analysis.regions.map(r=>changes.get(r.id)??r)}};
+   rememberAnalysis(key,saved);options.persist(saved);
+  }
+- signal.throwIfAborted();progress('마스크 품질·배경 보호 검사 및 레이어 생성');
+- const result=await reconstructDesign(saved.analysis,source,options.width,options.height,saved.skip,false,saved.provider,undefined,{mode:'independent',automatic:true,initial});
++ signal.throwIfAborted();progress('객체 추출·레이어 초안 구성');
++ const result=await reconstructDesign(saved.analysis,source,options.width,options.height,saved.skip,false,saved.provider,undefined,{mode:'independent',automatic:true,initial,control:{signal,onStage:stage=>progress(stage==='background'?'배경 복원 · 인접 객체 보호 검사':'독립 레이어 구성 · 편집 준비')}});
+  signal.throwIfAborted();return result;
+ }
+diff --git a/apps/studio/src/lib/magic-layers/cooperative.ts b/apps/studio/src/lib/magic-layers/cooperative.ts
+new file mode 100644
+index 0000000..f3bc88f
+--- /dev/null
++++ b/apps/studio/src/lib/magic-layers/cooperative.ts
+@@ -0,0 +1,5 @@
++/** Yield to input between bounded CPU tasks; cancellation never commits a page. */
++export async function cooperativeCheckpoint(signal?:AbortSignal){
++ if(!signal)return;signal.throwIfAborted();await new Promise<void>(resolve=>setTimeout(resolve,0));signal.throwIfAborted();
++}
++export interface ProcessingControl {signal:AbortSignal;onStage:(stage:'background'|'layers')=>void;}
+diff --git a/apps/studio/src/lib/magic-layers/extraction.ts b/apps/studio/src/lib/magic-layers/extraction.ts
+index da594ac..d78e7f3 100644
+--- a/apps/studio/src/lib/magic-layers/extraction.ts
++++ b/apps/studio/src/lib/magic-layers/extraction.ts
+@@ -1,3 +1,4 @@
++import {cooperativeCheckpoint} from './cooperative';
+ import { loadImage } from '../imports';
+ import type { Asset } from '../project';
+ import { toPixels, type Region } from './schema';
+@@ -10,9 +11,10 @@ export function polygonCoverage(region:Region) {
+  let area=0;for(let i=0;i<p.length;i++){const a=p[i],b=p[(i+1)%p.length];area+=a[0]*b[1]-a[1]*b[0];}
+  return Math.abs(area)/2/(region.bbox[2]*region.bbox[3]);
+ }
+-export async function extractAlphaCandidates(source:Asset,regions:Region[],outcomes:CandidateOutcome[]) {
++export async function extractAlphaCandidates(source:Asset,regions:Region[],outcomes:CandidateOutcome[],signal?:AbortSignal) {
+  const result:Region[]=[];let original:HTMLImageElement|undefined;
+  for(const r of regions){
++  await cooperativeCheckpoint(signal);
+   const o=outcomes.find(o=>o.id===r.id)!;
+   if(r.type!=='image'){o.extraction='native';result.push(r);continue;}
+   try{
+diff --git a/apps/studio/src/lib/magic-layers/independent.ts b/apps/studio/src/lib/magic-layers/independent.ts
+index 86a56e8..a55ecc6 100644
+--- a/apps/studio/src/lib/magic-layers/independent.ts
++++ b/apps/studio/src/lib/magic-layers/independent.ts
+@@ -1,3 +1,4 @@
++import {cooperativeCheckpoint,type ProcessingControl} from './cooperative';
+ import { createImageElement, uid, type PageData } from '../types';
+ import type { Asset } from '../project';
+ import { fitSource } from '../image-layout';
+@@ -10,10 +11,12 @@ export interface Reconstruction { page:PageData; assets:Asset[]; warnings:string
+ /** Extraction is an independent transaction. A missing repair never drops native candidates.
+  * Until a repair is approved, candidates are hidden to avoid duplicating source ink. */
+ export async function reconstructIndependent(input:Analysis,source:Asset,width:number,height:number,skip:string[],provider:string,
+- generate:(input:Analysis)=>Promise<Reconstruction>,initial:Partial<Diagnostic>={},reviewed:boolean|'automatic'=false) :Promise<Reconstruction> {
++ generate:(input:Analysis)=>Promise<Reconstruction>,initial:Partial<Diagnostic>={},reviewed:boolean|'automatic'=false,control?:ProcessingControl) :Promise<Reconstruction> {
++ await cooperativeCheckpoint(control?.signal);
+  const {canonical,outcomes}=reconcileCandidates(input.regions,skip);
+- const extractable=await extractAlphaCandidates(source,canonical,outcomes);
++ const extractable=await extractAlphaCandidates(source,canonical,outcomes,control?.signal);
+  const generated=extractable.length?await generate({...input,background:{...input.background,kind:'solid'},regions:extractable}):undefined;
++ await cooperativeCheckpoint(control?.signal);
+  const elements=generated?.page.elements??[];
+  for(const el of elements){
+   const o=outcomes.find(o=>o.id===el.provenance?.regionId)!;o.elementId=el.id;
+@@ -23,8 +26,10 @@ export async function reconstructIndependent(input:Analysis,source:Asset,width:n
+  // Extraction is committed to inventory before repair. Repair failures leave these elements intact.
+  let restored:{dataUrl:string;repaired:number;inpainted?:number}|undefined;
+  let repairFailed=false;
+- try {restored=await restoreCandidateBackground(source,[...canonical,...input.regions.filter(r=>skip.includes(r.id))],skip,elements,outcomes,reviewed);}
+- catch {repairFailed=true;}
++ control?.onStage('background');await cooperativeCheckpoint(control?.signal);
++ try {restored=await restoreCandidateBackground(source,[...canonical,...input.regions.filter(r=>skip.includes(r.id))],skip,elements,outcomes,reviewed,control?.signal);}
++ catch(error) {if(control?.signal.aborted)throw error;repairFailed=true;}
++ await cooperativeCheckpoint(control?.signal);control?.onStage('layers');
+  if(reviewed==='automatic')for(const o of outcomes){
+   if(o.status==='merged'||o.status==='user-excluded')continue;
+   o.decision=o.status==='separation-failed'?'failed':o.status==='generated'?(o.background==='inpaint-review'||o.background==='manual-flat'?'warning':'ready'):'review';
+diff --git a/apps/studio/src/lib/magic-layers/model-transport.ts b/apps/studio/src/lib/magic-layers/model-transport.ts
+new file mode 100644
+index 0000000..e20fcb1
+--- /dev/null
++++ b/apps/studio/src/lib/magic-layers/model-transport.ts
+@@ -0,0 +1,23 @@
++export interface ModelFile {bytes:number;sha256:string;}
++export type ModelProgress={stage:'download';loaded:number;total:number;cached:boolean}|{stage:'verify'};
++export async function readModelFiles(files:Record<string,ModelFile>,base:string,progress:(p:ModelProgress)=>void,cache?:Cache){
++ const entries=Object.entries(files),total=entries.reduce((sum,[,f])=>sum+f.bytes,0),loaded:Record<string,number>={};let last=0,lastTime=0;
++ const responses=await Promise.all(entries.map(async([name,file])=>{const url=new URL(name,base).href;let r:Response|undefined;try{r=await cache?.match(url);}catch{}const cached=Boolean(r);r??=await fetch(url);if(!r.ok)throw new Error('MODEL_DOWNLOAD_FAILED');return {name,file,url,response:r,cached};}));
++ const cached=responses.every(r=>r.cached),publish=(force=false)=>{const n=Object.values(loaded).reduce((a,b)=>a+b,0),time=performance.now();if(force||n-last>=1048576||time-lastTime>=100){last=n;lastTime=time;progress({stage:'download',loaded:n,total,cached});}};publish(true);
++ const buffers=await Promise.all(responses.map(async r=>{
++  let bytes:ArrayBuffer;
++  if(r.response.body){const reader=r.response.body.getReader(),parts:Uint8Array[]=[];let size=0;for(;;){const chunk=await reader.read();if(chunk.done)break;parts.push(chunk.value);size+=chunk.value.length;if(size>r.file.bytes){await reader.cancel();throw new Error('MODEL_SIZE_MISMATCH');}loaded[r.name]=size;publish();}const data=new Uint8Array(size);let offset=0;for(const part of parts){data.set(part,offset);offset+=part.length;}bytes=data.buffer;}
++  else{bytes=await r.response.arrayBuffer();loaded[r.name]=bytes.byteLength;publish();}
++  return {...r,bytes};
++ }));publish(true);progress({stage:'verify'});
++ for(const r of buffers){const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',r.bytes))).map(x=>x.toString(16).padStart(2,'0')).join('');if(r.bytes.byteLength!==r.file.bytes||hash!==r.file.sha256){try{await cache?.delete(r.url);}catch{}throw new Error('MODEL_INTEGRITY_FAILED');}}
++ for(const r of buffers)if(!r.cached)try{await cache?.put(r.url,new Response(r.bytes,{headers:{'Content-Type':'application/octet-stream'}}));}catch{/* Cache quota/private mode never modifies project storage or blocks inference. */}
++ return Object.fromEntries(buffers.map(r=>[r.name,r.bytes]));
++}
++export function modelFailure(stage:string,reason:string){
++ if(reason==='MODEL_INTEGRITY_FAILED'||reason==='MODEL_SIZE_MISMATCH')return '모델 파일이 온전하지 않습니다. 다시 시도해 파일을 새로 받으세요.';
++ if(stage==='download')return '모델 파일을 읽지 못했습니다. 네트워크 연결을 확인한 뒤 재시도하세요.';
++ if(stage==='initialize')return '분할 실행 환경을 시작하지 못했습니다. 브라우저를 새로고침한 뒤 재시도하세요.';
++ if(stage==='encode')return '이미지 특징을 분석하지 못했습니다. 원본은 보존됐습니다. 다시 시도하거나 이미지를 나누어 주세요.';
++ return '객체 경계를 만들지 못했습니다. 재시도하거나 고급 교정에서 마스크를 지정하세요.';
++}
+diff --git a/apps/studio/src/lib/magic-layers/reconstruct.ts b/apps/studio/src/lib/magic-layers/reconstruct.ts
+index 8ae8438..72aa7b6 100644
+--- a/apps/studio/src/lib/magic-layers/reconstruct.ts
++++ b/apps/studio/src/lib/magic-layers/reconstruct.ts
+@@ -1,3 +1,4 @@
++import type {ProcessingControl} from './cooperative';
+ // Reconstruction flow adapted from Canvix reconstruct.ts (MIT). PNG masks and honest background state replace JPEG crops.
+ import {
+   createImageElement,
+@@ -117,11 +118,11 @@ export async function reconstructDesign(
+   confirmedBackground: boolean,
+   provider = "manual",
+   repair?: RepairedSource,
+-  options: { automatic?: boolean; mode?: "preserve" | "redraw" | "independent"; inputKind?: Diagnostic["inputKind"]; initial?: Partial<Diagnostic> } = {},
++  options: { control?:ProcessingControl; automatic?: boolean; mode?: "preserve" | "redraw" | "independent"; inputKind?: Diagnostic["inputKind"]; initial?: Partial<Diagnostic> } = {},
+ ): Promise<Reconstruction> {
+   const originalAnalysis = analysisSchema.parse(input);
+   if(options.mode==="independent") return reconstructIndependent(originalAnalysis,source,width,height,skip,provider,
+-    prepared=>reconstructDesign(prepared,source,width,height,[],true,provider,undefined,{mode:"redraw"}),{...options.initial,inputKind:options.inputKind},options.automatic?'automatic':confirmedBackground);
++    prepared=>reconstructDesign(prepared,source,width,height,[],true,provider,undefined,{mode:"redraw"}),{...options.initial,inputKind:options.inputKind},options.automatic?'automatic':confirmedBackground,options.control);
+   let analysis = originalAnalysis;
+   const mode = options.mode ?? "preserve";
+   const hadRepair = Boolean(repair);
+diff --git a/apps/studio/src/lib/magic-layers/restoration.ts b/apps/studio/src/lib/magic-layers/restoration.ts
+index 9211e2d..061dc56 100644
+--- a/apps/studio/src/lib/magic-layers/restoration.ts
++++ b/apps/studio/src/lib/magic-layers/restoration.ts
+@@ -1,3 +1,4 @@
++import {cooperativeCheckpoint} from './cooperative';
+ import { inspectInteriorBackground } from './quality';
+ import { inpaintSupport } from './inpaint';
+ import { toPixels } from './schema';
+@@ -17,12 +18,13 @@ export function writeRepair(data:Uint8ClampedArray,width:number,height:number,pa
+   const p=(y*width+x)*4;data[p]=patch.color[0];data[p+1]=patch.color[1];data[p+2]=patch.color[2];data[p+3]=255;
+  }
+ }
+-export async function restoreCandidateBackground(source:Asset,regions:Region[],skip:string[],elements:AnyElement[],outcomes:CandidateOutcome[],reviewed:boolean|'automatic') {
++export async function restoreCandidateBackground(source:Asset,regions:Region[],skip:string[],elements:AnyElement[],outcomes:CandidateOutcome[],reviewed:boolean|'automatic',signal?:AbortSignal) {
+  const image=await loadImage(source.dataUrl),canvas=document.createElement('canvas');canvas.width=source.width;canvas.height=source.height;
+  const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)throw new Error('Canvas 사용 불가');ctx.drawImage(image,0,0);
+  const pixels=ctx.getImageData(0,0,source.width,source.height),plan=planLocalReplacement(pixels.data,source.width,source.height,regions,skip,reviewed);
+  let repaired=0,inpainted=0;
+  for(const el of elements){
++  await cooperativeCheckpoint(signal);
+   const o=outcomes.find(o=>o.id===el.provenance?.regionId)!;
+   if(reviewed==='automatic'&&el.type==='image'){
+    const crop=await loadImage(el.src),c=document.createElement('canvas');c.width=crop.naturalWidth;c.height=crop.naturalHeight;const cx=c.getContext('2d')!;cx.drawImage(crop,0,0);const rgba=cx.getImageData(0,0,c.width,c.height).data,alpha=new Uint8Array(c.width*c.height);for(let i=0;i<alpha.length;i++)alpha[i]=rgba[i*4+3];
+diff --git a/apps/studio/src/lib/magic-layers/segment.ts b/apps/studio/src/lib/magic-layers/segment.ts
+index 4ca7986..098925c 100644
+--- a/apps/studio/src/lib/magic-layers/segment.ts
++++ b/apps/studio/src/lib/magic-layers/segment.ts
+@@ -1,3 +1,4 @@
++import {cooperativeCheckpoint} from './cooperative';
+ import {loadImage} from '../imports';
+ import type {Asset} from '../project';
+ import type {Region} from './schema';
+@@ -9,7 +10,7 @@ export async function segmentObjects(source:Asset,regions:Region[],signal:AbortS
+  signal.throwIfAborted();const image=await loadImage(source.dataUrl),size=imageSize(source.width,source.height);
+  const c=document.createElement('canvas');c.width=size.width;c.height=size.height;const ctx=c.getContext('2d')!;ctx.drawImage(image,0,0,c.width,c.height);
+  const pixels=ctx.getImageData(0,0,c.width,c.height).data,input=new Float32Array(3*1024*1024),mean=[123.675,116.28,103.53],std=[58.395,57.12,57.375];
+- for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)for(let k=0;k<3;k++)input[k*1048576+y*1024+x]=(pixels[(y*c.width+x)*4+k]-mean[k])/std[k];
++ for(let y=0;y<c.height;y++){if(y%64===0)await cooperativeCheckpoint(signal);for(let x=0;x<c.width;x++)for(let k=0;k<3;k++)input[k*1048576+y*1024+x]=(pixels[(y*c.width+x)*4+k]-mean[k])/std[k];}
+  const boxes=targets.map(r=>({id:r.id,coords:[r.bbox[0]*size.width/1000,r.bbox[1]*size.height/1000,(r.bbox[0]+r.bbox[2])*size.width/1000,(r.bbox[1]+r.bbox[3])*size.height/1000]}));
+  const worker=new Worker(new URL('./segment.worker.ts',import.meta.url),{type:'module'}),masks:Mask[]=[];
+  const info=await new Promise<{revision:string;elapsedMs:number}>((resolve,reject)=>{
+@@ -19,11 +20,15 @@ export async function segmentObjects(source:Asset,regions:Region[],signal:AbortS
+   worker.onmessage=e=>{const m=e.data;if(m.stage==='error'){cleanup();worker.terminate();reject(new Error(m.message));}
+    else if(m.stage==='done'){cleanup();worker.terminate();resolve(m);}
+    else if(m.stage==='mask'){masks.push(m);progress(`객체 마스크 ${m.completed}/${m.total}`);}
+-   else progress(m.stage==='download'?'기기 분할 모델 준비 · 최초 약 57MB 다운로드':'이미지 특징 분석 중 · 원본은 전송하지 않습니다.');};
++   else if(m.stage==='download')progress(`${m.cached?'저장된 모델 재사용':'모델 파일 읽기'} · ${(m.loaded/1048576).toFixed(1)} / ${(m.total/1048576).toFixed(1)} MiB`);
++   else if(m.stage==='verify')progress('파일 무결성 검사 · 내려받은 모델 확인');
++   else if(m.stage==='initialize')progress('분할 실행 환경 초기화 · 최초 런타임 약13MB 추가 읽기');
++   else progress('이미지 특징 분석 중 · 원본은 전송하지 않습니다.');};
+   if(signal.aborted){abort();cleanup();return;}worker.postMessage({data:input,boxes},[input.buffer]);
+  });
+  const changes=new Map<string,Region>();let rejected=0;
+- for(const m of masks){
++ for(const [index,m] of masks.entries()){
++  await cooperativeCheckpoint(signal);progress(`마스크 경계 검사 ${index+1}/${masks.length}`);
+   signal.throwIfAborted();const target=targets.find(r=>r.id===m.id)!,full=upsampleLogits(m.logits),[x,y,w,h]=target.bbox.map((v,i)=>v*(i%2?size.height:size.width)/1000);
+   let left=1024,top=1024,right=0,bottom=0,area=0,inside=0;
+   for(let yy=0;yy<size.height;yy++)for(let xx=0;xx<size.width;xx++)if(full[yy*1024+xx]>0){area++;if(xx>=x&&xx<x+w&&yy>=y&&yy<y+h)inside++;left=Math.min(left,xx);top=Math.min(top,yy);right=Math.max(right,xx+1);bottom=Math.max(bottom,yy+1);}
+@@ -32,11 +37,12 @@ export async function segmentObjects(source:Asset,regions:Region[],signal:AbortS
+   const l=Math.max(0,Math.floor(left/size.width*source.width)-3),t=Math.max(0,Math.floor(top/size.height*source.height)-3),r=Math.min(source.width,Math.ceil(right/size.width*source.width)+3),b=Math.min(source.height,Math.ceil(bottom/size.height*source.height)+3);
+   if((r-l)*(b-t)>4194304){rejected++;continue;}
+   const mask=document.createElement('canvas');mask.width=r-l;mask.height=b-t;const mc=mask.getContext('2d')!,data=mc.createImageData(mask.width,mask.height);
+-  for(let yy=0;yy<mask.height;yy++)for(let xx=0;xx<mask.width;xx++){
++  for(let yy=0;yy<mask.height;yy++){if(yy%64===0)await cooperativeCheckpoint(signal);for(let xx=0;xx<mask.width;xx++){
+    const sx=(l+xx+.5)*size.width/source.width-.5,sy=(t+yy+.5)*size.height/source.height-.5;
+    const value=bilinear(full,1024,1024,Math.min(size.width-1,sx),Math.min(size.height-1,sy))>0?255:0,p=(yy*mask.width+xx)*4;
+    data.data[p]=data.data[p+1]=data.data[p+2]=value;data.data[p+3]=255;
+   }
++  }
+   mc.putImageData(data,0,0);const maskPng=mask.toDataURL('image/png');if(maskPng.length>2*1024*1024){rejected++;continue;}
+   changes.set(m.id,{...target,bbox:[l/source.width*1000,t/source.height*1000,(r-l)/source.width*1000,(b-t)/source.height*1000],maskPng,maskOrigin:'segmenter',review:true,segmentation:{model:'MobileSAM-vit_t',revision:info.revision,score:m.score,promptBox:target.bbox}});
+  }
+diff --git a/apps/studio/src/lib/magic-layers/segment.worker.ts b/apps/studio/src/lib/magic-layers/segment.worker.ts
+index 1079d6d..8781a81 100644
+--- a/apps/studio/src/lib/magic-layers/segment.worker.ts
++++ b/apps/studio/src/lib/magic-layers/segment.worker.ts
+@@ -1,19 +1,20 @@
++import {readModelFiles,modelFailure} from './model-transport';
+ import * as ort from 'onnxruntime-web/wasm';
+ type Input={data:Float32Array;boxes:{id:string;coords:number[]}[]};
+ const scope=self as unknown as {location:Location;onmessage:((e:MessageEvent<Input>)=>void)|null;postMessage:(v:unknown,t?:Transferable[])=>void};
+ scope.onmessage=async e=>{
++ let stage='download';
+  try{
+   ort.env.wasm.numThreads=1;ort.env.wasm.proxy=false;ort.env.wasm.wasmPaths=`${scope.location.origin}/sam/ort/`;ort.env.logLevel='error';
+-  scope.postMessage({stage:'download'});
+-  const response=await fetch('/sam/manifest.json');if(!response.ok)throw new Error('분할 모델 목록을 불러오지 못했습니다.');
+-  const manifest=await response.json();
+-  const read=async(name:string)=>{const r=await fetch(`/sam/${name}`);if(!r.ok)throw new Error(`분할 모델 다운로드 실패 (${r.status})`);const bytes=await r.arrayBuffer();
+-   const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))).map(x=>x.toString(16).padStart(2,'0')).join('');
+-   if(bytes.byteLength!==manifest.files[name].bytes||hash!==manifest.files[name].sha256)throw new Error('분할 모델 무결성 오류');return bytes;};
+-  const [encoder,decoder]=await Promise.all([read('encoder.onnx'),read('decoder.onnx')]);
++  scope.postMessage({stage:'download',loaded:0,total:44322987,cached:false});
++  const response=await fetch('/sam/manifest.json');if(!response.ok)throw new Error('MODEL_MANIFEST_FAILED');
++  const manifest=await response.json();let cache:Cache|undefined;try{cache=await caches.open(`pms-mobilesam-${manifest.upstreamRevision}`);}catch{}
++  const buffers=await readModelFiles(manifest.files,`${scope.location.origin}/sam/`,p=>scope.postMessage(p),cache),encoder=buffers['encoder.onnx'],decoder=buffers['decoder.onnx'];
++  stage='initialize';scope.postMessage({stage});
+   const enc=await ort.InferenceSession.create(encoder,{executionProviders:['wasm']}),dec=await ort.InferenceSession.create(decoder,{executionProviders:['wasm']});
+-  scope.postMessage({stage:'encode'});const start=performance.now();
++  stage='encode';scope.postMessage({stage});const start=performance.now();
+   const encoded=await enc.run({image:new ort.Tensor('float32',e.data.data,[1,3,1024,1024])});const embedding=encoded.embedding;await enc.release();
++  stage='mask';
+   for(const [i,box] of e.data.boxes.entries()){
+    const output=await dec.run({embedding,coords:new ort.Tensor('float32',new Float32Array(box.coords),[1,2,2]),labels:new ort.Tensor('float32',new Float32Array([2,3]),[1,2])});
+    const scores=output.scores.data as Float32Array;let best=1;for(let k=2;k<4;k++)if(scores[k]>scores[best])best=k;
+@@ -22,5 +23,5 @@ scope.onmessage=async e=>{
+    for(const tensor of Object.values(output))tensor.dispose();
+   }
+   embedding.dispose();await dec.release();scope.postMessage({stage:'done',elapsedMs:performance.now()-start,revision:manifest.upstreamRevision});
+- }catch(error){scope.postMessage({stage:'error',message:error instanceof Error?error.message:'기기 분할 실패'});}
++ }catch(error){scope.postMessage({stage:'error',message:modelFailure(stage,error instanceof Error?error.message:''),code:stage});}
+ };
+diff --git a/apps/studio/src/store/canvas-view.ts b/apps/studio/src/store/canvas-view.ts
+new file mode 100644
+index 0000000..cf2f7ad
+--- /dev/null
++++ b/apps/studio/src/store/canvas-view.ts
+@@ -0,0 +1,18 @@
++'use client';
++import {create} from 'zustand';
++import type {AnyElement} from '@/lib/types';
++export type Bounds={x:number;y:number;width:number;height:number};
++export function selectionBounds(elements:AnyElement[]):Bounds|undefined{
++ const corners=elements.filter(e=>e.visible).flatMap(e=>{const a=e.rotation*Math.PI/180,c=Math.cos(a),s=Math.sin(a);return [[0,0],[e.width,0],[e.width,e.height],[0,e.height]].map(([x,y])=>({x:e.x+x*c-y*s,y:e.y+x*s+y*c}));});
++ if(!corners.length)return;const x=Math.min(...corners.map(p=>p.x)),y=Math.min(...corners.map(p=>p.y));return {x,y,width:Math.max(1,Math.max(...corners.map(p=>p.x))-x),height:Math.max(1,Math.max(...corners.map(p=>p.y))-y)};
++}
++export function viewScale(mode:'fit'|'width'|'manual'|'selection',viewport:Bounds,document:Bounds,manual:number,target?:Bounds){
++ const available={width:Math.max(1,viewport.width-32),height:Math.max(1,viewport.height-32)},b=mode==='selection'&&target?target:document;
++ return Math.max(.01,Math.min(8,mode==='manual'?manual:mode==='width'?available.width/b.width:Math.min(available.width/b.width,available.height/b.height)));
++}
++interface ViewState {mode:'fit'|'width'|'manual'|'selection';manualScale:number;renderedScale:number;request:number;target?:Bounds;fit:()=>void;width:()=>void;actual:()=>void;zoom:(factor:number)=>void;selection:(target:Bounds)=>void;rendered:(scale:number)=>void;}
++/** Session view only. Never serialized into projects, undo, or assets. */
++export const useCanvasView=create<ViewState>((set,get)=>({mode:'fit',manualScale:1,renderedScale:1,request:0,
++ fit:()=>set({mode:'fit',target:undefined,request:get().request+1}),width:()=>set({mode:'width',target:undefined,request:get().request+1}),actual:()=>set({mode:'manual',manualScale:1,request:get().request+1}),
++ zoom:factor=>set({mode:'manual',manualScale:Math.max(.01,Math.min(8,get().renderedScale*factor)),request:get().request+1}),selection:target=>set({mode:'selection',target,request:get().request+1}),rendered:scale=>{if(Math.abs(get().renderedScale-scale)>1e-6)set({renderedScale:scale});},
++}));

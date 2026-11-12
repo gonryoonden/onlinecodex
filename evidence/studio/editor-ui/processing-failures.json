@@ -1,0 +1,7 @@
+{
+  "controlledDownloadFailure": true,
+  "controlledInitializationFailure": true,
+  "retryActualModelSucceeded": true,
+  "analysisRequests": 1,
+  "freshGeminiCalls": 0
+}
